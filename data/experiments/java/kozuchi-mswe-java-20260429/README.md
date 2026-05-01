@@ -1,6 +1,6 @@
 # kozuchi-mini-swe-agent + qwen3.5-27b xcheck@8
 
-Multi-SWE-bench Java Verified submission package for kozuchi-mini-swe-agent using qwen3.5-27b and strict xcheck@8 selection.
+Multi-SWE-bench Java submission package for kozuchi-mini-swe-agent using qwen3.5-27b and strict xcheck@8 selection.
 
 ## Result
 

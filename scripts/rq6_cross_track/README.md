@@ -2,7 +2,7 @@
 
 This directory is the standalone reviewer-facing source bundle for the
 paper's RQ6 result: cross-language transfer from SWE-bench Verified
-(Python) to Multi-SWE-bench Java Verified.
+(Python) to Multi-SWE-bench Java.
 
 Run from this directory:
 

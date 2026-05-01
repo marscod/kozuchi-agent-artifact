@@ -2,7 +2,7 @@
 
 > **Two evaluations, one agent, one backbone.**
 > Python: SWE-bench Verified, 500 instances, scaffold = mini-swe-agent + 8-phase decomposition, inference = TTS@8 (Best-of-8 + weighted-passrate selector).
-> Java: Multi-SWE-bench Java Verified, 128 instances, *same agent / scaffold / backbone*, inference = strict xcheck@8 (cross-agent-test selector).
+> Java: Multi-SWE-bench Java, 128 instances, *same agent / scaffold / backbone*, inference = strict xcheck@8 (cross-agent-test selector).
 >
 > Source documents:
 > * Python — `experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/analysis.md`

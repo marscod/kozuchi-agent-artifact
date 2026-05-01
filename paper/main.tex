@@ -301,7 +301,7 @@ auditable and repeatable without proprietary models or large fine-tuned
 backbones. With a locally hosted Qwen3.5-27B model, no fine-tuning, and
 TTS@8 candidate generation, Kozuchi agent resolves 374 of 500 SWE-bench
 Verified instances on the official cloud evaluator. Re-running the same
-27 B agent unchanged on Multi-SWE-bench Java Verified resolves 41/128
+27 B agent unchanged on Multi-SWE-bench Java resolves 41/128
 instances (32.03\%), placing first among strict open-weight submissions
 and fourth of 42 overall. Per-phase scaffold behaviour matches the
 Python run within $\pm 5$ percentage points on every phase, evidence that
@@ -344,7 +344,7 @@ Four operational blockers shaped the design.
   %         and paper/java_src/csv/leaderboard.csv (generated mirror).
   \includegraphics[width=\columnwidth]{figures/broad_success_vs_params_with_java.png}
   \caption{Kozuchi Agent is parameter efficient on both Python
-  SWE-bench Verified and Multi-SWE-bench Java Verified.}
+  SWE-bench Verified and Multi-SWE-bench Java.}
   \Description{Dual-axis scatter plot of agent success rate against
   total parameter count on a log scale. The left (blue) axis shows
   SWE-bench Verified Python results for Kozuchi Agent and open/local
@@ -510,7 +510,7 @@ failures, isolating the residual gap as a semantic-correctness problem
 rather than an editing-format problem. Patch LOC churn is the strongest
 single feature signal (point-biserial $r{=}-0.197$,
 $p{=}1.1{\times}10^{-5}$), and 494/495 produced patches apply cleanly
-through the SWE-bench harness. On Multi-SWE-bench Java Verified, the
+through the SWE-bench harness. On Multi-SWE-bench Java, the
 unchanged 27 B Java configuration resolves 41/128 instances (32.03\%), ranks
 4 of 42 overall, and is first among strict open-weight submissions;
 under Benjamini--Hochberg FDR control ($q\le0.05$), it significantly
@@ -550,7 +550,7 @@ shaped the design. \S\ref{sec:design} describes the system in five
 layers (runtime, tools, pipeline, serving, CI).
 \S\ref{sec:design-tts} details the cross-agent test-time selector.
 \S\ref{sec:eval} answers six research questions on SWE-bench
-Verified and Multi-SWE-bench Java Verified, all of them grounded in
+Verified and Multi-SWE-bench Java, all of them grounded in
 scripted analyses over the published Python TTS@8 and Java xcheck@8 artifacts: headline accuracy
 with uncertainty, peer-ranked position with multiplicity-corrected paired
 tests, structural breakdowns by repository, patch size, and trajectory
@@ -635,12 +635,12 @@ from function-level benchmarks to repository-level issues~\cite{chen2021codex,he
 SWE-bench Verified is a 500-instance human-curated subset with cleaner
 problem statements and reliable evaluation
 tests~\cite{openai2024swebenchverified}; it is the Python benchmark used
-in RQ1--RQ5.  Multi-SWE-bench Java Verified is the corresponding Java
+in RQ1--RQ5.  Multi-SWE-bench Java is the corresponding Java
 track used in RQ6: it keeps the same issue-to-patch resolved metric, but
 evaluates Java repositories through Maven/Gradle-style harnesses and a
 separate public leaderboard~\cite{zan2025multiswebench}.  We report the Python result on the
 \code{sb-cli} cloud stack~\cite{sbcli2026} and the Java result on the
-Multi-SWE-bench Java Verified leaderboard, keeping each benchmark's
+Multi-SWE-bench Java leaderboard, keeping each benchmark's
 denominator and peer set separate.
 
 \subsection{Agentic loops and base runtime}
@@ -1218,7 +1218,7 @@ Selector regret & Oracle minus submitted result & 34 / 500 = 6.8 pp \\
 % source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/figures/*.png
 \textbf{Evaluation setup.}
 RQ1--RQ5 use SWE-bench Verified as the fixed Python task suite; RQ6
-uses Multi-SWE-bench Java Verified as a cross-language validation track.
+uses Multi-SWE-bench Java as a cross-language validation track.
 The Python headline configuration uses a locally hosted model out of the box:
 the approach does not require training or fine-tuning before connecting
 the model to the agent runtime. For Python we run the same model eight times,
@@ -1239,7 +1239,7 @@ canonical denominator $N{=}500$ for every SWE-bench Verified aggregate;
 the five trajectory/report pairs that
 are missing from the bundle are folded into the unresolved bucket as
 \code{MISSING\_ARTEFACT} failures rather than dropped. The Java analysis
-uses the published Multi-SWE-bench Java Verified submission bundle with
+uses the published Multi-SWE-bench Java submission bundle with
 canonical denominator $N{=}128$, described separately in RQ6.
 
 \subsection{RQ1: Headline accuracy and uncertainty}
@@ -1674,7 +1674,7 @@ after patch selection.
 %   - Python K=8/TTS setup: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/analysis.md
 %     and paper/final/stats/{per_run_pass1.json,xcheck_summary.json}.
 We re-ran the same Qwen3.5-27B agent, eight-phase scaffold, and $K{=}8$
-selection pattern on Multi-SWE-bench Java Verified.  Only the corpus and
+selection pattern on Multi-SWE-bench Java.  Only the corpus and
 harness change: Java uses Maven/Gradle and strict xcheck@8, while the
 Python headline uses pytest and TTS@8 (\S\ref{sec:design-tts}).  The
 phase graph, action contract, persistent state, and selection family
@@ -1833,7 +1833,7 @@ Verified. Using a locally hosted open-weight model, no fine-tuning,
 eight candidate runs, and cross-agent testing, it resolves 374/500
 SWE-bench Verified instances (74.80\%, Wilson 95\% CI [70.82\%,
 78.41\%]; repository-clustered bootstrap [67.0\%, 79.8\%]) and 41/128
-Multi-SWE-bench Java Verified instances (32.03\%) under the same agent,
+Multi-SWE-bench Java instances (32.03\%) under the same agent,
 backbone, and scaffold. It ranks 12th among 135 catalogued Python
 submissions, is the highest-ranked open-weight Python system, ranks first
 among strict open-weight Java submissions, and recovers 80\% of resolved

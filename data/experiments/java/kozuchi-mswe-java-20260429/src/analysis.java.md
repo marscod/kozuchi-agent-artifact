@@ -1,4 +1,4 @@
-# Kozuchi mini-swe-agent + Qwen3.5-27B on Multi-SWE-bench Java Verified — A Deep Analysis
+# Kozuchi mini-swe-agent + Qwen3.5-27B on Multi-SWE-bench Java — A Deep Analysis
 
 > Submission directory: `experiments/java/kozuchi-mswe-java-20260429/`
 > Backbone: Qwen/Qwen3.5-27B (open-weight) · Agent: Kozuchi mini-swe-agent · Inference: xcheck@8 (8-leg candidate generation + cross-agent-test selector)
@@ -13,7 +13,7 @@ the artifacts already present in this submission directory.
 
 > Reproducibility note. Throughout the analysis we adopt the
 > canonical denominator $N=128$ for every aggregate metric on
-> Multi-SWE-bench Java Verified. The submission ships 128
+> Multi-SWE-bench Java. The submission ships 128
 > harness reports and 128 patches (one per instance after the
 > xcheck@8 selector); 127 of those are accompanied by a fully
 > reconstructed assistant trajectory and one
@@ -77,7 +77,7 @@ failure mode of the Java run relative to the Python run.
 ## 2. Where Kozuchi sits in the Java leaderboard
 
 ![Java Verified leaderboard with Kozuchi highlighted](figures/fig01_leaderboard.png)
-*Figure 1. Multi-SWE-bench Java Verified leaderboard;
+*Figure 1. Multi-SWE-bench Java leaderboard;
 Kozuchi (blue bar) sits at rank 4 / 42 with 41 / 128 — the
 top-ranked submission running an open-weight backbone.*
 
@@ -1455,7 +1455,7 @@ the same artefact density as the Python write-up
 
 ## 14. Summary of key findings
 
-1. **32.03 %** pass rate on Multi-SWE-bench Java Verified
+1. **32.03 %** pass rate on Multi-SWE-bench Java
    (Wilson 95 % CI [24.57 %, 40.54 %]); ranks **#4 / 42
    overall** and **#1 among submissions running an open-weight
    decision-LLM** by 1 instance over *iSWE-OpenModels* and

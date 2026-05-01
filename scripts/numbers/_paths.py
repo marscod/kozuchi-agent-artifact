@@ -77,7 +77,7 @@ TRAJ_XCHECK_SELECTED = (
 )
 
 # ---------------------------------------------------------------------------
-# Multi-SWE-bench Java Verified submission (RQ6 / cross-language track)
+# Multi-SWE-bench Java submission (RQ6 / cross-language track)
 # ---------------------------------------------------------------------------
 JAVA_SUBMISSION_DIR = (
     DATA_DIR / "experiments" / "java" / "kozuchi-mswe-java-20260429"

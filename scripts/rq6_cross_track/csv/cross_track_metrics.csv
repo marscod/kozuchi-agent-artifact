@@ -1,5 +1,5 @@
 signal,python,java,source
-Benchmark,"SWE-bench Verified ($n{=}500$)","Multi-SWE-bench Java Verified ($n{=}128$)","Python/Java headline.csv"
+Benchmark,"SWE-bench Verified ($n{=}500$)","Multi-SWE-bench Java ($n{=}128$)","Python/Java headline.csv"
 "Resolved (Wilson 95\% CI)","374/500 = 74.80\% [70.82, 78.41]","41/128 = 32.03\% [24.57, 40.54]","Python/Java headline.csv"
 Leaderboard position,"12/135 overall","4/42 overall","Python/Java leaderboard.csv"
 Open-weight rank,"1st curated open-weight","1st strict open-weight","Python leaderboard.csv; Java leaderboard.csv + analysis.java.md §2.1"
