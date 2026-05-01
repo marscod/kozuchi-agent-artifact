@@ -11,6 +11,22 @@ LaTeX bibliography is [`paper/references.bib`](paper/references.bib);
 its annotated index lives in
 [`REFERENCES_INDEX.md`](REFERENCES_INDEX.md).
 
+A companion technical blog post — [*The Case for Harness Engineering:
+Achieving SLM SOTA on SWE-bench Verified with a 27B Model
+(TTS@8 = 74.8%)*](https://blog-en.fltech.dev/entry/2026/04/07/swebench)
+(Fujitsu Research, 2026-04-08) — walks through the same result from a
+practitioner's angle. It covers the eight design decisions behind the
+`374/500 = 74.8%` `sb-cli` score on SWE-bench Verified using
+`Qwen3.5-27B` without fine-tuning: phase + workflow decomposition,
+filesystem-based state sharing under `/_share/`, handover-driven
+context compression, the Orchestra `conductor` + `tool-specialist`
+runtime, the four specialized tools (`line_trace`, `caller_trace`,
+`coedit_localize`, `line_edit`), phase-gated skill injection,
+cross-agent test selection (weighted `F2P=0.3` / `P2P=0.7` with a
+`shortest_patch_raw` tiebreaker), and the sharding + retry operations
+layer. It serves as a narrative supplement to the trajectories, logs,
+and configs shipped under `data/` in this artifact.
+
 Everything cited in the paper — every numeric value, every figure,
 every table, every trajectory-bundle counter — is regenerable from
 files **inside this folder only**. Nothing ever points to a path
