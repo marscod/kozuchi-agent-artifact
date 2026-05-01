@@ -1,0 +1,70 @@
+{
+  "rows": [
+    {
+      "key": "2013",
+      "resolved": 3,
+      "total": 3,
+      "rate": 1.0
+    },
+    {
+      "key": "2014",
+      "resolved": 2,
+      "total": 2,
+      "rate": 1.0
+    },
+    {
+      "key": "2015",
+      "resolved": 1,
+      "total": 1,
+      "rate": 1.0
+    },
+    {
+      "key": "2016",
+      "resolved": 1,
+      "total": 2,
+      "rate": 0.5
+    },
+    {
+      "key": "2017",
+      "resolved": 15,
+      "total": 16,
+      "rate": 0.9375
+    },
+    {
+      "key": "2018",
+      "resolved": 18,
+      "total": 24,
+      "rate": 0.75
+    },
+    {
+      "key": "2019",
+      "resolved": 77,
+      "total": 98,
+      "rate": 0.7857
+    },
+    {
+      "key": "2020",
+      "resolved": 81,
+      "total": 108,
+      "rate": 0.75
+    },
+    {
+      "key": "2021",
+      "resolved": 57,
+      "total": 86,
+      "rate": 0.6628
+    },
+    {
+      "key": "2022",
+      "resolved": 77,
+      "total": 102,
+      "rate": 0.7549
+    },
+    {
+      "key": "2023",
+      "resolved": 42,
+      "total": 58,
+      "rate": 0.7241
+    }
+  ]
+}

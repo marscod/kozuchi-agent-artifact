@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-04-27T21:20:00Z" agent="swe-sota-agent" version="22.0.0">
+  <diagram id="ci_pipeline" name="CI Pipeline">
+    <mxGraphModel dx="920" dy="520" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="860" pageHeight="360" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/><mxCell id="1" parent="0"/>
+        <mxCell id="title" value="Key idea: CI makes expensive agent evaluation reusable, not one-off" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#006BFF;strokeColor=none;fontColor=#ffffff;fontStyle=1;fontSize=18;align=center;" vertex="1" parent="1"><mxGeometry x="25" y="15" width="810" height="36" as="geometry"/></mxCell>
+        <mxCell id="prep" value="Prepare" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F0FF;strokeColor=#1F2937;strokeWidth=3;fontSize=13;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="35" y="100" width="90" height="50" as="geometry"/></mxCell>
+        <mxCell id="bench" value="Generate candidates" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9FBEF;strokeColor=#1F2937;strokeWidth=3;fontSize=13;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="155" y="100" width="120" height="50" as="geometry"/></mxCell>
+        <mxCell id="synth" value="Synthesize data" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4CC;strokeColor=#1F2937;strokeWidth=3;fontSize=13;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="305" y="100" width="110" height="50" as="geometry"/></mxCell>
+        <mxCell id="train" value="Optional SFT / RL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4CC;strokeColor=#1F2937;strokeWidth=3;fontSize=13;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="445" y="100" width="115" height="50" as="geometry"/></mxCell>
+        <mxCell id="post" value="Post-train eval" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9FBEF;strokeColor=#1F2937;strokeWidth=3;fontSize=13;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="590" y="100" width="110" height="50" as="geometry"/></mxCell>
+        <mxCell id="tts" value="Select + report" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE5EC;strokeColor=#1F2937;strokeWidth=3;fontSize=13;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="730" y="100" width="100" height="50" as="geometry"/></mxCell>
+        <mxCell id="reuse1" value="Reuse prior environment" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F2ECFF;strokeColor=#7C3AED;strokeWidth=2;fontSize=12;align=center;" vertex="1" parent="1"><mxGeometry x="35" y="220" width="120" height="42" as="geometry"/></mxCell>
+        <mxCell id="reuse2" value="Reuse prior trajectories" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F2ECFF;strokeColor=#7C3AED;strokeWidth=2;fontSize=12;align=center;" vertex="1" parent="1"><mxGeometry x="180" y="220" width="120" height="42" as="geometry"/></mxCell>
+        <mxCell id="reuse3" value="Reuse prior data" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F2ECFF;strokeColor=#7C3AED;strokeWidth=2;fontSize=12;align=center;" vertex="1" parent="1"><mxGeometry x="325" y="220" width="110" height="42" as="geometry"/></mxCell>
+        <mxCell id="reuse4" value="Reuse prior adapters" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F2ECFF;strokeColor=#7C3AED;strokeWidth=2;fontSize=12;align=center;" vertex="1" parent="1"><mxGeometry x="465" y="220" width="120" height="42" as="geometry"/></mxCell>
+        <mxCell id="reuse5" value="Reuse prior evals" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F2ECFF;strokeColor=#7C3AED;strokeWidth=2;fontSize=12;align=center;" vertex="1" parent="1"><mxGeometry x="610" y="220" width="110" height="42" as="geometry"/></mxCell>
+        <mxCell id="note" value="Reuse mode is the practical innovation: researchers can change one stage while freezing all upstream evidence." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#ffffff;strokeColor=#111111;fontSize=13;align=left;" vertex="1" parent="1"><mxGeometry x="560" y="285" width="270" height="55" as="geometry"/></mxCell>
+        <mxCell id="cluster" value="One cluster abstraction maps the same pipeline to GPU, ROCm, and VM runners." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#ffffff;strokeColor=#111111;fontSize=13;align=left;" vertex="1" parent="1"><mxGeometry x="35" y="285" width="300" height="55" as="geometry"/></mxCell>
+        <mxCell id="e1" style="endArrow=classic;html=1;strokeColor=#111111;strokeWidth=3;" edge="1" parent="1" source="prep" target="bench"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e2" style="endArrow=classic;html=1;strokeColor=#111111;strokeWidth=3;" edge="1" parent="1" source="bench" target="synth"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e3" style="endArrow=classic;html=1;strokeColor=#111111;strokeWidth=3;" edge="1" parent="1" source="synth" target="train"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e4" style="endArrow=classic;html=1;strokeColor=#111111;strokeWidth=3;" edge="1" parent="1" source="train" target="post"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e5" style="endArrow=classic;html=1;strokeColor=#111111;strokeWidth=3;" edge="1" parent="1" source="post" target="tts"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="r1" style="endArrow=classic;html=1;strokeColor=#7C3AED;strokeWidth=2;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="reuse1" target="prep"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="r2" style="endArrow=classic;html=1;strokeColor=#7C3AED;strokeWidth=2;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="reuse2" target="bench"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="r3" style="endArrow=classic;html=1;strokeColor=#7C3AED;strokeWidth=2;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="reuse3" target="synth"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="r4" style="endArrow=classic;html=1;strokeColor=#7C3AED;strokeWidth=2;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="reuse4" target="train"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="r5" style="endArrow=classic;html=1;strokeColor=#7C3AED;strokeWidth=2;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="reuse5" target="post"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

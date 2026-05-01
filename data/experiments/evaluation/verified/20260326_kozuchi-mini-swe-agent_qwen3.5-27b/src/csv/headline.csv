@@ -1,0 +1,6 @@
+metric,value,numerator,denominator,ci_lo,ci_hi
+resolved_pass@1_TTS@8,0.748,374,500,0.7081521751849856,0.7840661518868807
+trajectory_coverage,0.99,495,500,,
+report_coverage,0.99,495,500,,
+artefact_missing,0.01,5,500,,
+resolved_with_complete_trajectory,0.748,374,500,,

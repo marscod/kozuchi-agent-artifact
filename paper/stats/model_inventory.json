@@ -1,0 +1,42 @@
+{
+  "models": [
+    "model_claude_claude-sonnet-4-5",
+    "model_openai_gpt-5.2",
+    "model_switching_remote_gpt-5.2+claude-sonnet-4-5",
+    "model_vllm_CohereLabs_c4ai-command-a-03-2025",
+    "model_vllm_CohereLabs_command-a-reasoning-08-2025",
+    "model_vllm_Qwen_Qwen3-8B",
+    "model_vllm_Qwen_Qwen3-Coder-30B-A3B-Instruct",
+    "model_vllm_Qwen_Qwen3-Coder-Next",
+    "model_vllm_mistralai_Devstral-Small-2-24B-Instruct-2512",
+    "model_vllm_moonshotai_Kimi-K2-Thinking",
+    "model_vllm_multi_devstral_nemotron",
+    "model_vllm_nvidia_Llama-3.1-Nemotron-Nano-8B-v1",
+    "model_vllm_nvidia_Llama-3_3-Nemotron-Super-49B-v1_5",
+    "model_vllm_nvidia_Llama-3_3-Nemotron-Super-49B-v1_5_phase_lora_devstral",
+    "model_vllm_nvidia_NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+    "model_vllm_zai-org_GLM-4.5-Air",
+    "model_vllm_zai-org_GLM-4.7-Flash"
+  ],
+  "chat_templates": [
+    "chat-template_CohereLabs_c4ai-command-a-03-2025",
+    "chat-template_CohereLabs_command-a-reasoning-08-2025",
+    "chat-template_Qwen_Qwen3-8B",
+    "chat-template_Qwen_Qwen3-Coder-30B-A3B-Instruct",
+    "chat-template_Qwen_Qwen3-Coder-Next",
+    "chat-template_mistralai_Devstral-Small-2-24B-Instruct-2512",
+    "chat-template_moonshotai_Kimi-K2-Thinking",
+    "chat-template_nvidia_Llama-3.1-Nemotron-Nano-8B-v1",
+    "chat-template_nvidia_Llama-3_3-Nemotron-Super-49B-v1_5",
+    "chat-template_nvidia_NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+    "chat-template_zai-org_GLM-4.5-Air",
+    "chat-template_zai-org_GLM-4.7-Flash"
+  ],
+  "environments": [
+    "environment_docker",
+    "environment_singularity"
+  ],
+  "n_models": 17,
+  "n_chat_templates": 12,
+  "n_environments": 2
+}

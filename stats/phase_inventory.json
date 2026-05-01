@@ -1,0 +1,124 @@
+{
+  "initial_phase": "ISSUE_REPRODUCT",
+  "phases": [
+    {
+      "name": "ISSUE_REPRODUCT",
+      "on_complete": "TEST_SYNTHSIZE",
+      "on_giveup": "CODE_LOCALIZE"
+    },
+    {
+      "name": "TEST_SYNTHSIZE",
+      "on_complete": "CODE_LOCALIZE",
+      "on_giveup": "CODE_LOCALIZE"
+    },
+    {
+      "name": "CODE_LOCALIZE",
+      "on_complete": "TEST_LOCALIZE",
+      "on_giveup": "ISSUE_REPRODUCT"
+    },
+    {
+      "name": "TEST_LOCALIZE",
+      "on_complete": "CODE_FIX",
+      "on_giveup": "CODE_FIX"
+    },
+    {
+      "name": "CODE_FIX",
+      "on_complete": "VERIFY_PATCH",
+      "on_giveup": "VERIFY_PATCH"
+    },
+    {
+      "name": "VERIFY_PATCH",
+      "on_complete": "ISSUE_CLOSE",
+      "on_giveup": "CODE_FIX"
+    },
+    {
+      "name": "ISSUE_CLOSE",
+      "on_complete": "FINAL_REPORT",
+      "on_giveup": "CODE_FIX"
+    },
+    {
+      "name": "FINAL_REPORT",
+      "on_complete": null,
+      "on_giveup": "FINAL_REPORT"
+    }
+  ],
+  "edges": [
+    {
+      "from": "ISSUE_REPRODUCT",
+      "label": "on_complete",
+      "to": "TEST_SYNTHSIZE"
+    },
+    {
+      "from": "ISSUE_REPRODUCT",
+      "label": "on_giveup",
+      "to": "CODE_LOCALIZE"
+    },
+    {
+      "from": "TEST_SYNTHSIZE",
+      "label": "on_complete",
+      "to": "CODE_LOCALIZE"
+    },
+    {
+      "from": "TEST_SYNTHSIZE",
+      "label": "on_giveup",
+      "to": "CODE_LOCALIZE"
+    },
+    {
+      "from": "CODE_LOCALIZE",
+      "label": "on_complete",
+      "to": "TEST_LOCALIZE"
+    },
+    {
+      "from": "CODE_LOCALIZE",
+      "label": "on_giveup",
+      "to": "ISSUE_REPRODUCT"
+    },
+    {
+      "from": "TEST_LOCALIZE",
+      "label": "on_complete",
+      "to": "CODE_FIX"
+    },
+    {
+      "from": "TEST_LOCALIZE",
+      "label": "on_giveup",
+      "to": "CODE_FIX"
+    },
+    {
+      "from": "CODE_FIX",
+      "label": "on_complete",
+      "to": "VERIFY_PATCH"
+    },
+    {
+      "from": "CODE_FIX",
+      "label": "on_giveup",
+      "to": "VERIFY_PATCH"
+    },
+    {
+      "from": "VERIFY_PATCH",
+      "label": "on_complete",
+      "to": "ISSUE_CLOSE"
+    },
+    {
+      "from": "VERIFY_PATCH",
+      "label": "on_giveup",
+      "to": "CODE_FIX"
+    },
+    {
+      "from": "ISSUE_CLOSE",
+      "label": "on_complete",
+      "to": "FINAL_REPORT"
+    },
+    {
+      "from": "ISSUE_CLOSE",
+      "label": "on_giveup",
+      "to": "CODE_FIX"
+    },
+    {
+      "from": "FINAL_REPORT",
+      "label": "on_giveup",
+      "to": "FINAL_REPORT"
+    }
+  ],
+  "n_phases": 8,
+  "n_edges": 15
+}

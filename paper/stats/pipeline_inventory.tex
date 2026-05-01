@@ -1,0 +1,16 @@
+% Auto-generated: GitLab CI stage list (.gitlab-ci.yml).
+\begin{tabular}{ll}
+\toprule
+Stage & Notes \\
+\midrule
+\code{prepare} & Prepare venv / pin pip modules \\
+\code{test} & Run repo-level pytest on stratus \\
+\code{bench} & Inference seed runs (multi-cluster) \\
+\code{synth} & Build SFT data from prior trajectories \\
+\code{sft} & Supervised fine-tuning \\
+\code{rl} & Reinforcement learning \\
+\code{bench\_post} & Re-bench with SFT/RL adapters \\
+\code{tts} & Test-time selection over multiple runs \\
+\code{report} & Aggregate report job \\
+\bottomrule
+\end{tabular}

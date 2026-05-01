@@ -1,0 +1,2231 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% main.tex
+%% Long paper for the ASE 2026 Industry Showcase track.
+%% Class is fixed by the track CFP (paper/ase2026/cfp.md):
+%%   \documentclass[sigconf,review]{acmart}
+% Experiments path: https://github.com/marscod/experiments/tree/kozuchi-submission-analysis/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[sigconf,review]{acmart}
+
+\setcopyright{none}
+\settopmatter{printacmref=false, printccs=false, printfolios=true}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+
+\acmConference[ASE '26]{Proceedings of the 41st IEEE/ACM International Conference on Automated Software Engineering}{October 12--16, 2026}{Munich, Germany}
+\acmBooktitle{Proceedings of the 41st IEEE/ACM International Conference on Automated Software Engineering, Industry Showcase Track (ASE '26 Industry), October 12--16, 2026, Munich, Germany}
+\acmISBN{}
+\acmDOI{}
+\acmYear{2026}
+\copyrightyear{2026}
+
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{tabularx}
+\usepackage{microtype}
+\usepackage{float}
+
+%% Typesetting tolerance: encourage soft hyphenation/break choices over
+%% Overfull \hbox warnings caused by long monospace tokens cited inline
+%% (e.g., \code{turn\_handover\_threshold},
+%% \code{kozuchi-mini-swe-agent}). The two-column ACM layout has very
+%% narrow text columns, so we accept a small badness in exchange for
+%% staying inside the column.
+\sloppy
+\tolerance=2000
+\emergencystretch=3em
+\hyphenpenalty=200
+\exhyphenpenalty=200
+\hbadness=2000
+
+%% Tighten table floats: reduce the caption-to-table gap and the
+%% vertical whitespace after table floats in the ACM two-column layout.
+\AtBeginEnvironment{table}{%
+  \setlength{\abovecaptionskip}{2pt}%
+  \setlength{\belowcaptionskip}{2pt}%
+  \setlength{\tabcolsep}{3pt}%
+  \renewcommand{\arraystretch}{0.92}%
+  \scriptsize
+}
+\setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}
+
+%% URL line-breaking (used in references and inline file paths).
+\Urlmuskip=0mu plus 1mu
+
+\lstset{%
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  columns=fullflexible,
+  frame=single,
+  keepspaces=true,
+  showstringspaces=false,
+  xleftmargin=0pt,
+  xrightmargin=0pt,
+  framerule=0.3pt,
+  framesep=3pt,
+}
+
+% --- Convenience macros ---
+\newcommand{\figpath}[1]{figures/#1}
+\newcommand{\statpath}[1]{stats/#1}
+
+%% Long workspace paths kept out of the body via footnotes.
+%% \submissiondir is the SWE-bench Verified submission directory;
+%% \trajbundlepath is the per-run trajectory bundle directory.
+%% Use \submissiondir / \trajbundlepath to print the literal path
+%% (e.g., in a footnote) and \submissionref / \trajbundleref to
+%% emit a short label whose footnote carries the long path.
+\newcommand{\submissiondir}{experiments/\linebreak[0]evaluation/\linebreak[0]verified/\linebreak[0]20260326\_\linebreak[0]kozuchi-mini-swe-agent\_\linebreak[0]qwen3.5-27b/}
+\newcommand{\trajbundlepath}{trajectories/\linebreak[0]q35\_\linebreak[0]verified500\_\linebreak[0]tts8\_\linebreak[0]75p2\_\linebreak[0]submission\_\linebreak[0]bundle\_\linebreak[0]20260326-055715\_\linebreak[0]merged500/}
+\newcommand{\submissionref}{the published submission directory\footnote{Workspace path: \texttt{\submissiondir}.}}
+\newcommand{\trajbundleref}{the per-run trajectory bundle\footnote{Workspace path: \texttt{\trajbundlepath}.}}
+
+%% \code{...}: typewriter span. Combined with \sloppy and a generous
+%% \emergencystretch above, LaTeX is able to choose looser-but-legal
+%% line breaks for long tokens like \code{turn\_handover\_threshold}
+%% in narrow ACM two-column text. We do not redefine \_ inside \code
+%% because acmart+hyperref's expansion of \_ via \textunderscore is
+%% not safely re-entrant in moving arguments.
+\newcommand{\code}[1]{\texttt{#1}}
+\urlstyle{tt}
+\definecolor{KeyIdeaBlue}{HTML}{006BFF}
+\definecolor{AlgPanelBg}{HTML}{F8FAFC}
+\definecolor{AlgPanelBorder}{HTML}{2563EB}
+\definecolor{AlgDecisionBg}{HTML}{FFF7ED}
+\definecolor{AlgDecisionBorder}{HTML}{EA580C}
+\makeatletter
+%% The local TeX image used for this artifact does not ship
+%% algorithm2e.sty. These macros keep the same ruled, line-numbered
+%% presentation style without adding an unavailable dependency.
+\floatstyle{ruled}
+\newfloat{algorithm}{t}{loa}
+\floatname{algorithm}{Algorithm}
+\newcounter{AlgoLine}
+\newlength{\AlgoIndent}
+\setlength{\AlgoIndent}{0pt}
+\newcommand{\AlgoReset}{\setcounter{AlgoLine}{0}\setlength{\AlgoIndent}{0pt}}
+\newcommand{\AlgoTextStyle}{\scriptsize\setlength{\baselineskip}{6.8pt}}
+\newcommand{\AlgoLine}[1]{%
+  \refstepcounter{AlgoLine}%
+  \par\noindent
+  \makebox[1.8em][r]{\scriptsize\arabic{AlgoLine}:}%
+  \hspace{0.45em}\hspace*{\AlgoIndent}%
+  \begin{minipage}[t]{\dimexpr\linewidth-2.25em-\AlgoIndent\relax}%
+    \raggedright\AlgoTextStyle #1%
+  \end{minipage}\par
+}
+\newcommand{\AlgoMeta}[2]{%
+  \par\noindent\hspace*{2.25em}%
+  \begin{minipage}[t]{\dimexpr\linewidth-2.25em\relax}%
+    \raggedright\AlgoTextStyle\textbf{#1:} #2%
+  \end{minipage}\par
+}
+\AtBeginEnvironment{algorithm}{\AlgoReset\setlength{\parskip}{0pt}\setlength{\abovecaptionskip}{1pt}\setlength{\belowcaptionskip}{1pt}}
+\newcommand{\AlgoStmt}[1]{\AlgoLine{#1}}
+\newcommand{\AlgoNote}[1]{\AlgoLine{$\triangleright$ \textit{#1}}}
+\newcommand{\AlgoInput}[1]{\AlgoMeta{Input}{#1}}
+\newcommand{\AlgoOutput}[1]{\AlgoMeta{Output}{#1}}
+\newcommand{\AlgoRet}[1]{\AlgoLine{\textbf{return} #1}}
+\newcommand{\AlgoIf}[2]{%
+  \AlgoLine{\textbf{if} #1 \textbf{then}}%
+  \addtolength{\AlgoIndent}{1.25em}#2%
+  \addtolength{\AlgoIndent}{-1.25em}%
+  \AlgoLine{\textbf{end if}}%
+}
+\newcommand{\AlgoEIf}[3]{%
+  \AlgoLine{\textbf{if} #1 \textbf{then}}%
+  \addtolength{\AlgoIndent}{1.25em}#2%
+  \addtolength{\AlgoIndent}{-1.25em}%
+  \AlgoLine{\textbf{else}}%
+  \addtolength{\AlgoIndent}{1.25em}#3%
+  \addtolength{\AlgoIndent}{-1.25em}%
+  \AlgoLine{\textbf{end if}}%
+}
+\newcommand{\AlgoWhile}[2]{%
+  \AlgoLine{\textbf{while} #1 \textbf{do}}%
+  \addtolength{\AlgoIndent}{1.25em}#2%
+  \addtolength{\AlgoIndent}{-1.25em}%
+  \AlgoLine{\textbf{end while}}%
+}
+\newcommand{\AlgoForEach}[2]{%
+  \AlgoLine{\textbf{for each} #1 \textbf{do}}%
+  \addtolength{\AlgoIndent}{1.25em}#2%
+  \addtolength{\AlgoIndent}{-1.25em}%
+  \AlgoLine{\textbf{end for}}%
+}
+\providecommand{\algorithmautorefname}{Algorithm}
+\makeatother
+
+\title[Kozuchi Agent: language-agnostic open-weight software repair]{Kozuchi Agent: A Language-Agnostic Open-Weight Agent for Software Repair}
+
+%% Author roster: single \author block with superscript-keyed unique
+%% affiliations. Order matches the prior submission's metadata-derived list.
+%% Source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/metadata.yaml
+%% Affiliation keys:
+%%   1 = Fujitsu Research of America, USA
+%%   2 = Fujitsu Research, Japan
+%%   3 = Fujitsu Research of Europe, UK
+%%   4 = Fujitsu Research \& Development, China
+\author{%
+Mehdi Bahrami\textsuperscript{1},
+Kosaku Kimura\textsuperscript{2},
+Satoshi Munakata\textsuperscript{2},
+Satoshi Nakashima\textsuperscript{2},
+Yu Ishikawa\textsuperscript{2},
+Kosuke Maeda\textsuperscript{2},
+Nao Soma\textsuperscript{2},
+Kenichi Kobayashi\textsuperscript{2},
+Keisuke Miyazaki\textsuperscript{2},
+Keizo Kato\textsuperscript{2},
+Shigeki Fukuta\textsuperscript{2},
+Tatsuo Kumano\textsuperscript{2},
+Nobutaka Imamura\textsuperscript{2},
+Kevin Musgrave\textsuperscript{1},
+Shahbaz Abdul Khader\textsuperscript{3},
+Kwun Ho Ngan\textsuperscript{3},
+Joseph Townsend\textsuperscript{3},
+Fayas Asharindavida\textsuperscript{3},
+Matthieu Parizy\textsuperscript{3},
+Akira Sakai\textsuperscript{3},
+Yuma Ichikawa\textsuperscript{2},
+Yang Zhao\textsuperscript{4},
+Michiaki Takizawa\textsuperscript{2},
+Taku Fukui\textsuperscript{2},
+Hiroki Ohtsuji\textsuperscript{2},
+Wei-Peng Chen\textsuperscript{1},
+Hiro Kobashi\textsuperscript{2}%
+}
+%% acmart requires a non-empty \country{}; we keep the location info inside
+%% the multi-line \institution{} block and use a single-space \country{}
+%% as a placeholder so the parent Fujitsu Research entity is not duplicated.
+\affiliation{%
+  \institution{%
+    \textsuperscript{1}Fujitsu Research of America, USA \\
+    \textsuperscript{2}Fujitsu Research, Japan \\
+    \textsuperscript{3}Fujitsu Research of Europe, UK \\
+    \textsuperscript{4}Fujitsu Research \& Development, China%
+  }
+  \country{~}
+}
+
+%% Shorten the author list in the auto-generated "ACM Reference Format:"
+%% block (and the running page header) to "Bahrami et al." Listing all 27
+%% co-authors there is unwieldy; the full roster is still shown in the
+%% title block above.
+%%   - \shortauthors drives the running page header.
+%%   - \@acmRefShortAuthors is what acmart's \@mkbibcitation prints in the
+%%     ACM Reference Format. acmart appends a literal ". " after this
+%%     name, so we deliberately omit the trailing period here to avoid
+%%     "et al.." while still rendering "Bahrami et al. 2026. ..."
+\renewcommand{\shortauthors}{Bahrami et al.}
+\makeatletter
+\newcommand{\@acmRefShortAuthors}{Bahrami et~al}
+\AtBeginDocument{%
+  \patchcmd{\@mkbibcitation}%
+    {\authors}%
+    {\@acmRefShortAuthors}%
+    {}%
+    {\ClassWarning{test-prompt}{Could not patch ACM Reference Format author list}}%
+}
+\makeatother
+
+%% CCS Concepts commented out for the review build.
+%% Mandatory CCS Concepts (ACM 2012 classification).
+%% Source: ACM Computing Classification System
+%% (https://dl.acm.org/ccs/ccs.cfm).
+% \begin{CCSXML}
+% <ccs2012>
+%    <concept>
+%        <concept_id>10011007.10011074</concept_id>
+%        <concept_desc>Software and its engineering~Software creation and management</concept_desc>
+%        <concept_significance>500</concept_significance>
+%        </concept>
+%    <concept>
+%        <concept_id>10011007.10011074.10011099.10011102</concept_id>
+%        <concept_desc>Software and its engineering~Software defect analysis</concept_desc>
+%        <concept_significance>500</concept_significance>
+%        </concept>
+%    <concept>
+%        <concept_id>10010147.10010178.10010179</concept_id>
+%        <concept_desc>Computing methodologies~Natural language processing</concept_desc>
+%        <concept_significance>300</concept_significance>
+%        </concept>
+%    <concept>
+%        <concept_id>10010147.10010257</concept_id>
+%        <concept_desc>Computing methodologies~Machine learning</concept_desc>
+%        <concept_significance>300</concept_significance>
+%        </concept>
+% </ccs2012>
+% \end{CCSXML}
+%
+% \ccsdesc[500]{Software and its engineering~Software creation and management}
+% \ccsdesc[500]{Software and its engineering~Software defect analysis}
+% \ccsdesc[300]{Computing methodologies~Natural language processing}
+% \ccsdesc[300]{Computing methodologies~Machine learning}
+
+%% Keywords commented out for the review build.
+% \keywords{LLM agents, automated program repair, SWE-bench, agent harness,
+% test-time scaling, multi-cluster pipeline, production planning,
+% experience report}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Abstract
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/{README.md, metadata.yaml, results/results.json}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{headline.csv, leaderboard.csv, mcnemar.csv, multiple_comparison_corrected.csv, failure_modes.csv}
+% source (Java headline/rank): experiments/java/kozuchi-mswe-java-20260429/src/csv/{headline.csv,leaderboard.csv}
+% source (Java phase transfer): experiments/java/kozuchi-mswe-java-20260429/src/csv/phase_distribution.csv
+% source (Python/Java side-by-side): experiments/comparison.md §0, §4, §9
+% source: trajectories/q35_verified500_tts8_75p2_submission_bundle_20260326-055715_merged500/bundle_manifest.json
+% source: configs/agent_sota.yaml; .gitlab-ci.yml; pipeline/; scripts/module_load.sh
+Industrial software-engineering teams increasingly prefer LLM agents that
+turn bug reports into correct, test-passing patches, but operating such
+agents at industrial scale raises harness-level problems: long horizons,
+tool-use discipline, context persistence, multi-cluster execution, and
+evaluation reuse. This paper presents Kozuchi Agent, a
+\textit{language-agnostic open-weight agent} and \textit{CI-operated
+evaluation pipeline} for industrial-scale evaluation of issue-to-patch
+agents.
+Kozuchi agent combines explicit phases, persistent intermediate state,
+deterministic software-engineering tools, model-independent action
+interfaces, and cross-agent test-time selection, making agent behavior
+auditable and repeatable without proprietary models or large fine-tuned
+backbones. With a locally hosted Qwen3.5-27B model, no fine-tuning, and
+TTS@8 candidate generation, Kozuchi agent resolves 374 of 500 SWE-bench
+Verified instances on the official cloud evaluator. Re-running the same
+27 B agent unchanged on Multi-SWE-bench Java Verified resolves 41/128
+instances (32.03\%), placing first among strict open-weight submissions
+and fourth of 42 overall. Per-phase scaffold behaviour matches the
+Python run within $\pm 5$ percentage points on every phase, evidence that
+the harness is language agnostic. It ranks 12th among 135 public Python
+submissions and first among open-weight systems. The analysis shows that
+remaining failures are dominated by semantic correctness, Java-specific
+harness failures, and selection errors rather than proprietary-model
+advantages, while the CI workflow compresses operator-facing touch-points
+from five to one.
+%The public artifact contains trajectories, selector choices, and evaluation outputs.
+\end{abstract}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Introduction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+\label{sec:intro}
+Across our engineering organization, we observe a recurring
+industrial demand: developers want an LLM-based agent that takes an
+issue description plus a repository state and emits a correct,
+test-passing patch. In SWE-bench-style
+deployments~\cite{jimenez2024swebench}, meeting that demand requires
+more than choosing a model~\cite{Zhengetal2024}: the surrounding harness must keep long,
+tool-using repair attempts auditable and repeatable. The central
+question for us became:
+\emph{how far can an open, locally hosted model go when embedded in an
+auditable repair harness and selected through cross-agent testing?}
+Four operational blockers shaped the design.
+
+\begin{figure}[t]
+  \centering
+  % source: figures/broad_success_vs_params_with_java.png
+  %         (regenerated by paper/comparison/src/plot_broad_with_java.py).
+  %         Python numbers cross-checked against
+  %         experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{headline.csv,leaderboard.csv};
+  %         Java numbers cross-checked against
+  %         experiments/java/kozuchi-mswe-java-20260429/src/csv/{headline.csv,leaderboard.csv}
+  %         and paper/java_src/csv/leaderboard.csv (generated mirror).
+  \includegraphics[width=\columnwidth]{figures/broad_success_vs_params_with_java.png}
+  \caption{Kozuchi Agent is parameter efficient on both Python
+  SWE-bench Verified and Multi-SWE-bench Java Verified.}
+  \Description{Dual-axis scatter plot of agent success rate against
+  total parameter count on a log scale. The left (blue) axis shows
+  SWE-bench Verified Python results for Kozuchi Agent and open/local
+  peers with the Python Pareto frontier as a dashed blue line; the
+  right (red) axis shows Multi-SWE-Bench Verified Java results for
+  open-weight peers with the per-size-class Java envelope as a dashed
+  red line. Kozuchi Agent + Qwen3.5-27B is highlighted with star
+  markers on both axes (74.8 percent Python, 32.03 percent Java) at
+  27B parameters.}
+  \label{fig:pareto}
+\end{figure}
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.76\textwidth]{\figpath{overall-architecture.pdf}}
+  \caption{Kozuchi Agent workflow from candidate generation to
+  cross-agent selection.}
+  \Description{Two-lane system diagram. The upper lane shows the broad
+  issue-to-patch workflow through candidate generation, archived
+  artifacts, selection, and submitted patch. The lower lane expands one
+  candidate trajectory with durable shared memory, turn-level action
+  normalization, tools, and the cross-run test application that produces
+  the selector signals B_ij and R_ij.}
+  \label{fig:arch}
+\end{figure*}
+
+\paragraph{Pain~1: long-horizon execution.}
+% source: configs/agent_sota.yaml (step_limit: 500; instance_timeout: "3:00:00";
+%         max_prompt_tokens: 244736; eight phases with W0..Wn workflows each)
+A real fix requires reproducing the bug, generating a
+regression test, locating the root cause, editing several files, and
+verifying the result~\cite{jimenez2024swebench,yang2024sweagent,yao2023react,shinn2023reflexion},
+with each step taking many tens of LLM turns.
+In practice software-repair benchmark trajectories consume most of a multi-hour
+budget. Free-form planning at that horizon degrades decision quality:
+agents skip reproduction, re-investigate locations they
+analyzed, or ``fix'' code they have not understood.
+
+\paragraph{Pain~2: tool-grammar drift across model families.}
+% source: configs/agent_sota.yaml: agent.action_format (4 named formats);
+%         action_format_name (default tool_bash); ACTION_FORMAT_NAME env override.
+LLM families vary in conventions for tool calls and structured actions.
+A small syntax mismatch can invalidate a reasonable
+action~\cite{openaifunctioncalling2026,anthropictooluse2026} and cascade
+into wasted turns. The harness must absorb
+that diversity rather than forcing every model integration to fork the
+agent.
+
+\paragraph{Pain~3: multi-cluster heterogeneity.}
+% source: scripts/module_load.sh (kagura/ashitaka/stratus/abci/azalea blocks);
+%         .gitlab-ci.yml (cluster tags on bench_*, sft_*, rl_*, test_*).
+Our jobs land on heterogeneous internal clusters: GPU inference and
+training, VM-based testing, and Docker-based benchmark grading all have
+different operational requirements. We need one runtime to work across
+these environments without forcing researchers to rewrite scripts for
+each hardware backend.
+
+\paragraph{Pain~4: evaluation cost.}
+% source: README.md ``Use -> CI reuse mode''; .gitlab-ci.yml variables block
+% reuse vars (paper/final/stats/pipeline_inventory.json):
+% PIPELINE_PREPARE_VENV_DIR, PIPELINE_TRAJ_DIR, PIPELINE_DATA_SYNTH_DIR,
+% PHASE_SFT_ADAPTER_DIRS_FILE, PIPELINE_BENCH_POST_SFT_DIR, PIPELINE_BENCH_POST_RL_DIR.
+Re-running SWE-bench Verified end-to-end with Docker-based grading is
+expensive enough that a CI pipeline that re-runs every stage is
+unusable in practice~\cite{openai2024swebenchverified,sbcli2026}. The
+evaluator-grade score is the gate for
+external claims and the floor for experimentation, but it
+must be reachable on a budget that fits a few SLURM
+jobs~\cite{yoo2003slurm} rather than a research-cluster reservation.
+The CI reuse mode declared in \code{.gitlab-ci.yml} short-circuits 6 of
+9 stages per iteration (\S\ref{sec:lessons}).
+
+\medskip
+
+This paper is an experience report on the harness and pipeline we built
+to address those four pains, and on what we learned operating it.
+\emph{Kozuchi Agent} comprises:
+\begin{itemize}
+\item a phase-driven SWE agent layered on \code{mini-swe-agent}, a
+minimal open-source agent runtime~\cite{miniswea};
+\item a fixed sandbox of dynamic-analysis and edit operations;
+\item a CI-driven multi-cluster pipeline for repeatable pipelines;
+\item a test-time selection layer that merges multiple inference
+runs through \emph{cross-agent testing}~\cite{komoravolu2026agent}.
+\end{itemize}
+The released artifacts expose the resulting trajectories, selector
+choices, evaluation outputs, and additional deep analysis.
+
+\textbf{Contributions.}
+\noindent\textbf{C1. A phase-driven, model-agnostic SWE agent harness with auditable tools.}
+% source: configs/agent_sota.yaml: agent.phases;
+%         paper/final/stats/phase_inventory.json (n_phases=8, n_edges=15)
+% source: configs/agent_sota.yaml: agent.action_format (markdown_bash,
+%         tool_call, toolcall, tool_bash) + action_format_name (default tool_bash)
+% source: paper/final/stats/action_format_inventory.json
+% source: swe_sota_agent/tools/ + configs/agent_sota.yaml: agent.tools
+% source: paper/final/stats/tool_inventory.json
+We decompose issue resolution into eight semantically meaningful phases
+connected by explicit success and fallback transitions, separate the
+logical action contract from model-specific surface syntax, and expose a
+small deterministic tool sandbox for dynamic tracing, caller discovery,
+and guarded editing. Together these choices turn a free-form repair loop
+into an inspectable workflow whose state can be resumed and compared
+across open-weight and API-served backends.
+
+\noindent\textbf{C2. A CI-operated multi-cluster benchmark pipeline with reusable and regenerable artifacts.}
+% source: .gitlab-ci.yml; scripts/module_load.sh; pipeline/{bench,sft,rl,tts,
+%         data_synth,kg_synth,ci}/
+% source: paper/final/stats/pipeline_inventory.json
+% source: paper/final/sources/paper-src-test-prompt/{*.py, run_all.sh, README.md}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/{*.py, build.sh}
+A single CI pipeline coordinates benchmark inference, grading, data
+synthesis, optional post-training, test-time selection, and reporting
+across heterogeneous clusters. Its reuse mode allows operators to
+short-circuit expensive stages using previously validated outputs, while
+the published analysis scripts in \code{src/} regenerate every
+empirical value cited in RQ1--RQ6 directly from the SWE-bench and
+Multi-SWE-bench Java harness reports, trajectories, and cross-agent
+selection bundles in the public artifact (\S\ref{sec:artifact}).
+
+\noindent\textbf{C3. A cross-agent test-time selector with trajectory-level audit.}
+% source: pipeline/tts/; trajectories/q35_.../xcheck/results/*_75p2.json;
+%         paper/final/stats/xcheck_summary.json
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/revision.md
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{tts_oracle_summary.csv,tts_resolve_count_distribution.csv,conv_per_instance.csv,conv_outcome_tests.csv,conv_bash_verbs.csv,conv_returncode_per_instance.csv}
+We merge $K=8$ candidate inference runs through cross-agent testing:
+each run contributes both a patch and independent tests, and the tests
+are cross-applied to score candidate patches without using the hidden
+benchmark tests or a learned verifier. We also analyze the eight
+candidate streams and 495 full message trajectories, separating selector
+regret from
+instance hardness (408 instances solved by at least one run, 234 by all
+runs, 92 by none) and surfacing content-level selector signals such as
+THOUGHT-block-to-action balance, rollback language, and error-marker
+asymmetries.
+
+\noindent\textbf{C4. Competitive open-weight repair results with statistical and failure-mode analysis.}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/
+%         {README.md, metadata.yaml, results/results.json}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{headline.csv, leaderboard.csv, mcnemar.csv, multiple_comparison_corrected.csv}
+% source: trajectories/q35_.../bundle_manifest.json
+% source: paper/final/stats/{xcheck_summary.json, per_run_pass1.json}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{failure_modes.csv, patch_size_buckets.csv, effort_resolution_corr.csv, operational.csv}
+% source (Java result/rank/significance): experiments/java/kozuchi-mswe-java-20260429/src/csv/{headline.csv,leaderboard.csv,mcnemar.csv}
+%   - headline.csv: 41/128 = 32.03%, Wilson CI [24.57%, 40.54%]
+%   - leaderboard.csv: rank 4/42, strict open-weight cohort membership/name/rate
+%   - mcnemar.csv: paired Java peer outcomes; BH-FDR summary is reproduced in
+%     experiments/java/kozuchi-mswe-java-20260429/src/analysis.java.md §9.1
+On the official SWE-bench Verified cloud evaluator, our 27B open-weight
+Python configuration resolves 374 of 500 instances (74.80\%, Wilson 95\% CI [70.82\%,
+78.41\%]). The internal Docker re-grade resolves 376 (75.2\%); the
+cross-agent selector contributes +14 resolved instances over a
+size-ordered first-candidate baseline. On a frozen snapshot of 135
+publicly catalogued SWE-bench
+Verified submissions the configuration ranks 12th overall and is the
+highest-ranked open-weight system; under Benjamini--Hochberg FDR
+correction (target $q{\le}0.05$) the configuration significantly
+outperforms 16 of 17 curated open-weight peers on matched
+per-instance McNemar tests. Of 126 unresolved instances, 91.3\% are
+patches that apply cleanly but
+do not flip the hidden tests; 0\% are malformed-diff or empty-patch
+failures, isolating the residual gap as a semantic-correctness problem
+rather than an editing-format problem. Patch LOC churn is the strongest
+single feature signal (point-biserial $r{=}-0.197$,
+$p{=}1.1{\times}10^{-5}$), and 494/495 produced patches apply cleanly
+through the SWE-bench harness. On Multi-SWE-bench Java Verified, the
+unchanged 27 B Java configuration resolves 41/128 instances (32.03\%), ranks
+4 of 42 overall, and is first among strict open-weight submissions;
+under Benjamini--Hochberg FDR control ($q\le0.05$), it significantly
+outperforms 34 of 41 Java peer systems on paired per-instance outcomes.
+
+\noindent\textbf{C5. Cross-language transfer of the same harness to Java.}
+% source: experiments/java/kozuchi-mswe-java-20260429/src/analysis.java.md
+% source: experiments/comparison.md
+% exact numeric sources:
+%   - phase message shares: experiments/java/kozuchi-mswe-java-20260429/src/csv/phase_distribution.csv
+%     and experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/phase_distribution.csv;
+%     comparison.md §4 computes the ±5 pp cross-track statement.
+%   - per-instance effort medians: experiments/java/kozuchi-mswe-java-20260429/src/csv/trajectory_stats.csv
+%     and experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/trajectory_stats.csv;
+%     comparison.md §6 gives the six-of-seven within ±20% statement.
+%   - Java Qwen2.5-72B margin: experiments/java/kozuchi-mswe-java-20260429/src/csv/mcnemar.csv
+%     rows for MSWE/MopenHands/MagentLess + Qwen2.5-72B.
+The phase decomposition, action contract, persistent shared state, and
+cross-agent selector transfer from Python to Java unchanged. Per-phase
+share of assistant messages matches the Python run within $\pm5$
+percentage points on every phase, six of seven per-instance effort
+medians sit within 20\% of Python parity, and the same 27 B Qwen3.5
+backbone beats the strongest same-class open-weight Java peer
+(Qwen2.5-72B) by 38 instances, compared with a 26-instance same-family
+margin on Python.
+
+\textbf{Roadmap.}
+\S\ref{sec:related} situates the work among agentic SWE systems,
+industry-facing coding agents, training pipelines, and LLM-enabled
+CI/CD systems. \S\ref{sec:background} sets the SWE-bench, cluster,
+and prior-workflow background. \S\ref{sec:definitions} defines the
+runtime, trajectory, phase graph, tool-call contract,
+verifier/selector, and artifact boundary, and lists five invariants
+the runtime maintains.
+\S\ref{sec:observations} narrates five empirical observations that
+shaped the design. \S\ref{sec:design} describes the system in five
+layers (runtime, tools, pipeline, serving, CI).
+\S\ref{sec:design-tts} details the cross-agent test-time selector.
+\S\ref{sec:eval} answers six research questions on SWE-bench
+Verified and Multi-SWE-bench Java Verified, all of them grounded in
+scripted analyses over the published Python TTS@8 and Java xcheck@8 artifacts: headline accuracy
+with uncertainty, peer-ranked position with multiplicity-corrected paired
+tests, structural breakdowns by repository, patch size, and trajectory
+effort, the failure taxonomy and operational-reliability profile, the
+TTS@8 selection lift and cost--diversity envelope, and cross-language
+transfer to Java using the same agent, backbone, and scaffold.
+\S\ref{sec:artifact} gives the artifact availability statement and
+release boundary for the public trajectories, reports, selector bundle,
+and analysis scripts.
+\S\ref{sec:lessons} states seven operational lessons.
+\S\ref{sec:conclusion} discusses future directions.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Related Work
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Agentic SWE systems.}
+% source: prior internal technical note S4.5 + pip_modules/mini-swe-agent/
+SWE-agent~\cite{yang2024sweagent} established the now-standard pattern
+of an LLM observing a shell and emitting commands, building on broader
+reason-act and reflective-agent patterns~\cite{yao2023react,shinn2023reflexion,madaan2023selfrefine,yao2023tree}.
+We build on a minimal open-source runtime and add a phase-driven contract,
+a fixed tool sandbox, and a multi-cluster pipeline. AGENTLESS~\cite{xia2024agentless}
+uses a simpler localization-fix-verify pipeline; OpenHands and
+AutoCodeRover provide complementary open software-agent platforms and
+program-improvement systems~\cite{wang2024openhands,zhang2024autocoderover}.
+Our system is closer to a long agentic loop but constrains it through
+phases and shared state.
+The clearest difference is how test assets are handled: AGENTLESS selects
+one reproduction test and one regression set per issue, whereas each
+Kozuchi agent run independently generates tests that are later cross-applied to
+other candidates.
+
+\paragraph{Industry-facing coding agents.}
+% source: public product documentation and announcements for GitHub Copilot,
+%         Amazon Q Developer, Google Jules, OpenAI Codex, Anthropic Claude Code,
+%         Cognition Devin, and LogSage.
+Commercial systems such as GitHub Copilot's cloud coding
+agent~\cite{githubcopilotagent2025}, Amazon Q Developer~\cite{amazonqdeveloper2024},
+Google Jules~\cite{googlejules2025}, OpenAI Codex~\cite{openaicodex2025},
+Anthropic Claude Code~\cite{anthropicclaudecode2025}, and
+Devin~\cite{devin2024} validate industrial demand for asynchronous
+issue-to-patch agents. Their public descriptions are necessarily
+product-oriented; our focus is complementary harness evidence: phase
+boundaries, deterministic tools, queue-aware CI orchestration, reusable
+benchmark artifacts, and inspectable selection.
+
+\paragraph{Tools, training, and CI.}
+% source: swe_sota_agent/tools/; pipeline/{sft,rl}/; paper/ase2025/index.md
+Toolformer-style work injects tool calls into model training~\cite{schick2023toolformer}; generated-test
+selection and pass@k-style code evaluation provide related precedents for
+using execution evidence around generated code~\cite{chen2021codex,chen2023codet}.
+Our approach is the dual, holding the model fixed while injecting classic SE
+tools (line tracing, caller discovery, guarded editing) at runtime. SFT
+and RL recipes for code agents remain active directions, and systems such
+as Nemotron-CORTEXA~\cite{cortexa2025} use fine-tuned retrievers and
+graph localization. R2E-Gym~\cite{r2egym2025} explores verifiers for
+BEST@K; our cross-agent testing is execution-based but deliberately
+model-free. Finally, deployed LLM-for-CI systems such as
+LogSage~\cite{logsage2025} share our concern for artifact availability
+and reproducibility, although in our case CI orchestrates the agent
+workload itself.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Background and Industrial Context
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Background and Industrial Context}
+\label{sec:background}
+
+\subsection{SWE-bench and Multi-SWE-bench Java}
+% source: experiments/README.md (leaderboard policy, asset list)
+SWE-bench is a benchmark of real GitHub issues paired with the
+affected repository state and a hidden test suite; an entry counts as
+\emph{resolved} only when the model's patch passes the issue-revealing
+tests while preserving the existing regression tests~\cite{jimenez2024swebench}.
+It extends a longer code-generation and program-repair evaluation line
+from function-level benchmarks to repository-level issues~\cite{chen2021codex,hendrycks2021apps,li2022alphacode,legoues2012genprog,long2016prophet,gazzola2019automatic}.
+SWE-bench Verified is a 500-instance human-curated subset with cleaner
+problem statements and reliable evaluation
+tests~\cite{openai2024swebenchverified}; it is the Python benchmark used
+in RQ1--RQ5.  Multi-SWE-bench Java Verified is the corresponding Java
+track used in RQ6: it keeps the same issue-to-patch resolved metric, but
+evaluates Java repositories through Maven/Gradle-style harnesses and a
+separate public leaderboard~\cite{zan2025multiswebench}.  We report the Python result on the
+\code{sb-cli} cloud stack~\cite{sbcli2026} and the Java result on the
+Multi-SWE-bench Java Verified leaderboard, keeping each benchmark's
+denominator and peer set separate.
+
+\subsection{Agentic loops and base runtime}
+% source: .gitmodules (pip_modules/mini-swe-agent submodule);
+%         AGENTS.md (overview of repo and agent extension)
+Modern SWE agents follow an agentic loop: a tool-using LLM observes a
+shell, plans, runs a command, observes the result, and repeats~\cite{yao2023react,shinn2023reflexion}. We build
+on a minimal open-source runtime~\cite{miniswea} with harness-level
+support for long repairs: phase control, persistent shared state,
+deterministic tools, and model-independent action formatting. The
+artifact appendix defines the release boundary: trajectories, selector
+choices, evaluation outputs, and deep analysis are public, while agent
+and pipeline source code are not.
+
+\subsection{Multi-cluster operating context}
+% source: scripts/module_load.sh (hostname-prefix branching);
+%         paper/final/stats/pipeline_inventory.json
+Our infrastructure is heterogeneous and shared across many groups.
+Candidate generation, grading, and optional training run on different
+GPU and VM-backed clusters, each with different module systems,
+container support, storage paths, and queue behavior. The central
+methodological point is that the pipeline hides those differences
+behind a single cluster abstraction: a stage describes what work it
+needs, while the environment layer supplies the local launch details.
+Concrete cluster names and runner wiring are listed with the released
+artifact rather than in the main narrative.
+
+\subsection{The workflow we set out to replace}
+% source: README.md (Use), docs/HOW_TO_DEVELOP.md, pipeline/* scripts.
+Before Kozuchi Agent, each iteration required manually starting a vLLM
+server, launching a one-off repair-benchmark run, waiting hours, running Docker
+grading, and recording scores in a spreadsheet. SFT and RL experiments
+used separate branches and scripts; changing models or comparing
+trajectories required file edits and manual log reading, which are error prone. The harness
+replaces this with a CI-driven pipeline, one configurable agent, a fixed
+runtime contract, and a publishable artifact bundle. Table~\ref{tab:workflow-replacement}
+summarizes the workflow replacement; the engineer-minute estimate is
+bounded by published SWE-bench Docker-runtime and CI-adoption
+studies~\cite{epoch2024swebenchdocker,hilton2016ci}.
+% Auto-generated grounded counts; sources per row in
+%   stats/workflow_replacement.tex (LaTeX comment header reproduces the
+%   workspace path of every cell). Provenance JSON in
+%   stats/workflow_replacement.json. Regenerate via
+%   python3 paper/final/sources/paper-src-test-prompt/compute_workflow_replacement.py
+% Published anchors used to ground the engineer-minute estimates
+% (full bibliographic detail in references.bib):
+%   Epoch AI 2025, ``How to run SWE-bench Verified in one hour on one
+%       machine.''  https://epoch.ai/blog/swebench-docker
+%       Provides the upper-bound on Docker-grade wall-clock for Verified
+%       (62 min on a 32-core / 128 GiB GitHub Actions VM with optimized
+%       images), which bounds our 60 min pre-Kozuchi grade-attention
+%       assumption from above. AllHands originally needed several days
+%       for SWE-bench Lite (>10 min/instance unoptimized).
+%   Hilton, Tunnell, Huang, Marinov, Dig, ``Usage, Costs, and Benefits
+%       of Continuous Integration in Open-Source Projects,'' ASE 2016
+%       (DOI 10.1145/2970276.2970358; PDF
+%       https://mir.cs.illinois.edu/marinov/publications/HiltonETAL16ContinuousIntegration.pdf).
+%       Peer-reviewed evidence that CI roughly doubles release frequency
+%       in OSS, which supports the order-of-magnitude per-cycle
+%       manual-touch-point compression reported in this table (5x).
+\begin{table}[t]
+\centering
+\caption{Per-evaluation-cycle workflow comparison.}
+% provenance: stats/workflow_replacement.json
+\label{tab:workflow-replacement}
+\input{\statpath{workflow_replacement.tex}}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Definitions and Design Invariants
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Definitions and Design Invariants}
+\label{sec:definitions}
+
+We adopt the following definitions for the rest of the paper. Some
+invariants are mechanically enforced by parsing and configured
+transitions; others are prompt/workflow contracts audited through
+trajectories.
+
+\paragraph{D1 (Agent runtime $\mathcal{R}$).}
+% source: configs/agent_sota.yaml + AGENTS.md description of the Kozuchi Agent implementation
+The runtime is
+$\mathcal{R}=\langle\mathcal{P},\mathcal{S},\mathcal{T},\mathcal{A},\mathcal{F},\mathcal{H}\rangle$:
+phases, shared state, tools, action format, parser, and handover
+function. This tuple is declared by configuration rather than recovered
+from ad hoc scripts.
+
+\paragraph{D2 (Trajectory).}
+% source: trajectories/q35_.../README.md; trajectories/q35_.../runs/r0X_s100X/trajectories/
+A trajectory is the ordered record of prompts, assistant completions,
+parsed tool calls, tool responses, format/timeout feedback, phase
+handovers, and shared-state snapshots. Trajectories are published per
+instance and are the main audit object.
+
+\paragraph{D3 (Phase transition system).}
+% source: configs/agent_sota.yaml: agent.phases; paper/final/stats/phase_inventory.json
+The phase transition system is a directed graph $G_\Phi=(V_\Phi,E_\Phi)$.
+The evaluated graph has eight phases and fifteen normal/fallback edges
+(\autoref{alg:phase-transition}).
+
+\paragraph{D4 (Tool-call contract).}
+% source: configs/agent_sota.yaml: agent.action_format; paper/final/stats/action_format_inventory.json
+Each assistant turn must contain exactly one parseable action. Four
+surface formats let the same logical contract serve different model
+families while keeping parser failures explicit in the trajectory.
+
+\paragraph{D5 (Verifier/Selector).}
+% source: configs/agent_sota.yaml phases.VERIFY_PATCH; trajectories/q35_.../xcheck/results/*_75p2.json
+A verifier returns a binary or numeric pass-rate signal for a candidate
+patch. We use an intra-trajectory verifier for tests generated inside one
+run, and a cross-agent selector (\S\ref{sec:design-tts}) that
+cross-applies each run's generated tests to every candidate patch.
+
+\paragraph{D6 (Artifact boundary).}
+% source: trajectories/q35_.../README.md; experiments/README.md
+The public artifact includes trajectories, patches, per-run reports,
+selection tables, and official submission files. Transient scratch state,
+internal cluster configuration, and pipeline source are outside the
+release boundary because they contain internal paths, runners, tokens, or
+licence-sensitive dependencies.
+
+\paragraph{Runtime invariants.}
+% source: parse_action(), has_phase_finished(), instance_template, action_observation_template, configs/agent_sota.yaml thresholds
+Every assistant turn yields one parseable action or a recorded format
+error; phase exits follow configured edges; generated notes and logs stay
+outside the submitted patch; long observations are summarized with
+explicit elision; and repeated failures or repeated identical actions
+trigger a strategy-change warning.
+
+\begin{algorithm}[t]
+  % source: configs/agent_sota.yaml phases/action_format/tools/skills/templates
+  \caption{Phase-driven repair orchestration}
+  \label{alg:phase-transition}
+  \AlgoInput{Issue $I$, repository checkout $R$, phase graph $\Phi$, skill library $\mathcal{K}$, tool set $\mathcal{T}$, action grammar $A$, shared artifact store $S$, and limits $B$.}
+  \AlgoOutput{Candidate patch $\Delta$, final report $\rho$, and trajectory bundle $\tau$.}
+  \AlgoStmt{$p\gets p_{\mathsf{reproduce}}$; $H\gets\emptyset$; $M\gets\emptyset$; $\tau\gets\emptyset$}
+  \AlgoNote{In the evaluated graph, $p$ ranges over issue reproduction, FAIL-to-PASS test synthesis, code localization, PASS-to-PASS test localization, code fixing, patch verification, issue closeout, and final reporting.}
+  \AlgoWhile{$p\neq p_{\mathsf{final}}$}{
+    \AlgoStmt{$K_p\gets\{k\in\mathcal{K}: p\in\mathsf{phases}(k)\land\mathsf{tools}(k)\subseteq\mathcal{T}\}$}
+    \AlgoStmt{$C_p\gets\mathsf{Render}(I,R,\Phi[p],K_p,S,M,H)$}
+    \AlgoNote{$C_p$ contains the phase definition, available tools, selected skill guidance, handover memos, and artifacts already written to $S$.}
+    \AlgoStmt{$e\gets\bot$}
+    \AlgoWhile{$e=\bot$}{
+      \AlgoStmt{$y\gets\mathsf{LLM}(C_p,H)$}
+      \AlgoStmt{$a\gets\mathsf{Parse}_{A}(y)$}
+      \AlgoIf{$a=\bot$}{
+        \AlgoStmt{$o\gets\mathsf{FormatError}(y,A)$}
+        \AlgoNote{Ambiguous or multi-action output is recorded but not executed.}
+      }
+      \AlgoIf{$a\neq\bot$}{
+        \AlgoStmt{$o\gets\mathsf{SandboxExec}(a,R,\mathcal{T})$}
+        \AlgoStmt{$S\gets\mathsf{UpdateArtifacts}(S,p,a,o)$}
+        \AlgoNote{Phase artifacts include reproduction scripts, tests, traces, root-cause notes, patch diffs, and reports.}
+      }
+      \AlgoStmt{$H\gets H\circ(y,a,o)$; $\tau\gets\tau\circ(p,y,a,o,S)$}
+      \AlgoStmt{$e\gets\mathsf{ExitMarker}(y,o)$}
+      \AlgoIf{$e=\bot$ and $\mathsf{OverBudget}(H,S,B,p)$}{
+        \AlgoStmt{$m\gets\mathsf{Compress}(H,S,p)$; $S\gets S\cup\{m\}$; $H\gets\emptyset$}
+        \AlgoStmt{$C_p\gets\mathsf{Render}(I,R,\Phi[p],K_p,S,M,H)$}
+      }
+    }
+    \AlgoStmt{$(p,M)\gets\mathsf{PhaseHandover}(\Phi,p,e,H,S,M)$}
+    \AlgoNote{Handover extracts phase artifacts, follows the configured next/fallback edge, writes a memo, and preserves scratch state outside the patch.}
+  }
+  \AlgoStmt{$(\Delta,\rho)\gets\mathsf{CollectFinalArtifacts}(S,M)$}
+  \AlgoRet{$(\Delta,\rho,\tau)$}
+\end{algorithm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Motivating Empirical Observations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Motivating Empirical Observations}
+\label{sec:observations}
+
+The harness design emerged from operational failures in early
+prototypes; each observation below maps to a mechanism in
+\S\ref{sec:design}.
+
+\paragraph{O1 (Long conversations forget).}
+% source: configs/agent_sota.yaml agent.phases + system_template
+Single-prompt repair attempts skipped reproduction, re-investigated old
+locations, or patched code they had not understood. We responded with an
+explicit phase sequence and required the agent to state its workflow
+position at every turn.
+
+\paragraph{O2 (Tool syntax is a cliff).}
+% source: configs/agent_sota.yaml agent.action_format + action_format_inventory.json
+Different model families emit different tool-call bracketings. Separating
+the logical action from its surface syntax made model switching a
+configuration change rather than an agent fork.
+
+\paragraph{O3 (State must survive compression).}
+% source: configs/agent_sota.yaml instance_template + phases.*.definition
+Evidence stored only in conversation text can disappear when context is
+compressed. Reproduction notes, generated tests, traces, task boards, and
+handover memos therefore live in shared filesystem state.
+
+\paragraph{O4 (Shell alone localizes poorly).}
+% source: swe_sota_agent/tools/{line_trace,caller_trace,line_edit}.py + configs/agent_sota.yaml agent.tools
+Root-cause localization benefits from classic dynamic analysis. We added
+a small deterministic tool sandbox for line tracing, caller discovery,
+and guarded editing rather than a large, brittle tool zoo.
+
+\paragraph{O5 (CI cost is repeated work).}
+% source: README.md CI reuse mode + .gitlab-ci.yml reuse variables
+Benchmark stages take hours. Reuse mode lets operators hold validated
+artifacts fixed while changing one stage, which made repeated TTS@8 and
+selector sweeps practical.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% System Design
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{System Design}
+\label{sec:design}
+
+Figure~\ref{fig:arch} summarizes the architecture at two connected
+resolutions. The broad path shows how the pipeline
+turns one issue into $K$ auditable candidate trajectories and a final
+submitted patch. The in-depth path shows the internal structure that
+makes those trajectories useful evidence: phase boundaries define what
+each run must produce, the agent chooses or synthesizes the tests during
+those phases, durable shared memory persists tests and handover state,
+deterministic tools make localization and edits inspectable, and
+cross-agent selection converts those independently chosen tests into the
+$B_{ij}$ and $R_{ij}$ signals used below.
+
+\subsection{Agent runtime contract}
+\label{sec:design-runtime}
+
+% source: configs/agent_sota.yaml (whole file)
+The agent runtime is specified declaratively: one configuration file
+defines the phase graph, prompt templates, action-interface family,
+prompt-guidance skill library, and operational limits. The runtime
+contract is therefore explicit before execution, instead of being
+recoverable only from scattered scripts.
+
+\paragraph{Phases.}
+% source: configs/agent_sota.yaml agent.phases (8 entries);
+%         paper/final/stats/phase_inventory.json
+The evaluated phase graph has eight nodes and fifteen directed edges
+(\autoref{alg:phase-transition}). Each phase encodes a local workflow and two
+possible exits: successful completion or explicit give-up. This
+structure does not make the agent more capable by itself; rather, it
+prevents long trajectories from becoming unstructured conversations.
+The phase definitions and handover prompts make phase exits auditable:
+when a run leaves a phase, the next phase is selected from the
+configured edge and the handover memo records what evidence is carried
+forward.  Concretely, \textsc{PhaseHandover} extracts scripts, traces,
+tests, patch diffs, verification logs, and reports from the exiting
+phase; chooses either the configured next edge or the configured fallback
+edge based on the exit reason; writes a memo that summarizes carried
+evidence and open risks; and preserves scratch notes in shared state
+rather than in the submitted patch.
+
+\paragraph{Proposition 1 (Workflow well-formedness).}
+% source: configs/agent_sota.yaml next_phase graph;
+%         experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{phase_distribution.csv, operational.csv}
+\textit{In the observed Python headline trajectories, phase visits use the
+configured phase names and the run terminates either in final reporting
+or in an explicit runtime outcome.}
+\emph{Argument.} The phase graph is declared in configuration, and the
+trajectory-derived phase summaries show complete coverage of the eight
+declared phases for the 495 persisted trajectories. We do not claim
+liveness---the agent is not guaranteed to solve every instance---only
+that the published run is auditable against the configured phase graph.
+
+\paragraph{Skills (phase-gated, tool-gated).}
+% source: configs/agent_sota.yaml agent.skills (each entry has phases+tools)
+%         + paper/final/stats/skill_inventory.json
+Skills are reusable prompt-guidance blocks, not learned model
+capabilities. Each skill gives the agent a small procedure or tool-use
+pattern, and is injected only when the current phase and available tools
+make it relevant. The current configuration contains 14 such
+phase- and tool-gated skills. This deliberately conservative injection
+policy shortens the prompt and narrows the action space, which matters
+when a repair trajectory can span hundreds of turns.
+
+\paragraph{Action formats.}
+% source: configs/agent_sota.yaml agent.action_format
+The action interface separates the semantic requirement---one executable
+action per turn---from model-specific syntax. The same runtime can
+therefore evaluate several model families without changing the agent's
+state machine or tool semantics.
+
+\paragraph{Tool sandbox.}
+% source: configs/agent_sota.yaml agent.tools
+%         + paper/final/stats/tool_inventory.json
+% on_disk: caller_trace, kanban_update, line_edit, line_trace
+% active_in_config: line_trace, caller_trace, line_edit
+% disabled_in_config: kanban_update
+At runtime, the agent receives a fixed set of deterministic
+software-engineering operations. The current set covers dynamic line
+tracing, caller discovery, and guarded line editing. Keeping this set
+small made tool behavior inspectable and prevented the agent from
+depending on a large, brittle tool zoo.
+
+\paragraph{Templates.}
+% source: configs/agent_sota.yaml: system_template, instance_template,
+%         action_observation_template, format_error_template,
+%         timeout_template, handover_template
+Templates enforce the interaction contract: each turn contains an
+observable rationale field and exactly one action, and long observations
+are summarized with explicit elision rather than silently dropped. We
+treat that field as trajectory text, not as a faithful record of the
+model's cognitive state; the goal is to make the observable interface
+stable.
+
+\paragraph{Context compression and handover.}
+% source: configs/agent_sota.yaml: max_prompt_tokens, max_new_tokens,
+%         max_output_length, turn_handover_threshold per phase;
+%         AGENTS.md description of handover()
+State handover addresses a simple failure mode: facts stored only in the
+conversation can disappear when context is compressed. At phase changes,
+and when a phase grows too long, the agent writes a concise memo and
+continues with the relevant shared artifacts. The filesystem, not the
+raw conversation, becomes the durable memory.
+
+\iffalse
+\begin{algorithm}[t]
+  % source: prior internal diagram figure-4-context-compression-decision-flow.mmd
+  \caption{Budget-aware context compression during interactive repair}
+  \label{alg:context-compression}
+  \AlgoInput{History $H$, shared state $S$, model budget $B$, and turn threshold $\tau_p$.}
+  \AlgoOutput{Updated history $H$, shared state $S$, and error marker $e$.}
+  \AlgoStmt{$\ell\gets\mathsf{TokenLength}(H,S)$}
+  \AlgoIf{$\ell>B$}{
+    \AlgoStmt{$m\gets\mathsf{SummarizePhase}(H,S)$; $S\gets S\cup\{m\}$}
+    \AlgoStmt{$H\gets\mathsf{RebuildHistory}(S)$}
+    \AlgoNote{The rebuilt history keeps the phase prompt and durable shared artifacts.}
+    \AlgoIf{$\mathsf{TokenLength}(H,S)>B$}{
+      \AlgoStmt{$e\gets\mathsf{BudgetError}(H,S,B)$}
+      \AlgoRet{$(H,S,e)$}
+    }
+  }
+  \AlgoStmt{$y\gets\mathsf{LLM}(H,S)$; $a\gets\mathsf{Parse}(y)$; $o\gets\mathsf{Execute}(a)$}
+  \AlgoEIf{$\mathsf{TokenLength}(H\circ(y,a,o),S)\le B$}{
+    \AlgoStmt{$H\gets H\circ(y,a,o)$}
+  }{
+    \AlgoStmt{$\hat{o}\gets\mathsf{ShortenObservation}(o,B,H,S)$}
+    \AlgoEIf{$\mathsf{TokenLength}(H\circ(y,a,\hat{o}),S)\le B$}{
+      \AlgoStmt{$H\gets H\circ(y,a,\hat{o})$}
+    }{
+      \AlgoStmt{$H\gets H\circ(y,a,\mathsf{ElisionStub}(o))$}
+    }
+  }
+  \AlgoEIf{$\mathsf{TurnCount}(H)>\tau_p$}{
+    \AlgoStmt{$m\gets\mathsf{SummarizePhase}(H,S)$; $S\gets S\cup\{m\}$}
+    \AlgoStmt{$H\gets\mathsf{RebuildHistory}(S)$}
+  }{
+    \AlgoStmt{$H\gets\mathsf{Continue}(H)$}
+  }
+  \AlgoRet{$(H,S,\bot)$}
+\end{algorithm}
+\fi
+
+\paragraph{Orchestra runtime.}
+% source: prior internal technical note S2.5 (worked examples);
+%         configs/agent_sota.yaml model role conventions
+For the Python headline submission, each turn is processed by two roles. A
+planning role drafts the next step, and a formatting role rewrites only
+the executable action to satisfy the active interface. Both roles use
+the same locally hosted model. This division is a
+harness-level substitute for fine-tuning: the planner can express the
+repair strategy naturally, while the formatter normalizes only the
+command surface before execution, reducing formatting failures without
+changing model weights.
+
+\subsection{Software-engineering tool suite}
+\label{sec:design-tools}
+
+% source: swe_sota_agent/tools/{line_trace,caller_trace,line_edit,kanban_update}.py
+%         + configs/agent_sota.yaml: agent.skills (skill bodies show invocation form)
+%         + paper/final/stats/tool_inventory.json
+%         + paper/final/stats/skill_inventory.json
+The suite is deliberately small: \textbf{line tracing} records which
+statements and values appear under a reproduction test, turning
+localization into execution evidence; \textbf{caller tracing} shows the
+paths that reach suspect code and connects local symptoms to
+user-visible behavior; and \textbf{guarded editing} couples each edit to
+an expected target line, avoiding many free-form patch corruptions. The
+main policy is phase-gated injection: the agent sees only the tools and
+guidance relevant to its current phase, making tool availability part of
+the experimental contract.
+
+\subsection{Multi-cluster pipeline}
+\label{sec:design-pipeline}
+
+% source: pipeline/{bench,sft,rl,tts,data_synth,kg_synth}/run_*.sh
+%         + scripts/module_load.sh
+%         + paper/final/stats/pipeline_inventory.json
+The pipeline turns benchmark experimentation into a set of reusable
+stages: candidate generation, grading, data synthesis, optional
+post-training, test-time selection, and reporting. Each stage can run
+locally for debugging or as a scheduled cluster job. The practical
+contribution is reuse: operators can re-run only the stage under study
+while holding earlier artifacts fixed. This is what made repeated
+TTS@8 sweeps feasible in day-to-day development.
+
+\subsection{Model-agnostic serving}
+\label{sec:design-serving}
+
+% source: configs/{model_*.yaml, chat-template_*.yaml, environment_*.yaml}
+%         + paper/final/stats/model_inventory.json
+The serving layer decouples model identity, chat formatting, and
+execution sandbox. The same agent can run against local
+open-weight models, multi-server vLLM deployments, and remote APIs~\cite{kwon2023vllm}. The
+backend inventory is reported with the artifact materials.
+
+\subsection{CI as the evaluation substrate}
+\label{sec:design-ci}
+
+% source: .gitlab-ci.yml workflow.rules + stage list + bench_template +
+%         bench_post_template + variables block + cluster tags
+%         + paper/final/stats/pipeline_inventory.json
+CI is the evaluation substrate, not just a test runner. It records the
+stage graph, the cluster target, the reusable artifacts, and the
+conditions under which expensive work should be skipped. The stage
+graph covers preparation, candidate generation, grading, synthesis,
+optional training, post-training benchmarking, selection, and reporting;
+reuse short-circuits let operators iterate on one stage without
+invalidating the rest. This follows standard CI practice of keeping
+frequent integration feedback cheap and repeatable~\cite{fowler2006ci,duvall2007ci}.
+
+% source: README.md (CI reuse mode) + .gitlab-ci.yml variables block
+Reuse mode lets the team hold a trajectory bundle fixed while
+experimenting with selector weights, or hold an environment fixed while
+testing a new model. It is the operational difference between a
+benchmark script and an industrial evaluation pipeline.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Cross-Agent Test-Time Selection
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Cross-Agent Test-Time Selection}
+\label{sec:design-tts}
+
+% source: prior internal technical note S4.1; pipeline/tts/;
+%         trajectories/q35_.../xcheck/results/*_75p2.json;
+%         paper/final/stats/xcheck_summary.json
+A central design choice is to separate \emph{candidate generation}
+from \emph{final selection}. With $K=8$ independent runs of the same
+locally hosted model, each run produces a candidate patch
+together with its own bug-revealing and regression-preservation tests.
+The candidate agent decides which tests exist before final selection;
+the cross-agent selector does not choose tests, but only cross-applies the
+archived test runners. Each run contributes two kinds of evidence:
+tests intended to expose the reported bug, and tests intended to guard
+nearby behavior against regressions. These tests are fixed before final
+selection, so the selector can compare candidate patches without
+accessing hidden benchmark tests.
+At final selection time, we form a $K\times K$ matrix in which entry
+$(i,j)$ is the result of running run~$j$'s archived tests against
+run~$i$'s patch, converting candidate diversity into a selection signal
+using only evidence archived by the candidate runs.
+
+\paragraph{Selector.}
+% source: trajectories/q35_.../xcheck/results/simple_passrate_f03_p07_shortest_patch_raw_75p2.json
+For each candidate~$i$ we compute
+\begin{equation}
+\mathrm{score}(i)
+= \frac{1}{K}\sum_{j=1}^{K}
+   \big(w_{B}\, B_{ij} + w_{R}\, R_{ij}\big)
+\label{eq:score}
+\end{equation}
+Here $B_{ij}$ and $R_{ij}$ are the pass rates obtained by the
+cross-application process above: $B_{ij}$ is the pass rate of
+candidate~$i$ on run~$j$'s bug-revealing
+(\code{FAIL\_TO\_PASS}) tests, and $R_{ij}$ is the corresponding
+pass rate on its regression (\code{PASS\_TO\_PASS}) tests. The
+weights $w_{B}{=}0.3$ and $w_{R}{=}0.7$ are pragmatically selected
+fixed global constants in the submitted selector artifact; nevertheless,
+an artifact-only sweep over seven
+nearby weight pairs changes at most 35/495 selected candidates and
+5/500 estimated outcomes. We then pick
+$\arg\max_i \mathrm{score}(i)$, breaking ties by patch length. A tie
+means that at least two deduplicated patches are within
+$10^{-3}$ of the best score; this occurs on 304/495 covered
+instances. The selector summary is reproduced as
+Table~\ref{tab:xcheck}.
+
+\begin{table}[t]
+\centering
+\scriptsize
+% source: paper/final/stats/xcheck_summary.{json,tex};
+%         paper/final/stats/selector_audit.json;
+%         selector weights are from trajectories/q35_verified500_tts8_75p2_submission_bundle_20260326-055715_merged500/xcheck/results/simple_passrate_f03_p07_shortest_patch_raw_75p2.json
+\caption{Cross-agent selector summary.}
+\label{tab:xcheck}
+\input{\statpath{xcheck_summary.tex}}
+\end{table}
+
+\paragraph{Why cross-agent rather than oracle Best-of-$K$.}
+% source: trajectories/q35_.../xcheck/results/...75p2.json fields
+%   tie_instances=304, changed_from_order=302, order_baseline.resolved=362
+We do not use the official benchmark tests at selection time; doing so
+would leak evaluation information. The same constraint matters in
+production: a bad merge can cause significant downstream damage, so the
+system needs a selection signal before any hidden or production-only
+feedback is available. Instead, each run contributes the tests that its
+own agent chose or generated while solving the issue.
+The selector treats those archived tests as fixed evidence and
+cross-applies them to other runs' patches, turning trajectory diversity
+into selection evidence without any learned verifier or LLM judge.
+The matrix admits only archived suites with both
+\code{has\_fail\_to\_pass} and \code{has\_pass\_to\_pass}, so
+empty or invalid generated-test bundles are dropped before selection
+(12--21 drops per leg); candidate patches are deduplicated by content
+hash, and the 2/2{,}768 deduplicated patches with non-\code{ok}
+apply status are excluded from scoring. We do not infer flakiness or
+over-breadth from logs; after archive creation the selector reads only
+suite outcomes and apply status, never SWE-bench hidden-test results.
+Per-instance
+reordering data backs this up: on $302/495$ instances the selector chose
+a candidate other than the order baseline, demonstrating that it
+actively re-ranks rather than acting as a no-op.
+
+\paragraph{Diversity ceiling.}
+% source: paper/final/stats/run_overlap.json
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{tts_oracle_summary.csv,tts_resolve_count_distribution.csv,tts_pass_at_k_oracle.csv}
+A simple bound on selector quality comes from the union and intersection
+of the eight runs: at least one run resolves 408 instances, while all
+runs resolve 234. The cross-agent selector reaches 376 on the internal
+Docker re-grade (374 on the official evaluator), or about
+$376/408=92.2\%$ of the oracle union ceiling under the internal Docker
+re-grade. Pairwise completion
+overlap is high, so the useful diversity is mostly in \emph{which}
+instances are solved, not in whether runs cover
+different parts of SWE-bench Verified. The candidate-level decomposition
+sharpens the bound: for 92 instances, none of the eight runs produces a
+resolving candidate, so these instances cannot be recovered by a better
+selector. Only 174 instances are ``marginal''---resolved by some but not
+all runs ($1\le r_i\le 7$)---and therefore actually expose a selection
+choice.
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/tts_pass_at_k_oracle.csv;
+%         k approx. 2.2 is a linear interpolation between the oracle pass@2 and pass@3 expected-resolved rows to the official 374-resolved target.
+Measured against the official Python headline, the cross-agent selector leaves
+34 instances (6.8~pp) below the oracle union; linear interpolation on
+the closed-form oracle pass@k curve places the cross-agent selector near
+an oracle with $k\approx2.2$, so much of the eight-way compute budget
+is currently spent on candidate generation that the selector does not
+fully monetise.
+
+\begin{table}[t]
+\centering
+\scriptsize
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{tts_oracle_summary.csv,tts_resolve_count_distribution.csv}
+\caption{Candidate-level TTS@8 decomposition.}
+\label{tab:tts-decomp}
+\begin{tabular}{@{}llr@{}}
+\toprule
+Quantity & Interpretation & Value \\
+\midrule
+Mean pass@1 & Average over eight runs & 67.7\% \\
+All-run solved & $r_i=8$ scaffold-easy instances & 234 / 500 \\
+Zero-run solved & $r_i=0$ scaffold-hard instances & 92 / 500 \\
+Marginal instances & $1\le r_i\le7$ selector-sensitive & 174 / 500 \\
+Oracle pass@8 & Any run resolves & 408 / 500 = 81.6\% \\
+Cross-agent selector & Official-evaluator result & 374 / 500 = 74.8\% \\
+Selector regret & Oracle minus submitted result & 34 / 500 = 6.8 pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Evaluation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Evaluation}
+\label{sec:eval}
+
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/analysis.md
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/*.csv
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/figures/*.png
+\textbf{Evaluation setup.}
+RQ1--RQ5 use SWE-bench Verified as the fixed Python task suite; RQ6
+uses Multi-SWE-bench Java Verified as a cross-language validation track.
+The Python headline configuration uses a locally hosted model out of the box:
+the approach does not require training or fine-tuning before connecting
+the model to the agent runtime. For Python we run the same model eight times,
+archive each run's candidate patch and tests, and then apply the
+cross-agent selector described in \S\ref{sec:design-tts}. We report
+the official SWE-bench cloud evaluation as the primary Python result and
+use internal Docker re-grading only as a consistency check. The Java RQ6
+result uses the same 27 B agent and phase graph, but the Java xcheck@8
+artifact and Java leaderboard rather than the Python Docker/cloud
+evaluator. This setup separates three questions for each track: how often
+the full system resolves issues, how it compares with published peers,
+and where remaining errors come from.
+
+The Python analysis uses the published TTS@8 artifacts: 495 SWE-bench harness
+reports, 495 trajectories, the cross-agent selection bundle, and the
+per-instance outcome vectors of a curated competitor set.  We adopt the
+canonical denominator $N{=}500$ for every SWE-bench Verified aggregate;
+the five trajectory/report pairs that
+are missing from the bundle are folded into the unresolved bucket as
+\code{MISSING\_ARTEFACT} failures rather than dropped. The Java analysis
+uses the published Multi-SWE-bench Java Verified submission bundle with
+canonical denominator $N{=}128$, described separately in RQ6.
+
+\subsection{RQ1: Headline accuracy and uncertainty}
+\label{subsec:rq1}
+
+\textbf{Result.}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/README.md
+%         (verbatim block: ``Resolved 374 instances (74.80%)'')
+% source: trajectories/q35_.../bundle_manifest.json (376/500 internal Docker)
+% source: trajectories/q35_.../xcheck/results/...75p2.json (resolved_count: 376)
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{headline.csv, cluster_bootstrap_headline.csv}
+The Python configuration resolves 374/500 instances on the official cloud
+evaluator (74.80\%, Wilson 95\% CI [70.82\%, 78.41\%]~\cite{wilson1927score}). The
+corresponding internal Docker re-grade resolves 376/500 (75.2\%); the
+two-instance delta reflects evaluator differences and we report the
+official Python number as the Python headline. A repository-clustered bootstrap
+($B{=}10{,}000$ replicates resampling at the repository level)
+returns a wider 95\% CI of [67.0\%, 79.8\%], reflecting the fact
+that resolution is correlated within repositories; we therefore
+report both intervals to make the headline comparable to peers under
+their own reporting conventions and conservative to clustering.
+
+\textbf{Per-repository breakdown.}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{by_repo.csv, by_year.csv}
+Table~\ref{tab:byrepo} gives the repository breakdown.  The largest
+repository, \code{django/django}, accounts for 46.2\% of the Python benchmark
+and resolves at 76.6\%, just above the global mean. The lowest-rate
+repository is \code{pylint-dev/pylint} at 30.0\% ($n{=}10$). The
+auxiliary per-year CSV remains available in the artifact; across
+2017--2023, year-level resolution stays in the 66--94\% band, with the
+high end driven by the small 2017 slice. We report the structural
+repository pattern rather than mechanism because the workspace does not
+contain a controlled study of repository-internal API churn or year
+effects.
+
+\begin{table}[t]
+\centering
+\scriptsize
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/by_repo.csv
+\caption{SWE-bench Verified resolution by repository.}
+\label{tab:byrepo}
+\input{\statpath{resolved_by_repo.tex}}
+\end{table}
+
+\textbf{Threats.}
+Python cross-system comparisons against published numbers from other
+research groups use heterogeneous evaluation stacks; we therefore
+restrict our Python headline number to the official evaluator and use
+paired per-instance outcome vectors (rather than aggregate rates) for
+all Python peer comparisons in RQ2. A run-to-run variance estimate beyond
+the eight-run sweep would require additional eight-run sweeps under
+the same Orchestra configuration; we instead report the per-run
+pass@1 dispersion in RQ5.
+
+\subsection{RQ2: Peer-ranked position with multiplicity-corrected tests}
+\label{subsec:rq2}
+
+\textbf{Setup.}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{leaderboard.csv, peers.csv, mcnemar.csv, multiple_comparison_corrected.csv, paired_effect_sizes.csv}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/analyze_competitors.py (OPEN_WEIGHT_PEERS)
+We rank our system on a frozen snapshot of 135 publicly cataloged
+SWE-bench Verified as of April~28, 2026, and run paired
+McNemar exact tests~\cite{mcnemar1947note} on
+the per-instance outcome vectors of a curated set of 17 open-weight and 7 closed-frontier peers.  Multiplicity is
+controlled across the 24 paired tests with both Holm--Bonferroni
+(family-wise error rate) and Benjamini--Hochberg (false discovery
+rate) procedures~\cite{holm1979simple,benjamini1995controlling}, each with target $\alpha=0.05$ or $q=0.05$.
+
+\textbf{Result.}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{leaderboard.csv, mcnemar.csv, multiple_comparison_corrected.csv}
+On the frozen Python leaderboard snapshot, the configuration ranks
+\textbf{12th overall} and is the highest-ranked open-weight system;
+the next open-weight submission, \emph{Lingxi v1.5 + Kimi-K2},
+resolves 356/500 (71.2\%). Under Benjamini--Hochberg FDR control
+($q\le0.05$), the configuration significantly outperforms 16 of 17
+curated open-weight peers, including a 480B Qwen3-Coder
+configuration ($\Delta=+26$ instances, BH-FDR $q=0.011$). The single
+peer the configuration does not significantly outperform under
+either FWER or FDR control is \emph{Lingxi v1.5 + Kimi-K2} (raw
+$p=0.054$, $\Delta=+18$). Among closed-frontier peers, the
+configuration is statistically indistinguishable at $\alpha=0.05$
+from \emph{Sonar + Claude-Sonnet-4.5} ($\Delta=0$),
+\emph{OpenHands + Claude-Opus-4.5}, \emph{live-SWE + Gemini-3-Pro},
+and \emph{OpenHands + GPT-5}; significantly outperforms
+\emph{OpenHands + Claude-4-Sonnet} (FDR-significant); and is
+significantly behind the two top \emph{Sonar} / \emph{live-SWE +
+Claude-Opus-4.5} builds (FDR-significant; $\Delta=-22$ in both
+cases). The full pair-wise tables list raw McNemar $p$-values,
+Holm-corrected $p$-values, BH-corrected $q$-values, and conditional
+log-odds-ratio effect sizes with exact 95\% Clopper--Pearson
+confidence intervals~\cite{clopper1934use}.
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{multiple_comparison_corrected.csv,paired_effect_sizes.csv}
+
+\begin{figure}[t]
+  \centering
+  % source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/per_repo_vs_peers.csv
+  % source: figures/fig10_per_repo_vs_peers.png
+  \includegraphics[width=\columnwidth]{figures/fig10_per_repo_vs_peers.png}
+  \caption{Per-repository resolution rate for Kozuchi agent (first column on the left) and the curated
+  open-weight peers.}
+  \Description{Heatmap comparing per-repository resolution rates for
+  Kozuchi agent and open-weight peer agents across the 12 repositories in
+  SWE-bench Verified. Kozuchi agent leads or ties the strongest peer on
+  several high- and medium-volume repositories including django, sympy,
+  sphinx, and pytest, while pylint remains low for most systems.}
+  \label{fig:per-repo-peers}
+\end{figure}
+
+\textbf{Per-repository peer structure.}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/per_repo_vs_peers.csv
+Figure~\ref{fig:per-repo-peers} shows that the open-weight lead is not
+only an aggregate leaderboard artifact. On the largest benchmark slice,
+\code{django/django} ($n=231$), Kozuchi agent resolves 76.6\%, ahead of the
+next open-weight peer in the heatmap at 74.0\%; on \code{sympy/sympy}
+($n=75$) it resolves 76.0\%, compared with 70.7\% for the strongest
+peers; and on \code{pytest-dev/pytest} ($n=19$) it reaches 84.2\%,
+above the nearest peers at 78.9\%. The same pattern appears on several
+medium-size repositories: \code{sphinx-doc/sphinx} is tied for best at
+68.2\%, and \code{pydata/xarray} is near the top at 81.8\%. The main
+exception is \code{pylint-dev/pylint}, where Kozuchi agent resolves only
+30.0\% ($3/10$) and several peers reach 40.0\%. We therefore interpret
+the peer advantage as broad but not uniform: it is strongest on the
+large repositories that dominate the Verified denominator, while
+low-count repositories should be read as diagnostic failure clusters
+rather than stable rank evidence. \S\ref{subsec:rq6} extends the peer
+position analysis to Java, where the same 27 B configuration ranks first
+among strict open-weight submissions.
+
+\textbf{Threats.}
+Ranks use a frozen snapshot of cataloged submissions.
+
+\subsection{RQ3: Where does performance vary?}
+\label{subsec:rq3}
+
+\textbf{Setup.}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{patch_size_buckets.csv, patch_summary.csv, effort_resolution_corr.csv, effort_buckets.csv, phase_distribution.csv, phase_giveup_rate.csv, phase_by_outcome.csv, trajectory_stats.csv, logistic_regression.csv}
+For the Python SWE-bench Verified run, we stratify resolution by patch size, by per-instance LLM-call count,
+and by phase-level events extracted from the 495 trajectory JSON
+files; we also report a multivariate logistic regression with
+cluster-robust standard errors (clustering at the repository level)
+that adjusts trajectory features for external consensus hardness
+proxies. Because the consensus terms use peer outcomes, we treat this
+model as an explanatory diagnostic rather than as a deployable
+predictor.
+
+\textbf{Patch size.}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{patch_size_buckets.csv,patch_summary.csv,effort_resolution_corr.csv}
+Resolution rate decreases monotonically with the line-of-code (LOC)
+churn of the produced patch: from 81.7\% at 1--4 LOC to 41.7\% at
+$>$100 LOC. The point-biserial correlation between LOC churn and
+the binary resolution outcome is $r=-0.197$
+($p=1.1{\times}10^{-5}$), the strongest single feature signal in
+the dataset. The mean LOC added per patch is 10.5 (median 3) for
+resolved instances versus 21.9 (median 8) for unresolved instances.
+
+\textbf{Trajectory effort.}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{effort_resolution_corr.csv,trajectory_stats.csv,effort_buckets.csv}
+Trajectory-level effort metrics (per-instance LLM calls, runtime,
+prompt tokens, bash invocations) all carry \emph{negative}
+correlations with resolution. We interpret this signal as a
+hardness-selection effect: harder instances cost more effort and are
+also more likely to fail. We do not interpret it as ``effort hurts'';
+no effort metric is positively correlated with resolution at
+$\alpha=0.05$, which we report as a structural ceiling on what
+further inference compute can buy at fixed scaffold and backbone.
+
+\textbf{Phase-level behaviour.}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{phase_distribution.csv,phase_giveup_rate.csv,phase_by_outcome.csv}
+% source: configs/agent_sota.yaml agent.phases
+All 495 trajectories visit every one of the eight phases; rework is
+concentrated in the \code{CODE\_FIX} $\leftrightarrow$ \code{VERIFY\_PATCH}
+loop. \code{VERIFY\_PATCH} issues a \code{GIVEUP} in 18.2\% of
+trajectories (90/495, 95\% CI [15.0\%, 21.8\%]); \code{CODE\_FIX}
+itself rolls back in 1.0\% of cases; every other phase rolls back
+zero times. Unresolved trajectories fire roughly 28\% more
+\code{CODE\_FIX} messages than resolved ones (mean 170 vs.\ 132)
+and report 0.67 vs.\ 0.52 mean \code{VERIFY\_PATCH} \code{GIVEUP}s
+per instance.
+
+\textbf{Multivariate adjustment.}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{logistic_regression.csv,logistic_regression_fit.csv}
+A logistic regression of the binary resolution outcome on
+log-transformed LLM calls, patch churn, runtime, and two external
+consensus hardness proxies (\code{qwen\_consensus} and
+\code{frontier\_consensus}) shows that the consensus terms dominate
+the multivariate signal. After this adjustment, the trajectory-effort
+and patch-churn coefficients are not significant at $\alpha=0.05$.
+This supports the hardness-selection interpretation above and prevents
+the univariate patch-churn correlation from being read as an
+independent causal predictor.
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/logistic_regression.csv
+
+\textbf{Threats.}
+The consensus-adjusted model requires other systems' outcomes, and its
+coefficients should not be read causally.
+
+\subsection{RQ4: Failure taxonomy and operational reliability}
+\label{subsec:rq4}
+
+\textbf{Setup.}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{failure_modes.csv,failure_mode_per_instance.csv,failure_modes_by_repo.csv,patch_apply_outcomes.csv,operational.csv}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/analyze_failures.py
+For the Python SWE-bench Verified run, we classify each unresolved instance into one of five mutually
+exclusive failure categories from the SWE-bench harness reports.
+We then report the operational profile of the 495 trajectories that
+produced a harness report:
+phase visit completeness, exit status, and patch-application
+reliability.
+
+\textbf{Failure taxonomy.}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/failure_modes.csv
+Of 126 unresolved instances, 115 (91.3\%) are
+\code{WRONG\_FIX}: the patch applies cleanly under the harness but
+does not flip the hidden \code{FAIL\_TO\_PASS} tests.  6 (4.8\%) are
+\code{REGRESSION}: the patch applies but breaks at least one
+\code{PASS\_TO\_PASS} test. 5 (4.0\%) are
+\code{MISSING\_ARTEFACT}: no trajectory or harness report was
+persisted for the instance under the published bundle. The
+\code{PATCH\_DID\_NOT\_APPLY} and \code{EMPTY\_PATCH} categories are
+both 0.  The taxonomy is summarised in Table~\ref{tab:failuremodes}.
+
+\begin{table}[t]
+\centering
+\scriptsize
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/failure_modes.csv
+\caption{Failure taxonomy for unresolved instances.}
+\label{tab:failuremodes}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Category & Count & Share \\
+\midrule
+\code{WRONG\_FIX}             & 115 & 91.3\% \\
+\code{REGRESSION}             &   6 &  4.8\% \\
+\code{MISSING\_ARTEFACT}      &   5 &  4.0\% \\
+\code{PATCH\_DID\_NOT\_APPLY} &   0 &  0.0\% \\
+\code{EMPTY\_PATCH}           &   0 &  0.0\% \\
+\midrule
+Total                         & 126 & 100.0\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Operational reliability.}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{operational.csv,patch_apply_outcomes.csv}
+All 495 trajectories report \code{exit\_status = "Submitted"}; the
+agent does not crash mid-flight in this run. Of the 495 produced
+patches, 494 apply cleanly through the SWE-bench harness, giving a
+single edit-layer failure (0.20\%). Combined with the failure
+taxonomy, this isolates the residual gap as a semantic-correctness
+problem rather than an edit-format problem: the agent essentially
+always emits a syntactically acceptable patch, but in 91.3\% of
+unresolved cases the patch is semantically wrong.
+
+\textbf{Threats.}
+\code{MISSING\_ARTEFACT} cases are operational rather than
+modelling failures: under stricter persistence handling some of
+them might be recovered at no algorithmic cost. They are not
+removed from the Python headline denominator in this paper, but their
+existence inflates the unresolved bucket by up to 5/500 (1.0~pp).
+
+\subsection{RQ5: TTS@8 selection lift and cost--diversity envelope}
+\label{subsec:rq5}
+
+\textbf{Setup.}
+% source: trajectories/q35_.../{README.md, runs/r0X_s100X/report.json (X=1..8)};
+%         pipeline/tts/; paper/final/stats/{run_overlap.json,
+%         xcheck_summary.json, selector_ablation.json}
+% generated by paper/final/sources/paper-src-test-prompt/{compute_per_run_stats.py,
+%         compute_xcheck_summary.py, compute_run_overlap.py,
+%         compute_selector_ablation.py}
+For Python, we compare per-run pass@1 patches against the cross-agent
+TTS@8 selection on the same eight runs. Cost is measured in additional
+compute: $8\times$ candidate generation plus the cross-agent test
+cross-application matrix. For Java, the shipped bundle exposes the
+xcheck-selected source-run counts rather than complete per-leg pass@1
+reports, so we use those counts only as a source-run audit of the
+selected Java outcome.
+
+\textbf{Per-run pass@1.}
+% source: paper/final/stats/per_run_pass1.{tex,json,csv}
+% generated by paper/final/sources/paper-src-test-prompt/compute_per_run_stats.py
+% Python input: trajectories/q35_verified500_tts8_75p2_submission_bundle_20260326-055715_merged500/runs/r0X_s100X/report.json
+% Java input: experiments/java/kozuchi-mswe-java-20260429/logs/_harness/xcheck_preds_score.json
+The pass@1/pass@k terminology follows standard code-generation evaluation practice~\cite{chen2021codex}.
+The eight Python pass@1 runs are tightly clustered: they resolve
+334--343 of 500 instances (66.8--68.6\%), with mean
+338.6/500 = 67.7\% and population standard deviation 3.12 resolved
+instances (0.62~pp). The submitted cross-agent selection raises this
+average-run baseline to 374/500 = 74.8\% on the official evaluator
+and 376/500 = 75.2\% on the internal Docker re-grade, a gain of
+35.4--37.4 resolved instances (+7.1--7.5~pp) over mean pass@1.
+For Java, the xcheck artifact selects 15.9 source-run candidates on
+average and resolves 5.1 of them (population standard deviation
+1.54), yielding 41/128 = 32.03\% overall and a 32.3\% conditional
+resolved rate over selected source-run contributions.
+
+\textbf{Selection lift.}
+% source: trajectories/q35_.../xcheck/results/...75p2.json
+On Python, the cross-agent selector resolves 376/500 = 75.2\% on the internal
+Docker re-grade (Table~\ref{tab:xcheck}) and 374/500 = 74.8\% on the
+official evaluator. On 302 of 495 covered instances the
+selector chooses a different candidate than the size-ordered first
+candidate. The order baseline (first-run-wins) resolves 362/500 =
+72.4\%; the selector therefore contributes +14 absolute (+2.8~pp)
+over the order baseline and +33 to +42 absolute over individual
+per-run pass@1.
+
+\begin{table}[t]
+\centering
+\scriptsize
+% source: paper/final/stats/selector_ablation.{tex,json,csv}
+% reproducibility: regenerate with
+%   python3 paper/final/sources/paper-src-test-prompt/compute_selector_ablation.py
+% script copy in final package:
+%   paper/final/sources/paper-src-test-prompt/compute_selector_ablation.py
+% primary inputs:
+%   trajectories/q35_verified500_tts8_75p2_submission_bundle_20260326-055715_merged500/runs/r0X_s100X/{report.json,preds.json}
+%   trajectories/q35_verified500_tts8_75p2_submission_bundle_20260326-055715_merged500/xcheck/results/simple_passrate_f03_p07_shortest_patch_raw_75p2.json
+%   trajectories/q35_verified500_tts8_75p2_submission_bundle_20260326-055715_merged500/xcheck/instance_test_tables/*.json
+% method note: K=1 rows come from per-run report.json files; the order
+% and cross-agent selector rows come from the published xcheck summary; the
+% oracle is the union of per-run resolved_ids; self-tests-only is a
+% diagnostic reconstruction that scores each candidate run only on its
+% own archived tests from the cross-agent selection table and then checks
+% that chosen run against its original per-run report. Missing selection
+% tables remain unresolved under the canonical N=500 denominator.
+\caption{Artifact-based TTS@8 ablation.}
+\label{tab:selector-ablation}
+\input{\statpath{selector_ablation.tex}}
+\end{table}
+
+\textbf{Selector ablation.}
+% source: paper/final/stats/selector_ablation.{json,tex,csv};
+%         408 oracle = union of per-run resolved_ids in report.json files;
+%         376 cross-agent selector = xcheck resolved_count under internal Docker;
+%         346 self-tests-only = diagnostic reconstruction from selection tables.
+Table~\ref{tab:selector-ablation} separates the measured Python TTS@8 gain into
+candidate generation and selection effects. Moving from a single
+candidate to eight candidates creates the 408/500 oracle ceiling, while
+the cross-agent selector captures 376 of those instances on the
+internal Docker re-grade. A diagnostic self-tests-only selector,
+computed from the same archived cross-agent selection tables by scoring
+each candidate only on
+its own generated tests and then checking the chosen run's per-run
+report, resolves 346/500. The gap between self-tests-only selection
+and the cross-agent selector's 376/500 result supports the specific
+value of cross-agent test application, while the oracle gap leaves 32
+internal Docker re-grade wins for better selection at fixed candidates.
+This ablation isolates candidate count and selector signals; the other
+harness mechanisms below are supported by operational signatures rather
+than by controlled component-removal reruns.
+
+\textbf{Diversity ceiling.}
+% source: paper/final/stats/run_overlap.json
+Across the eight Python runs the union of resolved instances is 408 and
+the intersection is 234. The selector's 376 corresponds to about
+92\% of the internal Docker re-grade oracle ceiling ($376/408$). Pairwise Jaccard similarity
+over \emph{completed} instances ranges from 0.943 to 0.965 (mean
+0.957), so the diversity is in \emph{which} instances are resolved
+rather than in coverage of the benchmark itself.
+
+\textbf{Compute envelope.}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{trajectory_stats.csv, operational.csv, effort_buckets.csv, compute_resolution_pareto.csv}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/figures/fig15_pareto.png
+% source: paper/final/stats/selector_audit.json
+On Python, TTS@8 buys the +14 absolute lift over the size-order baseline at
+$8\times$ candidate generation plus a separately logged selector
+matrix: 21{,}635 patch--suite executions over 495 covered instances
+(mean 5.59 deduplicated patches $\times$ 7.80 archived suites,
+versus a naive $8\times8\times495=31{,}680$ matrix), booked as
+50 cross-check shards in \code{xcheck\_manifest.json}. We measure
+candidate-generation cost from the published trajectories rather than
+from job logs.  Across the 495 trajectories, per-instance medians are
+490 LLM calls, 6.20M prompt
+tokens, 83.1k completion tokens, and 0.77~h of wall-clock; the p95
+tail extends to 1{,}099 LLM calls, 16.6M prompt tokens, and
+1.94~h.  Aggregated over the full eight-run candidate generation, the
+configuration consumes approximately
+$3.8{\times}10^{9}$ prompt tokens and
+$5.8{\times}10^{7}$ completion tokens, so the workload is
+prompt-token dominated, consistent with the persistent handover and
+shared-state mechanism described in \S\ref{sec:design}.
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/compute_resolution_pareto.csv
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/figures/fig15_pareto.png
+The compute--resolution Pareto curve over the 374 resolved instances
+shows diminishing returns in the long tail: 80\% of resolved instances
+finish within 653 LLM calls per instance and 95\% within 1{,}069, but
+moving from the 90\% point to the 99\% point requires increasing the
+budget from 820 to 1{,}547 calls. We report this Pareto as a descriptive
+cost curve over \emph{this} run rather than as a prescription; an
+early-stopping policy that exploits it would need its own controlled
+study.
+
+\textbf{Threats.}
+% source: component-level limitation follows from available artifact
+%         boundary: trajectories, per-run reports, selection tables, and
+%         generated CSV/JSON summaries exist, but no controlled reruns
+%         with phase graph, handover, formatter, tracing tools, or
+%         guarded editing removed are present in the released bundle.
+Cross-agent testing requires that each candidate run produces
+high-quality agent-generated tests; weak tests directly weaken the
+selector's discrimination. A controlled comparison of direct versus
+debate-style selection on the same trajectory bundle would require
+a paired selector run with otherwise identical inputs. The compute
+envelope is reported in LLM calls,
+prompt/completion tokens, and wall-clock seconds rather than in
+GPU-hours, because the trajectory bundle does not record
+GPU-utilisation traces; converting to GPU-hours requires
+cluster-side accounting we did not collect. The ablation in
+Table~\ref{tab:selector-ablation} isolates candidate count and selector
+signals, but it does not isolate the causal contribution of the phase
+graph, persistent handover, action formatter, tracing tools, or guarded
+editing; those components require separate controlled reruns. The
+auditable selector boundary is the archived suite outcome and patch
+apply-status table, so hidden SWE-bench outcomes are unavailable until
+after patch selection.
+
+
+
+\subsection{RQ6: Cross-language transfer to Multi-SWE-bench Java}
+\label{subsec:rq6}
+
+% source: experiments/java/kozuchi-mswe-java-20260429/src/csv/{headline,leaderboard,mcnemar,by_repo,phase_distribution,failure_modes,operational}.csv
+% source: experiments/java/kozuchi-mswe-java-20260429/src/analysis.java.md
+% source: experiments/comparison.md
+% detailed provenance:
+%   - "same agent/backbone/scaffold": comparison.md §1; Java analysis header
+%     lines 3--5 names Qwen/Qwen3.5-27B, Kozuchi mini-swe-agent, xcheck@8.
+%   - Java denominator N=128 and trajectory/report coverage:
+%     experiments/java/kozuchi-mswe-java-20260429/src/csv/{headline.csv,operational.csv} and
+%     analysis.java.md §1 reproducibility note.
+%   - Python K=8/TTS setup: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/analysis.md
+%     and paper/final/stats/{per_run_pass1.json,xcheck_summary.json}.
+We re-ran the same Qwen3.5-27B agent, eight-phase scaffold, and $K{=}8$
+selection pattern on Multi-SWE-bench Java Verified.  Only the corpus and
+harness change: Java uses Maven/Gradle and strict xcheck@8, while the
+Python headline uses pytest and TTS@8 (\S\ref{sec:design-tts}).  The
+phase graph, action contract, persistent state, and selection family
+remain the same. Figure~\ref{fig:cross-track} shows headline resolution
+with Wilson intervals~\cite{wilson1927score} and per-phase assistant-message share.
+
+\begin{figure}[t]
+  \centering
+  % source: experiments/comparison_src/plot_python_vs_java.py, re-exported as a two-panel paper figure.
+  % figure data:
+  %   panel (a): Python headline.csv (374/500, Wilson [70.82,78.41]);
+  %              Java headline.csv (41/128, Wilson [24.57,40.54]).
+  %   panel (b): Python phase_distribution.csv and Java phase_distribution.csv;
+  %              numeric arrays match experiments/comparison_src/plot_python_vs_java.py.
+  \includegraphics[width=\columnwidth]{figures/cross_track_kozuchi.png}
+  \caption{Cross-language transfer summary.}
+  \Description{Two-panel comparison. The first panel shows Python at
+  374 of 500 resolved and Java at 41 of 128 resolved with Wilson
+  confidence intervals. The second panel overlays the eight phase message
+  shares for the Python and Java trajectories, showing similar shape
+  across the phase graph.}
+  \label{fig:cross-track}
+\end{figure}
+
+\begin{table}[t]
+\centering
+\scriptsize
+% row-level provenance is recorded in stats/cross_track_summary.tex.
+\caption{Python--Java cross-track evidence for the same 27 B Kozuchi agent configuration.}
+\label{tab:cross-track}
+\input{\statpath{cross_track_summary.tex}}
+\end{table}
+
+% exact source:
+%   - Java 41/128, 32.03%, Wilson CI: experiments/java/kozuchi-mswe-java-20260429/src/csv/headline.csv.
+%   - Java rank 4/42 and peer names/rates: experiments/java/kozuchi-mswe-java-20260429/src/csv/leaderboard.csv.
+%   - "first among strict open-weight" and +1/+22/+38 cohort deltas:
+%     experiments/java/kozuchi-mswe-java-20260429/src/csv/leaderboard.csv plus analysis.java.md §2.1.
+%   - 34/41 BH-FDR wins and adverse CodeArts comparison:
+%     experiments/java/kozuchi-mswe-java-20260429/src/csv/mcnemar.csv; corrected summary documented
+%     in analysis.java.md §9.1 because a separate corrected CSV is not shipped.
+%   - Qwen2.5-72B deltas (+27 to +38): experiments/java/kozuchi-mswe-java-20260429/src/csv/peers.csv
+%     and mcnemar.csv; analysis.java.md §4.1 gives the table.
+The Java run resolves 41/128 instances (32.03\%, Wilson 95\% CI
+[24.57\%, 40.54\%]), ranks 4 of 42 overall, and is first among strict
+open-weight submissions. Under BH-FDR control ($q\le0.05$), it
+significantly outperforms 34 of 41 Java peers, including all 72 B
+Qwen2.5 open-weight builds ($\Delta=+27$ to $+38$). The only
+FDR-significant adverse comparison is \emph{CodeArts-Agent +
+CodeArts-MiniMax-M2.5} ($\Delta=-15$, $q=0.011$), with a much larger
+closed-weight backbone.
+
+% exact source:
+%   - per-phase Python/Java message shares: comparison.md §4 and
+%     experiments/comparison_src/plot_python_vs_java.py constants
+%     PY_PHASE_SHARE / JA_PHASE_SHARE, traced to phase_distribution.csv
+%     on each track.
+%   - rework concentration: comparison.md §4; Java source
+%     experiments/java/kozuchi-mswe-java-20260429/src/csv/{phase_distribution.csv,phase_giveup_rate.csv}.
+%   - effort medians and "six of seven within ±20%": comparison.md §6;
+%     source CSVs are trajectory_stats.csv and operational.csv on each track.
+The scaffold behaviour transfers more strongly than the absolute score:
+per-phase message share is within $\pm5$ pp on every phase, rework still
+centres on \code{CODE\_FIX}$\leftrightarrow$\code{VERIFY\_PATCH}, and six
+of seven effort medians sit within $\pm20\%$ of Python parity. Thus the
+43 pp headline gap is not a compute gap. The Java failure profile is
+instead language/harness-specific: \code{no\_fix\_test\_results} (25\%),
+\code{report\_valid\_not\_leaderboard\_resolved} (9\%), and
+\code{anomalous\_test\_pattern} (6\%) do not appear on Python; edit-layer
+reliability is lower (96.9\% vs. 99.8\%); and \code{elastic/logstash}
+accounts for 38/128 Java instances, with 0/38 solved by Kozuchi agent and
+32/38 unresolved by every catalogued peer. We therefore claim
+language-agnostic harness transfer, not equal language fluency.
+
+% exact source:
+%   - Java failure shares: experiments/java/kozuchi-mswe-java-20260429/src/csv/failure_modes.csv and
+%     analysis.java.md §5; shares are percentages of 87 unresolved instances.
+%   - Python comparison buckets: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/failure_modes.csv
+%     and comparison.md §5.
+%   - nonempty/applying patch output: Java patch_apply_outcomes.csv plus
+%     empty_patch row in failure_modes.csv (3 apply failures + 1 empty patch
+%     out of 128 => 124/128 = 96.875%); Python patch_apply_outcomes.csv
+%     gives 494/495 = 99.80%.
+%   - logstash 38/128, 0/38 resolved, 32/38 globally hard:
+%     experiments/java/kozuchi-mswe-java-20260429/src/csv/{by_repo.csv,failure_modes_by_repo.csv,
+%     instance_solve_counts.csv,unique_resolved.csv}; analysis.java.md §5.2/§8.4.
+The Java leaderboard mixes open-weight, semi-open, undeclared, and
+closed-frontier peers; our open-weight claim uses the strict
+``decision-LLM weights publicly released'' subset. As in RQ5, the Java
+run does not separately ablate scaffold, backbone, and selector
+contributions.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Production Planning and Lessons Learned
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Production Planning and Lessons Learned}
+\label{sec:lessons}
+
+% numeric provenance for this compressed operational summary:
+%   - all-eight-phase visit and Python rework: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{phase_distribution.csv,phase_giveup_rate.csv,phase_by_outcome.csv}
+%   - Java phase-shape transfer: experiments/java/kozuchi-mswe-java-20260429/src/csv/phase_distribution.csv and comparison.md §4
+%   - 5->1 touch-points / 70 engineer-minutes / 4 action formats / 17 model
+%     configs / 6 of 9 reusable stages / 5 clusters:
+%     paper/final/stats/{workflow_replacement.tex,operational_outcomes.tex,
+%     action_format_inventory.tex,model_inventory.tex,pipeline_inventory.tex}
+%   - Python 494/495 patch apply: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/patch_apply_outcomes.csv
+%   - Python 374 cloud vs 376 Docker: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/headline.csv
+%     and trajectories/q35_verified500_tts8_75p2_submission_bundle_20260326-055715_merged500/bundle_manifest.json
+%   - Java 41/128 and strict open-weight rank: experiments/java/kozuchi-mswe-java-20260429/src/csv/{headline.csv,leaderboard.csv}
+The deployment lessons are operational rather than architectural.  First,
+phase boundaries beat free-form planning at long horizons: every Python
+TTS@8 trajectory visits all eight phases, rework concentrates in
+\code{CODE\_FIX}$\leftrightarrow$\code{VERIFY\_PATCH}, and the same phase
+shape transfers to Java within $\pm5$ percentage points per phase
+(\S\ref{subsec:rq6}).  Second, model-family variation is cheapest to
+handle at the action-format boundary: switching tool-call syntax is a
+configuration change rather than an agent fork.  Third, CI reuse is a
+core evaluation lever, because operators can hold trajectories,
+selection bundles, or environments fixed while changing one stage.  The
+same principle applies to filesystem-backed state: reproduction notes,
+generated tests, traces, and handover memos survive context compression
+and make runs reviewable after the fact.  Finally, cross-agent testing
+turns candidate diversity into accuracy without a learned verifier, while
+one cluster abstraction keeps multi-site runs reviewable.
+
+The artifact-derived operational indicators are consistent with those
+lessons: the workflow compresses five operator touch-points to one CI
+push (about 70 engineer-minutes saved per cycle), the runtime exposes
+four action formats across 17 model configs, six of nine CI stages are
+reusable, and five cluster environments sit behind \code{ENV\_NAME}.  On
+Python, 494/495 produced patches apply cleanly and the cloud-vs-Docker
+score drift is only 374 vs. 376 out of 500.  On Java, the same runtime
+contract reaches 41/128 (32.03\%) and ranks first among strict
+open-weight submissions, making cross-language transfer a measured
+operational outcome rather than an anecdotal consistency check.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Conclusion
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusion}
+\label{sec:conclusion}
+
+\textbf{Production plan.}
+% source: headline and uncertainty numbers from experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{headline.csv,cluster_bootstrap_headline.csv}
+% source: rank and peer-test numbers from experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{leaderboard.csv,multiple_comparison_corrected.csv}
+% source: compute medians and Pareto thresholds from experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{trajectory_stats.csv,compute_resolution_pareto.csv}
+% source (Java conclusion numbers): experiments/java/kozuchi-mswe-java-20260429/src/csv/{headline.csv,leaderboard.csv,phase_distribution.csv}
+%   - 41/128 and 32.03%: headline.csv
+%   - first strict open-weight Java rank: leaderboard.csv + open-weight cohort
+%     described in analysis.java.md §2.1
+%   - "same agent/backbone/scaffold": comparison.md §1, analysis.java.md header.
+Kozuchi Agent targets conservative production use on large repositories,
+with evidence from SWE-bench Verified (Python) and Multi-SWE-bench Java
+Verified. Using a locally hosted open-weight model, no fine-tuning,
+eight candidate runs, and cross-agent testing, it resolves 374/500
+SWE-bench Verified instances (74.80\%, Wilson 95\% CI [70.82\%,
+78.41\%]; repository-clustered bootstrap [67.0\%, 79.8\%]) and 41/128
+Multi-SWE-bench Java Verified instances (32.03\%) under the same agent,
+backbone, and scaffold. It ranks 12th among 135 catalogued Python
+submissions, is the highest-ranked open-weight Python system, ranks first
+among strict open-weight Java submissions, and recovers 80\% of resolved
+Python instances within 653 LLM calls.
+
+\textbf{What we learned.}
+% source: selector lift from paper/final/stats/xcheck_summary.json;
+%         patch-application and failure-mode counts from experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{patch_apply_outcomes.csv,failure_modes.csv};
+%         oracle-union gap from paper/final/stats/run_overlap.json;
+%         component-level causal limitation stated in RQ5 threats above.
+The results point to harness engineering---phase decomposition,
+single-command grammar, persistent shared filesystem, deterministic SE
+tools, cross-agent test selection, cluster indirection, and CI reuse---
+while ablations isolate only candidate count and selector signals. The
+phase decomposition, action grammar, persistent state, and cross-agent
+selector transfer from Python to Java unchanged, supporting the
+language-agnostic claim. The selector adds +14 resolved Python instances;
+494/495 Python patches apply cleanly; and remaining Python errors are
+mainly semantic or selection failures: 91.3\% of unresolved instances
+have clean-applying patches that miss hidden tests, and 34 instances are
+solved by some run but not selected.
+
+\textbf{Next.}
+Future work should ablate tools, selector design, and post-training; use
+conversation audits for content-aware selection; connect failure-pattern
+detection to harness updates; and use the compute--resolution Pareto
+curve for controlled early stopping.
+% Industrial-pilot scope acknowledgement: present submission grounds
+% impact in operational signatures summarized in \S\ref{sec:lessons}
+% rather than developer-acceptance metrics from a controlled internal
+% pilot; the latter is the planned camera-ready extension.
+Industrial-impact claims remain limited to workflow replacement,
+cross-evaluator consistency, and the Python--Java benchmark evidence;
+Java cross-track results are first-class evidence rather than a single
+consistency point, while controlled pilots and broader multilingual
+benchmarks remain future work.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Artifact Availability
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Artifact Availability}
+\label{sec:artifact}
+
+The source index for the references below is maintained in \code{paper/final/source-index.md};
+it records the URL and paper-specific use of each external source.
+
+The public artifact is the SWE-bench Verified submission folder
+at \url{https://github.com/kimusaku/experiments}. It contains the 495
+trajectories (\code{trajs/}), harness reports (\code{logs/}),
+predictions (\code{all\_preds.jsonl}), cross-agent selection bundle
+(\code{xcheck/}), and released analysis scripts under \code{src/}. From
+these files alone, \code{src/build.sh} regenerates the empirical
+RQ1--RQ5 values; the Java submission directory under the same artifact
+family regenerates the RQ6 values. All RQ figures,
+trajectory/conversation audits, and the selector re-run over the eight
+published candidate streams are included in that artifact family.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Hidden Data Availability Statement (not rendered in this review build)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\iffalse
+\section{Data Availability Statement}
+\label{sec:data}
+
+% Mandatory per ASE 2026 CFP (paper/ase2026/cfp.md): placed after Conclusion
+% and within the page limit; describe artifacts and DOI.
+The public artifact backing this paper consists of the SWE-bench
+Verified submission materials and trajectory bundle described in
+\S\ref{sec:eval}: predictions, results, metadata, eight per-run
+trajectory sets, cross-agent test tables, selector outputs, CSVs,
+figures, and deep-analysis summaries. All artifacts and additional deep
+analysis can be found there. Cluster-specific
+paths (e.g., \code{/home/share-tmp/frj/takane-for-coding},
+\code{/lustre/share/takane-for-coding}) are internal and not part of
+the public artifact.
+Model weights for \code{Qwen/Qwen3.5-27B} and the other backends
+inventoried in \code{\statpath{model\_inventory.tex}}
+(Table~\ref{tab:models}) must be obtained from their respective
+providers under their licenses. Some cluster-specific runner
+configuration (GitLab runner tokens, internal SLURM partitions) is
+omitted intentionally.
+
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{Backend serving inventory.}
+\label{tab:models}
+\input{\statpath{model_inventory.tex}}
+\end{table}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% References
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\nocite{qwen35,devstral,nemotron}
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{references}
+
+\iffalse
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Appendix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% A. Threats to Validity
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\iffalse
+\section{Threats to Validity and Limitations}
+\label{sec:threats}
+
+\paragraph{Internal validity.}
+% source: scripts/nccl_config.sh + .gitlab-ci.yml + README.md
+Our evaluation runs on internal clusters with internal SLURM
+allocations. The public artifact contains trajectories, selector
+choices, evaluation outputs, and additional deep analysis. Performance
+on third-party clusters will also depend on hardware, communication
+libraries, container availability, and queue behavior.
+
+\paragraph{Repository clustering and aggregate-CI choice.}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/cluster_bootstrap_headline.csv
+SWE-bench Verified outcomes are not i.i.d.: instances within the
+same repository share a code base and idiomatic patterns, and our
+analysis (\S\ref{subsec:rq3}) shows that resolution rate varies
+substantially by repository. The Wilson 95\% CI on the headline rate
+treats each instance as independent and therefore understates
+uncertainty under repository clustering; the cluster-robust
+bootstrap reported in \S\ref{subsec:rq1} ([67.0\%, 79.8\%]) widens
+the interval accordingly. Pairwise peer comparisons are conducted
+on per-instance outcomes (paired McNemar) so that clustering
+contributes equally to both sides of each pair.
+
+\paragraph{Multiplicity.}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/multiple_comparison_corrected.csv
+RQ2 reports 24 paired peer comparisons. Reporting only uncorrected
+$p$-values would over-state confidence given the family size. We
+therefore report Holm-adjusted $p$ and Benjamini--Hochberg $q$
+alongside the raw $p$, and use the BH-FDR result as the headline
+significance summary while disclosing both.
+
+\paragraph{Frozen leaderboard scope.}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/leaderboard.csv
+Leaderboard rank and the ``open-weight'' label are computed against
+a frozen snapshot of 135 catalogued submissions. Submissions added
+or revised after the snapshot are not reflected in the rank.
+Because public leaderboard metadata is not always consistent across
+submitters, the open-weight grouping follows whether the backbone
+weights are publicly released.
+
+\paragraph{External validity.}
+% source: experiments/README.md (leaderboard policy)
+Results are reported on a single benchmark family (SWE-bench
+Verified) and a single test-time selection variant (cross-agent test
+scoring). We have not measured on SWE-bench Multilingual,
+Multimodal, or Live, and we therefore make no claims about
+generalization to those tracks. As of November~2025, SWE-bench
+Verified accepts only academic and research-institution submissions
+with method-disclosure requirements; our submission satisfies that
+policy through the published engineering report, trajectory bundle,
+selector choices, and evaluation outputs.
+
+\paragraph{Construct validity.}
+SWE-bench's \emph{resolved} metric is a useful proxy for ``the agent
+fixed the bug,'' but a real maintainer fix sometimes touches
+comments, docs, type annotations, or migrations the benchmark does
+not score. We do not claim the agent reproduces real maintainer
+behavior, only that it produces patches that satisfy the benchmark's
+tests. The five \code{MISSING\_ARTEFACT} cases (\S\ref{subsec:rq4})
+are operational drop-outs in the published bundle that we count as
+unresolved; their inclusion is conservative for our headline rate.
+
+\paragraph{Effort vs.\ resolution.}
+The negative correlation between trajectory effort and resolution
+reported in \S\ref{subsec:rq3} reflects hardness selection (harder
+instances cost more effort and also fail more often), not a causal
+claim that effort hurts resolution.
+
+\paragraph{Reproducibility.}
+% source: .gitlab-ci.yml VLLM_EDITABLE_INSTALL + pipeline/bench/install_vllm_*.sh
+%         + scripts/nccl_config.sh + configs/chat-template_*.yaml
+Model-serving versions, container images, and communication settings
+are pinned by the pipeline, but the exact model weights and tokenizer
+must be obtained from the model provider. Run-to-run variance from
+sampling and scheduling is real; we partially absorb it through the
+eight-run TTS sweep and the per-run dispersion reported in
+\S\ref{subsec:rq5}, and through the cluster-robust bootstrap of the
+headline rate
+(\S\ref{subsec:rq1}).
+
+\paragraph{Generalizability.}
+The harness was developed primarily against Python repositories in
+SWE-bench Verified. The dynamic tracing tools are Python-specific;
+supporting other languages would require analogous tracing
+mechanisms. The phase graph and persistent-state contract are
+language-agnostic.
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% C. Cross-experiment Consensus Analysis
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\iffalse
+% \section{Cross-experiment Consensus Analysis (Auxiliary)}
+\label{subsec:cross-experiment}
+
+\textbf{Setup.}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{qwen_outcome_matrix.csv, qwen_consensus_summary.csv, kozuchi_unresolved_strata.csv, kozuchi_unique_solves.csv, frontier_solve_share.csv, consensus_permutation_test.csv}
+% source: src/analyze_qwen_vs_others.py
+The cross-experiment analyser joins our per-instance outcome
+vector against those of four Qwen-family peers and seven
+closed-frontier peers (12 columns total). We define
+\code{qwen\_consensus} $\in \{0,\dots,4\}$ as the number of Qwen-family
+peers that resolve an instance and
+\code{frontier\_consensus} $\in \{0,\dots,7\}$ analogously. We use
+these as instance-hardness proxies because trajectories are not
+available for the peers.
+
+\textbf{Result.}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{qwen_consensus_summary.csv,kozuchi_unresolved_strata.csv,consensus_permutation_test.csv}
+Resolution rises monotonically with both consensus signals: from
+29.2\% on the 120 instances no Qwen-family peer resolves to 97.5\%
+on the 198 instances every Qwen-family peer resolves; from 6.5\%
+on the 62 instances no closed-frontier peer resolves to 94.6\% on
+the 299 instances every closed-frontier peer resolves. A label
+permutation test ($B{=}10{,}000$) rejects the null of no association
+between consensus and resolution at $p<10^{-4}$ on both axes.
+Among the 126
+unresolved instances, 41 are resolved by at least one other
+Qwen-family peer, 31 are resolved by at least one closed-frontier
+peer (and by no Qwen peer), and 54 are unresolved by every system in
+the curated comparator. We report these strata as descriptive
+upper-bound calculations on what a richer scaffold ensemble or a
+stronger backbone could plausibly recover, not as predictions of
+future runs; they are auxiliary to RQ1--RQ5 because they depend on
+the published per-instance outcomes of other research groups.
+
+\textbf{Threats.}
+The auxiliary analysis depends on the per-instance outcome vectors
+of submissions we do not control. We cannot verify those numbers by
+re-running the peers under our harness; we therefore use the
+outcomes only to define hardness strata, not to make claims about
+the peers themselves.
+\fi
+
+\paragraph{Empirical roll-up.}
+% source: RQ1 rows from experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{headline.csv,cluster_bootstrap_headline.csv}
+% source: RQ2 rows from experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{leaderboard.csv,multiple_comparison_corrected.csv}
+% source: RQ3 rows from experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{patch_size_buckets.csv,effort_resolution_corr.csv,phase_giveup_rate.csv}
+% source: RQ4 rows from experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{failure_modes.csv,patch_apply_outcomes.csv}
+% source: RQ5 rows from paper/final/stats/{per_run_pass1.json,run_overlap.json,xcheck_summary.json,selector_ablation.json}
+% source: RQ5 compute rows from experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{trajectory_stats.csv,compute_resolution_pareto.csv}
+% source: Conversation-audit auxiliary paragraph from experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{conv_returncode_per_instance.csv,conv_thought_action_stats.csv}
+Table~\ref{tab:rollup} consolidates the measured values reported in
+RQ1--RQ6; every row is regenerable from the cited CSV.
+
+\begin{table}[t]
+% source: see row-level source block immediately above; leaderboard row uses
+%         experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/leaderboard.csv
+\caption{Roll-up of measured empirical claims.}
+\label{tab:rollup}
+\centering
+\scriptsize
+\begin{tabular}{@{}p{0.06\columnwidth}p{0.43\columnwidth}p{0.20\columnwidth}p{0.19\columnwidth}@{}}
+\toprule
+RQ & Claim & Metric & Value \\
+\midrule
+RQ1 & Qwen3.5-27B + TTS@8, official evaluator   & Resolved (Wilson 95\% CI) & 374/500 = 74.80\% [70.82, 78.41] \\
+RQ1 & Qwen3.5-27B + TTS@8, internal Docker      & Resolved & 376/500 = 75.2\% \\
+RQ1 & Cluster bootstrap (repo-level, $B{=}10{,}000$) & 95\% CI & [67.0\%, 79.8\%] \\
+RQ2 & Frozen leaderboard rank                   & Position & 12 / 135 (open-weight: 1) \\
+RQ2 & McNemar vs.\ open-weight peers, BH-FDR $q\le0.05$ & Significant wins & 16 / 17 \\
+RQ2 & McNemar vs.\ Lingxi + Kimi-K2             & raw $p$ ($\Delta=+18$) & $0.054$ \\
+RQ3 & Patch LOC churn vs.\ resolution           & Point-biserial $r$ ($p$) & $-0.197$ ($1.1{\times}10^{-5}$) \\
+RQ3 & Resolution rate at 1--4 LOC vs.\ $>$100 LOC & Bucket rates & 81.7\% / 41.7\% \\
+RQ3 & \code{VERIFY\_PATCH} \code{GIVEUP} rate   & Trajectories & 90 / 495 = 18.2\% \\
+RQ4 & \code{WRONG\_FIX} share of unresolved     & Count, share  & 115 / 126 = 91.3\% \\
+RQ4 & \code{PATCH\_DID\_NOT\_APPLY} + \code{EMPTY\_PATCH} & Count & 0 / 126 \\
+RQ4 & Patch apply rate over 495 produced patches & Rate          & 494 / 495 = 99.80\% \\
+RQ5 & Per-run pass@1 (r01\dots r08) range       & Resolved      & 334--343 / 500 \\
+RQ5 & TTS@8 vs.\ best single run                & $\Delta$ resolved & +33 (best) / +42 (worst) \\
+RQ5 & TTS@8 vs.\ size-order baseline            & $\Delta$ resolved & +14 \\
+RQ5 & Self-tests-only selector                   & Resolved          & 346/500 = 69.2\% \\
+RQ5 & Resolved-in-any vs.\ resolved-in-every    & union / intersection & 408 / 234 \\
+RQ5 & Zero-run / marginal instances             & Count         & 92 zero; 174 marginal \\
+RQ5 & TTS@8 vs.\ oracle ceiling                 & Coverage      & $374 / 408 \approx 91.7\%$ official \\
+RQ5 & Selector regret vs.\ oracle               & Gap           & 34 / 500 = 6.8 pp \\
+RQ5 & Per-instance LLM calls (median, p95)      & LLM calls     & 490 / 1{,}099 \\
+RQ5 & Per-instance prompt tokens (median)       & Tokens        & 6.20M \\
+RQ5 & Compute-resolution Pareto (80\% / 95\% of resolved set) & LLM calls & 653 / 1{,}069 \\
+RQ6 & Java Verified headline, same agent/backbone & Resolved (Wilson 95\% CI) & 41/128 = 32.03\% [24.57, 40.54] \\
+RQ6 & Java leaderboard position & Overall / strict open-weight rank & 4 / 42; open-weight: 1 \\
+RQ6 & McNemar vs. Java peers, BH-FDR $q\le0.05$ & Significant wins & 34 / 41 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Conversation-level trajectory audit (auxiliary).}
+\label{subsec:conversation-audit}
+
+\textbf{Setup.}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{conv_per_instance.csv,conv_phase_transition.csv,conv_bash_verbs.csv,conv_returncode_per_instance.csv,conv_error_indicators.csv,conv_outcome_tests.csv,conv_reflection_markers.csv}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/analyze_conversations.py
+We parse the 495 published \code{*.traj.json} files at message
+granularity, splitting messages by role and phase, extracting bash
+verbs and return codes, counting common Python traceback markers, and
+separating each assistant turn's \code{THOUGHT:} block from its
+\code{FINAL\_ANSWER:} action block. We treat \code{THOUGHT:} as an
+observable text field in the transcript, not as ground-truth model
+reasoning. This audit pairs headline effectiveness with a descriptive
+operational account of where trajectories differ: every count is
+regenerated from the published trajectory bundle.
+
+\textbf{Result and interpretation.}
+% source: message/character medians and error-marker rates from conv_per_instance.csv;
+%         transition mass from conv_phase_transition.csv; bash-call counts and rc=0 rate
+%         from conv_bash_verbs.csv and conv_returncode_per_instance.csv;
+%         THOUGHT-block/action effect sizes and BH-FDR results from conv_thought_action_stats.csv
+The median trajectory contains 556 messages and roughly 1.04M
+assistant-plus-tool-output characters; the only material non-canonical
+phase transition is \code{VERIFY\_PATCH}$\rightarrow$\code{CODE\_FIX}
+(1.0\%). Across 146{,}814 bash calls, 95.3\% with a return-code tag
+return zero, so the tool layer is not the residual bottleneck.
+Observable content gives selector-relevant signals: \code{NameError} is
+9.3$\times$ more common in resolved trajectories, rollback language is
+1.78$\times$ more common in unresolved trajectories, and the only
+positive-direction numeric signal for resolution is the
+THOUGHT-block-to-action ratio (Cliff's $\delta{=}+0.13$). These
+model-free trajectory signals could help recover part of the 6.8~pp
+selector headroom in Table~\ref{tab:tts-decomp} without regenerating
+candidates.
+
+\iffalse
+\section{Source-of-Truth Trace}
+\label{sec:appendix-trace}
+
+The paper keeps detailed provenance in LaTeX comments and generated
+statistics files rather than in the main narrative. At a high level,
+the evidence sources are:
+\begin{itemize}
+\item \textbf{Runtime and design.} The phase graph, action interface,
+skill gating, handover policy, and tool list are derived from the
+agent configuration and runtime implementation.
+\item \textbf{Pipeline and operations.} CI stages, reuse mode,
+cluster abstraction, and training/evaluation envelopes are derived
+from the pipeline scripts, CI configuration, and cluster-loading
+helpers.
+\item \textbf{Evaluation.} The official 374/500 (74.80\%) score
+comes from the SWE-bench Verified submission metadata; the
+repository and year breakdowns, the McNemar tests with
+multiplicity correction, the patch-size and trajectory-effort
+diagnostics, the failure taxonomy, the operational-reliability
+profile, and the cross-experiment consensus auxiliary all come
+from the scripted analysis under \code{src/} of the submission
+directory (full workspace path in~\S\ref{sec:data}), and the
+per-run pass@1 / cross-agent-selection summaries come
+from the published analysis artifacts.
+\item \textbf{Artifact availability.} The repository, trajectory
+bundle, generated statistics, and figure sources form the public
+artifact; internal cluster paths and model weights are documented as
+gated dependencies in the Data Availability Statement.
+\end{itemize}
+
+The generated manifest in the statistics directory lists every JSON,
+CSV, and LaTeX fragment produced by the analysis scripts. The comments
+adjacent to each section give precise workspace paths for tracing
+implementation evidence.
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B. Appendix: Per-Run Pass@1 Statistics
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\iffalse
+\section{Per-Run Pass@1 Statistics}
+\label{sec:appendix-stats}
+
+% source: trajectories/q35_.../runs/r0X_s100X/report.json (X=1..8)
+% generated by paper/final/sources/paper-src-test-prompt/compute_per_run_stats.py
+The eight per-run resolved counts are regenerated from the published
+trajectory reports. Summary statistics:
+\begin{itemize}
+\item $K=8$ runs, all on the same 500 SWE-bench Verified instances.
+\item Resolved counts: $\{343, 339, 337, 341, 341, 334, 334, 340\}$.
+\item Min = 334, max = 343, mean = 338.625, range = 9, population
+standard deviation $\approx 3.12$.
+\item TTS@8 selector resolves 376 internally / 374 on the official
+evaluator, strictly above the per-run max of 343.
+\item Order baseline resolves 362; selector
+contributes +14 absolute uplift.
+\item Resolved-in-any-run = 408; resolved-in-every-run = 234;
+selector reaches $376/408 \approx 92\%$ of the union ceiling.
+\end{itemize}
+\fi
+
+\fi
+
+\end{document}

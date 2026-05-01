@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-04-27T21:20:00Z" agent="swe-sota-agent" version="22.0.0">
+  <diagram id="tts" name="Cross-Agent Selection">
+    <mxGraphModel dx="1000" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="920" pageHeight="430" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/><mxCell id="1" parent="0"/>
+        <mxCell id="title" value="Key idea: use each agent run's tests to judge the other runs' patches" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#006BFF;strokeColor=none;fontColor=#ffffff;fontStyle=1;fontSize=18;align=center;" vertex="1" parent="1"><mxGeometry x="25" y="15" width="870" height="36" as="geometry"/></mxCell>
+        <mxCell id="runs" value="8 independent candidate runs&#10;same 27B model, different samples" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F0FF;strokeColor=#1F2937;strokeWidth=4;fontSize=17;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="45" y="105" width="210" height="82" as="geometry"/></mxCell>
+        <mxCell id="patches" value="Each run produces&#10;one patch + self-generated tests" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7E6;strokeColor=#1F2937;strokeWidth=3;fontSize=15;align=center;" vertex="1" parent="1"><mxGeometry x="45" y="240" width="210" height="72" as="geometry"/></mxCell>
+        <mxCell id="matrix" value="Cross-application matrix&#10;tests from run j applied to patch from run i" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4CC;strokeColor=#1F2937;strokeWidth=4;fontSize=17;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="350" y="115" width="230" height="95" as="geometry"/></mxCell>
+        <mxCell id="score" value="Simple score&#10;weighted pass rate&#10;+ patch-length tie-break" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9FBEF;strokeColor=#1F2937;strokeWidth=4;fontSize=17;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="665" y="110" width="205" height="100" as="geometry"/></mxCell>
+        <mxCell id="result" value="Final selected patch&#10;376 / 500 internal&#10;374 / 500 official" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE5EC;strokeColor=#1F2937;strokeWidth=4;fontSize=17;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="665" y="260" width="205" height="90" as="geometry"/></mxCell>
+        <mxCell id="no_leak" value="No hidden benchmark tests are used at selection time." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#ffffff;strokeColor=#111111;fontSize=13;align=left;" vertex="1" parent="1"><mxGeometry x="350" y="250" width="220" height="60" as="geometry"/></mxCell>
+        <mxCell id="lift" value="Measured lift: +14 resolved over a first-run baseline." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#ffffff;strokeColor=#111111;fontSize=13;align=left;" vertex="1" parent="1"><mxGeometry x="350" y="325" width="220" height="55" as="geometry"/></mxCell>
+        <mxCell id="e1" style="endArrow=classic;html=1;strokeColor=#111111;strokeWidth=3;" edge="1" parent="1" source="runs" target="matrix"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e2" style="endArrow=classic;html=1;strokeColor=#111111;strokeWidth=3;" edge="1" parent="1" source="patches" target="matrix"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e3" style="endArrow=classic;html=1;strokeColor=#111111;strokeWidth=3;" edge="1" parent="1" source="matrix" target="score"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e4" style="endArrow=classic;html=1;strokeColor=#111111;strokeWidth=3;" edge="1" parent="1" source="score" target="result"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

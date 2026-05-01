@@ -1,0 +1,3 @@
+track,benchmark,n,resolved,rate,ci_lo,ci_hi,source
+Python,SWE-bench Verified,500,374,0.7480,0.7082,0.7841,experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/headline.csv
+Java,Multi-SWE-bench Java Verified,128,41,0.3203,0.2457,0.4054,experiments/java/kozuchi-mswe-java-20260429/src/csv/headline.csv

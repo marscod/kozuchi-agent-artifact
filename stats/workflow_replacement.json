@@ -1,0 +1,106 @@
+{
+  "ci": {
+    "n_stages": 9,
+    "reuse_vars": [
+      "PHASE_SFT_ADAPTER_DIRS_FILE",
+      "PIPELINE_BENCH_POST_RL_DIR",
+      "PIPELINE_BENCH_POST_SFT_DIR",
+      "PIPELINE_DATA_SYNTH_DIR",
+      "PIPELINE_PREPARE_VENV_DIR",
+      "PIPELINE_TRAJ_DIR"
+    ],
+    "n_reuse_vars": 6,
+    "n_cluster_env_names": 5,
+    "cluster_env_names": [
+      "abci",
+      "ashitaka",
+      "azalea",
+      "kagura",
+      "stratus"
+    ],
+    "source": ".gitlab-ci.yml; scripts/module_load.sh"
+  },
+  "configs": {
+    "n_model_configs": 17,
+    "n_chat_templates": 12,
+    "n_environment_configs": 2,
+    "n_tool_implementations": 4,
+    "n_action_formats": 4,
+    "n_phases_in_agent_yaml": 8,
+    "n_skills_in_agent_yaml": 14,
+    "n_tools_in_agent_yaml": 3,
+    "source": "configs/; configs/agent_sota.yaml; swe_sota_agent/tools/"
+  },
+  "results": {
+    "resolved_official_cloud": 374,
+    "resolved_internal_docker": 376,
+    "total_instances": 500,
+    "n_trajectories": 495,
+    "trajectory_coverage": "495/500",
+    "patches_apply_cleanly_n": 494,
+    "patches_apply_total_n": 495,
+    "n_empty_patch_failures": 0,
+    "n_did_not_apply_bucket": 0,
+    "source": "experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{headline.csv,failure_modes.csv,patch_apply_outcomes.csv}; trajectories/q35_.../bundle_manifest.json"
+  },
+  "java_cross_language": {
+    "rate_pct": "32.00",
+    "params_b": "27.0",
+    "rank": "2",
+    "rank_total": 7,
+    "source": "paper/comparison/analysis.md (\"Java Custom-Row Ranking\")"
+  },
+  "workflow_estimate": {
+    "pre_steps": [
+      "manually start a vLLM server (pipeline/bench/run_vllm.sh)",
+      "launch a one-off SWE-bench run (pipeline/bench/run_infer.sh)",
+      "wait hours for the run",
+      "run Docker grading (pipeline/bench/run_eval.sh)",
+      "record scores in a spreadsheet"
+    ],
+    "n_pre_steps": 5,
+    "post_steps": [
+      "push to GitLab CI; pipeline orchestrates the rest (.gitlab-ci.yml)"
+    ],
+    "n_post_steps": 1,
+    "compression_factor_x": 5,
+    "pre_minutes_per_cycle_estimate": 75,
+    "post_minutes_per_cycle_estimate": 5,
+    "minutes_saved_per_cycle_estimate": 70,
+    "hours_saved_per_cycle_estimate": 1.2,
+    "estimate_assumptions": "5 min vLLM start; 5 min run launch; 60 min Docker-grade attention (bounded above by Epoch AI 2025 floor: 62-73 min wall-clock for Verified on optimized 32-core GitHub Actions VM); 5 min spreadsheet log; post-Kozuchi attention 5 min (single CI push). The compression estimate is directionally anchored by Hilton et al.'s ASE 2016 finding that CI-adopting OSS projects release faster. Wait time excluded on both sides.",
+    "anchors": [
+      "epoch_swebench_docker_2025",
+      "hilton_2016_ase_ci"
+    ],
+    "source": "paper/final/main.tex \u00a73.4 narrative + README.md \"Use\" section + docs/HOW_TO_DEVELOP.md + pipeline/bench/* + .gitlab-ci.yml"
+  },
+  "published_anchors": {
+    "epoch_swebench_docker_2025": {
+      "kind": "engineering blog (peer-cited)",
+      "title": "How to run SWE-bench Verified in one hour on one machine",
+      "authors": "Tom Adamczewski / Epoch AI",
+      "year": 2025,
+      "url": "https://epoch.ai/blog/swebench-docker",
+      "key_statistic": "SWE-bench Verified (500 instances) graded in 62 minutes on a single 32-core / 128 GiB GitHub Actions VM with optimized Docker images; AllHands originally needed several days for SWE-bench Lite (300 issues), i.e. >10 min/instance unoptimized.",
+      "anchors_in_script": [
+        "pre_minutes_per_cycle_estimate.grade_attention=60 (bounded above by 62-73 min wall-clock)",
+        "post-Kozuchi 5 min CI push (asynchronous; engineer not blocked on grading)"
+      ]
+    },
+    "hilton_2016_ase_ci": {
+      "kind": "peer-reviewed (ACM/IEEE ASE 2016)",
+      "title": "Usage, Costs, and Benefits of Continuous Integration in Open-Source Projects",
+      "authors": "Hilton, Tunnell, Huang, Marinov, Dig",
+      "year": 2016,
+      "venue": "Proc.\\ 31st IEEE/ACM International Conference on Automated Software Engineering (ASE)",
+      "doi": "10.1145/2970276.2970358",
+      "url": "https://doi.org/10.1145/2970276.2970358",
+      "pdf_url": "https://mir.cs.illinois.edu/marinov/publications/HiltonETAL16ContinuousIntegration.pdf",
+      "key_statistic": "Projects using CI release twice as fast as projects that do not use CI; provides peer-reviewed directional context for our operator-touch-point compression claim.",
+      "anchors_in_script": [
+        "compression_factor_x=5 (directionally aligned with release-frequency improvements documented for CI-adopting OSS projects)"
+      ]
+    }
+  }
+}

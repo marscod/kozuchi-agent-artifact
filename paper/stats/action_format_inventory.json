@@ -1,0 +1,10 @@
+{
+  "default_action_format": "tool_bash",
+  "available_action_formats": [
+    "markdown_bash",
+    "tool_call",
+    "toolcall",
+    "tool_bash"
+  ],
+  "n_formats": 4
+}

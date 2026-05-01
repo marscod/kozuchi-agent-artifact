@@ -1,0 +1,33 @@
+{
+  "stages": [
+    "prepare",
+    "test",
+    "bench",
+    "synth",
+    "sft",
+    "rl",
+    "bench_post",
+    "tts",
+    "report"
+  ],
+  "n_stages": 9,
+  "cluster_tags": [
+    "kagura",
+    "stratus"
+  ],
+  "reuse_vars": [
+    "PHASE_SFT_ADAPTER_DIRS_FILE",
+    "PIPELINE_BENCH_POST_RL_DIR",
+    "PIPELINE_BENCH_POST_SFT_DIR",
+    "PIPELINE_DATA_SYNTH_DIR",
+    "PIPELINE_PREPARE_VENV_DIR",
+    "PIPELINE_TRAJ_DIR"
+  ],
+  "env_names": [
+    "abci",
+    "ashitaka",
+    "azalea",
+    "kagura",
+    "stratus"
+  ]
+}

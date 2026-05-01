@@ -1,0 +1,14 @@
+axis,consensus,n_instances,kozuchi_resolved,kozuchi_rate
+qwen_consensus,0,120,35,0.2916666666666667
+qwen_consensus,1,60,39,0.65
+qwen_consensus,2,49,37,0.7551020408163265
+qwen_consensus,3,73,70,0.958904109589041
+qwen_consensus,4,198,193,0.9747474747474747
+frontier_consensus,0,62,4,0.06451612903225806
+frontier_consensus,1,20,4,0.2
+frontier_consensus,2,14,5,0.35714285714285715
+frontier_consensus,3,15,10,0.6666666666666666
+frontier_consensus,4,26,17,0.6538461538461539
+frontier_consensus,5,22,15,0.6818181818181818
+frontier_consensus,6,42,36,0.8571428571428571
+frontier_consensus,7,299,283,0.9464882943143813

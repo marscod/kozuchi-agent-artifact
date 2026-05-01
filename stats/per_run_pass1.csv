@@ -1,0 +1,9 @@
+leg,python_run,python_resolved,python_unresolved,python_empty_patch,python_error,python_total,python_rate,java_run,java_selected,java_resolved_selected,java_unresolved_selected,java_conditional_rate
+1,r01_s1001,343,139,16,2,500,0.6860,mswe_java_qwen35_azalea_full128_4x2gpu_20260411-214644,25,7,18,0.2800
+2,r02_s1002,339,143,15,3,500,0.6780,mswe_java_qwen35_azalea_full128_4x2gpu_20260413-064046,16,4,12,0.2500
+3,r03_s1003,337,145,15,3,500,0.6740,mswe_java_qwen35_azalea_full128_4x2gpu_20260416-141301,18,5,13,0.2778
+4,r04_s1004,341,145,13,1,500,0.6820,mswe_java_qwen35_azalea_full128_4x2gpu_20260419-001722,15,8,7,0.5333
+5,r05_s1005,341,144,10,5,500,0.6820,mswe_java_qwen35_azalea_full128_4x2gpu_20260420-030953,13,5,8,0.3846
+6,r06_s1006,334,146,17,3,500,0.6680,mswe_java_qwen35_azalea_full128_4x2gpu_20260421-043555,11,4,7,0.3636
+7,r07_s1007,334,148,15,3,500,0.6680,mswe_java_qwen35_azalea_full128_4x2gpu_20260422-221438,13,5,8,0.3846
+8,r08_s1008,340,138,15,7,500,0.6800,mswe_java_qwen35_azalea_full128_6x2gpu_20260417-144259,16,3,13,0.1875

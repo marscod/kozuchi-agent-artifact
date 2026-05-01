@@ -1,0 +1,232 @@
+{
+  "runs": [
+    "r01_s1001",
+    "r02_s1002",
+    "r03_s1003",
+    "r04_s1004",
+    "r05_s1005",
+    "r06_s1006",
+    "r07_s1007",
+    "r08_s1008"
+  ],
+  "per_run_completed": {
+    "r01_s1001": 482,
+    "r02_s1002": 482,
+    "r03_s1003": 482,
+    "r04_s1004": 486,
+    "r05_s1005": 485,
+    "r06_s1006": 480,
+    "r07_s1007": 482,
+    "r08_s1008": 478
+  },
+  "per_run_resolved": {
+    "r01_s1001": 343,
+    "r02_s1002": 339,
+    "r03_s1003": 337,
+    "r04_s1004": 341,
+    "r05_s1005": 341,
+    "r06_s1006": 334,
+    "r07_s1007": 334,
+    "r08_s1008": 340
+  },
+  "pairwise_completed_overlap": [
+    {
+      "a": "r01_s1001",
+      "b": "r02_s1002",
+      "intersection": 470,
+      "union": 494,
+      "jaccard": 0.9514
+    },
+    {
+      "a": "r01_s1001",
+      "b": "r03_s1003",
+      "intersection": 471,
+      "union": 493,
+      "jaccard": 0.9554
+    },
+    {
+      "a": "r01_s1001",
+      "b": "r04_s1004",
+      "intersection": 474,
+      "union": 494,
+      "jaccard": 0.9595
+    },
+    {
+      "a": "r01_s1001",
+      "b": "r05_s1005",
+      "intersection": 473,
+      "union": 494,
+      "jaccard": 0.9575
+    },
+    {
+      "a": "r01_s1001",
+      "b": "r06_s1006",
+      "intersection": 470,
+      "union": 492,
+      "jaccard": 0.9553
+    },
+    {
+      "a": "r01_s1001",
+      "b": "r07_s1007",
+      "intersection": 472,
+      "union": 492,
+      "jaccard": 0.9593
+    },
+    {
+      "a": "r01_s1001",
+      "b": "r08_s1008",
+      "intersection": 468,
+      "union": 492,
+      "jaccard": 0.9512
+    },
+    {
+      "a": "r02_s1002",
+      "b": "r03_s1003",
+      "intersection": 472,
+      "union": 492,
+      "jaccard": 0.9593
+    },
+    {
+      "a": "r02_s1002",
+      "b": "r04_s1004",
+      "intersection": 474,
+      "union": 494,
+      "jaccard": 0.9595
+    },
+    {
+      "a": "r02_s1002",
+      "b": "r05_s1005",
+      "intersection": 473,
+      "union": 494,
+      "jaccard": 0.9575
+    },
+    {
+      "a": "r02_s1002",
+      "b": "r06_s1006",
+      "intersection": 468,
+      "union": 494,
+      "jaccard": 0.9474
+    },
+    {
+      "a": "r02_s1002",
+      "b": "r07_s1007",
+      "intersection": 472,
+      "union": 492,
+      "jaccard": 0.9593
+    },
+    {
+      "a": "r02_s1002",
+      "b": "r08_s1008",
+      "intersection": 468,
+      "union": 492,
+      "jaccard": 0.9512
+    },
+    {
+      "a": "r03_s1003",
+      "b": "r04_s1004",
+      "intersection": 474,
+      "union": 494,
+      "jaccard": 0.9595
+    },
+    {
+      "a": "r03_s1003",
+      "b": "r05_s1005",
+      "intersection": 474,
+      "union": 493,
+      "jaccard": 0.9615
+    },
+    {
+      "a": "r03_s1003",
+      "b": "r06_s1006",
+      "intersection": 470,
+      "union": 492,
+      "jaccard": 0.9553
+    },
+    {
+      "a": "r03_s1003",
+      "b": "r07_s1007",
+      "intersection": 473,
+      "union": 491,
+      "jaccard": 0.9633
+    },
+    {
+      "a": "r03_s1003",
+      "b": "r08_s1008",
+      "intersection": 470,
+      "union": 490,
+      "jaccard": 0.9592
+    },
+    {
+      "a": "r04_s1004",
+      "b": "r05_s1005",
+      "intersection": 476,
+      "union": 495,
+      "jaccard": 0.9616
+    },
+    {
+      "a": "r04_s1004",
+      "b": "r06_s1006",
+      "intersection": 471,
+      "union": 495,
+      "jaccard": 0.9515
+    },
+    {
+      "a": "r04_s1004",
+      "b": "r07_s1007",
+      "intersection": 474,
+      "union": 494,
+      "jaccard": 0.9595
+    },
+    {
+      "a": "r04_s1004",
+      "b": "r08_s1008",
+      "intersection": 472,
+      "union": 492,
+      "jaccard": 0.9593
+    },
+    {
+      "a": "r05_s1005",
+      "b": "r06_s1006",
+      "intersection": 473,
+      "union": 492,
+      "jaccard": 0.9614
+    },
+    {
+      "a": "r05_s1005",
+      "b": "r07_s1007",
+      "intersection": 475,
+      "union": 492,
+      "jaccard": 0.9654
+    },
+    {
+      "a": "r05_s1005",
+      "b": "r08_s1008",
+      "intersection": 469,
+      "union": 494,
+      "jaccard": 0.9494
+    },
+    {
+      "a": "r06_s1006",
+      "b": "r07_s1007",
+      "intersection": 471,
+      "union": 491,
+      "jaccard": 0.9593
+    },
+    {
+      "a": "r06_s1006",
+      "b": "r08_s1008",
+      "intersection": 465,
+      "union": 493,
+      "jaccard": 0.9432
+    },
+    {
+      "a": "r07_s1007",
+      "b": "r08_s1008",
+      "intersection": 469,
+      "union": 491,
+      "jaccard": 0.9552
+    }
+  ],
+  "n_resolved_in_any_run": 408,
+  "n_resolved_in_every_run": 234
+}

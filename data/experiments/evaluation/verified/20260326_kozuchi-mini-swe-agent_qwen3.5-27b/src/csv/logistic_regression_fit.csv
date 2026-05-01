@@ -1,0 +1,7 @@
+metric,value
+n,495.0
+n_clusters,12.0
+mcfadden_pseudo_r2,0.4902569308863889
+log_likelihood,-140.32909032095668
+null_log_likelihood,-275.293768221261
+aic,292.65818064191336

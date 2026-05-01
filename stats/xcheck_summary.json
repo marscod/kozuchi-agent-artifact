@@ -1,0 +1,210 @@
+{
+  "selector_family": "simple_weighted_passrate",
+  "f2p_weight": 0.3,
+  "p2p_weight": 0.7,
+  "tie_break": "shortest_patch_raw",
+  "expected_count": 500,
+  "selected_count": 495,
+  "resolved_count": 376,
+  "unresolved_count": 117,
+  "error_count": 2,
+  "score_over_expected": 0.752,
+  "covered_over_expected": 0.99,
+  "tie_instances": 304,
+  "changed_from_order": 302,
+  "order_baseline": {
+    "resolved_count": 362,
+    "selected_count": 495,
+    "score_over_expected": 0.724,
+    "tie_instances": 304,
+    "changed_from_order": 0,
+    "status_counts": {
+      "resolved": 362,
+      "unresolved": 131,
+      "error": 2
+    }
+  },
+  "manifest_simple_passrate_result": {
+    "resolved_count": 376,
+    "expected_count": 500,
+    "score_over_expected": 0.752
+  },
+  "manifest_xcheck_input_file_count": 32,
+  "manifest_xcheck_table_count": 495,
+  "selector_audit": {
+    "sources": {
+      "xcheck_tables": "/home/mbahrami/repo/swe-sota-agent/paper/artifacts/data/trajectories/q35_verified500_tts8_75p2_submission_bundle_20260326-055715_merged500/xcheck/instance_test_tables",
+      "xcheck_result": "/home/mbahrami/repo/swe-sota-agent/paper/artifacts/data/trajectories/q35_verified500_tts8_75p2_submission_bundle_20260326-055715_merged500/xcheck/results/simple_passrate_f03_p07_shortest_patch_raw_75p2.json",
+      "xcheck_inputs": "/home/mbahrami/repo/swe-sota-agent/paper/artifacts/data/trajectories/q35_verified500_tts8_75p2_submission_bundle_20260326-055715_merged500/xcheck/inputs",
+      "per_run_reports": "/home/mbahrami/repo/swe-sota-agent/paper/artifacts/data/trajectories/q35_verified500_tts8_75p2_submission_bundle_20260326-055715_merged500/runs/r0*_s100*/report.json",
+      "per_run_predictions": "/home/mbahrami/repo/swe-sota-agent/paper/artifacts/data/trajectories/q35_verified500_tts8_75p2_submission_bundle_20260326-055715_merged500/runs/r0*_s100*/preds.json",
+      "xcheck_manifest": "/home/mbahrami/repo/swe-sota-agent/paper/artifacts/data/trajectories/q35_verified500_tts8_75p2_submission_bundle_20260326-055715_merged500/provenance/xcheck_manifest.json"
+    },
+    "selector_weights": {
+      "w_B": 0.3,
+      "w_R": 0.7,
+      "provenance_statement": "Fixed globally before official SWE-bench Verified evaluation; not tuned on hidden-test outcomes or per repository.",
+      "artifact_estimate_note": "Weight sensitivity uses archived xcheck tables and per-run report outcomes for the selected candidate; it is not a fresh SWE-bench grade."
+    },
+    "weight_sensitivity": [
+      {
+        "w_B": 0.5,
+        "w_R": 0.5,
+        "selected_count": 495,
+        "artifact_resolved_count": 330,
+        "artifact_rate_over_expected": 0.66,
+        "changed_from_current_weight_choice": 17
+      },
+      {
+        "w_B": 0.4,
+        "w_R": 0.6,
+        "selected_count": 495,
+        "artifact_resolved_count": 331,
+        "artifact_rate_over_expected": 0.662,
+        "changed_from_current_weight_choice": 19
+      },
+      {
+        "w_B": 0.3,
+        "w_R": 0.7,
+        "selected_count": 495,
+        "artifact_resolved_count": 332,
+        "artifact_rate_over_expected": 0.664,
+        "changed_from_current_weight_choice": 0
+      },
+      {
+        "w_B": 0.2,
+        "w_R": 0.8,
+        "selected_count": 495,
+        "artifact_resolved_count": 332,
+        "artifact_rate_over_expected": 0.664,
+        "changed_from_current_weight_choice": 7
+      },
+      {
+        "w_B": 0.1,
+        "w_R": 0.9,
+        "selected_count": 495,
+        "artifact_resolved_count": 331,
+        "artifact_rate_over_expected": 0.662,
+        "changed_from_current_weight_choice": 6
+      },
+      {
+        "w_B": 0.7,
+        "w_R": 0.3,
+        "selected_count": 495,
+        "artifact_resolved_count": 327,
+        "artifact_rate_over_expected": 0.654,
+        "changed_from_current_weight_choice": 34
+      },
+      {
+        "w_B": 0.9,
+        "w_R": 0.1,
+        "selected_count": 495,
+        "artifact_resolved_count": 329,
+        "artifact_rate_over_expected": 0.658,
+        "changed_from_current_weight_choice": 43
+      }
+    ],
+    "tie_audit": {
+      "tie_definition": ">=2 deduplicated patches within 0.001 of the top score",
+      "tie_instances_recomputed": 304,
+      "tie_size_histogram": {
+        "2": 84,
+        "3": 64,
+        "4": 45,
+        "5": 36,
+        "6": 27,
+        "7": 23,
+        "8": 25
+      },
+      "tie_breaker_applied_to_instances": 304,
+      "tie_breaker_applied_share_covered": 0.6141414141414141,
+      "tie_breaker_applied_share_expected": 0.608
+    },
+    "test_archive_audit": {
+      "admission_rule": "suite enters xcheck only if has_fail_to_pass and has_pass_to_pass are both true",
+      "per_run_archived_suite_counts": {
+        "r01_s1001": 479,
+        "r02_s1002": 483,
+        "r03_s1003": 479,
+        "r04_s1004": 486,
+        "r05_s1005": 488,
+        "r06_s1006": 482,
+        "r07_s1007": 483,
+        "r08_s1008": 479
+      },
+      "per_run_dropped_before_xcheck": {
+        "r01_s1001": 21,
+        "r02_s1002": 17,
+        "r03_s1003": 21,
+        "r04_s1004": 14,
+        "r05_s1005": 12,
+        "r06_s1006": 18,
+        "r07_s1007": 17,
+        "r08_s1008": 21
+      },
+      "archived_suite_count_range": [
+        479,
+        488
+      ],
+      "missing_fail_to_pass_among_archived": 0,
+      "missing_pass_to_pass_among_archived": 0,
+      "missing_both_among_archived": 0
+    },
+    "matrix_audit": {
+      "table_count": 495,
+      "missing_artifact_count": 5,
+      "all_table_status_ok": true,
+      "unique_patch_count_mean": 5.5919191919191915,
+      "unique_patch_count_histogram": {
+        "1": 47,
+        "2": 40,
+        "3": 38,
+        "4": 30,
+        "5": 43,
+        "6": 59,
+        "7": 66,
+        "8": 172
+      },
+      "suite_count_mean": 7.795959595959596,
+      "suite_count_histogram": {
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 3,
+        "6": 15,
+        "7": 47,
+        "8": 427
+      },
+      "deduplicated_patch_total": 2768,
+      "apply_status_counts": {
+        "apply_failed": 1,
+        "invalid_patch": 1,
+        "ok": 2766
+      },
+      "cache_status_counts": {
+        "hit": 2,
+        "miss": 2766
+      },
+      "matrix_patch_suite_executions": 21635,
+      "naive_8x8_executions_for_covered": 31680,
+      "dedup_and_filter_savings_share": 0.3170770202020202,
+      "xcheck_shard_job_count": 50,
+      "xcheck_method": "irt_bt_bayes",
+      "xcheck_allow_fallback": false
+    },
+    "hidden_test_boundary": {
+      "selector_inputs": [
+        "xcheck/instance_test_tables/*.json:suites",
+        "xcheck/instance_test_tables/*.json:patches.apply_status",
+        "xcheck/instance_test_tables/*.json:patches.suite_outcomes",
+        "runs/r0*_s100*/preds.json:model_patch length for tie-break"
+      ],
+      "not_selector_inputs": [
+        "official SWE-bench cloud result",
+        "internal Docker grading result",
+        "hidden benchmark test outcomes"
+      ],
+      "mechanics": "candidate tests are archived in share_assets before xcheck tables are produced; selector output is a selected-label/preds map consumed by downstream evaluation"
+    }
+  }
+}

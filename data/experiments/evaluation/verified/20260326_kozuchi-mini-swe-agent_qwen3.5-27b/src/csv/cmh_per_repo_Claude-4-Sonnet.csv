@@ -1,0 +1,13 @@
+peer,repo,both,kozuchi_only,peer_only,neither,repo_n
+OpenHands + Claude-4-Sonnet,astropy/astropy,12,1,0,9,22
+OpenHands + Claude-4-Sonnet,django/django,153,24,18,36,231
+OpenHands + Claude-4-Sonnet,matplotlib/matplotlib,17,6,3,8,34
+OpenHands + Claude-4-Sonnet,mwaskom/seaborn,1,0,1,0,2
+OpenHands + Claude-4-Sonnet,pallets/flask,1,0,0,0,1
+OpenHands + Claude-4-Sonnet,psf/requests,1,7,0,0,8
+OpenHands + Claude-4-Sonnet,pydata/xarray,17,1,1,3,22
+OpenHands + Claude-4-Sonnet,pylint-dev/pylint,2,1,2,5,10
+OpenHands + Claude-4-Sonnet,pytest-dev/pytest,12,4,1,2,19
+OpenHands + Claude-4-Sonnet,scikit-learn/scikit-learn,26,1,2,3,32
+OpenHands + Claude-4-Sonnet,sphinx-doc/sphinx,26,4,2,12,44
+OpenHands + Claude-4-Sonnet,sympy/sympy,50,7,4,14,75

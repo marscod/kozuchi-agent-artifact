@@ -1,0 +1,19 @@
+{
+  "tools_dir": "/home/mbahrami/repo/swe-sota-agent/paper/artifacts/data/swe_sota_agent/tools",
+  "on_disk": [
+    "caller_trace",
+    "kanban_update",
+    "line_edit",
+    "line_trace"
+  ],
+  "active_in_config": [
+    "line_trace",
+    "caller_trace",
+    "line_edit"
+  ],
+  "disabled_in_config": [
+    "kanban_update"
+  ],
+  "active_but_missing_on_disk": [],
+  "on_disk_but_not_active": []
+}

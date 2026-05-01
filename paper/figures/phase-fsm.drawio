@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-04-27T21:20:00Z" agent="swe-sota-agent" version="22.0.0">
+  <diagram id="phase_fsm" name="Phase FSM">
+    <mxGraphModel dx="960" dy="540" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="430" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="Key idea: explicit phases make long repair trajectories auditable and restartable" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#006BFF;strokeColor=none;fontColor=#ffffff;fontStyle=1;fontSize=18;align=center;" vertex="1" parent="1">
+          <mxGeometry x="25" y="15" width="850" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n1" value="Reproduce issue" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F0FF;strokeColor=#1F2937;strokeWidth=3;fontSize=15;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="30" y="110" width="110" height="60" as="geometry"/></mxCell>
+        <mxCell id="n2" value="Synthesize failing tests" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F0FF;strokeColor=#1F2937;strokeWidth=3;fontSize=15;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="170" y="110" width="120" height="60" as="geometry"/></mxCell>
+        <mxCell id="n3" value="Localize code" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F0FF;strokeColor=#1F2937;strokeWidth=3;fontSize=15;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="320" y="110" width="110" height="60" as="geometry"/></mxCell>
+        <mxCell id="n4" value="Localize regression tests" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F0FF;strokeColor=#1F2937;strokeWidth=3;fontSize=15;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="460" y="110" width="130" height="60" as="geometry"/></mxCell>
+        <mxCell id="n5" value="Implement fix" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9FBEF;strokeColor=#1F2937;strokeWidth=3;fontSize=15;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="620" y="110" width="110" height="60" as="geometry"/></mxCell>
+        <mxCell id="n6" value="Verify patch" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9FBEF;strokeColor=#1F2937;strokeWidth=3;fontSize=15;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="760" y="110" width="110" height="60" as="geometry"/></mxCell>
+        <mxCell id="n7" value="Clean up + review" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4CC;strokeColor=#1F2937;strokeWidth=3;fontSize=15;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="620" y="250" width="110" height="60" as="geometry"/></mxCell>
+        <mxCell id="n8" value="Final report" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE5EC;strokeColor=#1F2937;strokeWidth=3;fontSize=15;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="760" y="250" width="110" height="60" as="geometry"/></mxCell>
+        <mxCell id="note" value="Solid arrows: normal progress&#10;Dashed arrows: explicit fallback/retry&#10;No hidden phase skips are allowed." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#ffffff;strokeColor=#111111;fontSize=13;align=left;" vertex="1" parent="1"><mxGeometry x="30" y="235" width="260" height="90" as="geometry"/></mxCell>
+        <mxCell id="fallback" value="Late-stage failures return to repair, not to a silent best-effort submission." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#ffffff;strokeColor=#111111;fontSize=13;align=left;" vertex="1" parent="1"><mxGeometry x="320" y="235" width="240" height="70" as="geometry"/></mxCell>
+        <mxCell id="e12" style="endArrow=classic;html=1;strokeColor=#111111;strokeWidth=3;" edge="1" parent="1" source="n1" target="n2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e23" style="endArrow=classic;html=1;strokeColor=#111111;strokeWidth=3;" edge="1" parent="1" source="n2" target="n3"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e34" style="endArrow=classic;html=1;strokeColor=#111111;strokeWidth=3;" edge="1" parent="1" source="n3" target="n4"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e45" style="endArrow=classic;html=1;strokeColor=#111111;strokeWidth=3;" edge="1" parent="1" source="n4" target="n5"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e56" style="endArrow=classic;html=1;strokeColor=#111111;strokeWidth=3;" edge="1" parent="1" source="n5" target="n6"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e67" style="endArrow=classic;html=1;strokeColor=#111111;strokeWidth=3;" edge="1" parent="1" source="n6" target="n7"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e78" style="endArrow=classic;html=1;strokeColor=#111111;strokeWidth=3;" edge="1" parent="1" source="n7" target="n8"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f1" style="endArrow=classic;html=1;strokeColor=#E11D48;strokeWidth=2;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="n6" target="n5"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f2" style="endArrow=classic;html=1;strokeColor=#E11D48;strokeWidth=2;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="n7" target="n5"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

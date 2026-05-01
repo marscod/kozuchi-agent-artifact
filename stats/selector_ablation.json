@@ -1,0 +1,34 @@
+{
+  "expected_count": 500,
+  "n_runs": 8,
+  "per_run_mean_resolved": 338.625,
+  "per_run_best_resolved": 343,
+  "per_run_worst_resolved": 334,
+  "order_baseline_resolved": 362,
+  "cross_agent_selector_resolved_internal": 376,
+  "cross_agent_selector_resolved_official": 374,
+  "oracle_tts8_resolved": 408,
+  "artifact_estimate_note": "Variants derived from cross-agent selection tables use per-run report outcomes for the chosen candidate run; missing selection tables count as unresolved.",
+  "variants": {
+    "self_tests_only": {
+      "resolved_count": 346,
+      "selected_count": 495,
+      "score_over_expected": 0.692
+    },
+    "cross_agent_bug_tests_only": {
+      "resolved_count": 324,
+      "selected_count": 495,
+      "score_over_expected": 0.648
+    },
+    "cross_agent_regression_tests_only": {
+      "resolved_count": 313,
+      "selected_count": 495,
+      "score_over_expected": 0.626
+    },
+    "cross_agent_all_tests_estimate": {
+      "resolved_count": 331,
+      "selected_count": 495,
+      "score_over_expected": 0.662
+    }
+  }
+}

@@ -1,0 +1,11 @@
+repo,kozuchi_unresolved,frontier_solved,any_peer_solved,frontier_share,any_share
+django/django,54,33,34,0.6111111111111112,0.6296296296296297
+sympy/sympy,18,8,10,0.4444444444444444,0.5555555555555556
+sphinx-doc/sphinx,14,6,7,0.42857142857142855,0.5
+matplotlib/matplotlib,11,5,5,0.45454545454545453,0.45454545454545453
+astropy/astropy,9,4,4,0.4444444444444444,0.4444444444444444
+pylint-dev/pylint,7,4,4,0.5714285714285714,0.5714285714285714
+scikit-learn/scikit-learn,5,3,3,0.6,0.6
+pydata/xarray,4,2,2,0.5,0.5
+pytest-dev/pytest,3,2,2,0.6666666666666666,0.6666666666666666
+mwaskom/seaborn,1,1,1,1.0,1.0

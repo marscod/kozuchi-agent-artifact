@@ -1,0 +1,16 @@
+category,n,instance_id
+open_weight_only_unique,12.0,
+open_weight_only_unique_id,,astropy__astropy-14365
+open_weight_only_unique_id,,django__django-11138
+open_weight_only_unique_id,,django__django-11734
+open_weight_only_unique_id,,django__django-15280
+open_weight_only_unique_id,,django__django-15554
+open_weight_only_unique_id,,django__django-15732
+open_weight_only_unique_id,,django__django-15957
+open_weight_only_unique_id,,matplotlib__matplotlib-25960
+open_weight_only_unique_id,,psf__requests-6028
+open_weight_only_unique_id,,pylint-dev__pylint-7080
+open_weight_only_unique_id,,sympy__sympy-17630
+open_weight_only_unique_id,,sympy__sympy-21612
+globally_novel,1.0,
+globally_novel_id,,pylint-dev__pylint-7080

@@ -1,0 +1,25 @@
+peer,family,weight_class,both,kozuchi_only,peer_only,neither,kozuchi_resolved,peer_resolved,gap,mcnemar_p,significant_05
+Skywork-SWE-32B,Other-32B,open,176,198,14,112,374,190,184,8.952669222122511e-43,True
+SWE-agent + Devstral-Small (2507),Devstral,open,180,194,10,116,374,190,184,2.253504595066806e-45,True
+SWE-agent + SWE-agent-LM-32B,Other-32B,open,192,182,9,117,374,201,173,5.158322401431159e-43,True
+DeepSWE-Preview,DeepSeek-32B,open,199,175,12,114,374,211,163,2.911564893315428e-38,True
+Frogmini-14B,Other-14B,open,214,160,11,115,374,225,149,4.726935179641606e-35,True
+OpenHands + Devstral-Small,Devstral,open,218,156,16,110,374,234,140,5.07551626468059e-30,True
+Skywork-SWE-32B +TTS(Bo8),Other-32B,open,220,154,15,111,374,235,139,3.1240372747389442e-30,True
+OpenHands (Qwen3-Coder-30B-A3B),Qwen-30B,open,245,129,13,113,374,258,116,3.4647755616804076e-25,True
+EntroPO+R2E (Qwen3-Coder-30B-A3B),Qwen-30B,open,249,125,12,114,374,261,113,7.0458837577401e-25,True
+Frogboss-32B,Other-32B,open,254,120,14,112,374,268,106,3.544310912344032e-22,True
+DeepSWE-Preview +TTS(Bo16),DeepSeek-32B,open,276,98,18,108,374,294,80,1.6491055825052547e-14,True
+EntroPO+R2E (Qwen3-Coder-30B-A3B) +TTS,Qwen-30B,open,285,89,17,109,374,302,72,5.912079008704513e-13,True
+Z.AI GLM-4.5,GLM,open,299,75,22,104,374,321,53,6.073393488182724e-08,True
+OpenHands + Kimi-K2,Kimi-K2,open,302,72,25,101,374,327,47,1.9187392502875323e-06,True
+Z.AI GLM-4.6,GLM,open,319,55,22,104,374,341,33,0.00021680385841747665,True
+OpenHands (Qwen3-Coder-480B-A35B),Qwen-480B,open,316,58,32,94,374,348,26,0.008045928133225098,True
+OpenHands + Claude-4-Sonnet,Frontier,closed,318,56,34,92,374,352,22,0.02630166513112228,True
+Lingxi v1.5 + Kimi-K2,Kimi-K2,open,326,48,30,96,374,356,18,0.053544392168502264,False
+OpenHands + GPT-5,Frontier,closed,325,49,34,92,374,359,15,0.12385305946180145,False
+Sonar + Claude-Sonnet-4.5,Frontier,closed,338,36,36,90,374,374,0,1.0,False
+live-SWE + Gemini-3-Pro,Frontier,closed,349,25,38,88,374,387,-13,0.1299179230225525,False
+OpenHands + Claude-Opus-4.5,Frontier,closed,348,26,40,86,374,388,-14,0.1088569644097161,False
+Sonar + Claude-Opus-4.5,Frontier,closed,354,20,42,84,374,396,-22,0.007148733833163066,True
+live-SWE + Claude-Opus-4.5,Frontier,closed,352,22,44,82,374,396,-22,0.00921048969455458,True

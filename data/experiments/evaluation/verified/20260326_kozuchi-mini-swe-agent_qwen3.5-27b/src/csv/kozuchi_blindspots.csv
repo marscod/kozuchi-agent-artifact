@@ -1,0 +1,42 @@
+instance_id,repo,qwen_consensus,frontier_consensus,qwen_solvers,api_calls,patch_churn,runtime_sec,FAIL_TO_PASS_failure,PASS_TO_PASS_failure,patch_successfully_applied,has_traj
+django__django-11951,django/django,4,7,"OpenHands (Qwen-480B),EntroPO+R2E (Qwen-30B) +TTS,EntroPO+R2E (Qwen-30B),OpenHands (Qwen-30B)",453,2,2259.50283741951,0,0,True,True
+django__django-13089,django/django,4,7,"OpenHands (Qwen-480B),EntroPO+R2E (Qwen-30B) +TTS,EntroPO+R2E (Qwen-30B),OpenHands (Qwen-30B)",1522,2,8047.732096433639,0,0,True,True
+django__django-15561,django/django,4,7,"OpenHands (Qwen-480B),EntroPO+R2E (Qwen-30B) +TTS,EntroPO+R2E (Qwen-30B),OpenHands (Qwen-30B)",1598,51,10688.384111881256,0,0,True,True
+pylint-dev__pylint-7277,pylint-dev/pylint,4,7,"OpenHands (Qwen-480B),EntroPO+R2E (Qwen-30B) +TTS,EntroPO+R2E (Qwen-30B),OpenHands (Qwen-30B)",402,3,2060.1742832660675,0,0,True,True
+pytest-dev__pytest-7205,pytest-dev/pytest,4,4,"OpenHands (Qwen-480B),EntroPO+R2E (Qwen-30B) +TTS,EntroPO+R2E (Qwen-30B),OpenHands (Qwen-30B)",520,2,2496.461606025696,9,0,True,True
+django__django-13406,django/django,3,7,"OpenHands (Qwen-480B),EntroPO+R2E (Qwen-30B) +TTS,EntroPO+R2E (Qwen-30B)",552,5,3481.508378267288,2,0,True,True
+django__django-13551,django/django,3,7,"OpenHands (Qwen-480B),EntroPO+R2E (Qwen-30B) +TTS,EntroPO+R2E (Qwen-30B)",384,2,2363.5629007816315,2,0,True,True
+sphinx-doc__sphinx-8595,sphinx-doc/sphinx,3,1,"OpenHands (Qwen-480B),EntroPO+R2E (Qwen-30B) +TTS,OpenHands (Qwen-30B)",518,54,2456.91512298584,0,0,True,True
+django__django-10097,django/django,2,4,"OpenHands (Qwen-480B),OpenHands (Qwen-30B)",0,0,0.0,0,0,,False
+django__django-12308,django/django,2,2,"EntroPO+R2E (Qwen-30B) +TTS,OpenHands (Qwen-30B)",573,15,3144.314875125885,2,0,True,True
+django__django-13033,django/django,2,7,"OpenHands (Qwen-480B),OpenHands (Qwen-30B)",533,2,3516.3534893989563,1,1,True,True
+django__django-15022,django/django,2,5,"OpenHands (Qwen-480B),EntroPO+R2E (Qwen-30B) +TTS",1394,58,11841.611072063446,1,0,True,True
+django__django-16560,django/django,2,5,"OpenHands (Qwen-480B),OpenHands (Qwen-30B)",524,36,3062.315236568451,0,1,True,True
+django__django-16877,django/django,2,5,"EntroPO+R2E (Qwen-30B) +TTS,EntroPO+R2E (Qwen-30B)",400,7,2201.558653116226,2,0,True,True
+django__django-7530,django/django,2,7,"OpenHands (Qwen-480B),OpenHands (Qwen-30B)",0,0,0.0,0,0,,False
+matplotlib__matplotlib-22871,matplotlib/matplotlib,2,7,"OpenHands (Qwen-480B),EntroPO+R2E (Qwen-30B) +TTS",488,2,3124.5739645957947,1,37,True,True
+pylint-dev__pylint-6528,pylint-dev/pylint,2,7,"OpenHands (Qwen-480B),EntroPO+R2E (Qwen-30B) +TTS",771,50,4268.10413146019,0,0,True,True
+sphinx-doc__sphinx-7910,sphinx-doc/sphinx,2,7,"OpenHands (Qwen-480B),EntroPO+R2E (Qwen-30B)",512,42,3135.8304958343506,1,0,True,True
+sympy__sympy-13798,sympy/sympy,2,1,"EntroPO+R2E (Qwen-30B) +TTS,OpenHands (Qwen-30B)",386,8,1795.2739086151123,1,0,True,True
+sympy__sympy-18763,sympy/sympy,2,0,"EntroPO+R2E (Qwen-30B) +TTS,EntroPO+R2E (Qwen-30B)",519,2,4372.025801897049,1,0,True,True
+django__django-11239,django/django,1,7,OpenHands (Qwen-480B),330,17,2014.2387177944183,1,0,True,True
+django__django-11532,django/django,1,6,OpenHands (Qwen-480B),448,2,2426.5291423797607,0,18,True,True
+django__django-11848,django/django,1,6,OpenHands (Qwen-480B),348,5,2748.328471183777,2,0,True,True
+django__django-14376,django/django,1,6,OpenHands (Qwen-480B),490,4,2463.809053659439,3,0,True,True
+django__django-14534,django/django,1,5,OpenHands (Qwen-30B),552,2,3271.4752867221832,0,0,True,True
+django__django-14792,django/django,1,0,OpenHands (Qwen-480B),533,10,3499.2226078510284,2,0,True,True
+django__django-15037,django/django,1,6,OpenHands (Qwen-480B),601,9,3255.773579120636,1,0,True,True
+django__django-15127,django/django,1,4,OpenHands (Qwen-480B),428,2,2120.0528802871704,1,0,True,True
+django__django-16454,django/django,1,6,EntroPO+R2E (Qwen-30B),639,36,3207.3049762248997,0,1,True,True
+matplotlib__matplotlib-22865,matplotlib/matplotlib,1,7,OpenHands (Qwen-480B),468,30,3259.7998929023743,2,0,True,True
+pydata__xarray-4687,pydata/xarray,1,3,OpenHands (Qwen-480B),715,30,4016.125755548477,1,11,True,True
+pydata__xarray-6599,pydata/xarray,1,1,EntroPO+R2E (Qwen-30B) +TTS,663,13,5454.800942897797,0,0,True,True
+scikit-learn__scikit-learn-13124,scikit-learn/scikit-learn,1,7,OpenHands (Qwen-480B),444,4,2395.6939945220947,0,1,True,True
+scikit-learn__scikit-learn-14983,scikit-learn/scikit-learn,1,7,EntroPO+R2E (Qwen-30B),446,10,2723.1873807907104,2,0,True,True
+sphinx-doc__sphinx-10435,sphinx-doc/sphinx,1,1,OpenHands (Qwen-480B),502,4,2999.848840236664,1,0,True,True
+sphinx-doc__sphinx-8548,sphinx-doc/sphinx,1,2,OpenHands (Qwen-480B),689,31,3589.151826381684,1,0,True,True
+sphinx-doc__sphinx-9602,sphinx-doc/sphinx,1,0,OpenHands (Qwen-480B),572,152,2989.755599975586,1,0,True,True
+sympy__sympy-14976,sympy/sympy,1,5,EntroPO+R2E (Qwen-30B) +TTS,422,10,2319.897046327591,1,0,True,True
+sympy__sympy-15875,sympy/sympy,1,2,OpenHands (Qwen-480B),683,36,4012.678374528885,1,0,True,True
+sympy__sympy-17318,sympy/sympy,1,0,OpenHands (Qwen-480B),458,2,3372.627052307129,1,0,True,True
+sympy__sympy-18698,sympy/sympy,1,4,OpenHands (Qwen-480B),704,29,4253.733621835709,1,0,True,True

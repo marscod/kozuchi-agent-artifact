@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-04-27T21:20:00Z" agent="swe-sota-agent" version="22.0.0">
+  <diagram id="orchestra" name="Orchestra Runtime">
+    <mxGraphModel dx="900" dy="520" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="820" pageHeight="360" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/><mxCell id="1" parent="0"/>
+        <mxCell id="title" value="Key idea: split reasoning from interface enforcement" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#006BFF;strokeColor=none;fontColor=#ffffff;fontStyle=1;fontSize=18;align=center;" vertex="1" parent="1"><mxGeometry x="25" y="15" width="770" height="36" as="geometry"/></mxCell>
+        <mxCell id="input" value="Current phase&#10;+ repository observations&#10;+ shared artifacts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7E6;strokeColor=#1F2937;strokeWidth=3;fontSize=15;align=center;" vertex="1" parent="1"><mxGeometry x="40" y="120" width="150" height="85" as="geometry"/></mxCell>
+        <mxCell id="planner" value="Planner role&#10;proposes next repair step" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F0FF;strokeColor=#1F2937;strokeWidth=4;fontSize=17;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="245" y="115" width="175" height="95" as="geometry"/></mxCell>
+        <mxCell id="normalizer" value="Action-normalizer role&#10;keeps one valid executable action" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F2ECFF;strokeColor=#1F2937;strokeWidth=4;fontSize=17;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="475" y="115" width="190" height="95" as="geometry"/></mxCell>
+        <mxCell id="exec" value="Execute + observe" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9FBEF;strokeColor=#1F2937;strokeWidth=3;fontSize=16;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="700" y="128" width="95" height="70" as="geometry"/></mxCell>
+        <mxCell id="note1" value="Both roles use the same 27B backbone; the second role is a harness-level substitute for fine-tuning action syntax." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#ffffff;strokeColor=#111111;fontSize=13;align=left;" vertex="1" parent="1"><mxGeometry x="145" y="245" width="260" height="70" as="geometry"/></mxCell>
+        <mxCell id="note2" value="Innovation: fewer format failures without changing model weights." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#ffffff;strokeColor=#111111;fontSize=13;align=left;" vertex="1" parent="1"><mxGeometry x="475" y="250" width="230" height="60" as="geometry"/></mxCell>
+        <mxCell id="e1" style="endArrow=classic;html=1;strokeColor=#111111;strokeWidth=3;" edge="1" parent="1" source="input" target="planner"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e2" style="endArrow=classic;html=1;strokeColor=#111111;strokeWidth=3;" edge="1" parent="1" source="planner" target="normalizer"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e3" style="endArrow=classic;html=1;strokeColor=#111111;strokeWidth=3;" edge="1" parent="1" source="normalizer" target="exec"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

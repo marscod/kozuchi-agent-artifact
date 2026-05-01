@@ -1,0 +1,9 @@
+{
+  "draft": "paper/ase2026/drafts/test-prompt.tex",
+  "pdf": "paper/ase2026/build/test-prompt/test-prompt.pdf",
+  "figures": "paper/ase2026/figures/test-prompt",
+  "latex_lines": 2157,
+  "drawio_sources": 6,
+  "rendered_pdfs": 6,
+  "todo_markers": 0
+}

@@ -1,0 +1,19 @@
+% Auto-generated: cross-agent selector vs. order baseline (internal Docker re-grade).
+% Source: trajectories/q35_.../xcheck/results/simple_passrate_f03_p07_shortest_patch_raw_75p2.json
+% Audit rows source: paper/final/stats/selector_audit.json
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}lrlr@{}}
+\toprule
+Quantity & Value & Quantity & Value \\
+\midrule
+Expected (Verified)               & 500 & $w_{B}$                           & 0.3 \\
+Selected (covered)                & 495 & $w_{R}$                           & 0.7 \\
+Resolved (xcheck selector)        & 376 & Tie epsilon                       & 0.001 \\
+Score over expected (xcheck)      & 0.752 & Tie-breaker                       & shortest\_patch\_raw \\
+Resolved (order baseline)         & 362 & Tie-break applied               & 304/495 \\
+Score over expected (order)       & 0.724 & Mean unique patches               & 5.59/8 \\
+Tie instances                     & 304 & Matrix executions                 & 21,635 \\
+Reordered by selector             & 302 &                                  & \\
+\bottomrule
+\end{tabular}%
+}

@@ -1,0 +1,136 @@
+submission_dir,name,org,os_model,os_system,report,n_resolved,n_no_generation,n_no_logs,n_resolved_in_500,resolution_rate
+20231010_rag_claude2,RAG + Claude 2,,False,True,,22,1,0,22,0.044
+20231010_rag_gpt35,RAG + ChatGPT 3.5,SWE-agent,False,True,,2,0,0,2,0.004
+20231010_rag_swellama13b,RAG + SWE-Llama 13B,SWE-agent,False,True,,6,2,0,6,0.012
+20231010_rag_swellama7b,RAG + SWE-Llama 7B,SWE-agent,False,True,,7,2,0,7,0.014
+20240402_rag_claude3opus,RAG + Claude 3 Opus,,False,True,,35,0,0,35,0.07
+20240402_rag_gpt4,RAG + GPT 4 (1106),,False,True,,14,0,0,14,0.028
+20240402_sweagent_claude3opus,SWE-agent + Claude 3 Opus,SWE-agent,False,True,,79,41,0,79,0.158
+20240402_sweagent_gpt4,SWE-agent + GPT 4 (1106),SWE-agent,False,True,,112,30,0,112,0.224
+20240509_amazon-q-developer-agent-20240430-dev,Amazon Q Developer Agent (v20240430-dev),AWS,False,False,,128,3,0,128,0.256
+20240612_MASAI_gpt4o,MASAI + GPT 4o (2024-06-12),,False,False,,163,22,4,163,0.326
+20240615_appmap-navie_gpt4o,AppMap Navie + GPT 4o (2024-05-13),,False,True,,131,5,0,131,0.262
+20240617_factory_code_droid,Factory Code Droid,,False,False,,185,0,0,185,0.37
+20240620_sweagent_claude3.5sonnet,SWE-agent + Claude 3.5 Sonnet,SWE-agent,False,True,,168,11,3,168,0.336
+20240628_autocoderover-v20240620,AutoCodeRover (v20240620) + GPT 4o (2024-05-13),,False,False,,192,0,0,192,0.384
+20240721_amazon-q-developer-agent-20240719-dev,Amazon Q Developer Agent (v20240719-dev),AWS,False,False,,194,1,0,194,0.388
+20240728_sweagent_gpt4o,SWE-agent + GPT 4o (2024-05-13),SWE-agent,False,True,,116,50,3,116,0.232
+20240820_epam-ai-run-gpt-4o,EPAM AI/Run Developer Agent + GPT4o,,False,False,,120,18,2,120,0.24
+20240820_honeycomb,Honeycomb,,False,False,,203,14,47,203,0.406
+20240824_gru,Gru(2024-08-24),,False,False,,226,0,2,226,0.452
+20240918_lingma-agent_lingma-swe-gpt-72b,Lingma Agent + Lingma SWE-GPT 72b (v0918),Alibaba,False,True,https://arxiv.org/abs/2406.01422,125,15,2,125,0.25
+20240918_lingma-agent_lingma-swe-gpt-7b,Lingma Agent + Lingma SWE-GPT 7b (v0918),Alibaba,False,True,https://arxiv.org/abs/2406.01422,51,39,2,51,0.102
+20240920_solver,Solver (2024-09-12),,False,False,,218,4,0,218,0.436
+20240924_solver,Solver (2024-09-12),,False,False,,227,2,0,227,0.454
+20241001_nfactorial,nFactorial (2024-10-01),,False,False,,129,20,0,129,0.258
+20241002_lingma-agent_lingma-swe-gpt-72b,Lingma Agent + Lingma SWE-GPT 72b (v0925),Alibaba,False,True,,144,8,1,144,0.288
+20241002_lingma-agent_lingma-swe-gpt-7b,Lingma Agent + Lingma SWE-GPT 7b (v0925),Alibaba,False,True,,91,86,2,91,0.182
+20241007_nfactorial,nFactorial (2024-10-07),,False,False,,158,22,0,158,0.316
+20241016_composio_swekit,Composio SWEkit + Claude 3.5 Sonnet (2024-10-16),,False,True,,203,0,0,203,0.406
+20241016_epam-ai-run-gpt-4o,EPAM AI/Run Developer Agent + GPT4o,,False,False,,135,12,0,135,0.27
+20241022_tools_claude-3-5-haiku,Tools + Claude 3.5 Haiku,Anthropic,False,False,,203,16,3,203,0.406
+20241022_tools_claude-3-5-sonnet-updated,Tools + Claude 3.5 Sonnet (2024-10-22),Anthropic,False,False,,245,14,3,245,0.49
+20241023_emergent,Emergent E1 (v2024-10-12),,False,False,,233,2,0,233,0.466
+20241025_composio_swekit,Composio SWE-Kit (2024-10-25),,False,True,,243,1,0,243,0.486
+20241028_agentless-1.5_gpt4o,Agentless-1.5 + GPT 4o (2024-05-13),Agentless,False,True,https://github.com/OpenAutoCoder/Agentless/releases/tag/v1.5.0,194,4,0,194,0.388
+20241028_solver,Solver (2024-10-28),,False,False,,250,1,0,250,0.5
+20241029_OpenHands-CodeAct-2.1-sonnet-20241022,OpenHands + CodeAct v2.1 (claude-3-5-sonnet-20241022),OpenHands,False,True,https://www.all-hands.dev/blog/openhands-codeact-21-an-open-state-of-the-art-software-development-agent,265,6,1,265,0.53
+20241029_epam-ai-run-claude-3-5-sonnet,EPAM AI/Run Developer Agent v20241029 + Anthopic Claude 3.5 Sonnet,,False,False,,198,25,0,198,0.396
+20241030_nfactorial,nFactorial (2024-10-30),,False,False,,208,3,0,208,0.416
+20241105_nfactorial,nFactorial (2024-11-05),,False,False,,246,10,1,246,0.492
+20241106_navie-2-gpt4o-sonnet,AppMap Navie v2,,False,True,https://docs.google.com/document/d/e/2PACX-1vQGWwmMTOFicHV9jKvy1kmztMPXLnwYA6vNiUg3JgO_cYJQdcsoYqIHZRW6YrBsA_atBRrpoDqPMWyk/pub,236,7,0,236,0.472
+20241108_autocoderover-v2.0-claude-3-5-sonnet-20241022,AutoCodeRover-v2.0 (Claude-3.5-Sonnet-20241022),,False,True,https://github.com/AutoCodeRoverSG/auto-code-rover,231,4,0,231,0.462
+20241108_devlo,devlo,,False,False,https://devlo.ai/blog/devlo-swe-bench-sota,271,0,0,271,0.542
+20241113_nebius-search-open-weight-models-11-24,Nebius AI Qwen 2.5 72B Generator + LLama 3.1 70B Critic,,False,False,https://nebius.com/blog/posts/training-and-search-for-software-engineering-agents,203,1,0,203,0.406
+20241120_artemis_agent,Artemis Agent v1 (2024-11-20),,False,False,,160,4,7,160,0.32
+20241125_enginelabs,Engine Labs (2024-11-25),['Engine Labs'],False,False,https://github.com/SWE-bench/experiments/pull/129#issue-2692244173,259,8,0,259,0.518
+20241125_marscode-agent-dev,Bytedance MarsCode Agent,Bytedance,False,False,,250,2,0,250,0.5
+20241128_SWE-Fixer_Qwen2.5-7b-retriever_Qwen2.5-72b-editor_20241128,SWE-Fixer (Qwen2.5-7b retriever + Qwen2.5-72b editor) 20241128,,False,True,,151,2,0,151,0.302
+20241202_agentless-1.5_claude-3.5-sonnet-20241022,Agentless-1.5 + Claude-3.5 Sonnet (20241022),Agentless,False,True,,254,3,0,254,0.508
+20241202_amazon-q-developer-agent-20241202-dev,Amazon Q Developer Agent (v20241202-dev),AWS,False,False,,275,1,0,275,0.55
+20241208_gru,Gru(2024-12-08),,False,False,,285,0,0,285,0.57
+20241212_epam-ai-run-claude-3-5-sonnet,EPAM AI/Run Developer Agent v20241212 + Anthopic Claude 3.5 Sonnet,,False,False,,277,9,0,277,0.554
+20241212_google_jules_gemini_2.0_flash_experimental,Google Jules + Gemini 2.0 Flash (v20241212-experimental),Google,False,False,https://developers.googleblog.com/en/the-next-chapter-of-the-gemini-era-for-developers/,261,0,0,261,0.522
+20241213_devlo,devlo,,False,False,https://devlo.ai/blog/devlo-swe-bench-sota,291,0,0,291,0.582
+20241221_codestory_midwit_claude-3-5-sonnet_swe-search,CodeStory Midwit Agent + swe-search,,False,False,,311,45,0,311,0.622
+20241223_emergent,Emergent E1 (v2024-12-23),,False,False,,286,0,0,286,0.572
+20250110_blackboxai_agent_v1.1,Blackbox AI Agent,,False,False,,314,20,0,314,0.628
+20250110_learn_by_interact_claude3.5,Learn-by-interact,Google,False,False,https://arxiv.org/pdf/2501.10893,301,0,90,301,0.602
+20250112_ugaiforge,ugaiforge,,False,False,,208,7,0,208,0.416
+20250117_wandb_programmer_o1_crosscheck5,W&B Programmer O1 crosscheck5,,False,False,https://wandb.ai/wandb/agents/reports/Creating-a-state-of-the-art-AI-programming-agent-with-OpenAI-s-o1--VmlldzoxMTAyODI2Ng,323,1,0,323,0.646
+20250118_codeshellagent_gemini_2.0_flash_experimental,CodeShellAgent + Gemini 2.0 Flash (Experimental),,False,False,,221,13,1,221,0.442
+20250120_Bracket,Bracket.sh,,False,False,,266,17,0,266,0.532
+20250122_autocoderover-v2.1-claude-3-5-sonnet-20241022,AutoCodeRover-v2.1 (Claude-3.5-Sonnet-20241022),,False,False,,258,5,0,258,0.516
+20250203_openhands_4x_scaled,OpenHands + 4x Scaled (2024-02-03),OpenHands,False,True,,304,0,2,304,0.608
+20250206_agentscope,AgentScope,Alibaba,False,False,https://arxiv.org/abs/2402.14034,317,2,0,317,0.634
+20250214_agentless_lite_o3_mini,Agentless Lite + O3 Mini (20250214),Agentless,False,True,https://github.com/sorendunn/Agentless-Lite,212,10,0,212,0.424
+20250224_tools_claude-3-7-sonnet,Tools + Claude 3.7 Sonnet (2025-02-24),Anthropic,False,False,https://www.anthropic.com/news/claude-3-7-sonnet,316,0,0,316,0.632
+20250225_sweagent_claude-3-7-sonnet,SWE-agent + Claude 3.7 Sonnet w/ Review Heavy,SWE-agent,False,True,https://x.com/KLieret/status/1890048205448220849,312,2,0,312,0.624
+20250226_swerl_llama3_70b,SWE-RL (Llama3-SWE-RL-70B + Agentless Mini) (20250226),Agentless,False,True,https://arxiv.org/abs/2502.18449,206,0,1,206,0.412
+20250228_epam-ai-run-claude-3-5-sonnet,EPAM AI/Run Developer Agent v20250219 + Anthopic Claude 3.5 Sonnet,,False,False,,314,4,4,314,0.628
+20250306_SWE-Fixer_Qwen2.5-7b-retriever_Qwen2.5-72b-editor,SWE-Fixer (Qwen2.5-7b retriever + Qwen2.5-72b editor),,True,True,https://arxiv.org/abs/2501.05040,164,19,0,164,0.328
+20250316_augment_agent_v0,Augment Agent v0,,False,True,https://www.augmentcode.com/blog/1-open-source-agent-on-swe-bench-verified-by-combining-claude-3-7-and-o1,327,0,0,327,0.654
+20250405_amazon-q-developer-agent-20250405-dev,Amazon Q Developer Agent (v20250405-dev),AWS,False,False,,327,0,0,327,0.654
+20250405_swe-rizzo_claude37,SWE-Rizzo,,False,True,https://github.com/brokespace/gen42-codemonkeys,283,0,0,283,0.566
+20250410_cortexa,Nemotron-CORTEXA,NVIDIA,False,False,https://research.nvidia.com/labs/adlr/cortexa/,291,0,0,291,0.582
+20250415_openhands,OpenHands,OpenHands,False,True,https://www.all-hands.dev/blog/sota-on-swe-bench-verified-with-inference-time-scaling-and-critic-model,329,0,1,329,0.658
+20250430_zencoder_ai,Zencoder (2025-04-30),,False,False,https://zencoder.ai/blog/zencoder-emerges-leader-swe-bench-70-percent-success-rate,350,1,0,350,0.7
+20250503_patchpilot-v1.1-o4-mini,PatchPilot-v1.1,,False,True,https://arxiv.org/abs/2502.02747,323,13,0,323,0.646
+20250511_sweagent_lm_32b,SWE-agent + SWE-agent-LM-32B,SWE-agent,True,True,https://arxiv.org/abs/2504.21798,201,4,0,201,0.402
+20250514_aime_coder,Aime-coder v1 + Anthopic Claude 3.7 Sonnet,ByteDance DevInfra,False,False,,332,0,0,332,0.664
+20250515_Refact_Agent,Refact.ai Agent,['Refact.ai'],False,True,https://refact.ai/blog/2025/open-source-sota-on-swe-bench-verified-refact-ai/,352,1,0,352,0.704
+20250516_cortexa_o3,Nemotron-CORTEXA,NVIDIA,False,True,https://research.nvidia.com/labs/adlr/cortexa/,341,121,0,341,0.682
+20250519_devlo,devlo,['devlo'],False,False,https://devlo.ai/blog/devlo-swe-bench-sota#multi-llm,351,0,0,351,0.702
+20250519_trae,TRAE,,False,False,https://se-research.bytedance.com/blogs/trae-on-swe-bench-verified-682,353,0,0,353,0.706
+20250520_openhands_devstral_small,OpenHands + DevStral Small 2505,"['OpenHands', 'Mistral']",True,True,https://mistral.ai/news/devstral,234,5,3,234,0.468
+20250522_sweagent_claude-4-sonnet-20250514,SWE-agent + Claude 4 Sonnet,SWE-agent,False,True,,333,0,0,333,0.666
+20250522_tools_claude-4-opus,Tools + Claude 4 Opus (2025-05-22),,False,False,https://www.anthropic.com/news/claude-4,366,0,0,366,0.732
+20250522_tools_claude-4-sonnet,Tools + Claude 4 Sonnet (2025-05-22),,False,False,https://www.anthropic.com/news/claude-4,362,0,0,362,0.724
+20250524_openhands_claude_4_sonnet,OpenHands + Claude 4 Sonnet,OpenHands,False,True,,352,0,1,352,0.704
+20250527_amazon.nova-premier-v1.0,Amazon Nova Premier 1.0 (2025-04-30),Amazon Nova,False,False,,212,15,0,212,0.424
+20250528_patchpilot_Co-PatcheR,PatchPilot + Co-PatcheR,,True,True,https://arxiv.org/abs/2505.18955,230,0,0,230,0.46
+20250603_Refact_Agent_claude-4-sonnet,Refact.ai Agent + Claude 4 Sonnet + o4-mini,['Refact.ai'],False,True,https://refact.ai/blog/2025/1-agent-on-swe-bench-verified-using-claude-4-sonnet,372,1,0,372,0.744
+20250610_augment_agent_v1,Augment Agent v1,,False,True,https://www.augmentcode.com/blog/1-open-source-agent-on-swe-bench-verified-by-combining-claude-3-7-and-o1,352,0,0,352,0.704
+20250611_moatless_claude-4-sonnet-20250514,Moatless Tools + Claude 4 Sonnet,Moatless AI,False,True,https://github.com/aorwall/moatless-tools,354,3,0,354,0.708
+20250612_trae,TRAE + Claude Sonnet 4 + Opus 4 + Sonnet 3.7 + Gemini 2.5 Pro,TRAE,False,True,https://se-research.bytedance.com/blogs/trae-on-swe-bench-verified-71/,376,1,0,376,0.752
+20250616_Skywork-SWE-32B,Skywork-SWE-32B,Skywork AI,True,True,https://huggingface.co/Skywork/Skywork-SWE-32B/resolve/main/assets/Report.pdf,190,9,1,190,0.38
+20250616_Skywork-SWE-32B+TTS_Bo8,Skywork-SWE-32B + TTS(Bo8),Skywork AI,True,True,https://huggingface.co/Skywork/Skywork-SWE-32B/resolve/main/assets/Report.pdf,235,0,1,235,0.47
+20250623_warp,Warp,Warp,False,False,https://www.warp.dev/blog/swe-bench-verified,355,3,3,355,0.71
+20250627_agentless_MCTS-Refine-7B,MCTS-Refine-7B,,True,True,https://arxiv.org/abs/2506.12728,116,39,0,116,0.232
+20250629_deepswerl_r2eagent,DeepSWE-Preview,['Agentica'],True,True,https://www.notion.so/DeepSWE-Training-a-State-of-the-Art-Coding-Agent-from-Scratch-by-Scaling-RL-22281902c1468193aabbe9a8c59bbe33,211,45,0,211,0.422
+20250629_deepswerl_r2eagent_tts,DeepSWE-Preview + TTS(Bo16),['Agentica'],True,True,https://www.notion.so/DeepSWE-Training-a-State-of-the-Art-Coding-Agent-from-Scratch-by-Scaling-RL-22281902c1468193aabbe9a8c59bbe33,294,3,0,294,0.588
+20250710_bloop,Bloop,['Bloop AI'],False,False,https://bloop.ai/blog/swe-bench,356,0,0,356,0.712
+20250715_qodo_command,Qodo Command,Qodo,False,False,https://www.qodo.ai/blog/qodo-command-swe-bench-verified,356,0,0,356,0.712
+20250716_openhands_kimi_k2,OpenHands + Kimi K2,OpenHands,True,True,,327,0,1,327,0.654
+20250720_Lingxi-v1.5_claude-4-sonnet-20250514,Lingxi-v1.5_claude-4-sonnet-20250514,Lingxi,False,True,https://github.com/nimasteryang/Lingxi/blob/master/docs/Lingxi%20v1.5%20Technical%20Report%20200725.pdf,373,1,0,373,0.746
+20250725_sweagent_devstral_small_2507,SWE-agent + DevStral Small 2507,['SWE-agent'],True,True,TBD,190,3,3,190,0.38
+20250728_zai_glm4-5,20250728_zai_glm4-5,,,,,321,0,1,321,0.642
+20250731_harness_ai,Harness AI,Harness,False,False,https://www.harness.io/blog/harness-excels-in-swe-bench-verified,374,0,0,374,0.748
+20250804_codesweep_sweagent_kimi_k2_instruct,CodeSweep - SWE-agent - Kimi K2 Instruct,['CodeSweep Inc.'],True,True,https://blog.codesweep.ai/,267,18,1,267,0.534
+20250804_epam-ai-run-claude-4-sonnet,EPAM AI/Run Developer Agent v20250719 + Claude 4 Sonnet,"EPAM Systems, Inc.",False,False,,384,2,0,384,0.768
+20250805_openhands-Qwen3-Coder-30B-A3B-Instruct,20250805_openhands-Qwen3-Coder-30B-A3B-Instruct,,,,,258,0,1,258,0.516
+20250805_openhands-Qwen3-Coder-480B-A35B-Instruct,20250805_openhands-Qwen3-Coder-480B-A35B-Instruct,,,,,348,0,1,348,0.696
+20250806_SWE-Exp_DeepSeek-V3,20250806_SWE-Exp_DeepSeek-V3,,,,,210,32,0,210,0.42
+20250807_openhands_gpt5,OpenHands + GPT-5,OpenHands,False,True,,359,1,0,359,0.718
+20250819_ACoder,ACoder,ACoder,False,False,https://github.com/ACoder-AI/ACoder/blob/main/ACoder_Report.md,382,0,0,382,0.764
+20250901_entroPO_R2E_QwenCoder30BA3B,EntroPO + R2E + Qwen3-Coder-30B-A3B-Instruct,['42-b3yond-6ug'],True,True,https://www.notion.so/Introducing-EntroPO-Supercharging-LLM-Coding-Agents-by-Preserving-Solution-Diversity-260b285fc61c80089119f3e86a6b63a4,261,12,0,261,0.522
+20250901_entroPO_R2E_QwenCoder30BA3B_tts,EntroPO + R2E + Qwen3-Coder-30B-A3B-Instruct,['42-b3yond-6ug'],True,True,https://www.notion.so/Introducing-EntroPO-Supercharging-LLM-Coding-Agents-by-Preserving-Solution-Diversity-260b285fc61c80089119f3e86a6b63a4,302,5,0,302,0.604
+20250901_warp,Warp,Warp,False,False,https://www.warp.dev/blog/swe-bench-verified-update,378,3,1,378,0.756
+20250902_atlassian-rovo-dev,Atlassian Rovo Dev (2025-09-02),Atlassian,False,False,,384,0,0,384,0.768
+20250915_JoyCode,JoyCode + Claude 4 Sonnet + GPT-4.1,JoyCode,False,True,https://developer.jdcloud.com/article/4365,373,0,0,373,0.746
+20250924_artemis_agent_v2,Artemis Agent v2 (2025-09-24),['Turintech'],False,False,,285,5,7,285,0.57
+20250928_trae_doubao_seed_code,TRAE + Doubao-Seed-Code,ByteDance,False,True,https://arxiv.org/abs/2507.23370,394,2,0,394,0.788
+20250929_Prometheus_v1.2_gpt5,20250929_Prometheus_v1.2_gpt5,,,,,356,1,0,356,0.712
+20250930_zai_glm4-6,20250930_zai_glm4-6,,,,,341,1,2,341,0.682
+20251014_Lingxi_kimi_k2,Lingxi v1.5 x Kimi K2,['Huawei'],True,True,https://github.com/lingxi-agent/Lingxi/blob/master/docs/Lingxi%20v1.5%20Technical%20Report%20200725.pdf,356,1,0,356,0.712
+20251015_Prometheus_v1.2.1_gpt5,20251015_Prometheus_v1.2.1_gpt5,,,,,372,1,0,372,0.744
+20251021_SalesforceAIResearch_SAGE_bash_only,Salesforce AI Research SAGE (bash-only),Salesforce AI Research,False,False,https://www.salesforce.com/blog/sage-swe/,365,0,1,365,0.73
+20251103_SalesforceAIResearch_SAGE_OpenHands,Salesforce AI Research SAGE (OpenHands),Salesforce AI Research,False,False,https://www.salesforce.com/blog/sage-swe/,369,2,1,369,0.738
+20251103_sonar-foundation-agent_claude-sonnet-4-5,Sonar Foundation Agent + Claude 4.5 Sonnet,['Sonar'],False,False,https://www.sonarsource.com/blog/introducing-sonar-foundation-agent/,374,3,0,374,0.748
+20251110_frogboss-32b,FrogBoss-32B-2510,['Microsoft'],False,True,https://arxiv.org/abs/2510.19898,268,8,2,268,0.536
+20251110_frogmini-14b,FrogMini-14B-2510,['Microsoft'],False,True,https://arxiv.org/abs/2510.19898,225,5,1,225,0.45
+20251120_livesweagent_gemini-3-pro-preview,live-SWE-agent + Gemini 3 Pro Preview (2025-11-18),['UIUC'],False,True,https://arxiv.org/abs/2511.13646,387,2,1,387,0.774
+20251127_openhands_claude-opus-4-5,20251127_openhands_claude-opus-4-5,,,,,388,2,0,388,0.776
+20251205_sonar-foundation-agent_claude-opus-4-5,Sonar Foundation Agent + Claude 4.5 Opus,['Sonar'],False,False,https://github.com/AutoCodeRoverSG/sonar-foundation-agent/blob/main/technical_report.pdf,396,0,0,396,0.792
+20251215_livesweagent_claude-opus-4-5,live-SWE-agent + Claude 4.5 Opus medium (20251101),['UIUC'],False,True,https://arxiv.org/abs/2511.13646,396,4,1,396,0.792
+20260326_kozuchi-mini-swe-agent_qwen3.5-27b,Kozuchi mini-swe-agent + Qwen3.5-27B,Fujitsu Research,True,False,https://blog-en.fltech.dev/entry/2026/04/07/swebench,374,0,0,374,0.748

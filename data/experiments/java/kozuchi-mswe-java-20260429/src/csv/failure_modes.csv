@@ -1,0 +1,8 @@
+failure_mode,n,share_of_unresolved,share_of_all
+no_fixed_tests,33,0.3793103448275862,0.2578125
+no_fix_test_results,22,0.25287356321839083,0.171875
+regressed_passing_tests,15,0.1724137931034483,0.1171875
+report_valid_not_leaderboard_resolved,8,0.09195402298850575,0.0625
+anomalous_test_pattern,5,0.05747126436781609,0.0390625
+patch_apply_failed,3,0.034482758620689655,0.0234375
+empty_patch,1,0.011494252873563218,0.0078125

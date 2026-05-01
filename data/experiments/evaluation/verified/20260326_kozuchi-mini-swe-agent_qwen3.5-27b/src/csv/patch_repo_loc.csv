@@ -1,0 +1,13 @@
+repo,n,resolved_n,churn_p50,churn_mean,files_p50,hunks_p50,resolved_churn_p50,unresolved_churn_p50
+django/django,231,177,5.0,13.385281385281385,1.0,1.0,4.0,7.0
+sympy/sympy,75,57,6.0,15.253333333333334,1.0,1.0,6.0,9.0
+sphinx-doc/sphinx,44,30,12.5,32.95454545454545,1.0,2.0,6.5,51.0
+matplotlib/matplotlib,34,23,9.0,13.529411764705882,1.0,1.5,9.0,13.0
+scikit-learn/scikit-learn,32,27,5.0,7.65625,1.0,2.0,5.0,8.0
+astropy/astropy,22,13,9.5,20.818181818181817,1.0,1.0,9.0,11.0
+pydata/xarray,22,18,6.0,12.545454545454545,1.0,1.0,6.0,7.5
+pytest-dev/pytest,19,16,2.0,12.894736842105264,1.0,1.0,2.5,2.0
+pylint-dev/pylint,10,3,7.0,22.8,1.0,2.5,6.0,21.5
+psf/requests,8,8,4.5,12.0,1.0,1.5,4.5,
+mwaskom/seaborn,2,1,26.5,26.5,1.0,1.5,50.0,3.0
+pallets/flask,1,1,3.0,3.0,1.0,1.0,3.0,

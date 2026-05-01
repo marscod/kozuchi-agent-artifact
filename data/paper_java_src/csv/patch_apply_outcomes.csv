@@ -1,0 +1,4 @@
+outcome,n,resolved,report_valid
+patch_apply_failed,3,0,0
+patch_apply_not_failed,125,41,49
+missing_run_log,0,0,0

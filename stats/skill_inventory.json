@@ -1,0 +1,139 @@
+{
+  "n_skills": 14,
+  "skills": [
+    {
+      "title": "List targeted file paths",
+      "phases": [
+        "*"
+      ],
+      "tools": []
+    },
+    {
+      "title": "View file content with line numbers",
+      "phases": [
+        "*"
+      ],
+      "tools": []
+    },
+    {
+      "title": "Maintain the Kanban file",
+      "phases": [
+        "*"
+      ],
+      "tools": []
+    },
+    {
+      "title": "FAIL_TO_PASS triage (partial pass)",
+      "phases": [
+        "TEST_SYNTHSIZE",
+        "CODE_LOCALIZE",
+        "TEST_LOCALIZE",
+        "CODE_FIX",
+        "VERIFY_PATCH",
+        "ISSUE_CLOSE"
+      ],
+      "tools": [
+        "line_trace",
+        "caller_trace"
+      ]
+    },
+    {
+      "title": "Edit python files by git apply",
+      "phases": [
+        "CODE_FIX"
+      ],
+      "tools": []
+    },
+    {
+      "title": "Edit a specific line reliably (no git apply)",
+      "phases": [
+        "CODE_FIX"
+      ],
+      "tools": [
+        "line_edit"
+      ]
+    },
+    {
+      "title": "Create a new file",
+      "phases": [
+        "*"
+      ],
+      "tools": []
+    },
+    {
+      "title": "Write non-ASCII content safely",
+      "phases": [
+        "*"
+      ],
+      "tools": []
+    },
+    {
+      "title": "Restore the repository to its previous state",
+      "phases": [
+        "CODE_FIX",
+        "ISSUE_CLOSE"
+      ],
+      "tools": []
+    },
+    {
+      "title": "Check the edit status of the repository",
+      "phases": [
+        "CODE_FIX",
+        "VERIFY_PATCH",
+        "ISSUE_CLOSE"
+      ],
+      "tools": []
+    },
+    {
+      "title": "Draft the bash command",
+      "phases": [
+        "*"
+      ],
+      "tools": []
+    },
+    {
+      "title": "List lines of code actually executed",
+      "phases": [
+        "CODE_LOCALIZE",
+        "TEST_LOCALIZE"
+      ],
+      "tools": [
+        "line_trace"
+      ]
+    },
+    {
+      "title": "Filter lines of code actually executed",
+      "phases": [
+        "CODE_LOCALIZE",
+        "TEST_LOCALIZE"
+      ],
+      "tools": [
+        "line_trace"
+      ]
+    },
+    {
+      "title": "List functions that progressively call the given code (dynamic)",
+      "phases": [
+        "CODE_LOCALIZE",
+        "TEST_LOCALIZE"
+      ],
+      "tools": [
+        "caller_trace"
+      ]
+    }
+  ],
+  "skills_per_phase": {
+    "*": 6,
+    "CODE_FIX": 5,
+    "CODE_LOCALIZE": 4,
+    "ISSUE_CLOSE": 3,
+    "TEST_LOCALIZE": 4,
+    "TEST_SYNTHSIZE": 1,
+    "VERIFY_PATCH": 2
+  },
+  "skills_per_tool": {
+    "caller_trace": 2,
+    "line_edit": 1,
+    "line_trace": 3
+  }
+}

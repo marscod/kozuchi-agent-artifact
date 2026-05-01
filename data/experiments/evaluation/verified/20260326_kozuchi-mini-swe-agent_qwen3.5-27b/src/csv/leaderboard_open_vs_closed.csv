@@ -1,0 +1,4 @@
+bucket,n,resolved_mean,resolved_p25,resolved_p50,resolved_p75,resolved_max,top_3
+open_weight (os_model=True),16,247.0,198.25,234.5,296.0,374.0,"Kozuchi mini-swe-agent + Qwen3.5-27B, Lingxi v1.5 x Kimi K2, OpenHands + Kimi K2"
+closed_weight (os_model=False),111,255.07207207207207,200.5,266.0,350.5,396.0,"live-SWE-agent + Claude 4.5 Opus medium (20251101), Sonar Foundation Agent + Claude 4.5 Opus, TRAE + Doubao-Seed-Code"
+os_model=NA,8,324.25,305.25,344.5,360.0,388.0,"20251127_openhands_claude-opus-4-5, 20251015_Prometheus_v1.2.1_gpt5, 20250929_Prometheus_v1.2_gpt5"

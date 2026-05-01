@@ -1,0 +1,198 @@
+{
+  "runs": [
+    {
+      "run": "r01_s1001",
+      "total_instances": 500,
+      "submitted_instances": 500,
+      "completed_instances": 482,
+      "resolved_instances": 343,
+      "unresolved_instances": 139,
+      "empty_patch_instances": 16,
+      "error_instances": 2
+    },
+    {
+      "run": "r02_s1002",
+      "total_instances": 500,
+      "submitted_instances": 500,
+      "completed_instances": 482,
+      "resolved_instances": 339,
+      "unresolved_instances": 143,
+      "empty_patch_instances": 15,
+      "error_instances": 3
+    },
+    {
+      "run": "r03_s1003",
+      "total_instances": 500,
+      "submitted_instances": 500,
+      "completed_instances": 482,
+      "resolved_instances": 337,
+      "unresolved_instances": 145,
+      "empty_patch_instances": 15,
+      "error_instances": 3
+    },
+    {
+      "run": "r04_s1004",
+      "total_instances": 500,
+      "submitted_instances": 500,
+      "completed_instances": 486,
+      "resolved_instances": 341,
+      "unresolved_instances": 145,
+      "empty_patch_instances": 13,
+      "error_instances": 1
+    },
+    {
+      "run": "r05_s1005",
+      "total_instances": 500,
+      "submitted_instances": 500,
+      "completed_instances": 485,
+      "resolved_instances": 341,
+      "unresolved_instances": 144,
+      "empty_patch_instances": 10,
+      "error_instances": 5
+    },
+    {
+      "run": "r06_s1006",
+      "total_instances": 500,
+      "submitted_instances": 500,
+      "completed_instances": 480,
+      "resolved_instances": 334,
+      "unresolved_instances": 146,
+      "empty_patch_instances": 17,
+      "error_instances": 3
+    },
+    {
+      "run": "r07_s1007",
+      "total_instances": 500,
+      "submitted_instances": 500,
+      "completed_instances": 482,
+      "resolved_instances": 334,
+      "unresolved_instances": 148,
+      "empty_patch_instances": 15,
+      "error_instances": 3
+    },
+    {
+      "run": "r08_s1008",
+      "total_instances": 500,
+      "submitted_instances": 500,
+      "completed_instances": 478,
+      "resolved_instances": 340,
+      "unresolved_instances": 138,
+      "empty_patch_instances": 15,
+      "error_instances": 7
+    }
+  ],
+  "java_source_runs": [
+    {
+      "run_dir": "/home/tmusgrave/swe-sota-agent/out/mswe_java_qwen35_azalea_full128_4x2gpu_20260411-214644",
+      "run_dir_name": "mswe_java_qwen35_azalea_full128_4x2gpu_20260411-214644",
+      "report_path": "/home/tmusgrave/swe-sota-agent/out/mswe_java_qwen35_azalea_full128_4x2gpu_20260411-214644/multi_swe_java_eval_report.json",
+      "selected_count": 25,
+      "resolved_count": 7,
+      "unresolved_count": 18,
+      "error_count": 0,
+      "empty_patch_count": 0,
+      "incomplete_count": 0,
+      "unknown_count": 0,
+      "source_total_instances": 128
+    },
+    {
+      "run_dir": "/home/tmusgrave/swe-sota-agent/out/mswe_java_qwen35_azalea_full128_4x2gpu_20260413-064046",
+      "run_dir_name": "mswe_java_qwen35_azalea_full128_4x2gpu_20260413-064046",
+      "report_path": "/home/tmusgrave/swe-sota-agent/out/mswe_java_qwen35_azalea_full128_4x2gpu_20260413-064046/multi_swe_java_eval_report.json",
+      "selected_count": 16,
+      "resolved_count": 4,
+      "unresolved_count": 12,
+      "error_count": 0,
+      "empty_patch_count": 0,
+      "incomplete_count": 0,
+      "unknown_count": 0,
+      "source_total_instances": 128
+    },
+    {
+      "run_dir": "/home/tmusgrave/swe-sota-agent/out/mswe_java_qwen35_azalea_full128_4x2gpu_20260416-141301",
+      "run_dir_name": "mswe_java_qwen35_azalea_full128_4x2gpu_20260416-141301",
+      "report_path": "/home/tmusgrave/swe-sota-agent/out/mswe_java_qwen35_azalea_full128_4x2gpu_20260416-141301/multi_swe_java_eval_report.json",
+      "selected_count": 18,
+      "resolved_count": 5,
+      "unresolved_count": 13,
+      "error_count": 0,
+      "empty_patch_count": 0,
+      "incomplete_count": 0,
+      "unknown_count": 0,
+      "source_total_instances": 128
+    },
+    {
+      "run_dir": "/home/tmusgrave/swe-sota-agent/out/mswe_java_qwen35_azalea_full128_4x2gpu_20260419-001722",
+      "run_dir_name": "mswe_java_qwen35_azalea_full128_4x2gpu_20260419-001722",
+      "report_path": "/home/tmusgrave/swe-sota-agent/out/mswe_java_qwen35_azalea_full128_4x2gpu_20260419-001722/multi_swe_java_eval_report.json",
+      "selected_count": 15,
+      "resolved_count": 8,
+      "unresolved_count": 7,
+      "error_count": 0,
+      "empty_patch_count": 0,
+      "incomplete_count": 0,
+      "unknown_count": 0,
+      "source_total_instances": 128
+    },
+    {
+      "run_dir": "/home/tmusgrave/swe-sota-agent/out/mswe_java_qwen35_azalea_full128_4x2gpu_20260420-030953",
+      "run_dir_name": "mswe_java_qwen35_azalea_full128_4x2gpu_20260420-030953",
+      "report_path": "/home/tmusgrave/swe-sota-agent/out/mswe_java_qwen35_azalea_full128_4x2gpu_20260420-030953/multi_swe_java_eval_report.json",
+      "selected_count": 13,
+      "resolved_count": 5,
+      "unresolved_count": 8,
+      "error_count": 0,
+      "empty_patch_count": 0,
+      "incomplete_count": 0,
+      "unknown_count": 0,
+      "source_total_instances": 128
+    },
+    {
+      "run_dir": "/home/tmusgrave/swe-sota-agent/out/mswe_java_qwen35_azalea_full128_4x2gpu_20260421-043555",
+      "run_dir_name": "mswe_java_qwen35_azalea_full128_4x2gpu_20260421-043555",
+      "report_path": "/home/tmusgrave/swe-sota-agent/out/mswe_java_qwen35_azalea_full128_4x2gpu_20260421-043555/multi_swe_java_eval_report.json",
+      "selected_count": 11,
+      "resolved_count": 4,
+      "unresolved_count": 7,
+      "error_count": 0,
+      "empty_patch_count": 0,
+      "incomplete_count": 0,
+      "unknown_count": 0,
+      "source_total_instances": 128
+    },
+    {
+      "run_dir": "/home/tmusgrave/swe-sota-agent/out/mswe_java_qwen35_azalea_full128_4x2gpu_20260422-221438",
+      "run_dir_name": "mswe_java_qwen35_azalea_full128_4x2gpu_20260422-221438",
+      "report_path": "/home/tmusgrave/swe-sota-agent/out/mswe_java_qwen35_azalea_full128_4x2gpu_20260422-221438/multi_swe_java_eval_report.json",
+      "selected_count": 13,
+      "resolved_count": 5,
+      "unresolved_count": 8,
+      "error_count": 0,
+      "empty_patch_count": 0,
+      "incomplete_count": 0,
+      "unknown_count": 0,
+      "source_total_instances": 128
+    },
+    {
+      "run_dir": "/home/tmusgrave/swe-sota-agent/out/mswe_java_qwen35_azalea_full128_6x2gpu_20260417-144259",
+      "run_dir_name": "mswe_java_qwen35_azalea_full128_6x2gpu_20260417-144259",
+      "report_path": "/home/tmusgrave/swe-sota-agent/out/mswe_java_qwen35_azalea_full128_6x2gpu_20260417-144259/multi_swe_java_eval_report.json",
+      "selected_count": 16,
+      "resolved_count": 3,
+      "unresolved_count": 13,
+      "error_count": 0,
+      "empty_patch_count": 0,
+      "incomplete_count": 0,
+      "unknown_count": 0,
+      "source_total_instances": 128
+    }
+  ],
+  "n_runs": 8,
+  "min_resolved": 334,
+  "max_resolved": 343,
+  "mean_resolved": 338.625,
+  "stdev_resolved_population": 3.12,
+  "java_mean_selected": 15.875,
+  "java_mean_resolved": 5.125,
+  "java_stdev_resolved_population": 1.536
+}

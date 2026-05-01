@@ -1,0 +1,6 @@
+# Heavy data archives -- hosted on Zenodo (see ../admin.md).
+data/archives/*.tar.zst
+data/archives/*.jsonl.zst
+# But keep the manifest of expected archives / their checksums.
+!data/archives/SHA256SUMS.txt
+!data/archives/.gitkeep

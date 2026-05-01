@@ -1,0 +1,10 @@
+variant,resolved,rate,note
+k1_mean_no_selector,338.625,0.67725,per-run mean
+k1_best_no_selector,343,0.686,best single run
+k8_order_baseline,362,0.724,existing selector summary
+k8_self_tests_only,346,0.692,artifact estimate
+k8_cross_agent_bug_tests_only,324,0.648,artifact estimate
+k8_cross_agent_regression_tests_only,313,0.626,artifact estimate
+k8_cross_agent_all_tests_estimate,331,0.662,artifact estimate
+k8_cross_agent_selector,376,0.752,published internal Docker
+k8_oracle,408,0.816,upper bound

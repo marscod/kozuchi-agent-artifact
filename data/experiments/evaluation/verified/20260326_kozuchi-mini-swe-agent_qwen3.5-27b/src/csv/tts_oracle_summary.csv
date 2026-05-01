@@ -1,0 +1,15 @@
+metric,value,share
+selector_resolved,374.0,0.748
+selector_resolved_ci_lo,0.7081521751849856,
+selector_resolved_ci_hi,0.7840661518868807,
+oracle_resolved_any_leg,408.0,0.816
+oracle_resolved_ci_lo,0.7796708959018862,
+oracle_resolved_ci_hi,0.8475105208509756,
+headline_regret_oracle_minus_selector,34.0,0.068
+attainable_regret_oracle_minus_selector_hits,35.0,0.07
+merge_reeval_recovery_count,1.0,0.002
+selector_hit_rate_among_attainable,0.9142156862745098,
+instances_zero_legs_resolve,92.0,0.184
+instances_all_8_legs_resolve,234.0,0.468
+instances_marginal_1_to_7_legs_resolve,174.0,0.348
+instances_with_no_selector_pick,5.0,0.01
