@@ -34,9 +34,9 @@ All paths are relative to `paper/artifacts/`.
 | `compute_phase_inventory.py` | `data/configs/agent_sota.yaml` | `phase_inventory.json`, `phase_edges.csv` |
 | `compute_action_format_inventory.py` | `data/configs/agent_sota.yaml` | `action_format_inventory.{json,tex}` |
 | `compute_model_inventory.py` | `data/configs/{model_*,chat-template_*,environment_*}.yaml` | `model_inventory.{json,tex}` |
-| `compute_tool_inventory.py` | `data/configs/agent_sota.yaml`, `data/swe_sota_agent/tools/*.py` | `tool_inventory.{json,tex}` |
+| `compute_tool_inventory.py` | `data/configs/agent_sota.yaml`, `data/operational_metadata/tool_files.csv` | `tool_inventory.{json,tex}` |
 | `compute_skill_inventory.py` | `data/configs/agent_sota.yaml` | `skill_inventory.json` |
-| `compute_pipeline_inventory.py` | `data/repo_meta/.gitlab-ci.yml`, `data/repo_meta/scripts/module_load.sh` | `pipeline_inventory.{json,tex}` |
+| `compute_pipeline_inventory.py` | `data/operational_metadata/{ci_stages,ci_reuse_vars,ci_cluster_tags,cluster_env_names}.csv` | `pipeline_inventory.{json,tex}` |
 | `compute_workflow_replacement.py` | configs, tools, Python and Java CSVs, bundle manifest, comparison.md | `workflow_replacement.{json,tex}`, `operational_outcomes.tex` |
 
 After all scripts have run, `stats/manifest.json` lists every emitted

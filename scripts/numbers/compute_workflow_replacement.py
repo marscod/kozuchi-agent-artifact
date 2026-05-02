@@ -1,22 +1,23 @@
 """Workflow-replacement and operational-outcome numbers for §3.4 / lessons.
 
-Every number this script emits is derived from an existing file in the
-repository. Sources are recorded in the JSON output and re-emitted as
+Every number this script emits is derived from a file shipped with this
+artifact. Sources are recorded in the JSON output and re-emitted as
 LaTeX comments at the top of every generated fragment so reviewers can
 audit each cell from the published artifact bundle.
 
-Inputs (paths are repo-relative):
-- README.md
-- docs/HOW_TO_DEVELOP.md
-- .gitlab-ci.yml
-- scripts/module_load.sh
-- configs/agent_sota.yaml
-- configs/ (model_*, chat-template_*, environment_*)
-- swe_sota_agent/tools/
-- experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/
+Inputs (paths are artifact-relative):
+- data/operational_metadata/{ci_stages,ci_reuse_vars,cluster_env_names}.csv
+    (redacted CI / cluster inventory; replaces the upstream
+    ``.gitlab-ci.yml`` and ``scripts/module_load.sh`` which are not
+    shipped with the artifact)
+- data/configs/agent_sota.yaml
+- data/configs/ (model_*, chat-template_*, environment_*)
+- data/operational_metadata/tool_files.csv (redacted tool inventory;
+    replaces ``swe_sota_agent/tools/`` which is not shipped)
+- data/experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/
     src/csv/{headline.csv,failure_modes.csv,leaderboard.csv}
-- trajectories/q35_.../{bundle_manifest.json}
-- paper/comparison/analysis.md  (Java cross-language signal)
+- data/trajectories/q35_.../{bundle_manifest.json}
+- data/paper_comparison/analysis.md  (Java cross-language signal)
 
 Outputs are written to paper/final/stats/:
 - workflow_replacement.json
@@ -24,11 +25,9 @@ Outputs are written to paper/final/stats/:
 - operational_outcomes.tex (key-value table for the lessons summary)
 
 The "manual touch-points" count for the pre-Kozuchi workflow is the
-explicit list in §3.4 of main.tex and corroborated against
-README.md / docs/HOW_TO_DEVELOP.md / pipeline/bench/* scripts. The
-post-Kozuchi count of 1 is the single CI trigger documented in
-README.md "CI reuse mode" plus .gitlab-ci.yml. Both counts are tagged
-as estimates in the JSON output.
+explicit list in §3.4 of main.tex. The post-Kozuchi count of 1 is the
+single CI trigger documented in §3.4. Both counts are tagged as
+estimates in the JSON output.
 """
 
 from __future__ import annotations
@@ -39,17 +38,15 @@ import re
 from pathlib import Path
 
 from _paths import (
+    CI_REUSE_VARS_CSV,
+    CI_STAGES_CSV,
+    CLUSTER_ENV_NAMES_CSV,
     CONFIG_AGENT_SOTA as AGENT_SOTA,
     CONFIG_DIR,
-    GITLAB_CI,
-    HOW_TO_DEVELOP,
     JAVA_ANALYSIS,
-    MODULE_LOAD,
-    README,
-    REPO_ROOT,
     STATS_DIR,
     SUBMISSION_DIR,
-    TOOLS_DIR,
+    TOOL_FILES_CSV,
     TRAJ_BUNDLE_MANIFEST,
 )
 
@@ -161,18 +158,23 @@ def _count_tools(text: str) -> int:
     return len(re.findall(r"^\s+-\s+\S", m.group(1), flags=re.MULTILINE))
 
 
+def _read_csv_column(path: Path, column: str) -> list[str]:
+    with path.open() as f:
+        return [row[column] for row in csv.DictReader(f) if row.get(column)]
+
+
 def collect() -> dict:
-    ci = GITLAB_CI.read_text()
     agent_text = AGENT_SOTA.read_text()
 
-    n_stages = len(re.findall(r"^\s+-\s+\w+\s*$", re.search(r"^stages:\s*\n((?:\s+-\s+\w+\s*\n)+)", ci, re.MULTILINE).group(1), flags=re.MULTILINE))
-    reuse_vars = sorted(set(re.findall(r"\b(PIPELINE_[A-Z0-9_]+_DIR|PHASE_SFT_ADAPTER_DIRS_FILE)\b", ci)))
-    cluster_envs = sorted(set(re.findall(r"\b(kagura|stratus|ashitaka|abci|azalea)\b", MODULE_LOAD.read_text())))
+    stage_rows = _read_csv_column(CI_STAGES_CSV, "stage")
+    n_stages = len(stage_rows)
+    reuse_vars = sorted(set(_read_csv_column(CI_REUSE_VARS_CSV, "variable")))
+    cluster_envs = sorted(set(_read_csv_column(CLUSTER_ENV_NAMES_CSV, "env_name")))
 
     model_configs = sorted(p.name for p in CONFIG_DIR.glob("model_*.yaml"))
     chat_templates = sorted(p.name for p in CONFIG_DIR.glob("chat-template_*.yaml"))
     env_configs = sorted(p.name for p in CONFIG_DIR.glob("environment_*.yaml"))
-    tool_files = sorted(p.name for p in TOOLS_DIR.glob("*.py"))
+    tool_files = sorted(set(_read_csv_column(TOOL_FILES_CSV, "name")))
 
     n_action_formats = _count_action_formats(agent_text)
     n_phases = _count_phases(agent_text)
@@ -238,7 +240,7 @@ def collect() -> dict:
             "n_reuse_vars": len(reuse_vars),
             "n_cluster_env_names": len(cluster_envs),
             "cluster_env_names": cluster_envs,
-            "source": ".gitlab-ci.yml; scripts/module_load.sh",
+            "source": "data/operational_metadata/{ci_stages,ci_reuse_vars,cluster_env_names}.csv",
         },
         "configs": {
             "n_model_configs": len(model_configs),
@@ -249,7 +251,7 @@ def collect() -> dict:
             "n_phases_in_agent_yaml": n_phases,
             "n_skills_in_agent_yaml": n_skills,
             "n_tools_in_agent_yaml": n_tools_cfg,
-            "source": "configs/; configs/agent_sota.yaml; swe_sota_agent/tools/",
+            "source": "data/configs/; data/configs/agent_sota.yaml; data/operational_metadata/tool_files.csv",
         },
         "results": {
             "resolved_official_cloud": resolved_official,
@@ -298,8 +300,8 @@ def collect() -> dict:
                 "hilton_2016_ase_ci",
             ],
             "source": (
-                "paper/final/main.tex \u00a73.4 narrative + README.md \"Use\" section + "
-                "docs/HOW_TO_DEVELOP.md + pipeline/bench/* + .gitlab-ci.yml"
+                "paper/final/main.tex \u00a73.4 narrative + "
+                "data/operational_metadata/ (redacted CI / cluster counts)"
             ),
         },
         "published_anchors": PUBLISHED_ANCHORS,
@@ -319,14 +321,14 @@ def emit_workflow_table(d: dict) -> str:
     epoch = d["published_anchors"]["epoch_swebench_docker_2025"]
     hilton = d["published_anchors"]["hilton_2016_ase_ci"]
     return "\n".join([
-        "% Auto-generated by paper/final/sources/paper-src-test-prompt/compute_workflow_replacement.py",
-        "% Per-row workspace sources (see workflow_replacement.json):",
-        "%   touch-points: paper/final/main.tex \u00a73.4 + README.md \"CI reuse mode\" + .gitlab-ci.yml",
-        "%   backends:     configs/model_*.yaml (count) + configs/agent_sota.yaml action_format",
-        "%   reusable:     .gitlab-ci.yml stages: + reuse vars (PIPELINE_*_DIR, PHASE_SFT_ADAPTER_DIRS_FILE)",
-        "%   clusters:     scripts/module_load.sh ENV_NAME branches",
-        "%   audit trail:  trajectories/q35_.../bundle_manifest.json + experiments/.../src/csv/headline.csv",
-        "%   merge floor:  experiments/.../src/csv/{patch_apply_outcomes,failure_modes}.csv",
+        "% Auto-generated by scripts/numbers/compute_workflow_replacement.py",
+        "% Per-row artifact sources (see workflow_replacement.json):",
+        "%   touch-points: paper/main.tex \u00a73.4 narrative",
+        "%   backends:     data/configs/model_*.yaml (count) + data/configs/agent_sota.yaml action_format",
+        "%   reusable:     data/operational_metadata/ci_stages.csv + ci_reuse_vars.csv",
+        "%   clusters:     data/operational_metadata/cluster_env_names.csv",
+        "%   audit trail:  data/trajectories/q35_.../bundle_manifest.json + data/experiments/.../src/csv/headline.csv",
+        "%   merge floor:  data/experiments/.../src/csv/{patch_apply_outcomes,failure_modes}.csv",
         "% Published anchors for the engineer-minute estimate (URLs verified 2026-04-29;",
         "% see references.bib and workflow_replacement.json:published_anchors):",
         f"%   [Epoch AI 2025]  {epoch['title']}.",
@@ -378,19 +380,20 @@ def emit_operational_outcomes(d: dict) -> str:
     epoch = d["published_anchors"]["epoch_swebench_docker_2025"]
     hilton = d["published_anchors"]["hilton_2016_ase_ci"]
     return "\n".join([
-        "% Auto-generated by paper/final/sources/paper-src-test-prompt/compute_workflow_replacement.py",
-        "% Workspace inputs: configs/agent_sota.yaml; configs/model_*.yaml; .gitlab-ci.yml;",
-        "%         scripts/module_load.sh; experiments/.../src/csv/{headline,patch_apply_outcomes,",
-        "%         failure_modes}.csv; trajectories/q35_.../bundle_manifest.json;",
-        "%         paper/comparison/analysis.md.",
-        "% Per-row workspace sources:",
-        "%   workflow compression: paper/final/main.tex §3.4 + .gitlab-ci.yml",
-        "%   backend integrations: configs/agent_sota.yaml + configs/model_*.yaml",
-        "%   reusable pipeline stages: .gitlab-ci.yml",
-        "%   cluster portability: scripts/module_load.sh",
-        "%   patch-application risk proxy: experiments/.../src/csv/{patch_apply_outcomes,failure_modes}.csv",
-        "%   cross-evaluator drift: experiments/.../src/csv/headline.csv + trajectories/q35_.../bundle_manifest.json",
-        "%   cross-language Java: paper/comparison/analysis.md",
+        "% Auto-generated by scripts/numbers/compute_workflow_replacement.py",
+        "% Artifact inputs: data/configs/agent_sota.yaml; data/configs/model_*.yaml;",
+        "%         data/operational_metadata/{ci_stages,ci_reuse_vars,cluster_env_names,tool_files}.csv;",
+        "%         data/experiments/.../src/csv/{headline,patch_apply_outcomes,failure_modes}.csv;",
+        "%         data/trajectories/q35_.../bundle_manifest.json;",
+        "%         data/paper_comparison/analysis.md.",
+        "% Per-row artifact sources:",
+        "%   workflow compression: paper/main.tex §3.4 narrative",
+        "%   backend integrations: data/configs/agent_sota.yaml + data/configs/model_*.yaml",
+        "%   reusable pipeline stages: data/operational_metadata/{ci_stages,ci_reuse_vars}.csv",
+        "%   cluster portability: data/operational_metadata/cluster_env_names.csv",
+        "%   patch-application risk proxy: data/experiments/.../src/csv/{patch_apply_outcomes,failure_modes}.csv",
+        "%   cross-evaluator drift: data/experiments/.../src/csv/headline.csv + data/trajectories/q35_.../bundle_manifest.json",
+        "%   cross-language Java: data/paper_comparison/analysis.md",
         "% Published anchors for the workflow-compression row (see references.bib):",
         f"%   Epoch AI 2025 -- {epoch['url']}",
         f"%   Hilton et al., ASE 2016 -- DOI {hilton['doi']}",

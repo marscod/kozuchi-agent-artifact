@@ -1,18 +1,19 @@
 """Inventory of agent tools.
 
-Cross-references what is *actually present* under
-``swe_sota_agent/tools/`` against what is *enabled* in
-``configs/agent_sota.yaml: agent.tools``. The manuscript uses this
-script's output to avoid claiming that tools we do not ship are part of
-the sandbox.
+Cross-references the redacted tool-files CSV under
+``data/operational_metadata/tool_files.csv`` against what is *enabled*
+in ``data/configs/agent_sota.yaml: agent.tools``. The raw tool sources
+under ``swe_sota_agent/tools/`` are intentionally not shipped with the
+artifact; the CSV captures only the file names the inventory needs.
 """
 
 from __future__ import annotations
 
+import csv
 import json
 import re
 
-from _paths import CONFIG_AGENT_SOTA, STATS_DIR, TOOLS_DIR
+from _paths import CONFIG_AGENT_SOTA, STATS_DIR, TOOL_FILES_CSV
 
 
 def parse_tool_list(text: str) -> tuple[list[str], list[str]]:
@@ -43,15 +44,20 @@ def parse_tool_list(text: str) -> tuple[list[str], list[str]]:
     return active, disabled
 
 
+def _read_tool_files() -> list[str]:
+    with TOOL_FILES_CSV.open() as f:
+        return sorted({row["name"] for row in csv.DictReader(f) if row.get("name")})
+
+
 def main() -> None:
     STATS_DIR.mkdir(parents=True, exist_ok=True)
     text = CONFIG_AGENT_SOTA.read_text()
     active, disabled = parse_tool_list(text)
 
-    on_disk = sorted(p.stem for p in TOOLS_DIR.glob("*.py"))
+    on_disk = _read_tool_files()
 
     out = {
-        "tools_dir": str(TOOLS_DIR),
+        "tool_files_source": "data/operational_metadata/tool_files.csv",
         "on_disk": on_disk,
         "active_in_config": active,
         "disabled_in_config": disabled,
@@ -66,7 +72,7 @@ def main() -> None:
 
     tex = [
         "% Auto-generated: agent tool inventory.",
-        "% Source: configs/agent_sota.yaml (agent.tools) + swe_sota_agent/tools/*.py",
+        "% Source: data/configs/agent_sota.yaml (agent.tools) + data/operational_metadata/tool_files.csv",
         r"\begin{tabular}{lll}",
         r"\toprule",
         r"Tool & On disk & In \code{agent.tools} \\",

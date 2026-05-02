@@ -4,9 +4,13 @@ Every input lives under ``paper/artifacts/data/`` and every output under
 ``paper/artifacts/stats/``. No path escapes the artifact root, so the
 folder can be unzipped and run anywhere.
 
-The ``REPO_ROOT`` alias is kept so legacy scripts that import it (e.g.
-``compute_workflow_replacement.py``) keep working: it now points at the
-artifact ``data/repo_meta`` view of the original repo files.
+The CI / cluster / tool inventory counts cited in the manuscript come
+from the redacted CSVs under ``data/operational_metadata/``. The raw
+``.gitlab-ci.yml``, ``scripts/module_load.sh``, and
+``swe_sota_agent/tools/*.py`` are intentionally not shipped with the
+artifact (internal runner tags, SLURM partitions, tokens, and tool
+implementations are out of release scope), so the scripts read derived
+values instead.
 """
 
 from __future__ import annotations
@@ -28,21 +32,23 @@ STATS_DIR = ARTIFACT_ROOT / "stats"
 FIGURES_DIR = ARTIFACT_ROOT / "figures"
 PAPER_DIR = ARTIFACT_ROOT / "paper"
 
-# ---------------------------------------------------------------------------
-# Repo meta (configs, scripts, README, .gitlab-ci.yml, AGENTS.md, docs/)
-# ---------------------------------------------------------------------------
-# A few legacy scripts (compute_workflow_replacement, compute_repo_year_breakdown)
-# read repo files via REPO_ROOT. We point that alias at our copied subset.
-REPO_ROOT = DATA_DIR / "repo_meta"
-
 CONFIG_DIR = DATA_DIR / "configs"
 CONFIG_AGENT_SOTA = CONFIG_DIR / "agent_sota.yaml"
-TOOLS_DIR = DATA_DIR / "swe_sota_agent" / "tools"
 
-GITLAB_CI = REPO_ROOT / ".gitlab-ci.yml"
-README = REPO_ROOT / "README.md"
-HOW_TO_DEVELOP = REPO_ROOT / "docs" / "HOW_TO_DEVELOP.md"
-MODULE_LOAD = REPO_ROOT / "scripts" / "module_load.sh"
+# ---------------------------------------------------------------------------
+# Operational metadata (redacted CI / cluster / tool inventory CSVs)
+# ---------------------------------------------------------------------------
+# The raw upstream files (.gitlab-ci.yml, scripts/module_load.sh,
+# swe_sota_agent/tools/*.py) are not shipped with the artifact. The
+# CSVs below capture the only fields the reproduction scripts need
+# (counts, names, on/off status) so the paper numbers stay reproducible
+# without exposing internal CI wiring or tool implementations.
+OPERATIONAL_METADATA_DIR = DATA_DIR / "operational_metadata"
+CI_STAGES_CSV = OPERATIONAL_METADATA_DIR / "ci_stages.csv"
+CI_REUSE_VARS_CSV = OPERATIONAL_METADATA_DIR / "ci_reuse_vars.csv"
+CI_CLUSTER_TAGS_CSV = OPERATIONAL_METADATA_DIR / "ci_cluster_tags.csv"
+CLUSTER_ENV_NAMES_CSV = OPERATIONAL_METADATA_DIR / "cluster_env_names.csv"
+TOOL_FILES_CSV = OPERATIONAL_METADATA_DIR / "tool_files.csv"
 
 # ---------------------------------------------------------------------------
 # SWE-bench Verified submission (Python headline; RQ1-RQ5)

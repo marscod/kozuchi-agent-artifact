@@ -1,5 +1,5 @@
 {
-  "tools_dir": "/home/mbahrami/repo/swe-sota-agent/paper/artifacts/data/swe_sota_agent/tools",
+  "tool_files_source": "data/operational_metadata/tool_files.csv",
   "on_disk": [
     "caller_trace",
     "kanban_update",

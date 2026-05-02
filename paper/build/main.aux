@@ -6,8 +6,6 @@
 \citation{Zhengetal2024}
 \citation{jimenez2024swebench,yang2024sweagent,yao2023react,shinn2023reflexion}
 \citation{openaifunctioncalling2026,anthropictooluse2026}
-\citation{openai2024swebenchverified,sbcli2026}
-\citation{yoo2003slurm}
 \@writefile{toc}{\contentsline {section}{Abstract}{1}{section*.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
 \newlabel{sec:intro}{{1}{1}{Introduction}{section.1}{}}
@@ -17,11 +15,13 @@
 \@writefile{toc}{\contentsline {paragraph}{Pain\nonbreakingspace 1: long-horizon execution.}{1}{section*.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Pain\nonbreakingspace 2: tool-grammar drift across model families.}{1}{section*.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Pain\nonbreakingspace 3: multi-cluster heterogeneity.}{1}{section*.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Pain\nonbreakingspace 4: evaluation cost.}{1}{section*.8}\protected@file@percent }
+\citation{openai2024swebenchverified,sbcli2026}
+\citation{yoo2003slurm}
 \citation{miniswea}
 \citation{komoravolu2026agent}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Kozuchi Agent workflow from candidate generation to cross-agent selection.}}{2}{figure.caption.4}\protected@file@percent }
 \newlabel{fig:arch}{{2}{2}{Kozuchi Agent workflow from candidate generation to cross-agent selection}{figure.caption.4}{}}
+\@writefile{toc}{\contentsline {paragraph}{Pain\nonbreakingspace 4: evaluation cost.}{2}{section*.8}\protected@file@percent }
 \citation{yang2024sweagent}
 \citation{yao2023react,shinn2023reflexion,madaan2023selfrefine,yao2023tree}
 \citation{xia2024agentless}
@@ -42,7 +42,6 @@
 \citation{openai2024swebenchverified}
 \citation{zan2025multiswebench}
 \citation{sbcli2026}
-\citation{yao2023react,shinn2023reflexion}
 \citation{miniswea}
 \citation{epoch2024swebenchdocker,hilton2016ci}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{3}{section.2}\protected@file@percent }
@@ -54,12 +53,11 @@
 \newlabel{sec:background}{{3}{3}{Background and Industrial Context}{section.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}SWE-bench and Multi-SWE-bench Java}{3}{subsection.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Agentic loops and base runtime}{3}{subsection.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Multi-cluster operating context}{3}{subsection.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}The workflow we set out to replace}{3}{subsection.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}The workflow we set out to replace}{3}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Definitions and Design Invariants}{3}{section.4}\protected@file@percent }
+\newlabel{sec:definitions}{{4}{3}{Definitions and Design Invariants}{section.4}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Per-evaluation-cycle workflow comparison.}}{4}{table.caption.12}\protected@file@percent }
 \newlabel{tab:workflow-replacement}{{1}{4}{Per-evaluation-cycle workflow comparison}{table.caption.12}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Definitions and Design Invariants}{4}{section.4}\protected@file@percent }
-\newlabel{sec:definitions}{{4}{4}{Definitions and Design Invariants}{section.4}{}}
 \@writefile{toc}{\contentsline {paragraph}{D1 (Agent runtime $\mathcal  {R}$).}{4}{section*.13}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{D2 (Trajectory).}{4}{section*.14}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{D3 (Phase transition system).}{4}{section*.15}\protected@file@percent }
@@ -67,91 +65,90 @@
 \@writefile{toc}{\contentsline {paragraph}{D5 (Verifier/Selector).}{4}{section*.17}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{D6 (Artifact boundary).}{4}{section*.18}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Runtime invariants.}{4}{section*.19}\protected@file@percent }
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Phase-driven repair orchestration}}{4}{algorithm.1}\protected@file@percent }
-\newlabel{alg:phase-transition}{{1}{4}{Phase-driven repair orchestration}{algorithm.1}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {5}Motivating Empirical Observations}{4}{section.5}\protected@file@percent }
 \newlabel{sec:observations}{{5}{4}{Motivating Empirical Observations}{section.5}{}}
-\@writefile{toc}{\contentsline {paragraph}{O1 (Long conversations forget).}{4}{section*.20}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{O2 (Tool syntax is a cliff).}{4}{section*.21}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{O3 (State must survive compression).}{4}{section*.22}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{O4 (Shell alone localizes poorly).}{4}{section*.23}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Phase-driven repair orchestration}}{4}{algorithm.1}\protected@file@percent }
+\newlabel{alg:phase-transition}{{1}{4}{Phase-driven repair orchestration}{algorithm.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}System Design}{4}{section.6}\protected@file@percent }
+\newlabel{sec:design}{{6}{4}{System Design}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Agent runtime contract}{4}{subsection.6.1}\protected@file@percent }
+\newlabel{sec:design-runtime}{{6.1}{4}{Agent runtime contract}{subsection.6.1}{}}
 \citation{kwon2023vllm}
-\@writefile{toc}{\contentsline {paragraph}{O5 (CI cost is repeated work).}{5}{section*.24}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}System Design}{5}{section.6}\protected@file@percent }
-\newlabel{sec:design}{{6}{5}{System Design}{section.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Agent runtime contract}{5}{subsection.6.1}\protected@file@percent }
-\newlabel{sec:design-runtime}{{6.1}{5}{Agent runtime contract}{subsection.6.1}{}}
-\@writefile{toc}{\contentsline {paragraph}{Phases.}{5}{section*.25}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Proposition 1 (Workflow well-formedness).}{5}{section*.26}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Skills (phase-gated, tool-gated).}{5}{section*.27}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Action formats.}{5}{section*.28}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Tool sandbox.}{5}{section*.29}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Templates.}{5}{section*.30}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Context compression and handover.}{5}{section*.31}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Orchestra runtime.}{5}{section*.32}\protected@file@percent }
+\citation{fowler2006ci,duvall2007ci}
+\@writefile{toc}{\contentsline {paragraph}{Phases.}{5}{section*.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Proposition 1 (Workflow well-formedness).}{5}{section*.21}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Skills (phase-gated, tool-gated).}{5}{section*.22}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Action formats.}{5}{section*.23}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Tool sandbox.}{5}{section*.24}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Templates.}{5}{section*.25}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Context compression and handover.}{5}{section*.26}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Orchestra runtime.}{5}{section*.27}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Software-engineering tool suite}{5}{subsection.6.2}\protected@file@percent }
 \newlabel{sec:design-tools}{{6.2}{5}{Software-engineering tool suite}{subsection.6.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Multi-cluster pipeline}{5}{subsection.6.3}\protected@file@percent }
 \newlabel{sec:design-pipeline}{{6.3}{5}{Multi-cluster pipeline}{subsection.6.3}{}}
-\citation{fowler2006ci,duvall2007ci}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Model-agnostic serving}{6}{subsection.6.4}\protected@file@percent }
-\newlabel{sec:design-serving}{{6.4}{6}{Model-agnostic serving}{subsection.6.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}CI as the evaluation substrate}{6}{subsection.6.5}\protected@file@percent }
-\newlabel{sec:design-ci}{{6.5}{6}{CI as the evaluation substrate}{subsection.6.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Cross-Agent Test-Time Selection}{6}{section.7}\protected@file@percent }
-\newlabel{sec:design-tts}{{7}{6}{Cross-Agent Test-Time Selection}{section.7}{}}
-\@writefile{toc}{\contentsline {paragraph}{Selector.}{6}{section*.33}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Model-agnostic serving}{5}{subsection.6.4}\protected@file@percent }
+\newlabel{sec:design-serving}{{6.4}{5}{Model-agnostic serving}{subsection.6.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}CI as the evaluation substrate}{5}{subsection.6.5}\protected@file@percent }
+\newlabel{sec:design-ci}{{6.5}{5}{CI as the evaluation substrate}{subsection.6.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Cross-Agent Test-Time Selection}{5}{section.7}\protected@file@percent }
+\newlabel{sec:design-tts}{{7}{5}{Cross-Agent Test-Time Selection}{section.7}{}}
+\citation{qwen35}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Cross-agent selector summary.}}{6}{table.caption.29}\protected@file@percent }
+\newlabel{tab:xcheck}{{2}{6}{Cross-agent selector summary}{table.caption.29}{}}
+\@writefile{toc}{\contentsline {paragraph}{Selector.}{6}{section*.28}\protected@file@percent }
 \newlabel{eq:score}{{1}{6}{Selector}{equation.7.1}{}}
-\@writefile{toc}{\contentsline {paragraph}{Why cross-agent rather than oracle Best-of-$K$.}{6}{section*.35}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Cross-agent selector summary.}}{6}{table.caption.34}\protected@file@percent }
-\newlabel{tab:xcheck}{{2}{6}{Cross-agent selector summary}{table.caption.34}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Candidate-level TTS@8 decomposition.}}{6}{table.caption.37}\protected@file@percent }
-\newlabel{tab:tts-decomp}{{3}{6}{Candidate-level TTS@8 decomposition}{table.caption.37}{}}
-\@writefile{toc}{\contentsline {paragraph}{Diversity ceiling.}{6}{section*.36}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Why cross-agent rather than oracle Best-of-$K$.}{6}{section*.30}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Candidate-level TTS@8 decomposition.}}{6}{table.caption.32}\protected@file@percent }
+\newlabel{tab:tts-decomp}{{3}{6}{Candidate-level TTS@8 decomposition}{table.caption.32}{}}
+\@writefile{toc}{\contentsline {paragraph}{Diversity ceiling.}{6}{section*.31}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Evaluation}{6}{section.8}\protected@file@percent }
+\newlabel{sec:eval}{{8}{6}{Evaluation}{section.8}{}}
 \citation{wilson1927score}
 \citation{mcnemar1947note}
 \citation{holm1979simple,benjamini1995controlling}
 \citation{clopper1934use}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Evaluation}{7}{section.8}\protected@file@percent }
-\newlabel{sec:eval}{{8}{7}{Evaluation}{section.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces SWE-bench Verified resolution by repository.}}{7}{table.caption.33}\protected@file@percent }
+\newlabel{tab:byrepo}{{4}{7}{SWE-bench Verified resolution by repository}{table.caption.33}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {8.1}RQ1: Headline accuracy and uncertainty}{7}{subsection.8.1}\protected@file@percent }
 \newlabel{subsec:rq1}{{8.1}{7}{RQ1: Headline accuracy and uncertainty}{subsection.8.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces SWE-bench Verified resolution by repository.}}{7}{table.caption.38}\protected@file@percent }
-\newlabel{tab:byrepo}{{4}{7}{SWE-bench Verified resolution by repository}{table.caption.38}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Per-repository resolution rate for Kozuchi agent (first column on the left) and the curated open-weight peers.}}{7}{figure.caption.39}\protected@file@percent }
-\newlabel{fig:per-repo-peers}{{3}{7}{Per-repository resolution rate for Kozuchi agent (first column on the left) and the curated open-weight peers}{figure.caption.39}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Per-repository resolution rate for Kozuchi agent (first column on the left) and the curated open-weight peers.}}{7}{figure.caption.34}\protected@file@percent }
+\newlabel{fig:per-repo-peers}{{3}{7}{Per-repository resolution rate for Kozuchi agent (first column on the left) and the curated open-weight peers}{figure.caption.34}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {8.2}RQ2: Peer-ranked position with multiplicity-corrected tests}{7}{subsection.8.2}\protected@file@percent }
 \newlabel{subsec:rq2}{{8.2}{7}{RQ2: Peer-ranked position with multiplicity-corrected tests}{subsection.8.2}{}}
+\citation{chen2021codex}
 \@writefile{toc}{\contentsline {subsection}{\numberline {8.3}RQ3: Where does performance vary?}{8}{subsection.8.3}\protected@file@percent }
 \newlabel{subsec:rq3}{{8.3}{8}{RQ3: Where does performance vary?}{subsection.8.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Failure taxonomy for unresolved instances.}}{8}{table.caption.40}\protected@file@percent }
-\newlabel{tab:failuremodes}{{5}{8}{Failure taxonomy for unresolved instances}{table.caption.40}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {8.4}RQ4: Failure taxonomy and operational reliability}{8}{subsection.8.4}\protected@file@percent }
 \newlabel{subsec:rq4}{{8.4}{8}{RQ4: Failure taxonomy and operational reliability}{subsection.8.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Failure taxonomy for unresolved instances.}}{8}{table.caption.35}\protected@file@percent }
+\newlabel{tab:failuremodes}{{5}{8}{Failure taxonomy for unresolved instances}{table.caption.35}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {8.5}RQ5: TTS@8 selection lift and cost--diversity envelope}{8}{subsection.8.5}\protected@file@percent }
 \newlabel{subsec:rq5}{{8.5}{8}{RQ5: TTS@8 selection lift and cost--diversity envelope}{subsection.8.5}{}}
-\citation{chen2021codex}
 \citation{wilson1927score}
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Artifact-based TTS@8 ablation.}}{9}{table.caption.41}\protected@file@percent }
-\newlabel{tab:selector-ablation}{{6}{9}{Artifact-based TTS@8 ablation}{table.caption.41}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Cross-language transfer summary.}}{9}{figure.caption.42}\protected@file@percent }
-\newlabel{fig:cross-track}{{4}{9}{Cross-language transfer summary}{figure.caption.42}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Artifact-based TTS@8 ablation. Scope: this table isolates candidate count ($K$) and selector design only; phase graph, formatter, persistent state, and tool sandbox are not ablated and are evidenced operationally in \S  \ref {sec:design} and \S  \ref {sec:lessons}.}}{9}{table.caption.36}\protected@file@percent }
+\newlabel{tab:selector-ablation}{{6}{9}{Artifact-based TTS@8 ablation. Scope: this table isolates candidate count ($K$) and selector design only; phase graph, formatter, persistent state, and tool sandbox are not ablated and are evidenced operationally in \S \ref {sec:design} and \S \ref {sec:lessons}}{table.caption.36}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Cross-language transfer summary.}}{9}{figure.caption.37}\protected@file@percent }
+\newlabel{fig:cross-track}{{4}{9}{Cross-language transfer summary}{figure.caption.37}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {8.6}RQ6: Cross-language transfer to Multi-SWE-bench Java}{9}{subsection.8.6}\protected@file@percent }
 \newlabel{subsec:rq6}{{8.6}{9}{RQ6: Cross-language transfer to Multi-SWE-bench Java}{subsection.8.6}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Python--Java cross-track evidence for the same 27 B Kozuchi agent configuration.}}{10}{table.caption.43}\protected@file@percent }
-\newlabel{tab:cross-track}{{7}{10}{Python--Java cross-track evidence for the same 27 B Kozuchi agent configuration}{table.caption.43}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {9}Production Planning and Lessons Learned}{10}{section.9}\protected@file@percent }
-\newlabel{sec:lessons}{{9}{10}{Production Planning and Lessons Learned}{section.9}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {10}Conclusion}{10}{section.10}\protected@file@percent }
-\newlabel{sec:conclusion}{{10}{10}{Conclusion}{section.10}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {11}Artifact Availability}{10}{section.11}\protected@file@percent }
-\newlabel{sec:artifact}{{11}{10}{Artifact Availability}{section.11}{}}
+\citation{epoch2024swebenchdocker,hilton2016ci}
 \citation{qwen35}
 \citation{devstral}
 \citation{nemotron}
 \bibstyle{ACM-Reference-Format}
 \bibdata{references}
 \bibcite{epoch2024swebenchdocker}{{1}{2025}{{Adamczewski}}{{}}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Python--Java cross-track evidence for the same 27 B Kozuchi agent configuration.}}{10}{table.caption.38}\protected@file@percent }
+\newlabel{tab:cross-track}{{7}{10}{Python--Java cross-track evidence for the same 27 B Kozuchi agent configuration}{table.caption.38}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Operational Planning and Lessons Learned}{10}{section.9}\protected@file@percent }
+\newlabel{sec:lessons}{{9}{10}{Operational Planning and Lessons Learned}{section.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10}Conclusion}{10}{section.10}\protected@file@percent }
+\newlabel{sec:conclusion}{{10}{10}{Conclusion}{section.10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11}Data Availability Statement}{10}{section.11}\protected@file@percent }
+\newlabel{sec:artifact}{{11}{10}{Data Availability Statement}{section.11}{}}
+\newlabel{sec:data}{{11}{10}{Data Availability Statement}{section.11}{}}
+\@writefile{toc}{\contentsline {section}{References}{10}{section*.40}\protected@file@percent }
 \bibcite{amazonqdeveloper2024}{{2}{2024}{{Amazon Web Services}}{{}}}
 \bibcite{anthropicclaudecode2025}{{3}{2026a}{{Anthropic}}{{}}}
 \bibcite{anthropictooluse2026}{{4}{2026b}{{Anthropic}}{{}}}
@@ -187,7 +184,6 @@
 \bibcite{shinn2023reflexion}{{34}{2023}{{Shinn et~al\mbox  {.}}}{{}}}
 \bibcite{cortexa2025}{{35}{2025}{{Sohrabizadeh et~al\mbox  {.}}}{{}}}
 \bibcite{sbcli2026}{{36}{2026}{{SWE-bench Maintainers}}{{}}}
-\@writefile{toc}{\contentsline {section}{References}{11}{section*.45}\protected@file@percent }
 \bibcite{wang2024openhands}{{37}{2024}{{Wang et~al\mbox  {.}}}{{}}}
 \bibcite{wilson1927score}{{38}{1927}{{Wilson}}{{}}}
 \bibcite{devin2024}{{39}{2024}{{Wu}}{{}}}

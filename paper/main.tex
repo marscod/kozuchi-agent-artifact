@@ -301,16 +301,29 @@ auditable and repeatable without proprietary models or large fine-tuned
 backbones. With a locally hosted Qwen3.5-27B model, no fine-tuning, and
 TTS@8 candidate generation, Kozuchi agent resolves 374 of 500 SWE-bench
 Verified instances on the official cloud evaluator. Re-running the same
-27 B agent unchanged on Multi-SWE-bench Java resolves 41/128
+27B agent unchanged on Multi-SWE-bench Java resolves 41/128
 instances (32.03\%), placing first among strict open-weight submissions
-and fourth of 42 overall. Per-phase scaffold behaviour matches the
+and fourth of 42 overall. Per-phase scaffold behavior matches the
 Python run within $\pm 5$ percentage points on every phase, evidence that
-the harness is language agnostic. It ranks 12th among 135 public Python
-submissions and first among open-weight systems. The analysis shows that
+the same harness transfers from Python to Java. It ranks 12th among 135 public Python
+submissions and first among open-weight systems, with both Python and Java
+results comparing favorably against open/local peers by parameter count.
+The analysis shows that
 remaining failures are dominated by semantic correctness, Java-specific
 harness failures, and selection errors rather than proprietary-model
-advantages, while the CI workflow compresses operator-facing touch-points
-from five to one.
+advantages. 
+% Causal evidence in this submission isolates candidate count
+% and the cross-agent selector ($K{=}8$, +14 over the order baseline); the
+% phase graph, persistent state, action formatter, tool sandbox, and
+% CI-reuse mechanisms are reported as design-level evidence supported by
+% operational signatures and trajectory audits. 
+The industrial
+contribution is evaluation-pipeline replacement for pre-production agent
+assessment: the CI workflow compresses operator touch-points from five to
+one across heterogeneous internal clusters. 
+% We do not claim production
+% deployment of the agent itself; the evidence is benchmark-scale
+% evaluation.
 %The public artifact contains trajectories, selector choices, and evaluation outputs.
 \end{abstract}
 
@@ -322,16 +335,18 @@ from five to one.
 \section{Introduction}
 \label{sec:intro}
 Across our engineering organization, we observe a recurring
-industrial demand: developers want an LLM-based agent that takes an
+industrial demand: developers prefer an LLM-based agent that takes an
 issue description plus a repository state and emits a correct,
 test-passing patch. In SWE-bench-style
-deployments~\cite{jimenez2024swebench}, meeting that demand requires
+evaluations~\cite{jimenez2024swebench}, meeting that demand requires
 more than choosing a model~\cite{Zhengetal2024}: the surrounding harness must keep long,
 tool-using repair attempts auditable and repeatable. The central
 question for us became:
 \emph{how far can an open, locally hosted model go when embedded in an
 auditable repair harness and selected through cross-agent testing?}
-Four operational blockers shaped the design.
+Figure~\ref{fig:pareto} summarizes the resulting Python and Java
+position against open/local peers by parameter count.
+Four operational blockers shaped the design as follows.
 
 \begin{figure}[t]
   \centering
@@ -420,7 +435,10 @@ The CI reuse mode declared in \code{.gitlab-ci.yml} short-circuits 6 of
 \medskip
 
 This paper is an experience report on the harness and pipeline we built
-to address those four pains, and on what we learned operating it.
+to address those four pains, and on what we learned operating it. Its
+industrial contribution is the workflow replacement: multi-cluster
+orchestration, reusable artifacts, trajectory-level audit, and one-push
+benchmark reruns.
 \emph{Kozuchi Agent} comprises:
 \begin{itemize}
 \item a phase-driven SWE agent layered on \code{mini-swe-agent}, a
@@ -432,6 +450,17 @@ runs through \emph{cross-agent testing}~\cite{komoravolu2026agent}.
 \end{itemize}
 The released artifacts expose the resulting trajectories, selector
 choices, evaluation outputs, and additional deep analysis.
+
+\textbf{Scope of industrial claims.}
+The reported industrial impact is the internal evaluation-pipeline
+replacement described in Table~\ref{tab:workflow-replacement} (touch-points,
+reusable stages, cluster abstraction); we do not report production
+traffic, end-user developer KPIs, or deployment of the agent against
+proprietary internal repositories. The strongest causal evidence in this
+submission isolates candidate count and cross-agent selection; phase,
+handover, formatter, tool, and CI-reuse mechanisms are supported by
+operational signatures and artifact-level audits rather than
+component-removal reruns.
 
 \textbf{Contributions.}
 \noindent\textbf{C1. A phase-driven, model-agnostic SWE agent harness with auditable tools.}
@@ -446,20 +475,25 @@ We decompose issue resolution into eight semantically meaningful phases
 connected by explicit success and fallback transitions, separate the
 logical action contract from model-specific surface syntax, and expose a
 small deterministic tool sandbox for dynamic tracing, caller discovery,
-and guarded editing. Together these choices turn a free-form repair loop
-into an inspectable workflow whose state can be resumed and compared
-across open-weight and API-served backends.
+and guarded editing. These design mechanisms make a free-form repair
+loop inspectable: state can be resumed, audited, and compared across
+open-weight and API-served backends. C1 is supported by operational
+signatures (\S\ref{sec:observations}, \S\ref{sec:design}) and
+artifact-level audit (\S\ref{sec:artifact}), not by mechanism-removal
+ablations; controlled removals of the phase graph, formatter,
+persistent state, and tool sandbox are scoped as future work
+(\S\ref{sec:conclusion}).
 
 \noindent\textbf{C2. A CI-operated multi-cluster benchmark pipeline with reusable and regenerable artifacts.}
 % source: .gitlab-ci.yml; scripts/module_load.sh; pipeline/{bench,sft,rl,tts,
 %         data_synth,kg_synth,ci}/
 % source: paper/final/stats/pipeline_inventory.json
 % source: paper/final/sources/paper-src-test-prompt/{*.py, run_all.sh, README.md}
-% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/{*.py, build.sh}
+% source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/{*.py,csv/*.csv}
 A single CI pipeline coordinates benchmark inference, grading, data
 synthesis, optional post-training, test-time selection, and reporting
-across heterogeneous clusters. Its reuse mode allows operators to
-short-circuit expensive stages using previously validated outputs, while
+across heterogeneous clusters. Its reuse mode records which expensive
+stages can be short-circuited using previously validated outputs, while
 the published analysis scripts in \code{src/} regenerate every
 empirical value cited in RQ1--RQ6 directly from the SWE-bench and
 Multi-SWE-bench Java harness reports, trajectories, and cross-agent
@@ -478,8 +512,8 @@ candidate streams and 495 full message trajectories, separating selector
 regret from
 instance hardness (408 instances solved by at least one run, 234 by all
 runs, 92 by none) and surfacing content-level selector signals such as
-THOUGHT-block-to-action balance, rollback language, and error-marker
-asymmetries.
+\code{THOUGHT:}-block-to-action balance, rollback language, and
+error-marker asymmetries.
 
 \noindent\textbf{C4. Competitive open-weight repair results with statistical and failure-mode analysis.}
 % source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/
@@ -538,30 +572,13 @@ backbone beats the strongest same-class open-weight Java peer
 margin on Python.
 
 \textbf{Roadmap.}
-\S\ref{sec:related} situates the work among agentic SWE systems,
-industry-facing coding agents, training pipelines, and LLM-enabled
-CI/CD systems. \S\ref{sec:background} sets the SWE-bench, cluster,
-and prior-workflow background. \S\ref{sec:definitions} defines the
-runtime, trajectory, phase graph, tool-call contract,
-verifier/selector, and artifact boundary, and lists five invariants
-the runtime maintains.
-\S\ref{sec:observations} narrates five empirical observations that
-shaped the design. \S\ref{sec:design} describes the system in five
-layers (runtime, tools, pipeline, serving, CI).
-\S\ref{sec:design-tts} details the cross-agent test-time selector.
-\S\ref{sec:eval} answers six research questions on SWE-bench
-Verified and Multi-SWE-bench Java, all of them grounded in
-scripted analyses over the published Python TTS@8 and Java xcheck@8 artifacts: headline accuracy
-with uncertainty, peer-ranked position with multiplicity-corrected paired
-tests, structural breakdowns by repository, patch size, and trajectory
-effort, the failure taxonomy and operational-reliability profile, the
-TTS@8 selection lift and cost--diversity envelope, and cross-language
-transfer to Java using the same agent, backbone, and scaffold.
-\S\ref{sec:artifact} gives the artifact availability statement and
-release boundary for the public trajectories, reports, selector bundle,
-and analysis scripts.
-\S\ref{sec:lessons} states seven operational lessons.
-\S\ref{sec:conclusion} discusses future directions.
+\S\ref{sec:related}--\S\ref{sec:definitions} cover prior systems,
+industrial background, and the runtime definitions. \S\ref{sec:observations}--\S\ref{sec:design-tts}
+describe the observations, harness design, and cross-agent selector.
+\S\ref{sec:eval} reports six scripted analyses over the published
+Python TTS@8 and Java xcheck@8 artifacts. \S\ref{sec:lessons} states
+operational lessons, \S\ref{sec:conclusion} concludes, and
+\S\ref{sec:artifact} defines the public artifact boundary.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Related Work
@@ -646,40 +663,22 @@ denominator and peer set separate.
 \subsection{Agentic loops and base runtime}
 % source: .gitmodules (pip_modules/mini-swe-agent submodule);
 %         AGENTS.md (overview of repo and agent extension)
-Modern SWE agents follow an agentic loop: a tool-using LLM observes a
-shell, plans, runs a command, observes the result, and repeats~\cite{yao2023react,shinn2023reflexion}. We build
-on a minimal open-source runtime~\cite{miniswea} with harness-level
-support for long repairs: phase control, persistent shared state,
-deterministic tools, and model-independent action formatting. The
-artifact appendix defines the release boundary: trajectories, selector
-choices, evaluation outputs, and deep analysis are public, while agent
-and pipeline source code are not.
-
-\subsection{Multi-cluster operating context}
-% source: scripts/module_load.sh (hostname-prefix branching);
-%         paper/final/stats/pipeline_inventory.json
-Our infrastructure is heterogeneous and shared across many groups.
-Candidate generation, grading, and optional training run on different
-GPU and VM-backed clusters, each with different module systems,
-container support, storage paths, and queue behavior. The central
-methodological point is that the pipeline hides those differences
-behind a single cluster abstraction: a stage describes what work it
-needs, while the environment layer supplies the local launch details.
-Concrete cluster names and runner wiring are listed with the released
-artifact rather than in the main narrative.
+Kozuchi Agent uses \code{mini-swe-agent}~\cite{miniswea} as its base
+tool-using repair loop. Its contribution is the harness around that
+loop: phase control, persistent shared state, deterministic tools, and
+model-independent action formatting for long repairs.
 
 \subsection{The workflow we set out to replace}
 % source: README.md (Use), docs/HOW_TO_DEVELOP.md, pipeline/* scripts.
-Before Kozuchi Agent, each iteration required manually starting a vLLM
-server, launching a one-off repair-benchmark run, waiting hours, running Docker
-grading, and recording scores in a spreadsheet. SFT and RL experiments
-used separate branches and scripts; changing models or comparing
-trajectories required file edits and manual log reading, which are error prone. The harness
-replaces this with a CI-driven pipeline, one configurable agent, a fixed
-runtime contract, and a publishable artifact bundle. Table~\ref{tab:workflow-replacement}
-summarizes the workflow replacement; the engineer-minute estimate is
-bounded by published SWE-bench Docker-runtime and CI-adoption
-studies~\cite{epoch2024swebenchdocker,hilton2016ci}.
+Before Kozuchi Agent, each iteration crossed heterogeneous internal
+clusters and required manually starting a vLLM server, launching a
+one-off repair-benchmark run, waiting hours, running Docker grading, and
+recording scores in a spreadsheet. The harness replaces this workflow
+with a CI-driven pipeline, one configurable agent, a fixed runtime
+contract, and a publishable artifact bundle. Table~\ref{tab:workflow-replacement}
+summarizes this workflow inventory; the engineer-minute estimate is an
+order-of-magnitude operational estimate bounded by published SWE-bench
+Docker-runtime and CI-adoption studies~\cite{epoch2024swebenchdocker,hilton2016ci}.
 % Auto-generated grounded counts; sources per row in
 %   stats/workflow_replacement.tex (LaTeX comment header reproduces the
 %   workspace path of every cell). Provenance JSON in
@@ -819,40 +818,13 @@ trigger a strategy-change warning.
 \section{Motivating Empirical Observations}
 \label{sec:observations}
 
-The harness design emerged from operational failures in early
-prototypes; each observation below maps to a mechanism in
-\S\ref{sec:design}.
-
-\paragraph{O1 (Long conversations forget).}
-% source: configs/agent_sota.yaml agent.phases + system_template
-Single-prompt repair attempts skipped reproduction, re-investigated old
-locations, or patched code they had not understood. We responded with an
-explicit phase sequence and required the agent to state its workflow
-position at every turn.
-
-\paragraph{O2 (Tool syntax is a cliff).}
-% source: configs/agent_sota.yaml agent.action_format + action_format_inventory.json
-Different model families emit different tool-call bracketings. Separating
-the logical action from its surface syntax made model switching a
-configuration change rather than an agent fork.
-
-\paragraph{O3 (State must survive compression).}
-% source: configs/agent_sota.yaml instance_template + phases.*.definition
-Evidence stored only in conversation text can disappear when context is
-compressed. Reproduction notes, generated tests, traces, task boards, and
-handover memos therefore live in shared filesystem state.
-
-\paragraph{O4 (Shell alone localizes poorly).}
-% source: swe_sota_agent/tools/{line_trace,caller_trace,line_edit}.py + configs/agent_sota.yaml agent.tools
-Root-cause localization benefits from classic dynamic analysis. We added
-a small deterministic tool sandbox for line tracing, caller discovery,
-and guarded editing rather than a large, brittle tool zoo.
-
-\paragraph{O5 (CI cost is repeated work).}
-% source: README.md CI reuse mode + .gitlab-ci.yml reuse variables
-Benchmark stages take hours. Reuse mode lets operators hold validated
-artifacts fixed while changing one stage, which made repeated TTS@8 and
-selector sweeps practical.
+Early prototypes exposed recurring operational failures: long repair
+contexts lost evidence and repeated work, model-specific tool syntax made
+backend swaps brittle, shell-only debugging localized defects poorly, and
+multi-hour benchmark stages made recomputation expensive.  The system
+design below turns these observations into phase boundaries, durable
+shared state, deterministic tools, configurable action formats, and CI
+artifact reuse.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% System Design
@@ -868,8 +840,7 @@ makes those trajectories useful evidence: phase boundaries define what
 each run must produce, the agent chooses or synthesizes the tests during
 those phases, durable shared memory persists tests and handover state,
 deterministic tools make localization and edits inspectable, and
-cross-agent selection converts those independently chosen tests into the
-$B_{ij}$ and $R_{ij}$ signals used below.
+cross-agent selection converts those independently chosen tests into signals as defined in Eq~\S\ref{eq:score}.
 
 \subsection{Agent runtime contract}
 \label{sec:design-runtime}
@@ -905,6 +876,7 @@ rather than in the submitted patch.
 \textit{In the observed Python headline trajectories, phase visits use the
 configured phase names and the run terminates either in final reporting
 or in an explicit runtime outcome.}
+
 \emph{Argument.} The phase graph is declared in configuration, and the
 trajectory-derived phase summaries show complete coverage of the eight
 declared phases for the 495 persisted trajectories. We do not claim
@@ -1068,12 +1040,6 @@ reuse short-circuits let operators iterate on one stage without
 invalidating the rest. This follows standard CI practice of keeping
 frequent integration feedback cheap and repeatable~\cite{fowler2006ci,duvall2007ci}.
 
-% source: README.md (CI reuse mode) + .gitlab-ci.yml variables block
-Reuse mode lets the team hold a trajectory bundle fixed while
-experimenting with selector weights, or hold an environment fixed while
-testing a new model. It is the operational difference between a
-benchmark script and an industrial evaluation pipeline.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Cross-Agent Test-Time Selection
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1118,7 +1084,8 @@ fixed global constants in the submitted selector artifact; nevertheless,
 an artifact-only sweep over seven
 nearby weight pairs changes at most 35/495 selected candidates and
 5/500 estimated outcomes. We then pick
-$\arg\max_i \mathrm{score}(i)$, breaking ties by patch length. A tie
+$\arg\max_i \mathrm{score}(i)$; when execution evidence is indistinguishable,
+we break ties by shorter patch length as a conservative engineering heuristic. A tie
 means that at least two deduplicated patches are within
 $10^{-3}$ of the best score; this occurs on 304/495 covered
 instances. The selector summary is reproduced as
@@ -1171,8 +1138,9 @@ $376/408=92.2\%$ of the oracle union ceiling under the internal Docker
 re-grade. Pairwise completion
 overlap is high, so the useful diversity is mostly in \emph{which}
 instances are solved, not in whether runs cover
-different parts of SWE-bench Verified. The candidate-level decomposition
-sharpens the bound: for 92 instances, none of the eight runs produces a
+different parts of SWE-bench Verified. Table~\ref{tab:tts-decomp} gives
+the candidate-level decomposition that sharpens this bound: for 92
+instances, none of the eight runs produces a
 resolving candidate, so these instances cannot be recovered by a better
 selector. Only 174 instances are ``marginal''---resolved by some but not
 all runs ($1\le r_i\le 7$)---and therefore actually expose a selection
@@ -1221,7 +1189,7 @@ RQ1--RQ5 use SWE-bench Verified as the fixed Python task suite; RQ6
 uses Multi-SWE-bench Java as a cross-language validation track.
 The Python headline configuration uses a locally hosted model out of the box:
 the approach does not require training or fine-tuning before connecting
-the model to the agent runtime. For Python we run the same model eight times,
+the model to the agent runtime. For Python we run the agent with the same model eight times,
 archive each run's candidate patch and tests, and then apply the
 cross-agent selector described in \S\ref{sec:design-tts}. We report
 the official SWE-bench cloud evaluation as the primary Python result and
@@ -1231,6 +1199,23 @@ artifact and Java leaderboard rather than the Python Docker/cloud
 evaluator. This setup separates three questions for each track: how often
 the full system resolves issues, how it compares with published peers,
 and where remaining errors come from.
+
+\textbf{Reproducibility configuration.}
+The public artifact records two reproducibility layers: the declarative
+runtime configuration (\code{configs/agent\_sota.yaml}) and the executed
+Python sweep manifest (\code{provenance/sweep\_manifest.json}). The run
+uses backbone \code{Qwen/Qwen3.5-27B}~\cite{qwen35}, $K{=}8$ independent
+candidate runs, selector weights $w_B{=}0.3$ and $w_R{=}0.7$
+(\S\ref{sec:design-tts}), run labels \code{r01\_s1001} through
+\code{r08\_s1008}, and the tool set \code{line\_trace},
+\code{caller\_trace}, and \code{line\_edit}. The manifest records
+serving/run parameters including two-GPU tensor parallelism, 50 shards,
+\code{max\_model\_len=150000}, \code{max\_new\_tokens=16384},
+\code{step\_limit=1000}, \code{instance\_timeout=06:00:00}, and the
+best-known repository commit before submission; the analysis scripts use
+fixed seed \code{SEED=20260427}. Model weights remain external licensed
+dependencies (\S\ref{sec:artifact}), so the artifact pins the model identifier and run
+provenance rather than redistributing the checkpoint.
 
 The Python analysis uses the published TTS@8 artifacts: 495 SWE-bench harness
 reports, 495 trajectories, the cross-agent selection bundle, and the
@@ -1292,7 +1277,9 @@ paired per-instance outcome vectors (rather than aggregate rates) for
 all Python peer comparisons in RQ2. A run-to-run variance estimate beyond
 the eight-run sweep would require additional eight-run sweeps under
 the same Orchestra configuration; we instead report the per-run
-pass@1 dispersion in RQ5.
+pass@1 dispersion in RQ5 (eight independent decoding seeds,
+$\sigma{=}3.12$ resolved instances, range 334--343/500), which we treat
+as the within-configuration variance estimate for the headline.
 
 \subsection{RQ2: Peer-ranked position with multiplicity-corrected tests}
 \label{subsec:rq2}
@@ -1365,7 +1352,7 @@ the peer advantage as broad but not uniform: it is strongest on the
 large repositories that dominate the Verified denominator, while
 low-count repositories should be read as diagnostic failure clusters
 rather than stable rank evidence. \S\ref{subsec:rq6} extends the peer
-position analysis to Java, where the same 27 B configuration ranks first
+position analysis to Java, where the same 27B model configuration \textbf{ranks first}
 among strict open-weight submissions.
 
 \textbf{Threats.}
@@ -1566,7 +1553,10 @@ per-run pass@1.
 % own archived tests from the cross-agent selection table and then checks
 % that chosen run against its original per-run report. Missing selection
 % tables remain unresolved under the canonical N=500 denominator.
-\caption{Artifact-based TTS@8 ablation.}
+\caption{Artifact-based TTS@8 ablation. Scope: this table isolates
+candidate count ($K$) and selector design only; phase graph, formatter,
+persistent state, and tool sandbox are not ablated and are evidenced
+operationally in \S\ref{sec:design} and \S\ref{sec:lessons}.}
 \label{tab:selector-ablation}
 \input{\statpath{selector_ablation.tex}}
 \end{table}
@@ -1679,7 +1669,9 @@ harness change: Java uses Maven/Gradle and strict xcheck@8, while the
 Python headline uses pytest and TTS@8 (\S\ref{sec:design-tts}).  The
 phase graph, action contract, persistent state, and selection family
 remain the same. Figure~\ref{fig:cross-track} shows headline resolution
-with Wilson intervals~\cite{wilson1927score} and per-phase assistant-message share.
+with Wilson intervals~\cite{wilson1927score} and per-phase
+assistant-message share, while Table~\ref{tab:cross-track} summarizes
+the matched Python--Java evidence.
 
 \begin{figure}[t]
   \centering
@@ -1769,9 +1761,9 @@ contributions.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Production Planning and Lessons Learned
+%% Operational Planning and Lessons Learned
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Production Planning and Lessons Learned}
+\section{Operational Planning and Lessons Learned}
 \label{sec:lessons}
 
 % numeric provenance for this compressed operational summary:
@@ -1785,8 +1777,9 @@ contributions.
 %   - Python 374 cloud vs 376 Docker: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/headline.csv
 %     and trajectories/q35_verified500_tts8_75p2_submission_bundle_20260326-055715_merged500/bundle_manifest.json
 %   - Java 41/128 and strict open-weight rank: experiments/java/kozuchi-mswe-java-20260429/src/csv/{headline.csv,leaderboard.csv}
-The deployment lessons are operational rather than architectural.  First,
-phase boundaries beat free-form planning at long horizons: every Python
+The operational lessons from benchmark-scale use are practical rather
+than architectural.  First,
+phase boundaries kept long-horizon runs structured and auditable: every Python
 TTS@8 trajectory visits all eight phases, rework concentrates in
 \code{CODE\_FIX}$\leftrightarrow$\code{VERIFY\_PATCH}, and the same phase
 shape transfers to Java within $\pm5$ percentage points per phase
@@ -1802,15 +1795,20 @@ turns candidate diversity into accuracy without a learned verifier, while
 one cluster abstraction keeps multi-site runs reviewable.
 
 The artifact-derived operational indicators are consistent with those
-lessons: the workflow compresses five operator touch-points to one CI
-push (about 70 engineer-minutes saved per cycle), the runtime exposes
-four action formats across 17 model configs, six of nine CI stages are
-reusable, and five cluster environments sit behind \code{ENV\_NAME}.  On
-Python, 494/495 produced patches apply cleanly and the cloud-vs-Docker
-score drift is only 374 vs. 376 out of 500.  On Java, the same runtime
-contract reaches 41/128 (32.03\%) and ranks first among strict
-open-weight submissions, making cross-language transfer a measured
-operational outcome rather than an anecdotal consistency check.
+lessons: in the inventoried workflow, five operator touch-points become
+one CI push; the about-70-engineer-minute-per-cycle figure is an estimate
+derived from the published per-stage inventory and the SWE-bench
+Docker-runtime / CI-adoption anchors in prior work~\cite{epoch2024swebenchdocker,hilton2016ci}.
+It is not a measured before/after from a controlled developer pilot, and
+we report it as an order-of-magnitude operational claim rather than a
+productivity metric. The runtime exposes four action formats across 17
+model configs, six of nine CI stages are reusable, and five cluster
+environments sit behind \code{ENV\_NAME}.  On Python, 494/495 produced
+patches apply cleanly and the cloud-vs-Docker score drift is only 374
+vs. 376 out of 500.  On Java, the same runtime contract reaches 41/128
+(32.03\%) and ranks first among strict open-weight submissions, making
+cross-language transfer a measured operational outcome rather than an
+anecdotal consistency check.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Conclusion
@@ -1818,7 +1816,7 @@ operational outcome rather than an anecdotal consistency check.
 \section{Conclusion}
 \label{sec:conclusion}
 
-\textbf{Production plan.}
+\textbf{Operational readiness evidence.}
 % source: headline and uncertainty numbers from experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{headline.csv,cluster_bootstrap_headline.csv}
 % source: rank and peer-test numbers from experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{leaderboard.csv,multiple_comparison_corrected.csv}
 % source: compute medians and Pareto thresholds from experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/{trajectory_stats.csv,compute_resolution_pareto.csv}
@@ -1827,9 +1825,10 @@ operational outcome rather than an anecdotal consistency check.
 %   - first strict open-weight Java rank: leaderboard.csv + open-weight cohort
 %     described in analysis.java.md §2.1
 %   - "same agent/backbone/scaffold": comparison.md §1, analysis.java.md header.
-Kozuchi Agent targets conservative production use on large repositories,
-with evidence from SWE-bench Verified (Python) and Multi-SWE-bench Java
-Verified. Using a locally hosted open-weight model, no fine-tuning,
+Kozuchi Agent targets conservative pre-production evaluation of
+issue-to-patch agents on large repositories, with evidence from
+SWE-bench Verified (Python) and Multi-SWE-bench Java. Using a
+locally hosted open-weight model, no fine-tuning,
 eight candidate runs, and cross-agent testing, it resolves 374/500
 SWE-bench Verified instances (74.80\%, Wilson 95\% CI [70.82\%,
 78.41\%]; repository-clustered bootstrap [67.0\%, 79.8\%]) and 41/128
@@ -1847,10 +1846,13 @@ Python instances within 653 LLM calls.
 The results point to harness engineering---phase decomposition,
 single-command grammar, persistent shared filesystem, deterministic SE
 tools, cross-agent test selection, cluster indirection, and CI reuse---
-while ablations isolate only candidate count and selector signals. The
+while ablations isolate only candidate count and selector signals; we
+leave controlled per-mechanism ablations (no-phase, no-formatter,
+no-Orchestra, no-tools) to a follow-up that can re-use the published
+trajectory bundle without re-running TTS@8. The
 phase decomposition, action grammar, persistent state, and cross-agent
-selector transfer from Python to Java unchanged, supporting the
-language-agnostic claim. The selector adds +14 resolved Python instances;
+selector transfer from Python to Java unchanged, supporting the narrower
+cross-language harness-transfer claim. The selector adds +14 resolved Python instances;
 494/495 Python patches apply cleanly; and remaining Python errors are
 mainly semantic or selection failures: 91.3\% of unresolved instances
 have clean-applying patches that miss hidden tests, and 34 instances are
@@ -1865,65 +1867,32 @@ curve for controlled early stopping.
 % impact in operational signatures summarized in \S\ref{sec:lessons}
 % rather than developer-acceptance metrics from a controlled internal
 % pilot; the latter is the planned camera-ready extension.
-Industrial-impact claims remain limited to workflow replacement,
-cross-evaluator consistency, and the Python--Java benchmark evidence;
-Java cross-track results are first-class evidence rather than a single
-consistency point, while controlled pilots and broader multilingual
-benchmarks remain future work.
+Industrial-impact claims are deliberately scoped to internal
+evaluation-pipeline replacement (Table~\ref{tab:workflow-replacement},
+\S\ref{sec:lessons}), cross-evaluator consistency (374/376 agreement),
+and Python--Java benchmark transfer of the same agent. Production
+deployment against proprietary repositories, end-user developer studies,
+field A/B telemetry, and broader multilingual benchmarks are explicit
+future work.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Artifact Availability
+%% Data Availability Statement
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Artifact Availability}
-\label{sec:artifact}
-
-The source index for the references below is maintained in \code{paper/final/source-index.md};
-it records the URL and paper-specific use of each external source.
-
-The public artifact is the SWE-bench Verified submission folder
-at \url{https://github.com/kimusaku/experiments}. It contains the 495
-trajectories (\code{trajs/}), harness reports (\code{logs/}),
-predictions (\code{all\_preds.jsonl}), cross-agent selection bundle
-(\code{xcheck/}), and released analysis scripts under \code{src/}. From
-these files alone, \code{src/build.sh} regenerates the empirical
-RQ1--RQ5 values; the Java submission directory under the same artifact
-family regenerates the RQ6 values. All RQ figures,
-trajectory/conversation audits, and the selector re-run over the eight
-published candidate streams are included in that artifact family.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Hidden Data Availability Statement (not rendered in this review build)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\iffalse
 \section{Data Availability Statement}
+\label{sec:artifact}
 \label{sec:data}
+The public review artifact including all analysis is available at
+\url{https://github.com/marscod/kozuchi-agent-artifact}. 
 
-% Mandatory per ASE 2026 CFP (paper/ase2026/cfp.md): placed after Conclusion
-% and within the page limit; describe artifacts and DOI.
-The public artifact backing this paper consists of the SWE-bench
-Verified submission materials and trajectory bundle described in
-\S\ref{sec:eval}: predictions, results, metadata, eight per-run
-trajectory sets, cross-agent test tables, selector outputs, CSVs,
-figures, and deep-analysis summaries. All artifacts and additional deep
-analysis can be found there. Cluster-specific
-paths (e.g., \code{/home/share-tmp/frj/takane-for-coding},
-\code{/lustre/share/takane-for-coding}) are internal and not part of
-the public artifact.
-Model weights for \code{Qwen/Qwen3.5-27B} and the other backends
-inventoried in \code{\statpath{model\_inventory.tex}}
-(Table~\ref{tab:models}) must be obtained from their respective
-providers under their licenses. Some cluster-specific runner
-configuration (GitLab runner tokens, internal SLURM partitions) is
-omitted intentionally.
-
-\begin{table}[t]
-\centering
-\scriptsize
-\caption{Backend serving inventory.}
-\label{tab:models}
-\input{\statpath{model_inventory.tex}}
-\end{table}
-\fi
+A Zenodo
+archival record has been reserved for camera-ready release
+(reserved DOI: 10.5281/zenodo.19941649). It contains the
+submission folders, trajectories, logs, predictions, selector bundle,
+generated summaries, figures, audits, and scripts needed to regenerate
+RQ1--RQ6.
+% Model weights for
+% \code{Qwen/Qwen3.5-27B} and other inventoried backends must be obtained
+% from their providers under their licenses.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% References
@@ -2159,7 +2128,7 @@ Observable content gives selector-relevant signals: \code{NameError} is
 9.3$\times$ more common in resolved trajectories, rollback language is
 1.78$\times$ more common in unresolved trajectories, and the only
 positive-direction numeric signal for resolution is the
-THOUGHT-block-to-action ratio (Cliff's $\delta{=}+0.13$). These
+\code{THOUGHT:}-block-to-action ratio (Cliff's $\delta{=}+0.13$). These
 model-free trajectory signals could help recover part of the 6.8~pp
 selector headroom in Table~\ref{tab:tts-decomp} without regenerating
 candidates.

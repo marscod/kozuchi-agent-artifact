@@ -1,67 +1,49 @@
 """Inventory of CI stages, cluster tags, and reuse-mode variables.
 
-Reads ``.gitlab-ci.yml`` and ``scripts/module_load.sh`` to produce a
-machine-readable summary of the multi-cluster pipeline that the
-manuscript discusses.
+Reads the redacted operational-metadata CSVs under
+``data/operational_metadata/`` and produces a machine-readable summary
+of the multi-cluster pipeline that the manuscript discusses. The raw
+``.gitlab-ci.yml`` and ``scripts/module_load.sh`` are not shipped with
+the artifact (they contain internal runner tags, SLURM partitions, and
+tokens); only the derived counts are released.
 """
 
 from __future__ import annotations
 
+import csv
 import json
-import re
 
-from _paths import GITLAB_CI, MODULE_LOAD, STATS_DIR
+from _paths import (
+    CI_CLUSTER_TAGS_CSV,
+    CI_REUSE_VARS_CSV,
+    CI_STAGES_CSV,
+    CLUSTER_ENV_NAMES_CSV,
+    STATS_DIR,
+)
+
+
+def _read_column(path, column: str) -> list[str]:
+    with path.open() as f:
+        return [row[column] for row in csv.DictReader(f) if row.get(column)]
+
+
+def _read_stages() -> tuple[list[str], dict[str, str]]:
+    stages: list[tuple[int, str, str]] = []
+    with CI_STAGES_CSV.open() as f:
+        for row in csv.DictReader(f):
+            order = int(row["order"])
+            stages.append((order, row["stage"], row.get("notes", "")))
+    stages.sort(key=lambda r: r[0])
+    return [s for _, s, _ in stages], {s: n for _, s, n in stages}
 
 
 def main() -> None:
     STATS_DIR.mkdir(parents=True, exist_ok=True)
-    ci_text = GITLAB_CI.read_text()
 
-    m_stages = re.search(r"^stages:\s*\n((?:\s+-\s+\w+\s*\n)+)", ci_text, re.MULTILINE)
-    stages: list[str] = []
-    if m_stages:
-        for ln in m_stages.group(1).splitlines():
-            ms = re.match(r"\s+-\s+(\w+)", ln)
-            if ms:
-                stages.append(ms.group(1))
-
-    # The CI uses block-style tag lists, e.g.
-    #     tags:
-    #       - kagura
-    cluster_tags: list[str] = []
-    seen_tags: set[str] = set()
-    lines = ci_text.splitlines()
-    for i, ln in enumerate(lines):
-        if re.match(r"^\s+tags:\s*$", ln):
-            for j in range(i + 1, min(i + 6, len(lines))):
-                m = re.match(r"^\s+-\s+\[?(\w+)\]?\s*$", lines[j])
-                if not m:
-                    break
-                t = m.group(1)
-                if t not in seen_tags:
-                    seen_tags.add(t)
-                    cluster_tags.append(t)
-        m_inline = re.match(r"^\s+tags:\s*\[\s*(\w+)\s*\]\s*$", ln)
-        if m_inline and m_inline.group(1) not in seen_tags:
-            seen_tags.add(m_inline.group(1))
-            cluster_tags.append(m_inline.group(1))
-    cluster_tags = sorted(cluster_tags)
-
-    reuse_vars = sorted(
-        set(
-            re.findall(
-                r"\b(PIPELINE_[A-Z0-9_]+_DIR|PHASE_SFT_ADAPTER_DIRS_FILE)\b",
-                ci_text,
-            )
-        )
-    )
-
-    env_block = MODULE_LOAD.read_text() if MODULE_LOAD.exists() else ""
-    env_names = sorted(set(re.findall(r'ENV_NAME"\s*==\s*"(\w+)"', env_block)))
-    if not env_names:
-        env_names = sorted(
-            set(re.findall(r"\b(kagura|stratus|ashitaka|abci|azalea)\b", env_block))
-        )
+    stages, stage_notes = _read_stages()
+    cluster_tags = sorted(set(_read_column(CI_CLUSTER_TAGS_CSV, "tag")))
+    reuse_vars = sorted(set(_read_column(CI_REUSE_VARS_CSV, "variable")))
+    env_names = sorted(set(_read_column(CLUSTER_ENV_NAMES_CSV, "env_name")))
 
     out = {
         "stages": stages,
@@ -73,26 +55,16 @@ def main() -> None:
     (STATS_DIR / "pipeline_inventory.json").write_text(json.dumps(out, indent=2))
 
     tex = [
-        "% Auto-generated: GitLab CI stage list (.gitlab-ci.yml).",
+        "% Auto-generated: GitLab CI stage list (redacted from upstream .gitlab-ci.yml).",
         r"\begin{tabular}{ll}",
         r"\toprule",
         r"Stage & Notes \\",
         r"\midrule",
     ]
-    notes = {
-        "prepare": "Prepare venv / pin pip modules",
-        "test": "Run repo-level pytest on stratus",
-        "bench": "Inference seed runs (multi-cluster)",
-        "synth": "Build SFT data from prior trajectories",
-        "sft": "Supervised fine-tuning",
-        "rl": "Reinforcement learning",
-        "bench_post": "Re-bench with SFT/RL adapters",
-        "tts": "Test-time selection over multiple runs",
-        "report": "Aggregate report job",
-    }
     for s in stages:
         escaped = s.replace("_", r"\_")
-        tex.append(f"\\code{{{escaped}}} & {notes.get(s, '--')} \\\\")
+        note = stage_notes.get(s, "--") or "--"
+        tex.append(f"\\code{{{escaped}}} & {note} \\\\")
     tex.append(r"\bottomrule")
     tex.append(r"\end{tabular}")
     (STATS_DIR / "pipeline_inventory.tex").write_text("\n".join(tex) + "\n")

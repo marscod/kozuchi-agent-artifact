@@ -18,7 +18,7 @@
       "kagura",
       "stratus"
     ],
-    "source": ".gitlab-ci.yml; scripts/module_load.sh"
+    "source": "data/operational_metadata/{ci_stages,ci_reuse_vars,cluster_env_names}.csv"
   },
   "configs": {
     "n_model_configs": 17,
@@ -29,7 +29,7 @@
     "n_phases_in_agent_yaml": 8,
     "n_skills_in_agent_yaml": 14,
     "n_tools_in_agent_yaml": 3,
-    "source": "configs/; configs/agent_sota.yaml; swe_sota_agent/tools/"
+    "source": "data/configs/; data/configs/agent_sota.yaml; data/operational_metadata/tool_files.csv"
   },
   "results": {
     "resolved_official_cloud": 374,
@@ -73,7 +73,7 @@
       "epoch_swebench_docker_2025",
       "hilton_2016_ase_ci"
     ],
-    "source": "paper/final/main.tex \u00a73.4 narrative + README.md \"Use\" section + docs/HOW_TO_DEVELOP.md + pipeline/bench/* + .gitlab-ci.yml"
+    "source": "paper/final/main.tex \u00a73.4 narrative + data/operational_metadata/ (redacted CI / cluster counts)"
   },
   "published_anchors": {
     "epoch_swebench_docker_2025": {
