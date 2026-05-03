@@ -7,8 +7,7 @@ This directory is the **self-contained artifact** for the paper:
 
 Everything cited in the paper — every numeric value, every figure,
 every table, every trajectory-bundle counter — is regenerable from
-files **inside this folder only**. Nothing ever points to a path
-outside `paper/artifacts/`.
+files **inside this folder only**.
 
 | Quick links | What it gives you |
 |---|---|
