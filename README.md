@@ -5,12 +5,6 @@ This directory is the **self-contained artifact** for the paper:
 > *Kozuchi Agent: A Language-Agnostic Open-Weight Agent for Software Repair*
 > (Bahrami et al., manuscript under review)
 
-The full paper PDF is at [`paper/main.pdf`](paper/main.pdf), and the
-LaTeX sources are at [`paper/main.tex`](paper/main.tex). The bundled
-LaTeX bibliography is [`paper/references.bib`](paper/references.bib);
-its annotated index lives in
-[`REFERENCES_INDEX.md`](REFERENCES_INDEX.md).
-
 Everything cited in the paper — every numeric value, every figure,
 every table, every trajectory-bundle counter — is regenerable from
 files **inside this folder only**. Nothing ever points to a path
