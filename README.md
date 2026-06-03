@@ -70,6 +70,8 @@ paper/artifacts/
 ---
 
 ## 2. Quick-start
+## Download Trajectory Dataset
+You may download datasets for both Python and Java from [Zenodo](https://zenodo.org/records/19941649?preview=1&token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjIxMTZmNzIwLTIyYTYtNDcwMi1iYTEwLTRhYmQyZTE3YzY1OSIsImRhdGEiOnt9LCJyYW5kb20iOiIwNzg0MDQ0OWI1MzBmNDUwODE2YjQxYjVmMjIzYmU3MiJ9.zVk_UhMOeTJR0iFIuIwI2MRlek-JRnRLDOt1rfZrWS9x8poQFvlU6QTJTfhCr0By8gpDt5eHC6F3honpOdVbGw) with reserved DOI: [10.5281/zenodo.19941649](https://zenodo.org/records/19941649?preview=1&token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjIxMTZmNzIwLTIyYTYtNDcwMi1iYTEwLTRhYmQyZTE3YzY1OSIsImRhdGEiOnt9LCJyYW5kb20iOiIwNzg0MDQ0OWI1MzBmNDUwODE2YjQxYjVmMjIzYmU3MiJ9.zVk_UhMOeTJR0iFIuIwI2MRlek-JRnRLDOt1rfZrWS9x8poQFvlU6QTJTfhCr0By8gpDt5eHC6F3honpOdVbGw) . Alternatively, you may review pre-rendered notebooks.
 
 ### 2.1 Regenerate every paper number and figure
 
