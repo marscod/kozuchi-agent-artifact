@@ -1,3 +1,6 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19941649.svg)](https://doi.org/10.5281/zenodo.19941649)
+![Python](https://img.shields.io/badge/python-3.11+-blue.svg)
+![License](https://img.shields.io/badge/license-Apache--2.0-green.svg)
 # Kozuchi Agent — Reproducibility Artifact
 
 This directory is the **self-contained artifact** for the paper:
