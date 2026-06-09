@@ -4,6 +4,7 @@
 
 # Kozuchi Agent — Reproducibility Artifact
 
+
 This directory is the **self-contained artifact** for the paper:
 
 > *Kozuchi Agent: A Language-Agnostic Open-Weight Agent for Software Repair*
@@ -235,3 +236,5 @@ The build script writes `paper/main.pdf` (and a copy at
 `paper/build/main.pdf`). It uses the bundled ACM class files
 ([`paper/acmart.cls`](paper/acmart.cls), etc.) so no internet access
 is required.
+
+<img width="50%" height="50%" alt="image" src="https://github.com/user-attachments/assets/700fea2d-14da-458f-a65e-09c34f86d647" />
