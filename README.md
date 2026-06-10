@@ -1,8 +1,17 @@
 [![Zenodo](https://img.shields.io/badge/Zenodo-Draft-blue)](https://zenodo.org/records/19941649?preview=1)
 ![Python](https://img.shields.io/badge/python-3.11+-blue.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Project Website](https://img.shields.io/badge/%F0%9F%8C%90_Project_Website-live-ff5c49?style=flat&labelColor=1b2430)](https://marscod.github.io/kozuchi-agent-artifact/)
 
 # Kozuchi Agent — Reproducibility Artifact
+
+> [!TIP]
+> ### 🆕 **New: Interactive Project Website**
+> Explore the paper's headline results, architecture, and one-command reproduction guide on the new project website:
+>
+> ### 🌐 **[marscod.github.io/kozuchi-agent-artifact](https://marscod.github.io/kozuchi-agent-artifact/)**
+>
+> 📄 [Paper PDF](https://marscod.github.io/kozuchi-agent-artifact/paper/main.pdf) · 📓 [Rendered walkthrough notebook](https://marscod.github.io/kozuchi-agent-artifact/notebooks/reproduce.html) · 🗃 [Dataset on Zenodo (under review — preview access)](https://zenodo.org/records/19941649?preview=1&token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjIxMTZmNzIwLTIyYTYtNDcwMi1iYTEwLTRhYmQyZTE3YzY1OSIsImRhdGEiOnt9LCJyYW5kb20iOiIwNzg0MDQ0OWI1MzBmNDUwODE2YjQxYjVmMjIzYmU3MiJ9.zVk_UhMOeTJR0iFIuIwI2MRlek-JRnRLDOt1rfZrWS9x8poQFvlU6QTJTfhCr0By8gpDt5eHC6F3honpOdVbGw)
 
 
 This directory is the **self-contained artifact** for the paper:
@@ -237,4 +246,6 @@ The build script writes `paper/main.pdf` (and a copy at
 ([`paper/acmart.cls`](paper/acmart.cls), etc.) so no internet access
 is required.
 
-<img width="50%" height="50%" alt="image" src="https://github.com/user-attachments/assets/700fea2d-14da-458f-a65e-09c34f86d647" />
+<p align="center">
+  <img width="40%" alt="Kozuchi AI Agent mascot — 小槌 (Kozuchi), the magic mallet that brings valuable outcomes" src="figures/kozuchi.png" />
+</p>

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kozuchi Agent — A Language-Agnostic Open-Weight Agent for Software Repair</title>
+<meta name="description" content="Reproducibility artifact for Kozuchi Agent: 74.80% on SWE-bench Verified with a 27B open-weight model; 32.03% on Multi-SWE-bench Java.">
+<meta property="og:title" content="Kozuchi Agent — Reproducibility Artifact">
+<meta property="og:description" content="74.80% on SWE-bench Verified with a 27B open-weight model. Every paper number regenerable with one command.">
+<meta property="og:image" content="static/hero-swebench-27b.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafbff;
+    --panel: #ffffff;
+    --line: #e7ebf4;
+    --ink: #141a26;
+    --muted: #5b6678;
+    --coral: #ff3d5e;
+    --orange: #ff8a3d;
+    --violet: #6c5ce7;
+    --blue: #2f6bff;
+    --teal: #00b894;
+    --grad: linear-gradient(90deg, var(--coral), var(--orange));
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+    --radius: 18px;
+    --shadow: 0 10px 34px rgba(20,26,38,.08);
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Inter", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.65; overflow-x: hidden;
+  }
+  ::selection { background: var(--coral); color: #fff; }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ambient color wash */
+  .mesh {
+    position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(720px 440px at 14% -6%, rgba(255,61,94,.10), transparent 60%),
+      radial-gradient(640px 420px at 88% -2%, rgba(108,92,231,.10), transparent 60%),
+      radial-gradient(760px 520px at 50% 112%, rgba(47,107,255,.08), transparent 60%);
+  }
+
+  /* sticky glass nav */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    background: rgba(250,251,255,.78);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner { display: flex; align-items: center; gap: 22px; height: 58px; }
+  .brand { font-weight: 800; font-size: 16px; letter-spacing: -.01em; color: var(--ink); }
+  .brand em { font-style: normal; background: var(--grad);
+    -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .nav-links { display: flex; gap: 18px; margin-left: auto; }
+  .nav-links a { color: var(--muted); font-size: 14px; font-weight: 600; }
+  .nav-links a:hover { color: var(--ink); text-decoration: none; }
+  @media (max-width: 720px) { .nav-links a:not(.keep) { display: none; } }
+
+  /* hero */
+  header { padding: 64px 0 56px; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 300px; gap: 48px; align-items: center; }
+  .hero-copy { text-align: left; }
+  .hero-copy .links { justify-content: flex-start; }
+  .hero-mascot { text-align: center; }
+  .hero-mascot img {
+    width: 100%; max-width: 300px; border-radius: 22px;
+    border: 1px solid var(--line);
+    box-shadow: 0 26px 60px rgba(108,92,231,.28);
+    animation: floaty 6s ease-in-out infinite;
+  }
+  .hero-mascot .mascot-quote { font-size: 13px; color: var(--muted); margin-top: 14px; font-style: italic; }
+  @keyframes floaty { 50% { transform: translateY(-10px) rotate(.6deg); } }
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+    .hero-copy { text-align: center; }
+    .hero-copy .links { justify-content: center; }
+    .hero-mascot img { max-width: 240px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .hero-mascot img { animation: none; } }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--violet); border: 1px solid rgba(108,92,231,.35); background: rgba(108,92,231,.07);
+    border-radius: 999px; padding: 6px 16px; margin-bottom: 26px;
+  }
+  .pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--violet);
+    box-shadow: 0 0 10px var(--violet); animation: pulse 2.2s infinite; }
+  @keyframes pulse { 50% { opacity: .35; } }
+  h1 { font-size: clamp(42px, 7vw, 76px); font-weight: 900; line-height: 1.04; letter-spacing: -.03em; }
+  h1 .grad { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .subtitle { font-size: clamp(17px, 2.4vw, 22px); color: var(--muted); margin-top: 18px; font-weight: 500;
+    max-width: 700px; margin-left: auto; margin-right: auto; }
+  .authors { margin-top: 16px; color: var(--muted); font-size: 15px; }
+
+  .links { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 9px; padding: 12px 24px; border-radius: 14px;
+    font-weight: 600; font-size: 15px; text-decoration: none !important;
+    background: var(--panel); color: var(--ink); border: 1px solid var(--line);
+    box-shadow: 0 2px 10px rgba(20,26,38,.05);
+    transition: transform .15s, box-shadow .15s, border-color .15s;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: #d4dbeb; }
+  .btn.hot { background: var(--grad); border: none; color: #fff; box-shadow: 0 10px 28px rgba(255,61,94,.32); }
+  .btn.hot:hover { box-shadow: 0 14px 36px rgba(255,61,94,.4); }
+  .btn small { font-weight: 500; opacity: .75; font-size: 12px; }
+
+  /* stat strip */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-top: 52px; }
+  .stat {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 26px 18px; text-align: center; position: relative; overflow: hidden; box-shadow: var(--shadow);
+  }
+  .stat::before { content: ""; position: absolute; inset: 0 0 auto; height: 4px; background: var(--c, var(--grad)); }
+  .stat b { display: block; font-size: 36px; font-weight: 900; letter-spacing: -.03em;
+    color: var(--ck, var(--coral)); font-variant-numeric: tabular-nums; }
+  .stat span { font-size: 13.5px; color: var(--muted); display: block; margin-top: 6px; }
+  .stat.s1 { --c: linear-gradient(90deg,#ff3d5e,#ff8a3d); --ck: #ff3d5e; }
+  .stat.s2 { --c: linear-gradient(90deg,#6c5ce7,#a55eea); --ck: #6c5ce7; }
+  .stat.s3 { --c: linear-gradient(90deg,#2f6bff,#00b8d4); --ck: #2f6bff; }
+  .stat.s4 { --c: linear-gradient(90deg,#00b894,#7bed9f); --ck: #00a37f; }
+
+  /* sections */
+  section { padding: 74px 0; }
+  section.tint { background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .kicker { font-family: var(--mono); font-size: 13px; letter-spacing: .12em;
+    text-transform: uppercase; margin-bottom: 12px; font-weight: 600; color: var(--kc, var(--coral)); }
+  .sec-head { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+  h2 { font-size: clamp(26px, 4vw, 36px); font-weight: 800; letter-spacing: -.02em; }
+  .browse {
+    display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700;
+    color: var(--kc, var(--coral)); background: color-mix(in srgb, var(--kc, var(--coral)) 8%, white);
+    border: 1px solid color-mix(in srgb, var(--kc, var(--coral)) 30%, white);
+    border-radius: 999px; padding: 5px 14px; text-decoration: none !important;
+    transition: transform .14s, box-shadow .14s;
+  }
+  .browse:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(20,26,38,.12); }
+  p.lead { font-size: 17px; color: var(--muted); max-width: 780px; }
+  p.lead strong, ul.checks strong { color: var(--ink); }
+
+  figure { margin: 34px 0 0; text-align: center; }
+  figure a { display: inline-block; border-radius: var(--radius); }
+  figure img {
+    max-width: 100%; border-radius: var(--radius); border: 1px solid var(--line);
+    background: #fff; box-shadow: var(--shadow); display: block;
+    transition: transform .2s, box-shadow .2s;
+  }
+  figure a:hover img { transform: translateY(-3px); box-shadow: 0 20px 50px rgba(20,26,38,.14); }
+  figcaption { font-size: 14px; color: var(--muted); margin-top: 14px; max-width: 720px;
+    margin-left: auto; margin-right: auto; }
+  figcaption .open-hint { font-size: 12.5px; color: var(--blue); }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 30px; }
+  @media (max-width: 760px) { .grid2 { grid-template-columns: 1fr; } }
+
+  /* paper snapshot */
+  .paper-flex { display: grid; grid-template-columns: 340px 1fr; gap: 44px; align-items: center; margin-top: 26px; }
+  @media (max-width: 820px) { .paper-flex { grid-template-columns: 1fr; } }
+  .paper-snap { perspective: 1000px; text-align: center; }
+  .paper-snap a { display: inline-block; }
+  .paper-snap img {
+    width: 100%; max-width: 340px; border-radius: 12px; border: 1px solid var(--line);
+    box-shadow: 0 24px 50px rgba(20,26,38,.18);
+    transform: rotateY(-7deg) rotateX(2deg);
+    transition: transform .25s, box-shadow .25s;
+  }
+  .paper-snap a:hover img { transform: rotateY(0) rotateX(0) translateY(-4px);
+    box-shadow: 0 30px 60px rgba(20,26,38,.22); }
+  .paper-snap .tag { font-size: 13px; color: var(--muted); margin-top: 14px; }
+  .paper-points { list-style: none; padding: 0; }
+  .paper-points li { padding: 10px 0 10px 34px; position: relative; color: var(--muted); }
+  .paper-points li::before { content: "→"; position: absolute; left: 0; color: var(--violet); font-weight: 800; }
+  .paper-points strong { color: var(--ink); }
+
+  /* design pillars */
+  .pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px; margin-top: 26px; }
+  .pillar {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+    padding: 18px 20px; box-shadow: 0 2px 10px rgba(20,26,38,.04); position: relative;
+    border-left: 4px solid var(--pc, var(--coral));
+    transition: transform .16s, box-shadow .16s;
+  }
+  .pillar:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(20,26,38,.12); }
+  .pillar b { display: block; font-size: 15px; font-weight: 800; margin-bottom: 5px; color: var(--pc, var(--coral)); }
+  .pillar span { font-size: 13.5px; color: var(--muted); }
+
+  /* code */
+  pre {
+    background: #10151f; color: #e7edf7; border-radius: var(--radius);
+    font-family: var(--mono); font-size: 14px; padding: 22px 24px;
+    overflow-x: auto; line-height: 1.8; margin-top: 22px; box-shadow: var(--shadow);
+  }
+  pre .c { color: #6b788c; }
+  pre .p { color: var(--orange); user-select: none; }
+  code.inline { font-family: var(--mono); font-size: .88em; background: #f1f4fb;
+    border: 1px solid var(--line); border-radius: 7px; padding: 2px 7px; color: var(--violet); }
+
+  /* checklist */
+  ul.checks { list-style: none; margin-top: 18px; max-width: 800px; padding: 0; }
+  ul.checks li { padding: 14px 18px 14px 46px; position: relative; margin-bottom: 10px; color: var(--muted);
+    background: var(--panel); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 2px 10px rgba(20,26,38,.04); }
+  ul.checks li::before { content: "✓"; position: absolute; left: 18px; top: 13px;
+    color: var(--teal); font-weight: 900; }
+
+  /* cards */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 28px; }
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 22px 24px; text-decoration: none !important; color: inherit; display: block; position: relative;
+    box-shadow: 0 2px 10px rgba(20,26,38,.04);
+    border-top: 4px solid var(--cc, var(--coral));
+    transition: transform .18s, box-shadow .18s;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(20,26,38,.13); }
+  .card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .card h3 code { font-family: var(--mono); font-size: 14px; color: var(--cc, var(--coral)); }
+  .card p { font-size: 14px; color: var(--muted); }
+  .card .arrow { position: absolute; top: 18px; right: 20px; color: var(--muted); transition: transform .18s, color .18s; }
+  .card:hover .arrow { transform: translate(3px, -3px); color: var(--cc, var(--coral)); }
+  .card.c1 { --cc: #ff3d5e; } .card.c2 { --cc: #ff8a3d; } .card.c3 { --cc: #6c5ce7; }
+  .card.c4 { --cc: #2f6bff; } .card.c5 { --cc: #00b894; } .card.c6 { --cc: #e84393; }
+
+  /* zenodo note */
+  .note {
+    display: flex; gap: 12px; align-items: flex-start; max-width: 800px; margin-top: 20px;
+    background: rgba(255,138,61,.08); border: 1px solid rgba(255,138,61,.35);
+    border-radius: 14px; padding: 14px 18px; font-size: 14.5px; color: #8a5a2b;
+  }
+  .note b { color: #6e4115; }
+
+  /* bibtex */
+  .bibtex {
+    background: #10151f; border-radius: var(--radius); box-shadow: var(--shadow);
+    padding: 22px 24px; font-family: var(--mono); font-size: 13.5px; white-space: pre;
+    overflow-x: auto; color: #aab6c8; margin-top: 20px; position: relative;
+  }
+  .copy-btn {
+    position: absolute; top: 12px; right: 12px; font-family: "Inter", sans-serif; font-size: 12.5px;
+    font-weight: 600; color: #fff; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+    border-radius: 9px; padding: 6px 13px; cursor: pointer; transition: background .15s;
+  }
+  .copy-btn:hover { background: rgba(255,255,255,.22); }
+
+  /* animated tour */
+  .tour { text-align: center; }
+  .tour img {
+    max-width: 100%; width: 820px; border-radius: var(--radius); border: 1px solid var(--line);
+    box-shadow: 0 24px 60px rgba(20,26,38,.16);
+  }
+
+  /* reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  footer { padding: 46px 0 60px; text-align: center; color: var(--muted); font-size: 14px;
+    border-top: 1px solid var(--line); background: #fff; }
+</style>
+</head>
+<body>
+<div class="mesh" aria-hidden="true"></div>
+
+<nav>
+  <div class="wrap nav-inner">
+    <span class="brand"><em>Kozuchi</em>&nbsp;Agent</span>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#paper">Paper</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#results">Results</a>
+      <a href="#reproduce">Reproduce</a>
+      <a href="#artifact">Artifact</a>
+      <a class="keep" href="https://github.com/marscod/kozuchi-agent-artifact">GitHub ↗</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="pill"><span class="dot"></span>Under review · ASE 2026 · Reproducibility Artifact</div>
+        <h1>Kozuchi <span class="grad">Agent</span></h1>
+        <p class="subtitle">A language-agnostic, <strong>open-weight</strong> agent for software repair —
+          state-of-the-art parameter efficiency on SWE-bench Verified with a 27B model.</p>
+        <p class="authors">Bahrami et&nbsp;al. — manuscript under review</p>
+        <div class="links">
+          <a class="btn hot" href="paper/main.pdf">📄&nbsp; Paper (PDF)</a>
+          <a class="btn" href="https://github.com/marscod/kozuchi-agent-artifact">⭐&nbsp; Artifact Repository</a>
+          <a class="btn" href="https://zenodo.org/records/19941649?preview=1&token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjIxMTZmNzIwLTIyYTYtNDcwMi1iYTEwLTRhYmQyZTE3YzY1OSIsImRhdGEiOnt9LCJyYW5kb20iOiIwNzg0MDQ0OWI1MzBmNDUwODE2YjQxYjVmMjIzYmU3MiJ9.zVk_UhMOeTJR0iFIuIwI2MRlek-JRnRLDOt1rfZrWS9x8poQFvlU6QTJTfhCr0By8gpDt5eHC6F3honpOdVbGw">🗃&nbsp; Dataset (Zenodo) <small>· under review</small></a>
+          <a class="btn" href="notebooks/reproduce.html">📓&nbsp; Walkthrough Notebook</a>
+          <a class="btn" href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/INDEX.md">🔍&nbsp; Number Index</a>
+        </div>
+      </div>
+      <div class="hero-mascot">
+        <img src="static/kozuchi-web.png" alt="Kozuchi AI Agent mascot holding the kozuchi magic mallet">
+        <div class="mascot-quote">小槌 (Kozuchi) — "the magic mallet that brings valuable outcomes."<br>We swing it with intelligence. ✨</div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat s1 reveal"><b data-count="74.80" data-suffix="%">0%</b><span>SWE-bench Verified<br>(374 / 500 resolved)</span></div>
+      <div class="stat s2 reveal"><b>#1</b><span>open-weight agent<br>(rank 12 / 135 overall)</span></div>
+      <div class="stat s3 reveal"><b data-count="27" data-suffix="B">0B</b><span>parameters — smallest model<br>on the Pareto frontier</span></div>
+      <div class="stat s4 reveal"><b data-count="32.03" data-suffix="%">0%</b><span>Multi-SWE-bench Java<br>(rank 4 / 42, #1 open-weight)</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="overview" class="tint" style="--kc:#ff3d5e">
+  <div class="wrap">
+    <div class="kicker">01 · Overview</div>
+    <div class="sec-head">
+      <h2>Small model, frontier results</h2>
+      <a class="browse" href="https://github.com/marscod/kozuchi-agent-artifact">browse repository ↗</a>
+    </div>
+    <p class="lead">
+      Kozuchi Agent is a phase-driven software-repair agent that pairs a
+      <strong>27B open-weight model</strong> (Qwen3.5-27B) with reuse orchestration,
+      K-candidate trajectory sampling, and an agent-internal selector — no closed-source
+      verifier and no hidden-test access at selection time. It resolves
+      <strong>74.80% of SWE-bench Verified</strong> and transfers to Java
+      (<strong>32.03% on Multi-SWE-bench</strong>) without language-specific changes.
+    </p>
+    <figure class="reveal">
+      <a href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/figures/hero-swebench-27b.png" title="Open figure in repository">
+        <img src="static/hero-swebench-27b.png" alt="SWE-bench Verified success rate vs. model parameters; Kozuchi at 74.8% with 27B sits on the Pareto front" width="780">
+      </a>
+      <figcaption>
+        Kozuchi mini-swe-agent + Qwen3.5-27B reaches 74.8% on SWE-bench Verified with
+        ~10–40× fewer parameters than peers at comparable success rates.
+        <span class="open-hint">— click to open in <code>figures/</code></span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="paper" style="--kc:#6c5ce7">
+  <div class="wrap">
+    <div class="kicker">02 · The Paper</div>
+    <div class="sec-head">
+      <h2>Read the manuscript</h2>
+      <a class="browse" href="https://github.com/marscod/kozuchi-agent-artifact/tree/main/paper">browse paper/ ↗</a>
+    </div>
+    <div class="paper-flex">
+      <div class="paper-snap reveal">
+        <a href="paper/main.pdf" title="Open the full PDF">
+          <img src="static/paper-page1.png" alt="First page of the Kozuchi Agent paper">
+        </a>
+        <div class="tag">Click the snapshot to open the full PDF</div>
+      </div>
+      <div>
+        <ul class="paper-points">
+          <li><strong>Six research questions</strong> covering headline performance, peer comparison, variance analysis, failure taxonomy, test-time-scaling selection lift, and cross-language transfer.</li>
+          <li><strong>Statistically grounded:</strong> Wilson CIs, repo-level cluster bootstrap, McNemar paired tests with BH-FDR correction across 17 open-weight peers.</li>
+          <li><strong>Fully rebuildable:</strong> <a href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/paper/build.sh"><code>paper/build.sh</code></a> compiles the PDF offline with bundled ACM class files.</li>
+          <li><strong>Every cited number</strong> maps to a script via <a href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/INDEX.md"><code>INDEX.md</code></a>; every reference is annotated in <a href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/REFERENCES_INDEX.md"><code>REFERENCES_INDEX.md</code></a>.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="architecture" class="tint" style="--kc:#2f6bff">
+  <div class="wrap">
+    <div class="kicker">03 · Architecture</div>
+    <div class="sec-head">
+      <h2>How it works</h2>
+      <a class="browse" href="https://github.com/marscod/kozuchi-agent-artifact/tree/main/figures">browse figures/ ↗</a>
+    </div>
+    <p class="lead">
+      Industrial software-engineering teams increasingly prefer LLM agents that turn bug
+      reports into correct, test-passing patches — but operating such agents at industrial
+      scale raises <strong>harness-level problems</strong>: long horizons, tool-use discipline,
+      context persistence, multi-cluster execution, and evaluation reuse. Kozuchi Agent answers
+      with a <strong>language-agnostic open-weight agent</strong> and a
+      <strong>CI-operated evaluation pipeline</strong> built on five pillars:
+    </p>
+    <div class="pillars">
+      <div class="pillar reveal" style="--pc:#ff3d5e"><b>Explicit phases</b><span>An 8-phase / 15-edge finite-state workflow (reproduce → test synthesis → localization → fix → verify → report) with 14 phase-gated skills.</span></div>
+      <div class="pillar reveal" style="--pc:#ff8a3d"><b>Persistent intermediate state</b><span>Durable shared memory — scripts, generated tests, traces, handovers, patch notes — survives across phases and candidates.</span></div>
+      <div class="pillar reveal" style="--pc:#6c5ce7"><b>Deterministic SE tools</b><span>Three active, deterministic software-engineering tools instead of free-form shell improvisation.</span></div>
+      <div class="pillar reveal" style="--pc:#2f6bff"><b>Model-independent actions</b><span>A turn-level action normalizer keeps the action interface identical across backbone models.</span></div>
+      <div class="pillar reveal" style="--pc:#00b894"><b>Cross-agent test-time selection</b><span>K=8 candidate trajectories per instance, ranked by a K×K selector using only agent-chosen tests — never hidden benchmark tests.</span></div>
+      <div class="pillar reveal" style="--pc:#e84393"><b>Auditable &amp; repeatable</b><span>No proprietary models, no fine-tuning, no large backbones — behavior is reproducible from a locally hosted Qwen3.5-27B.</span></div>
+    </div>
+    <figure class="reveal">
+      <a href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/figures/overall-architecture.png" title="Open figure in repository">
+        <img src="static/overall-architecture.png" alt="Kozuchi Agent construction map: phase-driven agent, reuse orchestration, K candidate trajectories, selector" width="940">
+      </a>
+      <figcaption>End-to-end construction map: hidden benchmark tests are used only by the official evaluator, never during selection.
+        <span class="open-hint">— click to open in <code>figures/</code></span></figcaption>
+    </figure>
+    <p class="lead" style="margin-top:30px;">
+      The same harness transfers from Python to Java unchanged: per-phase scaffold behavior
+      matches the Python run within <strong>±5 percentage points on every phase</strong>, and the
+      remaining failures are dominated by semantic correctness, Java-specific harness failures,
+      and selection errors — <strong>not proprietary-model advantages</strong>.
+    </p>
+  </div>
+</section>
+
+<section id="results" style="--kc:#00b894">
+  <div class="wrap">
+    <div class="kicker">04 · Results</div>
+    <div class="sec-head">
+      <h2>Results at a glance</h2>
+      <a class="browse" href="https://github.com/marscod/kozuchi-agent-artifact/tree/main/stats">browse stats/ ↗</a>
+    </div>
+    <ul class="checks">
+      <li class="reveal"><strong>374/500 = 74.80%</strong> on SWE-bench Verified (cloud evaluator), Wilson 95% CI [70.82, 78.41]; internal Docker re-grade 376/500 = 75.20%.</li>
+      <li class="reveal"><strong>Rank 12/135</strong> on the frozen SWE-bench Verified leaderboard — <strong>#1 among open-weight agents</strong>; McNemar paired tests win significantly against 16/17 open-weight peers (BH-FDR).</li>
+      <li class="reveal"><strong>41/128 = 32.03%</strong> on Multi-SWE-bench Java with the <em>same agent, unchanged</em> — rank 4/42, #1 strict open-weight, 34/41 significant wins.</li>
+      <li class="reveal">All 495 persisted trajectories submit a patch; <strong>494/495 patches apply cleanly</strong>.</li>
+    </ul>
+    <div class="grid2">
+      <figure class="reveal">
+        <a href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/figures/cross_track_kozuchi.png" title="Open figure in repository">
+          <img src="static/cross_track_kozuchi.png" alt="Python vs Java headline rates and per-phase message share">
+        </a>
+        <figcaption>Cross-track transfer: one agent, two languages.</figcaption>
+      </figure>
+      <figure class="reveal">
+        <a href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/figures/fig10_per_repo_vs_peers.png" title="Open figure in repository">
+          <img src="static/fig10_per_repo_vs_peers.png" alt="Per-repository resolution heatmap vs peers">
+        </a>
+        <figcaption>Per-repository resolution vs. open-weight peers.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="reproduce" class="tint" style="--kc:#ff8a3d">
+  <div class="wrap">
+    <div class="kicker">05 · Reproducibility</div>
+    <div class="sec-head">
+      <h2>Reproduce every number</h2>
+      <a class="browse" href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/reproduce.sh">open reproduce.sh ↗</a>
+    </div>
+    <p class="lead">
+      The artifact is self-contained: every numeric value, figure, and table in the paper is
+      regenerable from files inside the repository, and
+      <a href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/INDEX.md">INDEX.md</a>
+      maps each claim to its script, its paper section, and its regenerated output.
+    </p>
+<pre class="reveal"><span class="p">$</span> git clone https://github.com/marscod/kozuchi-agent-artifact
+<span class="p">$</span> cd kozuchi-agent-artifact
+<span class="p">$</span> ./reproduce.sh                <span class="c"># every paper number + figure (stats/, figures/, plots/)</span>
+<span class="p">$</span> ./reproduce.sh --paper        <span class="c"># also rebuild paper/main.pdf</span>
+<span class="p">$</span> ./decompress.sh               <span class="c"># optional: restore 22 GB of raw trajectories from data/archives/</span></pre>
+    <p style="margin-top:16px; color: var(--muted); font-size: 15px;">
+      Requirements: Python 3.10+ (<code class="inline">scripts/numbers/</code> needs no third-party
+      packages); <code class="inline">matplotlib pandas seaborn numpy openpyxl</code> for figures
+      (auto-handled via <code class="inline">uv</code> when available); TeX Live only for
+      <code class="inline">--paper</code>.
+    </p>
+    <div class="note">
+      <span>🗃</span>
+      <span><b>Dataset note:</b> the Zenodo record (trajectory datasets for Python and Java) is
+      <b>under review and not yet publicly published</b>. Until the record goes live, use the
+      <a href="https://zenodo.org/records/19941649?preview=1&token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjIxMTZmNzIwLTIyYTYtNDcwMi1iYTEwLTRhYmQyZTE3YzY1OSIsImRhdGEiOnt9LCJyYW5kb20iOiIwNzg0MDQ0OWI1MzBmNDUwODE2YjQxYjVmMjIzYmU3MiJ9.zVk_UhMOeTJR0iFIuIwI2MRlek-JRnRLDOt1rfZrWS9x8poQFvlU6QTJTfhCr0By8gpDt5eHC6F3honpOdVbGw">reviewer
+      preview link</a> and place the downloaded archives under <code class="inline">data/archives/</code>.</span>
+    </div>
+  </div>
+</section>
+
+<section id="artifact" style="--kc:#e84393">
+  <div class="wrap">
+    <div class="kicker">06 · Artifact</div>
+    <div class="sec-head">
+      <h2>Artifact map</h2>
+      <a class="browse" href="https://github.com/marscod/kozuchi-agent-artifact">browse all files ↗</a>
+    </div>
+    <p class="lead">Every card opens the corresponding folder or file in the repository.</p>
+    <div class="cards">
+      <a class="card c1 reveal" href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/INDEX.md">
+        <span class="arrow">↗</span>
+        <h3><code>INDEX.md</code></h3>
+        <p>One row per paper number: claim ↔ script ↔ section ↔ regenerated output. A reviewer checklist.</p>
+      </a>
+      <a class="card c2 reveal" href="notebooks/reproduce.html">
+        <span class="arrow">↗</span>
+        <h3><code>notebooks/reproduce.html</code></h3>
+        <p>Fully rendered narrative walkthrough of every paper number — no Jupyter required.</p>
+      </a>
+      <a class="card c3 reveal" href="https://github.com/marscod/kozuchi-agent-artifact/tree/main/scripts">
+        <span class="arrow">↗</span>
+        <h3><code>scripts/</code></h3>
+        <p>Every reproduction script: paper numbers, figures, RQ1–RQ6 analyses, and the standalone RQ6 cross-track bundle.</p>
+      </a>
+      <a class="card c4 reveal" href="https://github.com/marscod/kozuchi-agent-artifact/tree/main/data">
+        <span class="arrow">↗</span>
+        <h3><code>data/</code></h3>
+        <p>Configs, per-instance trajectory bundles, Python &amp; Java evaluation directories, redacted operational metadata.</p>
+      </a>
+      <a class="card c5 reveal" href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/REFERENCES_INDEX.md">
+        <span class="arrow">↗</span>
+        <h3><code>REFERENCES_INDEX.md</code></h3>
+        <p>Annotated bibliography: every cite key, its URL, and why the paper uses it.</p>
+      </a>
+      <a class="card c6 reveal" href="https://github.com/marscod/kozuchi-agent-artifact/tree/main/paper">
+        <span class="arrow">↗</span>
+        <h3><code>paper/</code></h3>
+        <p>LaTeX sources, figures, stats fragments, and a one-command offline PDF build.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="citation" class="tint" style="--kc:#6c5ce7">
+  <div class="wrap">
+    <div class="kicker">07 · Citation</div>
+    <div class="sec-head">
+      <h2>Citation</h2>
+      <a class="browse" href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/paper/references.bib">open references.bib ↗</a>
+    </div>
+    <p class="lead">If you build on this artifact, please cite the paper (citation will be updated upon publication):</p>
+    <div class="bibtex" id="bib">@misc{kozuchi2026,
+  title  = {Kozuchi Agent: A Language-Agnostic Open-Weight Agent for Software Repair},
+  author = {Bahrami, Mehdi and others},
+  year   = {2026},
+  note   = {Under review. Artifact: \url{https://github.com/marscod/kozuchi-agent-artifact}}
+}<button class="copy-btn" onclick="copyBib(this)">Copy</button></div>
+  </div>
+</section>
+
+<section id="tour" style="--kc:#ff3d5e">
+  <div class="wrap tour">
+    <div class="kicker">08 · One-Minute Tour</div>
+    <h2 style="margin-bottom:18px;">The artifact in motion</h2>
+    <p class="lead" style="margin: 0 auto 8px;">Headline Pareto frontier, construction map, cross-language transfer, peer heatmap, and the paper itself.</p>
+    <figure class="reveal">
+      <a href="https://github.com/marscod/kozuchi-agent-artifact" title="Explore the repository">
+        <img src="static/artifact-tour.gif" alt="Animated tour cycling through the key figures of the Kozuchi Agent artifact">
+      </a>
+      <figcaption>Click to explore the full repository.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Kozuchi Agent Reproducibility Artifact · MIT License ·
+    <a href="https://github.com/marscod/kozuchi-agent-artifact">GitHub</a> ·
+    <a href="https://zenodo.org/records/19941649?preview=1&token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjIxMTZmNzIwLTIyYTYtNDcwMi1iYTEwLTRhYmQyZTE3YzY1OSIsImRhdGEiOnt9LCJyYW5kb20iOiIwNzg0MDQ0OWI1MzBmNDUwODE2YjQxYjVmMjIzYmU3MiJ9.zVk_UhMOeTJR0iFIuIwI2MRlek-JRnRLDOt1rfZrWS9x8poQFvlU6QTJTfhCr0By8gpDt5eHC6F3honpOdVbGw">Zenodo (under review)</a>
+  </div>
+</footer>
+
+<script>
+  // reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // animated counters
+  const cio = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (!e.isIntersecting) continue;
+      cio.unobserve(e.target);
+      const el = e.target, target = parseFloat(el.dataset.count), suffix = el.dataset.suffix || '';
+      const decimals = (el.dataset.count.split('.')[1] || '').length;
+      const t0 = performance.now(), dur = 1300;
+      (function tick(t) {
+        const k = Math.min((t - t0) / dur, 1), eased = 1 - Math.pow(1 - k, 3);
+        el.textContent = (target * eased).toFixed(decimals) + suffix;
+        if (k < 1) requestAnimationFrame(tick);
+      })(t0);
+    }
+  }, { threshold: 0.4 });
+  document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
+
+  function copyBib(btn) {
+    const text = document.getElementById('bib').innerText.replace(/Copy$/, '').trim();
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Copied ✓';
+      setTimeout(() => btn.textContent = 'Copy', 1600);
+    });
+  }
+</script>
+</body>
+</html>
