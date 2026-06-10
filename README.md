@@ -246,4 +246,6 @@ The build script writes `paper/main.pdf` (and a copy at
 ([`paper/acmart.cls`](paper/acmart.cls), etc.) so no internet access
 is required.
 
-<img width="50%" height="50%" alt="image" src="https://github.com/user-attachments/assets/700fea2d-14da-458f-a65e-09c34f86d647" />
+<p align="center">
+  <img width="40%" alt="Kozuchi AI Agent mascot — 小槌 (Kozuchi), the magic mallet that brings valuable outcomes" src="figures/kozuchi.png" />
+</p>
