@@ -245,7 +245,3 @@ The build script writes `paper/main.pdf` (and a copy at
 `paper/build/main.pdf`). It uses the bundled ACM class files
 ([`paper/acmart.cls`](paper/acmart.cls), etc.) so no internet access
 is required.
-
-<p align="center">
-  <img width="40%" alt="Kozuchi AI Agent mascot — 小槌 (Kozuchi), the magic mallet that brings valuable outcomes" src="figures/kozuchi.png" />
-</p>
