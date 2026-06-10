@@ -1,8 +1,17 @@
 [![Zenodo](https://img.shields.io/badge/Zenodo-Draft-blue)](https://zenodo.org/records/19941649?preview=1)
 ![Python](https://img.shields.io/badge/python-3.11+-blue.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Project Website](https://img.shields.io/badge/%F0%9F%8C%90_Project_Website-live-ff5c49?style=flat&labelColor=1b2430)](https://marscod.github.io/kozuchi-agent-artifact/)
 
 # Kozuchi Agent — Reproducibility Artifact
+
+> [!TIP]
+> ### 🆕 **New: Interactive Project Website**
+> Explore the paper's headline results, architecture, and one-command reproduction guide on the new project website:
+>
+> ### 🌐 **[marscod.github.io/kozuchi-agent-artifact](https://marscod.github.io/kozuchi-agent-artifact/)**
+>
+> 📄 [Paper PDF](https://marscod.github.io/kozuchi-agent-artifact/paper/main.pdf) · 📓 [Rendered walkthrough notebook](https://marscod.github.io/kozuchi-agent-artifact/notebooks/reproduce.html) · 🗃 [Dataset on Zenodo](https://doi.org/10.5281/zenodo.19941649)
 
 
 This directory is the **self-contained artifact** for the paper:
