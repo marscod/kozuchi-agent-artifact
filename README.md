@@ -245,3 +245,27 @@ The build script writes `paper/main.pdf` (and a copy at
 `paper/build/main.pdf`). It uses the bundled ACM class files
 ([`paper/acmart.cls`](paper/acmart.cls), etc.) so no internet access
 is required.
+
+---
+
+## 7. Citation
+
+If you build on this artifact, please cite the paper (citation will be
+updated upon publication):
+
+```bibtex
+@misc{kozuchi2026,
+  title  = {Kozuchi Agent: A Language-Agnostic Open-Weight Agent for Software Repair},
+  author = {Mehdi Bahrami and Kosaku Kimura and Satoshi Munakata and
+            Satoshi Nakashima and Yu Ishikawa and Kosuke Maeda and
+            Nao Soma and Kenichi Kobayashi and Keisuke Miyazaki and
+            Keizo Kato and Shigeki Fukuta and Tatsuo Kumano and
+            Nobutaka Imamura and Kevin Musgrave and Shahbaz {Abdul Khader} and
+            Kwun Ho Ngan and Joseph Townsend and Fayas Asharindavida and
+            Matthieu Parizy and Akira Sakai and Yuma Ichikawa and
+            Yang Zhao and Michiaki Takizawa and Taku Fukui and
+            Hiroki Ohtsuji and Wei-Peng Chen and Hiro Kobashi},
+  year   = {2026},
+  note   = {Under review. Artifact: \url{https://github.com/marscod/kozuchi-agent-artifact}}
+}
+```
