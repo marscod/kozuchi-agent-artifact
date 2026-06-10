@@ -11,7 +11,7 @@
 >
 > ### 🌐 **[marscod.github.io/kozuchi-agent-artifact](https://marscod.github.io/kozuchi-agent-artifact/)**
 >
-> 📄 [Paper PDF](https://marscod.github.io/kozuchi-agent-artifact/paper/main.pdf) · 📓 [Rendered walkthrough notebook](https://marscod.github.io/kozuchi-agent-artifact/notebooks/reproduce.html) · 🗃 [Dataset on Zenodo](https://doi.org/10.5281/zenodo.19941649)
+> 📄 [Paper PDF](https://marscod.github.io/kozuchi-agent-artifact/paper/main.pdf) · 📓 [Rendered walkthrough notebook](https://marscod.github.io/kozuchi-agent-artifact/notebooks/reproduce.html) · 🗃 [Dataset on Zenodo (under review — preview access)](https://zenodo.org/records/19941649?preview=1&token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjIxMTZmNzIwLTIyYTYtNDcwMi1iYTEwLTRhYmQyZTE3YzY1OSIsImRhdGEiOnt9LCJyYW5kb20iOiIwNzg0MDQ0OWI1MzBmNDUwODE2YjQxYjVmMjIzYmU3MiJ9.zVk_UhMOeTJR0iFIuIwI2MRlek-JRnRLDOt1rfZrWS9x8poQFvlU6QTJTfhCr0By8gpDt5eHC6F3honpOdVbGw)
 
 
 This directory is the **self-contained artifact** for the paper:
