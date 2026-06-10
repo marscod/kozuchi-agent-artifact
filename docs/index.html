@@ -56,7 +56,7 @@
     border-bottom: 1px solid var(--line);
   }
   .nav-inner { display: flex; align-items: center; gap: 22px; height: 58px; }
-  .brand { font-weight: 800; font-size: 16px; letter-spacing: -.01em; color: var(--ink); }
+  .brand { font-weight: 800; font-size: 16px; letter-spacing: -.01em; color: var(--ink); text-decoration: none !important; }
   .brand em { font-style: normal; background: var(--grad);
     -webkit-background-clip: text; background-clip: text; color: transparent; }
   .nav-links { display: flex; gap: 18px; margin-left: auto; }
@@ -251,9 +251,9 @@
 <body>
 <div class="mesh" aria-hidden="true"></div>
 
-<nav>
+<nav id="top">
   <div class="wrap nav-inner">
-    <span class="brand"><em>Kozuchi</em>&nbsp;Agent</span>
+    <a class="brand" href="#top"><em>Kozuchi</em>&nbsp;Agent</a>
     <div class="nav-links">
       <a href="#overview">Overview</a>
       <a href="#paper">Paper</a>
