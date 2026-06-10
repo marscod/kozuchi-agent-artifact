@@ -8,8 +8,7 @@
 <meta property="og:title" content="Kozuchi Agent — Reproducibility Artifact">
 <meta property="og:description" content="74.80% on SWE-bench Verified with a 27B open-weight model. Every paper number regenerable with one command.">
 <meta property="og:image" content="static/hero-swebench-27b.png">
-<link rel="icon" type="image/png" sizes="64x64" href="static/favicon-64.png">
-<link rel="apple-touch-icon" href="static/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="static/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -66,26 +65,7 @@
   @media (max-width: 720px) { .nav-links a:not(.keep) { display: none; } }
 
   /* hero */
-  header { padding: 64px 0 56px; }
-  .hero-grid { display: grid; grid-template-columns: 1fr 300px; gap: 48px; align-items: center; }
-  .hero-copy { text-align: left; }
-  .hero-copy .links { justify-content: flex-start; }
-  .hero-mascot { text-align: center; }
-  .hero-mascot img {
-    width: 100%; max-width: 300px; border-radius: 22px;
-    border: 1px solid var(--line);
-    box-shadow: 0 26px 60px rgba(108,92,231,.28);
-    animation: floaty 6s ease-in-out infinite;
-  }
-  .hero-mascot .mascot-quote { font-size: 13px; color: var(--muted); margin-top: 14px; font-style: italic; }
-  @keyframes floaty { 50% { transform: translateY(-10px) rotate(.6deg); } }
-  @media (max-width: 860px) {
-    .hero-grid { grid-template-columns: 1fr; gap: 36px; }
-    .hero-copy { text-align: center; }
-    .hero-copy .links { justify-content: center; }
-    .hero-mascot img { max-width: 240px; }
-  }
-  @media (prefers-reduced-motion: reduce) { .hero-mascot img { animation: none; } }
+  header { padding: 84px 0 56px; text-align: center; }
   .pill {
     display: inline-flex; align-items: center; gap: 8px;
     font-size: 12.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
@@ -288,25 +268,17 @@
 
 <header>
   <div class="wrap">
-    <div class="hero-grid">
-      <div class="hero-copy">
-        <div class="pill"><span class="dot"></span>Under review · ASE 2026 · Reproducibility Artifact</div>
-        <h1>Kozuchi <span class="grad">Agent</span></h1>
-        <p class="subtitle">A language-agnostic, <strong>open-weight</strong> agent for software repair —
-          state-of-the-art parameter efficiency on SWE-bench Verified with a 27B model.</p>
-        <p class="authors">Bahrami et&nbsp;al. — manuscript under review</p>
-        <div class="links">
-          <a class="btn hot" href="paper/main.pdf">📄&nbsp; Paper (PDF)</a>
-          <a class="btn" href="https://github.com/marscod/kozuchi-agent-artifact">⭐&nbsp; Artifact Repository</a>
-          <a class="btn" href="https://zenodo.org/records/19941649?preview=1&token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjIxMTZmNzIwLTIyYTYtNDcwMi1iYTEwLTRhYmQyZTE3YzY1OSIsImRhdGEiOnt9LCJyYW5kb20iOiIwNzg0MDQ0OWI1MzBmNDUwODE2YjQxYjVmMjIzYmU3MiJ9.zVk_UhMOeTJR0iFIuIwI2MRlek-JRnRLDOt1rfZrWS9x8poQFvlU6QTJTfhCr0By8gpDt5eHC6F3honpOdVbGw">🗃&nbsp; Dataset (Zenodo) <small>· under review</small></a>
-          <a class="btn" href="notebooks/reproduce.html">📓&nbsp; Walkthrough Notebook</a>
-          <a class="btn" href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/INDEX.md">🔍&nbsp; Number Index</a>
-        </div>
-      </div>
-      <div class="hero-mascot">
-        <img src="static/kozuchi-web.png" alt="Kozuchi AI Agent mascot holding the kozuchi magic mallet">
-        <div class="mascot-quote">小槌 (Kozuchi) — "the magic mallet that brings valuable outcomes."<br>We swing it with intelligence. ✨</div>
-      </div>
+    <div class="pill"><span class="dot"></span>Under review · ASE 2026 · Reproducibility Artifact</div>
+    <h1>Kozuchi <span class="grad">Agent</span></h1>
+    <p class="subtitle">A language-agnostic, <strong>open-weight</strong> agent for software repair —
+      state-of-the-art parameter efficiency on SWE-bench Verified with a 27B model.</p>
+    <p class="authors">Bahrami et&nbsp;al. — manuscript under review</p>
+    <div class="links">
+      <a class="btn hot" href="paper/main.pdf">📄&nbsp; Paper (PDF)</a>
+      <a class="btn" href="https://github.com/marscod/kozuchi-agent-artifact">⭐&nbsp; Artifact Repository</a>
+      <a class="btn" href="https://zenodo.org/records/19941649?preview=1&token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjIxMTZmNzIwLTIyYTYtNDcwMi1iYTEwLTRhYmQyZTE3YzY1OSIsImRhdGEiOnt9LCJyYW5kb20iOiIwNzg0MDQ0OWI1MzBmNDUwODE2YjQxYjVmMjIzYmU3MiJ9.zVk_UhMOeTJR0iFIuIwI2MRlek-JRnRLDOt1rfZrWS9x8poQFvlU6QTJTfhCr0By8gpDt5eHC6F3honpOdVbGw">🗃&nbsp; Dataset (Zenodo) <small>· under review</small></a>
+      <a class="btn" href="notebooks/reproduce.html">📓&nbsp; Walkthrough Notebook</a>
+      <a class="btn" href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/INDEX.md">🔍&nbsp; Number Index</a>
     </div>
 
     <div class="stats">
