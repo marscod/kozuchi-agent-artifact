@@ -159,6 +159,18 @@
   .paper-points li::before { content: "→"; position: absolute; left: 0; color: var(--violet); font-weight: 800; }
   .paper-points strong { color: var(--ink); }
 
+  /* design pillars */
+  .pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px; margin-top: 26px; }
+  .pillar {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+    padding: 18px 20px; box-shadow: 0 2px 10px rgba(20,26,38,.04); position: relative;
+    border-left: 4px solid var(--pc, var(--coral));
+    transition: transform .16s, box-shadow .16s;
+  }
+  .pillar:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(20,26,38,.12); }
+  .pillar b { display: block; font-size: 15px; font-weight: 800; margin-bottom: 5px; color: var(--pc, var(--coral)); }
+  .pillar span { font-size: 13.5px; color: var(--muted); }
+
   /* code */
   pre {
     background: #10151f; color: #e7edf7; border-radius: var(--radius);
@@ -339,11 +351,21 @@
       <a class="browse" href="https://github.com/marscod/kozuchi-agent-artifact/tree/main/figures">browse figures/ ↗</a>
     </div>
     <p class="lead">
-      Each issue is processed through an 8-phase / 15-edge finite-state workflow
-      (reproduce → test synthesis → localization → fix → verify → report) with
-      14 phase-gated skills and 3 active tools. K=8 candidate trajectories are sampled per
-      instance and ranked by a K×K selector using only agent-chosen tests.
+      Industrial software-engineering teams increasingly prefer LLM agents that turn bug
+      reports into correct, test-passing patches — but operating such agents at industrial
+      scale raises <strong>harness-level problems</strong>: long horizons, tool-use discipline,
+      context persistence, multi-cluster execution, and evaluation reuse. Kozuchi Agent answers
+      with a <strong>language-agnostic open-weight agent</strong> and a
+      <strong>CI-operated evaluation pipeline</strong> built on five pillars:
     </p>
+    <div class="pillars">
+      <div class="pillar reveal" style="--pc:#ff3d5e"><b>Explicit phases</b><span>An 8-phase / 15-edge finite-state workflow (reproduce → test synthesis → localization → fix → verify → report) with 14 phase-gated skills.</span></div>
+      <div class="pillar reveal" style="--pc:#ff8a3d"><b>Persistent intermediate state</b><span>Durable shared memory — scripts, generated tests, traces, handovers, patch notes — survives across phases and candidates.</span></div>
+      <div class="pillar reveal" style="--pc:#6c5ce7"><b>Deterministic SE tools</b><span>Three active, deterministic software-engineering tools instead of free-form shell improvisation.</span></div>
+      <div class="pillar reveal" style="--pc:#2f6bff"><b>Model-independent actions</b><span>A turn-level action normalizer keeps the action interface identical across backbone models.</span></div>
+      <div class="pillar reveal" style="--pc:#00b894"><b>Cross-agent test-time selection</b><span>K=8 candidate trajectories per instance, ranked by a K×K selector using only agent-chosen tests — never hidden benchmark tests.</span></div>
+      <div class="pillar reveal" style="--pc:#e84393"><b>Auditable &amp; repeatable</b><span>No proprietary models, no fine-tuning, no large backbones — behavior is reproducible from a locally hosted Qwen3.5-27B.</span></div>
+    </div>
     <figure class="reveal">
       <a href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/figures/overall-architecture.png" title="Open figure in repository">
         <img src="static/overall-architecture.png" alt="Kozuchi Agent construction map: phase-driven agent, reuse orchestration, K candidate trajectories, selector" width="940">
@@ -351,6 +373,12 @@
       <figcaption>End-to-end construction map: hidden benchmark tests are used only by the official evaluator, never during selection.
         <span class="open-hint">— click to open in <code>figures/</code></span></figcaption>
     </figure>
+    <p class="lead" style="margin-top:30px;">
+      The same harness transfers from Python to Java unchanged: per-phase scaffold behavior
+      matches the Python run within <strong>±5 percentage points on every phase</strong>, and the
+      remaining failures are dominated by semantic correctness, Java-specific harness failures,
+      and selection errors — <strong>not proprietary-model advantages</strong>.
+    </p>
   </div>
 </section>
 
