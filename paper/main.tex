@@ -5,10 +5,12 @@
 %%   \documentclass[sigconf,review]{acmart}
 % Experiments path: https://github.com/marscod/experiments/tree/kozuchi-submission-analysis/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[sigconf,review]{acmart}
+\documentclass[sigconf]{acmart}
 
-\setcopyright{none}
-\settopmatter{printacmref=false, printccs=false, printfolios=true}
+%% Camera-ready rights: placeholder until the ACM rights-form email
+%% arrives; update \setcopyright, \acmISBN, and \acmDOI from the form.
+\setcopyright{acmlicensed}
+\settopmatter{printacmref=true, printccs=true, printfolios=false}
 \renewcommand\footnotetextcopyrightpermission[1]{}
 
 \acmConference[ASE '26]{Proceedings of the 41st IEEE/ACM International Conference on Automated Software Engineering}{October 12--16, 2026}{Munich, Germany}
@@ -238,40 +240,40 @@ Hiro Kobashi\textsuperscript{2}%
 %% Mandatory CCS Concepts (ACM 2012 classification).
 %% Source: ACM Computing Classification System
 %% (https://dl.acm.org/ccs/ccs.cfm).
-% \begin{CCSXML}
-% <ccs2012>
-%    <concept>
-%        <concept_id>10011007.10011074</concept_id>
-%        <concept_desc>Software and its engineering~Software creation and management</concept_desc>
-%        <concept_significance>500</concept_significance>
-%        </concept>
-%    <concept>
-%        <concept_id>10011007.10011074.10011099.10011102</concept_id>
-%        <concept_desc>Software and its engineering~Software defect analysis</concept_desc>
-%        <concept_significance>500</concept_significance>
-%        </concept>
-%    <concept>
-%        <concept_id>10010147.10010178.10010179</concept_id>
-%        <concept_desc>Computing methodologies~Natural language processing</concept_desc>
-%        <concept_significance>300</concept_significance>
-%        </concept>
-%    <concept>
-%        <concept_id>10010147.10010257</concept_id>
-%        <concept_desc>Computing methodologies~Machine learning</concept_desc>
-%        <concept_significance>300</concept_significance>
-%        </concept>
-% </ccs2012>
-% \end{CCSXML}
-%
-% \ccsdesc[500]{Software and its engineering~Software creation and management}
-% \ccsdesc[500]{Software and its engineering~Software defect analysis}
-% \ccsdesc[300]{Computing methodologies~Natural language processing}
-% \ccsdesc[300]{Computing methodologies~Machine learning}
+%% CCS concepts and keywords enabled for the camera-ready build.
+\begin{CCSXML}
+<ccs2012>
+   <concept>
+       <concept_id>10011007.10011074</concept_id>
+       <concept_desc>Software and its engineering~Software creation and management</concept_desc>
+       <concept_significance>500</concept_significance>
+       </concept>
+   <concept>
+       <concept_id>10011007.10011074.10011099.10011102</concept_id>
+       <concept_desc>Software and its engineering~Software defect analysis</concept_desc>
+       <concept_significance>500</concept_significance>
+       </concept>
+   <concept>
+       <concept_id>10010147.10010178.10010179</concept_id>
+       <concept_desc>Computing methodologies~Natural language processing</concept_desc>
+       <concept_significance>300</concept_significance>
+       </concept>
+   <concept>
+       <concept_id>10010147.10010257</concept_id>
+       <concept_desc>Computing methodologies~Machine learning</concept_desc>
+       <concept_significance>300</concept_significance>
+       </concept>
+</ccs2012>
+\end{CCSXML}
 
-%% Keywords commented out for the review build.
-% \keywords{LLM agents, automated program repair, SWE-bench, agent harness,
-% test-time scaling, multi-cluster pipeline, production planning,
-% experience report}
+\ccsdesc[500]{Software and its engineering~Software creation and management}
+\ccsdesc[500]{Software and its engineering~Software defect analysis}
+\ccsdesc[300]{Computing methodologies~Natural language processing}
+\ccsdesc[300]{Computing methodologies~Machine learning}
+
+\keywords{LLM agents, automated program repair, SWE-bench, agent harness,
+test-time scaling, multi-cluster pipeline, production planning,
+experience report}
 
 \begin{document}
 
@@ -460,7 +462,7 @@ proprietary internal repositories. The strongest causal evidence in this
 submission isolates candidate count and cross-agent selection; phase,
 handover, formatter, tool, and CI-reuse mechanisms are supported by
 operational signatures and artifact-level audits rather than
-component-removal reruns.
+component-removal reruns (Table~\ref{tab:evidence-map}).
 
 \textbf{Contributions.}
 \noindent\textbf{C1. A phase-driven, model-agnostic SWE agent harness with auditable tools.}
@@ -482,7 +484,8 @@ signatures (\S\ref{sec:observations}, \S\ref{sec:design}) and
 artifact-level audit (\S\ref{sec:artifact}), not by mechanism-removal
 ablations; controlled removals of the phase graph, formatter,
 persistent state, and tool sandbox are scoped as future work
-(\S\ref{sec:conclusion}).
+(\S\ref{sec:conclusion}). Table~\ref{tab:evidence-map} summarizes this
+evidence boundary for all mechanisms and claims.
 
 \noindent\textbf{C2. A CI-operated multi-cluster benchmark pipeline with reusable and regenerable artifacts.}
 % source: .gitlab-ci.yml; scripts/module_load.sh; pipeline/{bench,sft,rl,tts,
@@ -571,6 +574,38 @@ backbone beats the strongest same-class open-weight Java peer
 (Qwen2.5-72B) by 38 instances, compared with a 26-instance same-family
 margin on Python.
 
+\noindent\textbf{Evidence boundary.}
+Table~\ref{tab:evidence-map} separates what this experience report
+establishes through controlled comparisons from what it supports only
+through operational signatures. ``Ablated'' rows have a matched
+comparison in the published artifact; ``operational'' rows are
+evidenced by trajectory audits and inventories without
+component-removal reruns; ``estimate'' and ``out of scope'' rows are
+disclosed as such wherever they are cited.
+
+\begin{table}[t]
+\centering
+% Evidence-boundary summary added for camera-ready in response to
+% reviewer requests to separate causal from observational claims.
+% Numbers cross-referenced from paper/final/stats/{per_run_pass1.json,
+% selector_ablation.json,run_overlap.json,workflow_replacement.json}.
+\caption{Evidence map: mechanisms and claims by evidence type.}
+\label{tab:evidence-map}
+\begin{tabular}{@{}p{0.38\columnwidth}p{0.36\columnwidth}l@{}}
+\toprule
+Mechanism / claim & Evidence type & Where \\
+\midrule
+Candidate count $K{=}8$ & Ablated: pass@1 334--343 vs.\ oracle 408 & Tab.~\ref{tab:selector-ablation} \\
+Cross-agent selector & Ablated: 376 vs.\ 362 (order) vs.\ 346 (self-tests) & Tab.~\ref{tab:selector-ablation} \\
+Selector weights $w_B,w_R$ & Sensitivity sweep: $\le$5/500 outcome change & \S\ref{sec:design-tts} \\
+Phase graph, handover state, formatter, tool sandbox, CI reuse & Operational signatures; not ablated & \S\ref{sec:design}, \S\ref{sec:lessons} \\
+Engineer-minute saving & Derived order-of-magnitude estimate & Tab.~\ref{tab:workflow-replacement} \\
+GPU-hours & Wall-clock-derived estimate & \S\ref{subsec:rq5} \\
+Production deployment, developer pilot, GPU accounting & Out of scope; future work & \S\ref{sec:conclusion} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \textbf{Roadmap.}
 \S\ref{sec:related}--\S\ref{sec:definitions} cover prior systems,
 industrial background, and the runtime definitions. \S\ref{sec:observations}--\S\ref{sec:design-tts}
@@ -634,6 +669,15 @@ model-free. Finally, deployed LLM-for-CI systems such as
 LogSage~\cite{logsage2025} share our concern for artifact availability
 and reproducibility, although in our case CI orchestrates the agent
 workload itself.
+
+In sum, the individual harness mechanisms---phased workflows, persistent
+state, runtime tools, CI orchestration---draw on established practice.
+The originality of this work lies in the cross-agent selector
+formulation, in which independent runs generate tests that are
+cross-applied as selection evidence under a constraint that no hidden or
+production-only feedback is available at selection time, and in the
+integration and industrial-scale evaluation of these mechanisms as one
+auditable harness.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Background and Industrial Context
@@ -858,8 +902,9 @@ recoverable only from scattered scripts.
 The evaluated phase graph has eight nodes and fifteen directed edges
 (\autoref{alg:phase-transition}). Each phase encodes a local workflow and two
 possible exits: successful completion or explicit give-up. This
-structure does not make the agent more capable by itself; rather, it
-prevents long trajectories from becoming unstructured conversations.
+structure does not make the agent more capable by itself; rather, it is
+designed to keep long trajectories from becoming unstructured
+conversations.
 The phase definitions and handover prompts make phase exits auditable:
 when a run leaves a phase, the next phase is selected from the
 configured edge and the handover memo records what evidence is carried
@@ -1080,10 +1125,18 @@ candidate~$i$ on run~$j$'s bug-revealing
 (\code{FAIL\_TO\_PASS}) tests, and $R_{ij}$ is the corresponding
 pass rate on its regression (\code{PASS\_TO\_PASS}) tests. The
 weights $w_{B}{=}0.3$ and $w_{R}{=}0.7$ are pragmatically selected
-fixed global constants in the submitted selector artifact; nevertheless,
-an artifact-only sweep over seven
+fixed global constants in the submitted selector artifact; they are not
+learned and were not tuned on benchmark outcomes. The asymmetry encodes
+a deliberate engineering prior for a merge-gated setting: a patch that
+silently breaks existing behaviour (a regression that a
+\code{PASS\_TO\_PASS} suite would catch) is the costlier failure once
+merged, whereas agent-generated bug-revealing tests are sparser and
+noisier as evidence, so regression conformance is weighted higher than
+bug-revealing pass rate. Nevertheless, an artifact-only sweep over seven
 nearby weight pairs changes at most 35/495 selected candidates and
-5/500 estimated outcomes. We then pick
+5/500 estimated outcomes ($\le$1.0~pp), so we report the submitted pair
+as a robust operating point rather than an optimized one; a systematic
+weight search on held-out tasks remains future work. We then pick
 $\arg\max_i \mathrm{score}(i)$; when execution evidence is indistinguishable,
 we break ties by shorter patch length as a conservative engineering heuristic. A tie
 means that at least two deduplicated patches are within
@@ -1612,6 +1665,20 @@ $3.8{\times}10^{9}$ prompt tokens and
 $5.8{\times}10^{7}$ completion tokens, so the workload is
 prompt-token dominated, consistent with the persistent handover and
 shared-state mechanism described in \S\ref{sec:design}.
+% source: GPU-hour estimate derived from trajectory_stats.csv
+%         (runtime_sec_mean = 3414.16 s over the 495 selected
+%         trajectories) x 8 legs x TP=2 GPUs; see Table tab:evidence-map
+%         for its evidence status (wall-clock-derived estimate).
+Because the trajectory bundle records wall-clock but not
+GPU-utilisation traces, we can bound rather than measure GPU cost:
+mean per-instance wall-clock is 0.95~h on the two-GPU tensor-parallel
+serving configuration, so summing instance wall-clock across the full
+eight-run generation gives an upper bound of roughly
+$7.5{\times}10^{3}$ GPU-hours ($8 \times 495 \times 0.95\,\mathrm{h}
+\times 2$). This is an upper bound because the vLLM servers batch many
+concurrent instances on the same GPUs; per-instance wall-clock
+double-counts shared occupancy. Accounted GPU-hours would require
+cluster-side telemetry we did not collect (Table~\ref{tab:evidence-map}).
 % source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/compute_resolution_pareto.csv
 % source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/figures/fig15_pareto.png
 The compute--resolution Pareto curve over the 374 resolved instances
@@ -1622,6 +1689,19 @@ budget from 820 to 1{,}547 calls. We report this Pareto as a descriptive
 cost curve over \emph{this} run rather than as a prescription; an
 early-stopping policy that exploits it would need its own controlled
 study.
+
+\textbf{Scaling under tighter budgets.}
+For organizations without the infrastructure to spend the full TTS@8
+envelope, the measured cost structure suggests three policies, none of
+which we have validated with controlled runs: (i) a per-instance
+call or token budget that stops the long tail (cutting at the 90\%
+Pareto point of 820 calls sacrifices at most the last decile of
+resolved instances in this run); (ii) adaptive candidate count, since
+234 of 500 instances are resolved by all eight runs and would be
+selected correctly from far fewer candidates; and (iii) skipping the
+cross-check matrix when deduplicated patches collapse to a single
+candidate. Each policy needs its own controlled study before
+deployment.
 
 \textbf{Threats.}
 % source: component-level limitation follows from available artifact
@@ -1635,14 +1715,15 @@ selector's discrimination. A controlled comparison of direct versus
 debate-style selection on the same trajectory bundle would require
 a paired selector run with otherwise identical inputs. The compute
 envelope is reported in LLM calls,
-prompt/completion tokens, and wall-clock seconds rather than in
-GPU-hours, because the trajectory bundle does not record
-GPU-utilisation traces; converting to GPU-hours requires
-cluster-side accounting we did not collect. The ablation in
+prompt/completion tokens, and wall-clock seconds, with GPU-hours given
+only as a wall-clock-derived estimate, because the trajectory bundle
+does not record GPU-utilisation traces; accounted GPU-hours require
+cluster-side telemetry we did not collect. The ablation in
 Table~\ref{tab:selector-ablation} isolates candidate count and selector
 signals, but it does not isolate the causal contribution of the phase
 graph, persistent handover, action formatter, tracing tools, or guarded
-editing; those components require separate controlled reruns. The
+editing; those components require separate controlled reruns
+(Table~\ref{tab:evidence-map}). The
 auditable selector boundary is the archived suite outcome and patch
 apply-status table, so hidden SWE-bench outcomes are unavailable until
 after patch selection.
@@ -1862,7 +1943,8 @@ solved by some run but not selected.
 Future work should ablate tools, selector design, and post-training; use
 conversation audits for content-aware selection; connect failure-pattern
 detection to harness updates; and use the compute--resolution Pareto
-curve for controlled early stopping.
+curve for controlled early stopping and adaptive candidate counts
+(\S\ref{subsec:rq5}).
 % Industrial-pilot scope acknowledgement: present submission grounds
 % impact in operational signatures summarized in \S\ref{sec:lessons}
 % rather than developer-acceptance metrics from a controlled internal

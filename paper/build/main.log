@@ -1,12 +1,12 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.4.3)  1 MAY 2026 09:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.4.3)  5 AUG 2026 13:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **main.tex
-(/home/mbahrami/repo/swe-sota-agent/paper/final/main.tex
+(/home/mbahrami/repo/swe-sota-agent/kozuchi-agent-artifact/paper/main.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
-(/home/mbahrami/repo/swe-sota-agent/paper/final/acmart.cls
+(/home/mbahrami/repo/swe-sota-agent/kozuchi-agent-artifact/paper/acmart.cls
 Document Class: acmart 2025/08/27 v2.16 Typesetting articles for the Associatio
 n for Computing Machinery
 (/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
@@ -41,7 +41,6 @@ Package acmart Info: Explicitly selecting natbib mode on input line 138.
 Package acmart Info: Not using anonymous mode on input line 146.
 Package acmart Info: Not using timestamp mode on input line 154.
 Package acmart Info: Not using authordraft mode on input line 164.
-Package acmart Info: Using review mode on input line 179.
 Class acmart Info: Using format sigconf, number 4 on input line 179.
 Class acmart Info: Using fontsize 9pt on input line 281.
 
@@ -695,10 +694,6 @@ Package: fancyhdr 2022/11/09 v4.1 Extensive control of page headers and footers
 \f@nch@O@olf=\skip74
 \f@nch@O@orf=\skip75
 )
-\ACM@linecount@bx=\box61
-\ACM@linecount@bxht=\skip76
-\ACM@linecount=\count312
-
 Special comment 'acks'
 LaTeX Font Info:    Trying to load font information for T1+LinuxLibertineT-TLF 
 on input line 3652.
@@ -710,29 +705,29 @@ nuxLibertineT-TLF.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
 (Font)              scaled to size 9.0pt on input line 3652.
 )
-Class acmart Info: Suppressing bibformat on input line 11.
-Class acmart Info: Suppressing CCS on input line 11.
-Class acmart Info: Printing folios on input line 11.
+Class acmart Info: Printing bibformat on input line 13.
+Class acmart Info: Printing CCS on input line 13.
+Class acmart Info: Suppressing folios on input line 13.
 
 (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count313
-\lst@gtempboxa=\box62
+\lst@mode=\count312
+\lst@gtempboxa=\box61
 \lst@token=\toks40
-\lst@length=\count314
+\lst@length=\count313
 \lst@currlwidth=\dimen193
-\lst@column=\count315
-\lst@pos=\count316
+\lst@column=\count314
+\lst@pos=\count315
 \lst@lostspace=\dimen194
 \lst@width=\dimen195
-\lst@newlines=\count317
-\lst@lineno=\count318
+\lst@newlines=\count316
+\lst@lineno=\count317
 \lst@maxwidth=\dimen196
 
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
-\c@lstnumber=\count319
-\lst@skipnumbers=\count320
-\lst@framebox=\box63
+\c@lstnumber=\count318
+\lst@skipnumbers=\count319
+\lst@framebox=\box62
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2023/02/27 1.9 listings configuration
@@ -745,33 +740,35 @@ Package: tabularx 2023/07/08 v2.11c `tabularx' package (DPC)
 (/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
 Package: array 2023/10/16 v2.5g Tabular extension package (FMi)
 \col@sep=\dimen197
-\ar@mcellbox=\box64
+\ar@mcellbox=\box63
 \extrarowheight=\dimen198
 \NC@list=\toks41
-\extratabsurround=\skip77
-\backup@length=\skip78
-\ar@cellbox=\box65
+\extratabsurround=\skip76
+\backup@length=\skip77
+\ar@cellbox=\box64
 )
 \TX@col@width=\dimen199
 \TX@old@table=\dimen256
 \TX@old@col=\dimen257
 \TX@target=\dimen258
 \TX@delta=\dimen259
-\TX@cols=\count321
+\TX@cols=\count320
 \TX@ftn=\toks42
 )
 \@float@every@algorithm=\toks43
-\c@algorithm=\count322
-\c@AlgoLine=\count323
-\AlgoIndent=\skip79
+\c@algorithm=\count321
+\c@AlgoLine=\count322
+\AlgoIndent=\skip78
 
 
 Class acmart Warning: Do not put several authors in the same \author macro! on 
-input line 202.
+input line 204.
 
-Package hyperref Info: Option `pdfdisplaydoctitle' set `true' on input line 276
+Excluding 'CCSXML' comment.
+Package hyperref Info: Option `pdfdisplaydoctitle' set `true' on input line 278
 .
-\c@theorem=\count324
+\c@theorem=\count323
+
 (/usr/share/texlive/texmf-dist/tex/latex/preprint/balance.sty
 Package: balance 1999/02/23 4.3 (PWD)
 \oldvsize=\dimen260
@@ -780,118 +777,118 @@ Excluding comment 'screenonly' Include comment 'printonly'
 Include comment 'anonsuppress'
 (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count325
-\l__pdf_internal_box=\box66
+\l__color_backend_stack_int=\count324
+\l__pdf_internal_box=\box65
 )
-(/home/mbahrami/repo/swe-sota-agent/paper/final/build/main.aux)
+(/home/mbahrami/repo/swe-sota-agent/kozuchi-agent-artifact/paper/build/main.aux
+)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/nxlmi/m/it on input line 276.
+LaTeX Font Info:    Checking defaults for OML/nxlmi/m/it on input line 278.
 LaTeX Font Info:    Trying to load font information for OML+nxlmi on input line
- 276.
-
-(/usr/share/texlive/texmf-dist/tex/latex/newtx/omlnxlmi.fd
+ 278.
+ (/usr/share/texlive/texmf-dist/tex/latex/newtx/omlnxlmi.fd
 File: omlnxlmi.fd 2013/11/19 Fontinst v1.933 font definitions for OML/nxlmi.
 )
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 276.
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 276.
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 276.
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 276.
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 276.
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 276.
+LaTeX Font Info:    ... okay on input line 278.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 278.
+LaTeX Font Info:    ... okay on input line 278.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 278.
+LaTeX Font Info:    ... okay on input line 278.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 278.
+LaTeX Font Info:    ... okay on input line 278.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 278.
+LaTeX Font Info:    ... okay on input line 278.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 278.
+LaTeX Font Info:    ... okay on input line 278.
+LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 278.
 LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 
-276.
+278.
 
 (/usr/share/texlive/texmf-dist/tex/latex/newtx/untxexa.fd
 File: untxexa.fd 2012/04/16 Fontinst v1.933 font definitions for U/ntxexa.
 )
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 276.
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 276.
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 276.
+LaTeX Font Info:    ... okay on input line 278.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 278.
+LaTeX Font Info:    ... okay on input line 278.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 278.
+LaTeX Font Info:    ... okay on input line 278.
+LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 278.
 LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line
- 276.
+ 278.
 
 (/usr/share/texlive/texmf-dist/tex/latex/newtx/lmsntxsy.fd
 File: lmsntxsy.fd 2016/07/02 Fontinst v1.933 font definitions for LMS/ntxsy.
 )
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 276.
+LaTeX Font Info:    ... okay on input line 278.
+LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 278.
 LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input lin
-e 276.
+e 278.
 
 (/usr/share/texlive/texmf-dist/tex/latex/newtx/lmxntxexx.fd
 File: lmxntxexx.fd 2016/07/03 Fontinst v1.933 font definitions for LMX/ntxexx.
 )
-LaTeX Font Info:    ... okay on input line 276.
+LaTeX Font Info:    ... okay on input line 278.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.0pt on input line 276.
+(Font)              scaled to size 7.0pt on input line 278.
 LaTeX Font Info:    Trying to load font information for OT1+LinuxLibertineT-TLF
- on input line 276.
+ on input line 278.
 
 (/usr/share/texlive/texmf-dist/tex/latex/libertine/OT1LinuxLibertineT-TLF.fd
 File: OT1LinuxLibertineT-TLF.fd 2017/03/20 (autoinst) Font definitions for OT1/
 LinuxLibertineT-TLF.
 )
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.3pt on input line 276.
+(Font)              scaled to size 7.3pt on input line 278.
 <<ot1.cmap>>
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 5.5pt on input line 276.
+(Font)              scaled to size 5.5pt on input line 278.
 <<oml.cmap>>
-LaTeX Font Info:    Trying to load font information for U+msa on input line 276
+LaTeX Font Info:    Trying to load font information for U+msa on input line 278
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 276
+LaTeX Font Info:    Trying to load font information for U+msb on input line 278
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 
-276.
+278.
 
 (/usr/share/texlive/texmf-dist/tex/latex/newtx/untxmia.fd
 File: untxmia.fd 2018/04/14 Fontinst v1.933 font definitions for U/ntxmia.
 )
 LaTeX Font Info:    Trying to load font information for U+ntxsym on input line 
-276.
+278.
 
 (/usr/share/texlive/texmf-dist/tex/latex/newtx/untxsym.fd
 File: untxsym.fd 2023/08/16 Fontinst v1.933 font definitions for U/ntxsym.
 )
 LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 
-276.
+278.
 
 (/usr/share/texlive/texmf-dist/tex/latex/newtx/untxsyc.fd
 File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
 )
-LaTeX Info: Command `\dddot' is already robust on input line 276.
-LaTeX Info: Command `\ddddot' is already robust on input line 276.
-LaTeX Info: Redefining \microtypecontext on input line 276.
-Package microtype Info: Applying patch `item' on input line 276.
-Package microtype Info: Applying patch `toc' on input line 276.
-Package microtype Info: Applying patch `eqnum' on input line 276.
-Package microtype Info: Applying patch `footnote' on input line 276.
-Package microtype Info: Applying patch `verbatim' on input line 276.
+LaTeX Info: Command `\dddot' is already robust on input line 278.
+LaTeX Info: Command `\ddddot' is already robust on input line 278.
+LaTeX Info: Redefining \microtypecontext on input line 278.
+Package microtype Info: Applying patch `item' on input line 278.
+Package microtype Info: Applying patch `toc' on input line 278.
+Package microtype Info: Applying patch `eqnum' on input line 278.
+Package microtype Info: Applying patch `footnote' on input line 278.
+Package microtype Info: Applying patch `verbatim' on input line 278.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 276.
+LaTeX Info: Redefining \showhyphens on input line 278.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -899,26 +896,27 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `LinuxLibertineT-TLF' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-Package hyperref Info: Link coloring OFF on input line 276.
+Package hyperref Info: Link coloring OFF on input line 278.
 
-(/home/mbahrami/repo/swe-sota-agent/paper/final/build/main.out)
-(/home/mbahrami/repo/swe-sota-agent/paper/final/build/main.out)
+(/home/mbahrami/repo/swe-sota-agent/kozuchi-agent-artifact/paper/build/main.out
+)
+(/home/mbahrami/repo/swe-sota-agent/kozuchi-agent-artifact/paper/build/main.out
+)
 \@outlinefile=\write4
 \openout4 = `main.out'.
 
-
-(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+ (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count326
+\scratchcounter=\count325
 \scratchdimen=\dimen261
-\scratchbox=\box67
-\nofMPsegments=\count327
-\nofMParguments=\count328
+\scratchbox=\box66
+\nofMPsegments=\count326
+\nofMParguments=\count327
 \everyMPshowfont=\toks44
-\MPscratchCnt=\count329
+\MPscratchCnt=\count328
 \MPscratchDim=\dimen262
-\MPnumerator=\count330
-\makeMPintoPDFobject=\count331
+\MPnumerator=\count329
+\makeMPintoPDFobject=\count330
 \everyMPtoPDFconversion=\toks45
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -963,8 +961,8 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@mv@tabular=\count332
-\c@mv@boldtabular=\count333
+\c@mv@tabular=\count331
+\c@mv@boldtabular=\count332
 (/usr/share/texlive/texmf-dist/tex/latex/upquote/upquote.sty
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
@@ -973,36 +971,36 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count334
+\c@lstlisting=\count333
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 17.28pt on input line 330.
+(Font)              scaled to size 17.28pt on input line 332.
 LaTeX Font Info:    Trying to load font information for T1+LinuxBiolinumT-TLF o
-n input line 330.
+n input line 332.
 
 (/usr/share/texlive/texmf-dist/tex/latex/libertine/T1LinuxBiolinumT-TLF.fd
 File: T1LinuxBiolinumT-TLF.fd 2017/03/20 (autoinst) Font definitions for T1/Lin
 uxBiolinumT-TLF.
 )
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 17.28pt on input line 330.
+(Font)              scaled to size 17.28pt on input line 332.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `LinuxBiolinumT-TLF' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/b/n' will be
-(Font)              scaled to size 17.28pt on input line 330.
+(Font)              scaled to size 17.28pt on input line 332.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 12.0pt on input line 330.
+(Font)              scaled to size 12.0pt on input line 332.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 12.0pt on input line 330.
+(Font)              scaled to size 12.0pt on input line 332.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `LinuxLibertineT-TLF' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 8.8pt on input line 330.
+(Font)              scaled to size 8.8pt on input line 332.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 6.6pt on input line 330.
+(Font)              scaled to size 6.6pt on input line 332.
 
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
@@ -1011,707 +1009,723 @@ File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 8.8pt on input line 330.
+(Font)              scaled to size 8.8pt on input line 332.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 330.
+(Font)              scaled to size 10.0pt on input line 332.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 330.
+(Font)              scaled to size 10.0pt on input line 332.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.3pt on input line 330.
+(Font)              scaled to size 7.3pt on input line 332.
 
 
 Class acmart Warning: No city present for an affiliation.
 
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 9.0pt on input line 330.
+(Font)              scaled to size 9.0pt on input line 332.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 10.95pt on input line 330.
+(Font)              scaled to size 10.95pt on input line 332.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 9.0pt on input line 330.
+(Font)              scaled to size 9.0pt on input line 332.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 330.
+(Font)              scaled to size 9.0pt on input line 332.
+LaTeX Font Info:    Trying to load font information for TS1+LinuxLibertineT-TLF
+ on input line 332.
+(/usr/share/texlive/texmf-dist/tex/latex/libertine/TS1LinuxLibertineT-TLF.fd
+File: TS1LinuxLibertineT-TLF.fd 2017/03/20 (autoinst) Font definitions for TS1/
+LinuxLibertineT-TLF.
+)
+LaTeX Font Info:    Font shape `TS1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 9.0pt on input line 332.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `LinuxLibertineT-TLF' (encoding: TS1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
 
+
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 330.
+(hyperref)                removing `\mathsurround' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 330.
+(hyperref)                removing `\z@' on input line 332.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 330.
+(hyperref)                removing `superscript' on input line 332.
+
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 8.0pt on input line 332.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-<figures/broad_success_vs_params_with_java.png, id=118, 1120.185pt x 635.976pt>
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
+(Font)              scaled to size 8.0pt on input line 332.
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
+(Font)              scaled to size 8.0pt on input line 332.
+<figures/broad_success_vs_params_with_java.png, id=119, 1120.185pt x 635.976pt>
 
 File: figures/broad_success_vs_params_with_java.png Graphic file (type png)
 <use figures/broad_success_vs_params_with_java.png>
 Package pdftex.def Info: figures/broad_success_vs_params_with_java.png  used on
- input line 360.
+ input line 362.
 (pdftex.def)             Requested size: 241.14749pt x 136.90685pt.
-<figures/overall-architecture.pdf, id=120, 950.59138pt x 409.53pt>
+<figures/overall-architecture.pdf, id=121, 950.59138pt x 409.53pt>
 File: figures/overall-architecture.pdf Graphic file (type pdf)
 <use figures/overall-architecture.pdf>
 Package pdftex.def Info: figures/overall-architecture.pdf  used on input line 3
-77.
+79.
 (pdftex.def)             Requested size: 384.7814pt x 165.77126pt.
-
-Underfull \vbox (badness 1448) has occurred while \output is active []
-
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 6.0pt on input line 420.
  [1.1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/tex
-mf-dist/fonts/enc/dvips/libertine/lbtn_76gpa5.enc}{/usr/share/texlive/texmf-dis
-t/fonts/enc/dvips/libertine/lbtn_25tcsq.enc}
+mf-dist/fonts/enc/dvips/libertine/lbtn_25tcsq.enc}{/usr/share/texlive/texmf-dis
+t/fonts/enc/dvips/libertine/lbtn_76gpa5.enc}
 
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertine/lbtn_nh77jq.enc}{/usr/
 share/texlive/texmf-dist/fonts/enc/dvips/libertine/lbtn_7grukw.enc}{/usr/share/
-texlive/texmf-dist/fonts/enc/dvips/libertine/lbtn_oexx6f.enc} </home/mbahrami/r
-epo/swe-sota-agent/paper/final/figures/broad_success_vs_params_with_java.png>]
+texlive/texmf-dist/fonts/enc/dvips/libertine/lbtn_oexx6f.enc}{/usr/share/texliv
+e/texmf-dist/fonts/enc/dvips/libertine/lbtn_naooyc.enc}]
 LaTeX Font Info:    Trying to load font information for T1+zi4 on input line 43
-2.
-
-(/usr/share/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd
+4.
+ (/usr/share/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd
 File: t1zi4.fd 2018/01/14 T1/zi4 (Inconsolata)
 )
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
-(Font)              scaled to size 9.0pt on input line 432.
+(Font)              scaled to size 9.0pt on input line 434.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `zi4' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
@@ -1719,22 +1733,37 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 
 Class acmart Warning: \vspace should only be used to provide space above/below 
-surrounding objects on input line 435.
+surrounding objects on input line 437.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 552.
+(Font)              scaled to size 9.0pt on input line 576.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 7.0pt on input line 552.
+(Font)              scaled to size 7.0pt on input line 576.
  [2.2{/usr/share/texlive/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-4.enc} </
-home/mbahrami/repo/swe-sota-agent/paper/final/figures/overall-architecture.pdf>
-]
-(/home/mbahrami/repo/swe-sota-agent/paper/final/stats/workflow_replacement.tex
+home/mbahrami/repo/swe-sota-agent/kozuchi-agent-artifact/paper/figures/broad_su
+ccess_vs_params_with_java.png>]
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 6.0pt on input line 586.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 6.5pt on input line 20.
+(Font)              scaled to size 6.5pt on input line 594.
 
+Underfull \hbox (badness 3679) in paragraph at lines 602--602
+[]|\T1/LinuxLibertineT-TLF/m/n/6 (+20) Derived order-of-magnitude es-ti-
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \vbox (badness 3815) has occurred while \output is active []
+
+ [3.3 </home/mbahrami/repo/swe-sota-agent/kozuchi-agent-artifact/paper/figures/
+overall-architecture.pdf>]
+(/home/mbahrami/repo/swe-sota-agent/kozuchi-agent-artifact/paper/stats/workflow
+_replacement.tex
 Underfull \hbox (badness 10000) in paragraph at lines 24--24
 []|\T1/LinuxLibertineT-TLF/m/n/6 (+20) 5 (vLLM, launch, wait,
  []
@@ -1742,54 +1771,52 @@ Underfull \hbox (badness 10000) in paragraph at lines 24--24
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
 (Font)              scaled to size 6.0pt on input line 28.
 )
-Underfull \vbox (badness 1616) has occurred while \output is active []
+Underfull \vbox (badness 2261) has occurred while \output is active []
 
- [3.3]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 776.
+put line 820.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 6.0pt on input line 778.
+(Font)              scaled to size 6.0pt on input line 822.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 6.5pt on input line 780.
+(Font)              scaled to size 6.5pt on input line 824.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 5.5pt on input line 780.
+(Font)              scaled to size 5.5pt on input line 824.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 6.0pt on input line 781.
+(Font)              scaled to size 6.0pt on input line 825.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 7.3pt on input line 837.
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/sc' will be
-(Font)              scaled to size 9.0pt on input line 866.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
+(Font)              scaled to size 7.3pt on input line 881.
  [4.4]
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/sc' will be
+(Font)              scaled to size 9.0pt on input line 911.
+
 [5.5{/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertine/lbtn_ncsllp.enc}]
-(/home/mbahrami/repo/swe-sota-agent/paper/final/stats/xcheck_summary.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 1203--1219
+(/home/mbahrami/repo/swe-sota-agent/kozuchi-agent-artifact/paper/stats/xcheck_s
+ummary.tex) [6.6]
+Underfull \hbox (badness 10000) in paragraph at lines 1256--1272
 []\T1/LinuxLibertineT-TLF/b/n/9 (+20) Reproducibility con-fig-u-ra-tion. \T1/Li
 nuxLibertineT-TLF/m/n/9 (+20) The pub-lic ar-ti-fact
  []
 
 
-Underfull \hbox (badness 3701) in paragraph at lines 1203--1219
+Underfull \hbox (badness 3701) in paragraph at lines 1256--1272
 \T1/LinuxLibertineT-TLF/m/n/9 (+20) records two re-pro-ducibil-ity lay-ers: the
  declar-a-tive run-time
  []
 
 
-Underfull \hbox (badness 2671) in paragraph at lines 1203--1219
+Underfull \hbox (badness 2671) in paragraph at lines 1256--1272
 \T1/LinuxLibertineT-TLF/m/n/9 (+20) con-fig-u-ra-tion (\T1/zi4/m/n/9 configs/ag
 ent_sota.yaml\T1/LinuxLibertineT-TLF/m/n/9 (+20) ) and the ex-e-cuted
  []
 
 
-Underfull \hbox (badness 2932) in paragraph at lines 1203--1219
+Underfull \hbox (badness 2932) in paragraph at lines 1256--1272
 \T1/LinuxLibertineT-TLF/m/n/9 (+20) Python sweep man-i-fest (\T1/zi4/m/n/9 prov
 enance/sweep_manifest.json\T1/LinuxLibertineT-TLF/m/n/9 (+20) ).
  []
 
 
-Underfull \hbox (badness 4467) in paragraph at lines 1203--1219
+Underfull \hbox (badness 4467) in paragraph at lines 1256--1272
 \T1/LinuxLibertineT-TLF/m/n/9 (+20) can-di-date runs, se-lec-tor weights $\OML/
 nxlmi/m/it/9 w[][]\OT1/LinuxLibertineT-TLF/m/n/9 (+20) 0\OML/nxlmi/m/it/9 :\OT1
 /LinuxLibertineT-TLF/m/n/9 (+20) 3$ \T1/LinuxLibertineT-TLF/m/n/9 (+20) and $\O
@@ -1799,57 +1826,60 @@ OT1/LinuxLibertineT-TLF/m/n/9 (+20) 7$ \T1/LinuxLibertineT-TLF/m/n/9 (+20) (Ÿ[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1203--1219
+Underfull \hbox (badness 10000) in paragraph at lines 1256--1272
 \T1/LinuxLibertineT-TLF/m/n/9 (+20) 50 shards, \T1/zi4/m/n/9 max_model_len=1500
 00\T1/LinuxLibertineT-TLF/m/n/9 (+20) , \T1/zi4/m/n/9 max_new_tokens=16384\T1/L
 inuxLibertineT-TLF/m/n/9 (+20) ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1203--1219
+Underfull \hbox (badness 10000) in paragraph at lines 1256--1272
 \T1/zi4/m/n/9 step_limit=1000\T1/LinuxLibertineT-TLF/m/n/9 (+20) , \T1/zi4/m/n/
 9 instance_timeout=06:00:00\T1/LinuxLibertineT-TLF/m/n/9 (+20) , and the
  []
 
-[6.6]
-(/home/mbahrami/repo/swe-sota-agent/paper/final/stats/resolved_by_repo.tex)
-<figures/fig10_per_repo_vs_peers.png, id=385, 502.9992pt x 253.30635pt>
+
+(/home/mbahrami/repo/swe-sota-agent/kozuchi-agent-artifact/paper/stats/resolved
+_by_repo.tex) [7.7]
+<figures/fig10_per_repo_vs_peers.png, id=410, 502.9992pt x 253.30635pt>
 File: figures/fig10_per_repo_vs_peers.png Graphic file (type png)
 <use figures/fig10_per_repo_vs_peers.png>
 Package pdftex.def Info: figures/fig10_per_repo_vs_peers.png  used on input lin
-e 1327.
+e 1380.
 (pdftex.def)             Requested size: 241.14749pt x 121.44264pt.
 
-Underfull \vbox (badness 5939) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [7.7 </home/mbahrami/repo/swe-sota-agent/paper/final/figures/fig10_per_repo_vs
-_peers.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 1472--1482
+ [8.8 </home/mbahrami/repo/swe-sota-agent/kozuchi-agent-artifact/paper/figures/
+fig10_per_repo_vs_peers.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1525--1535
 []\T1/LinuxLibertineT-TLF/b/n/9 (+20) Operational re-li-a-bil-ity. \T1/LinuxLib
 ertineT-TLF/m/n/9 (+20) All 495 tra-jec-to-ries re-port
  []
 
 
-Underfull \hbox (badness 3439) in paragraph at lines 1472--1482
+Underfull \hbox (badness 3439) in paragraph at lines 1525--1535
 \T1/zi4/m/n/9 exit_status = "Submitted"\T1/LinuxLibertineT-TLF/m/n/9 (+20) ; th
 e agent does not crash
  []
 
 
-Underfull \vbox (badness 2903) has occurred while \output is active []
-
- [8.8]
-(/home/mbahrami/repo/swe-sota-agent/paper/final/stats/selector_ablation.tex)
+(/home/mbahrami/repo/swe-sota-agent/kozuchi-agent-artifact/paper/stats/selector
+_ablation.tex)
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-<figures/cross_track_kozuchi.png, id=421, 522.45187pt x 196.03238pt>
+ [9.9]
+Underfull \vbox (badness 4279) has occurred while \output is active []
+
+<figures/cross_track_kozuchi.png, id=445, 522.45187pt x 196.03238pt>
 File: figures/cross_track_kozuchi.png Graphic file (type png)
 <use figures/cross_track_kozuchi.png>
-Package pdftex.def Info: figures/cross_track_kozuchi.png  used on input line 16
-84.
+Package pdftex.def Info: figures/cross_track_kozuchi.png  used on input line 17
+65.
 (pdftex.def)             Requested size: 241.14749pt x 90.48407pt.
 
-(/home/mbahrami/repo/swe-sota-agent/paper/final/stats/cross_track_summary.tex
+(/home/mbahrami/repo/swe-sota-agent/kozuchi-agent-artifact/paper/stats/cross_tr
+ack_summary.tex
 Underfull \hbox (badness 10000) in paragraph at lines 7--7
 []|\T1/LinuxLibertineT-TLF/m/n/6 (+20) SWE-bench Ver-i-fied
  []
@@ -1870,34 +1900,37 @@ Underfull \hbox (badness 6001) in paragraph at lines 8--9
  []
 
 )
-Underfull \hbox (badness 10000) in paragraph at lines 1731--1743
+Underfull \hbox (badness 10000) in paragraph at lines 1812--1824
 \T1/LinuxLibertineT-TLF/m/n/9 (+20) is in-stead language/harness-specific: \T1/
 zi4/m/n/9 no_fix_test_results
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1731--1743
+Underfull \hbox (badness 10000) in paragraph at lines 1812--1824
 \T1/LinuxLibertineT-TLF/m/n/9 (+20) (25%), \T1/zi4/m/n/9 report_valid_not_leade
 rboard_resolved \T1/LinuxLibertineT-TLF/m/n/9 (+20) (9%), and
  []
 
-[9.9 </home/mbahrami/repo/swe-sota-agent/paper/final/figures/cross_track_kozuch
-i.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 1780--1796
+
+Underfull \hbox (badness 10000) in paragraph at lines 1861--1877
 \T1/LinuxLibertineT-TLF/m/n/9 (+20) The op-er-a-tional lessons from benchmark-s
 cale use are
  []
 
 
-Underfull \hbox (badness 4328) in paragraph at lines 1780--1796
+Underfull \hbox (badness 4328) in paragraph at lines 1861--1877
 \T1/LinuxLibertineT-TLF/m/n/9 (+20) prac-ti-cal rather than ar-chi-tec-tural. F
 irst, phase bound-aries
  []
 
-(/home/mbahrami/repo/swe-sota-agent/paper/final/build/main.bbl
+[10.10 </home/mbahrami/repo/swe-sota-agent/kozuchi-agent-artifact/paper/figures
+/cross_track_kozuchi.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+(/home/mbahrami/repo/swe-sota-agent/kozuchi-agent-artifact/paper/build/main.bbl
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
 (Font)              scaled to size 7.0pt on input line 50.
- [10.10]
 LaTeX Info: Redefining \tempurl on input line 64.
 LaTeX Info: Redefining \tempurl on input line 77.
 LaTeX Info: Redefining \tempurl on input line 92.
@@ -1914,33 +1947,22 @@ in-i-mal
  []
 
 
-Underfull \hbox (badness 6792) in paragraph at lines 183--197
+Underfull \hbox (badness 3872) in paragraph at lines 183--197
 \T1/LinuxLibertineT-TLF/m/n/7 (+20) Agent Run-time for SWE Tasks.  Ven-dored in
- this repos-i-tory un-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 183--197
-\T1/LinuxLibertineT-TLF/m/n/7 (+20) der \T1/zi4/m/n/7 pip_modules/mini-swe-agen
-t/\T1/LinuxLibertineT-TLF/m/n/7 (+20) ; up-stream is the open-source
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 183--197
-\T1/zi4/m/n/7 mini-swe-agent \T1/LinuxLibertineT-TLF/m/n/7 (+20) project from t
-he SWE-agent au-thors.   []$\T1/zi4/m/n/7 https :
+ this repos-i-tory un-der
  []
 
 LaTeX Info: Redefining \tempurl on input line 210.
+[11.11]
 LaTeX Info: Redefining \tempurl on input line 223.
 
-Underfull \hbox (badness 2443) in paragraph at lines 218--228
+Underfull \hbox (badness 2753) in paragraph at lines 218--228
 []\T1/LinuxLibertineT-TLF/m/n/7 (+20) Martin Fowler and Matthew Foem-mel. 2006.
   Con-tin-u-ous In-te-gra-tion.
  []
 
 
-Underfull \hbox (badness 3138) in paragraph at lines 218--228
+Underfull \hbox (badness 3492) in paragraph at lines 218--228
 \T1/LinuxLibertineT-TLF/m/n/7 (+20) Mar-t-in-Fowler.com ar-ti-cle.   []$\T1/zi4
 /m/n/7 https : / / martinfowler . com / articles /
  []
@@ -1963,10 +1985,6 @@ LaTeX Info: Redefining \tempurl on input line 585.
 LaTeX Info: Redefining \tempurl on input line 605.
 LaTeX Info: Redefining \tempurl on input line 619.
 LaTeX Info: Redefining \tempurl on input line 635.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [11.11]
 LaTeX Info: Redefining \tempurl on input line 661.
 LaTeX Info: Redefining \tempurl on input line 676.
 LaTeX Info: Redefining \tempurl on input line 696.
@@ -1974,21 +1992,8 @@ LaTeX Info: Redefining \tempurl on input line 713.
 LaTeX Info: Redefining \tempurl on input line 730.
 LaTeX Info: Redefining \tempurl on input line 747.
 LaTeX Info: Redefining \tempurl on input line 776.
-)
-
-Class acmart Warning: ACM keywords are mandatory for papers over two pages.
-
-
-Class acmart Warning: ACM reference format is mandatory 
-(acmart)              for papers over one page. 
-(acmart)              Please add printacmref=true to the 
-(acmart)              \settopmatter command..
-
-
-Class acmart Warning: CCS concepts are mandatory for papers over two pages.
-
-
-Overfull \vbox (1.152pt too high) has occurred while \output is active []
+[12.12])
+Overfull \vbox (1.16599pt too high) has occurred while \output is active []
 
 
 (/usr/share/texlive/texmf-dist/tex/generic/stringenc/se-pdfdoc.def
@@ -1996,23 +2001,24 @@ File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
 )
 (/usr/share/texlive/texmf-dist/tex/generic/stringenc/se-utf8.def
 File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
-) [12.12]
-(/home/mbahrami/repo/swe-sota-agent/paper/final/build/main.aux)
+) [13.13]
+(/home/mbahrami/repo/swe-sota-agent/kozuchi-agent-artifact/paper/build/main.aux
+)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 9F22D645E77A7029B7946A13BDE0D67D;5973.
+(rerunfilecheck)             Checksum: DAB4F785DBD3E0DAC346D5346113319E;5973.
  ) 
 Here is how much of TeX's memory you used:
- 23209 strings out of 476182
- 375421 string characters out of 5795596
- 1983975 words of memory out of 5000000
- 43857 multiletter control sequences out of 15000+600000
- 774604 words of font info for 549 fonts, out of 8000000 for 9000
+ 23340 strings out of 476182
+ 379492 string characters out of 5795596
+ 1974975 words of memory out of 5000000
+ 43902 multiletter control sequences out of 15000+600000
+ 796880 words of font info for 600 fonts, out of 8000000 for 9000
  175 hyphenation exceptions out of 8191
- 90i,16n,131p,1233b,795s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,12n,131p,1233b,792s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4
 r.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/LibertineMathMI.p
 fb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/LibertineMathMI5.pfb
@@ -2028,11 +2034,11 @@ are/texlive/texmf-dist/fonts/type1/public/newtx/NewTXMI.pfb></usr/share/texlive
 t/fonts/type1/public/newtx/txexs.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /public/newtx/txmiaX.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newt
 x/txsys.pfb>
-Output written on /home/mbahrami/repo/swe-sota-agent/paper/final/build/main.pdf
- (12 pages, 1438562 bytes).
+Output written on /home/mbahrami/repo/swe-sota-agent/kozuchi-agent-artifact/pap
+er/build/main.pdf (13 pages, 1449574 bytes).
 PDF statistics:
- 648 PDF objects out of 1000 (max. 8388607)
- 558 compressed objects within 6 object streams
- 159 named destinations out of 1000 (max. 500000)
- 106237 words of extra memory for PDF output out of 106986 (max. 10000000)
+ 676 PDF objects out of 1000 (max. 8388607)
+ 584 compressed objects within 6 object streams
+ 163 named destinations out of 1000 (max. 500000)
+ 122621 words of extra memory for PDF output out of 128383 (max. 10000000)
 
