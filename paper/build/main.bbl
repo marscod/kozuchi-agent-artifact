@@ -44,12 +44,12 @@
   Machine}.
 \newblock \bibinfo{howpublished}{Epoch AI engineering blog}.
 \newblock
+\shownote{Accessed 2026-04-29}.
+\newblock
 \urldef\tempurl%
 \url{https://epoch.ai/blog/swebench-docker}
 \showURL{%
 \tempurl}
-\newblock
-\shownote{Accessed 2026-04-29}.
 
 
 \bibitem[{Amazon Web Services}(2024)]%
@@ -73,12 +73,12 @@
 \newblock \bibinfo{title}{{Claude Code} Overview}.
 \newblock \bibinfo{howpublished}{{Claude Code} Documentation}.
 \newblock
+\shownote{Accessed 2026-04-28}.
+\newblock
 \urldef\tempurl%
 \url{https://code.claude.com/docs/en/overview}
 \showURL{%
 \tempurl}
-\newblock
-\shownote{Accessed 2026-04-28}.
 
 
 \bibitem[{Anthropic}(2026b)]%
@@ -88,12 +88,12 @@
 \newblock \bibinfo{title}{Tool Use with {Claude}}.
 \newblock \bibinfo{howpublished}{{Claude API} Documentation}.
 \newblock
+\shownote{Accessed 2026-04-29}.
+\newblock
 \urldef\tempurl%
 \url{https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview}
 \showURL{%
 \tempurl}
-\newblock
-\shownote{Accessed 2026-04-29}.
 
 
 \bibitem[Benjamini and Hochberg(1995)]%
@@ -188,12 +188,12 @@
   {\code{pip\_modules/mini-swe-agent/}}; upstream is the open-source
   {\code{mini-swe-agent}} project from the {SWE-agent} authors}.
 \newblock
+\shownote{Accessed 2026-04-28}.
+\newblock
 \urldef\tempurl%
 \url{https://github.com/SWE-agent/mini-swe-agent}
 \showURL{%
 \tempurl}
-\newblock
-\shownote{Accessed 2026-04-28}.
 
 
 \bibitem[Duvall et~al\mbox{.}(2007)]%
@@ -219,12 +219,12 @@
 \newblock \bibinfo{title}{Continuous Integration}.
 \newblock \bibinfo{howpublished}{MartinFowler.com article}.
 \newblock
+\shownote{Original article published 2000; updated 2006}.
+\newblock
 \urldef\tempurl%
 \url{https://martinfowler.com/articles/continuousIntegration.html}
 \showURL{%
 \tempurl}
-\newblock
-\shownote{Original article published 2000; updated 2006}.
 
 
 \bibitem[Gazzola et~al\mbox{.}(2019)]%
@@ -246,12 +246,12 @@
 \newblock \bibinfo{title}{About {GitHub Copilot} Cloud Agent}.
 \newblock \bibinfo{howpublished}{{GitHub} Documentation}.
 \newblock
+\shownote{Accessed 2026-04-27}.
+\newblock
 \urldef\tempurl%
 \url{https://docs.github.com/copilot/concepts/agents/coding-agent/about-coding-agent}
 \showURL{%
 \tempurl}
-\newblock
-\shownote{Accessed 2026-04-27}.
 
 
 \bibitem[Hendrycks et~al\mbox{.}(2021)]%
@@ -471,12 +471,12 @@
 \newblock \bibinfo{title}{{\code{Devstral-Small-2-24B-Instruct-2512}}}.
 \newblock \bibinfo{howpublished}{Hugging Face model card}.
 \newblock
+\shownote{Accessed 2026-04-29}.
+\newblock
 \urldef\tempurl%
 \url{https://huggingface.co/mistralai/Devstral-Small-2-24B-Instruct-2512}
 \showURL{%
 \tempurl}
-\newblock
-\shownote{Accessed 2026-04-29}.
 
 
 \bibitem[{NVIDIA}(2026)]%
@@ -486,13 +486,13 @@
   {\code{Llama-3.1 Nemotron Nano 8B v1}}}.
 \newblock \bibinfo{howpublished}{Hugging Face model cards}.
 \newblock
+\shownote{Accessed 2026-04-29. Primary URL is the Super model card; Nano model
+  card: \url{https://huggingface.co/nvidia/Llama-3.1-Nemotron-Nano-8B-v1}}.
+\newblock
 \urldef\tempurl%
 \url{https://huggingface.co/nvidia/Llama-3_3-Nemotron-Super-49B-v1_5}
 \showURL{%
 \tempurl}
-\newblock
-\shownote{Accessed 2026-04-29. Primary URL is the Super model card; Nano model
-  card: \url{https://huggingface.co/nvidia/Llama-3.1-Nemotron-Nano-8B-v1}}.
 
 
 \bibitem[{OpenAI}(2024)]%
@@ -525,12 +525,12 @@
 \newblock \bibinfo{title}{Function Calling}.
 \newblock \bibinfo{howpublished}{{OpenAI API} Documentation}.
 \newblock
+\shownote{Accessed 2026-04-29}.
+\newblock
 \urldef\tempurl%
 \url{https://developers.openai.com/api/docs/guides/function-calling}
 \showURL{%
 \tempurl}
-\newblock
-\shownote{Accessed 2026-04-29}.
 
 
 \bibitem[{Qwen Team}(2026)]%
@@ -540,15 +540,15 @@
 \newblock \bibinfo{title}{{\code{Qwen3.5-27B}}}.
 \newblock \bibinfo{howpublished}{Hugging Face model card}.
 \newblock
-\urldef\tempurl%
-\url{https://huggingface.co/Qwen/Qwen3.5-27B}
-\showURL{%
-\tempurl}
-\newblock
 \shownote{Accessed 2026-04-29. Used as the backbone LLM for the headline run
   reported in this paper; the public artifact records the model identifier, run
   manifest, and serving provenance, while model weights remain external
   licensed dependencies}.
+\newblock
+\urldef\tempurl%
+\url{https://huggingface.co/Qwen/Qwen3.5-27B}
+\showURL{%
+\tempurl}
 
 
 \bibitem[Schick et~al\mbox{.}(2023)]%
@@ -615,12 +615,12 @@
   {SWE-bench} Cloud Evaluation}.
 \newblock \bibinfo{howpublished}{{SWE-bench} Documentation}.
 \newblock
+\shownote{Accessed 2026-04-06}.
+\newblock
 \urldef\tempurl%
 \url{https://www.swebench.com/sb-cli/}
 \showURL{%
 \tempurl}
-\newblock
-\shownote{Accessed 2026-04-06}.
 
 
 \bibitem[Wang et~al\mbox{.}(2024)]%
