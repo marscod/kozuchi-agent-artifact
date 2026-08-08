@@ -1,3 +1,4 @@
+[![ASE 2026](https://img.shields.io/badge/ASE_2026-Accepted-success)](https://conf.researchr.org/home/ase-2026)
 [![Zenodo](https://img.shields.io/badge/Zenodo-Draft-blue)](https://zenodo.org/records/19941649?preview=1)
 ![Python](https://img.shields.io/badge/python-3.11+-blue.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -17,7 +18,9 @@
 This directory is the **self-contained artifact** for the paper:
 
 > *Kozuchi Agent: A Language-Agnostic Open-Weight Agent for Software Repair*
-> (Bahrami et al., manuscript under review)
+> (Bahrami et al. — **accepted for presentation at [ASE 2026](https://conf.researchr.org/home/ase-2026)**,
+> the 41st IEEE/ACM International Conference on Automated Software Engineering,
+> Munich, Germany, October 12–16, 2026)
 
 Everything cited in the paper — every numeric value, every figure,
 every table, every trajectory-bundle counter — is regenerable from
@@ -250,11 +253,11 @@ is required.
 
 ## 7. Citation
 
-If you build on this artifact, please cite the paper (citation will be
-updated upon publication):
+If you build on this artifact, please cite the paper (DOI and page
+numbers will be added once the ASE 2026 proceedings are published):
 
 ```bibtex
-@misc{kozuchi2026,
+@inproceedings{kozuchi2026,
   title  = {Kozuchi Agent: A Language-Agnostic Open-Weight Agent for Software Repair},
   author = {Mehdi Bahrami and Kosaku Kimura and Satoshi Munakata and
             Satoshi Nakashima and Yu Ishikawa and Kosuke Maeda and
@@ -265,7 +268,10 @@ updated upon publication):
             Matthieu Parizy and Akira Sakai and Yuma Ichikawa and
             Yang Zhao and Michiaki Takizawa and Taku Fukui and
             Hiroki Ohtsuji and Wei-Peng Chen and Hiro Kobashi},
+  booktitle = {Proceedings of the 41st IEEE/ACM International Conference on
+               Automated Software Engineering (ASE 2026)},
+  address = {Munich, Germany},
   year   = {2026},
-  note   = {Under review. Artifact: \url{https://github.com/marscod/kozuchi-agent-artifact}}
+  note   = {To appear. Artifact: \url{https://github.com/marscod/kozuchi-agent-artifact}}
 }
 ```
