@@ -7,18 +7,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[sigconf,screen]{acmart}
 
-%% Camera-ready rights: placeholder until the ACM rights-form email
-%% arrives; update \setcopyright, \acmISBN, and \acmDOI from the form.
-\setcopyright{acmlicensed}
 \settopmatter{printacmref=true, printccs=true, printfolios=false}
-\renewcommand\footnotetextcopyrightpermission[1]{}
 
-\acmConference[ASE '26]{Proceedings of the 41st IEEE/ACM International Conference on Automated Software Engineering}{October 12--16, 2026}{Munich, Germany}
-\acmBooktitle{Proceedings of the 41st IEEE/ACM International Conference on Automated Software Engineering, Industry Showcase Track (ASE '26 Industry), October 12--16, 2026, Munich, Germany}
-\acmISBN{}
-\acmDOI{}
-\acmYear{2026}
+%%% The following is specific to ASE '26-IND and the paper
+%%% 'Kozuchi Agent: A Language-Agnostic Open-Weight Agent for Software Repair'
+%%% by Mehdi Bahrami, Kosaku Kimura, Satoshi Munakata, Satoshi Nakashima, Yu Ishikawa, Kosuke Maeda, Nao Soma, Kenichi Kobayashi, Keisuke Miyazaki, Keizo Kato, Shigeki Fukuta, Tatsuo Kumano, Nobutaka Imamura, Kevin Takeshi Musgrave, Shahbaz Abdul Khader, Kwun Ho Ngan, Joseph Townsend, Fayas Asharindavida, Matthieu Parizy, Akira Sakai, Yuma Ichikawa, Yang Zhao, Michiaki Takizawa, Taku Fukui, Hiroki Ohtsuji, Wei-Peng Chen, and Hiro Kobashi.
+%%%
 \copyrightyear{2026}
+\acmYear{2026}
+\setcopyright{cc}
+\setcctype{by}
+\acmConference[ASE '26]{Proceedings of the 41st IEEE/ACM International Conference on Automated Software Engineering}{October 12--16, 2026}{Munich, Germany}
+\acmBooktitle{Proceedings of the 41st IEEE/ACM International Conference on Automated Software Engineering (ASE '26), October 12--16, 2026, Munich, Germany}
+\acmDOI{10.1145/3832783.3834531}
+\acmISBN{979-8-4007-2882-2/2026/10}
+\acmSubmissionID{ase26ind-p408-p}
+\received{2026-05-01}
+\received[accepted]{2026-07-01}
 
 \usepackage{booktabs}
 \usepackage{listings}
@@ -31,6 +36,7 @@
 \usepackage{microtype}
 \usepackage{siunitx}
 \usepackage{float}
+\usepackage{balance}
 
 \DeclareSIUnit{\percentagepoint}{pp}
 \DeclareSIUnit{\loc}{LOC}
@@ -183,35 +189,62 @@
 %%   2 = Fujitsu Research, Japan
 %%   3 = Fujitsu Research of Europe, UK
 %%   4 = Fujitsu Research \& Development, China
-\author{%
-Mehdi Bahrami\textsuperscript{1},
-Kosaku Kimura\textsuperscript{2},
-Satoshi Munakata\textsuperscript{2},
-Satoshi Nakashima\textsuperscript{2},
-Yu Ishikawa\textsuperscript{2},
-Kosuke Maeda\textsuperscript{2},
-Nao Soma\textsuperscript{2},
-Kenichi Kobayashi\textsuperscript{2},
-Keisuke Miyazaki\textsuperscript{2},
-Keizo Kato\textsuperscript{2},
-Shigeki Fukuta\textsuperscript{2},
-Tatsuo Kumano\textsuperscript{2},
-Nobutaka Imamura\textsuperscript{2},
-Kevin Musgrave\textsuperscript{1},
-Shahbaz Abdul Khader\textsuperscript{3},
-Kwun Ho Ngan\textsuperscript{3},
-Joe Townsend\textsuperscript{3},
-Fayas Asharindavida\textsuperscript{3},
-Matthieu Parizy\textsuperscript{3},
-Akira Sakai\textsuperscript{3},
-Yuma Ichikawa\textsuperscript{2},
-Yang Zhao\textsuperscript{4},
-Michiaki Takizawa\textsuperscript{2},
-Taku Fukui\textsuperscript{2},
-Hiroki Ohtsuji\textsuperscript{2},
-Wei-Peng Chen\textsuperscript{1},
-Hiro Kobashi\textsuperscript{2}%
-}
+%% Each author is declared with its own \author command so that the ACM
+%% camera-ready validator counts all 27 authors, but a single shared
+%% \affiliation keeps them in one title box. acmart stacks the names of a
+%% box one per line; with 27 authors that fills a page, so we make the
+%% separator inline and let the roster wrap across the full text width.
+%% This reproduces the original single-block roster with superscript-keyed
+%% affiliations.
+\settopmatter{authorsperrow=1}
+\makeatletter
+\newcount\kz@authorcount
+\def\@typeset@author@bx{\bgroup\hsize=\author@bx@wd
+  \normalbaselines
+  \global\setbox\author@bx=\vtop{\centering
+    \@authorfont
+    %% acmart separates the names of an author box with \par. Turn that
+    %% separator into a comma so the 27-name roster wraps as running text
+    %% instead of occupying 27 lines.
+    \begingroup
+      \kz@authorcount=0\relax
+      \def\par{\ifnum\kz@authorcount>0\relax,\space\fi
+        \global\advance\kz@authorcount by 1\relax}%
+      \@currentauthors
+    \endgroup
+    \endgraf\@affiliationfont\@currentaffiliation}\egroup
+  \box\author@bx\hspace{\author@bx@sep}%
+  \gdef\@currentauthors{}%
+  \gdef\@currentaffiliation{}}
+\makeatother
+
+\author{Mehdi Bahrami\textsuperscript{1}}
+\author{Kosaku Kimura\textsuperscript{2}}
+\author{Satoshi Munakata\textsuperscript{2}}
+\author{Satoshi Nakashima\textsuperscript{2}}
+\author{Yu Ishikawa\textsuperscript{2}}
+\author{Kosuke Maeda\textsuperscript{2}}
+\author{Nao Soma\textsuperscript{2}}
+\author{Kenichi Kobayashi\textsuperscript{2}}
+\author{Keisuke Miyazaki\textsuperscript{2}}
+\author{Keizo Kato\textsuperscript{2}}
+\author{Shigeki Fukuta\textsuperscript{2}}
+\author{Tatsuo Kumano\textsuperscript{2}}
+\author{Nobutaka Imamura\textsuperscript{2}}
+\author{Kevin Takeshi Musgrave\textsuperscript{1}}
+\author{Shahbaz Abdul Khader\textsuperscript{3}}
+\author{Kwun Ho Ngan\textsuperscript{3}}
+\author{Joseph Townsend\textsuperscript{3}}
+\author{Fayas Asharindavida\textsuperscript{3}}
+\author{Matthieu Parizy\textsuperscript{3}}
+\author{Akira Sakai\textsuperscript{3}}
+\author{Yuma Ichikawa\textsuperscript{2}}
+\author{Yang Zhao\textsuperscript{4}}
+\author{Michiaki Takizawa\textsuperscript{2}}
+\author{Taku Fukui\textsuperscript{2}}
+\author{Hiroki Ohtsuji\textsuperscript{2}}
+\author{Wei-Peng Chen\textsuperscript{1}}
+\author{Hiro Kobashi\textsuperscript{2}}
 %% acmart requires a non-empty \country{}; we keep the location info inside
 %% the multi-line \institution{} block and use a single-space \country{}
 %% as a placeholder so the parent Fujitsu Research entity is not duplicated.
@@ -225,18 +258,22 @@ Hiro Kobashi\textsuperscript{2}%
   \country{~}
 }
 
-%% Shorten the author list in the auto-generated "ACM Reference Format:"
-%% block (and the running page header) to "Bahrami et al." Listing all 27
-%% co-authors there is unwieldy; the full roster is still shown in the
-%% title block above.
-%%   - \shortauthors drives the running page header.
-%%   - \@acmRefShortAuthors is what acmart's \@mkbibcitation prints in the
-%%     ACM Reference Format. acmart appends a literal ". " after this
-%%     name, so we deliberately omit the trailing period here to avoid
-%%     "et al.." while still rendering "Bahrami et al. 2026. ..."
+%% \shortauthors drives the running page header only.
+%% The ACM Reference Format must carry the full roster exactly as the
+%% camera-ready validator expects it, so \@acmRefAuthors spells out all
+%% 27 co-authors; the single \author{} block above carries affiliation
+%% superscripts that must not leak into the reference string. acmart
+%% appends a literal ". " after this name, so the trailing period is
+%% deliberately omitted here.
 \renewcommand{\shortauthors}{Bahrami et al.}
 \makeatletter
-\newcommand{\@acmRefShortAuthors}{Bahrami et~al}
+\newcommand{\@acmRefShortAuthors}{Mehdi Bahrami, Kosaku Kimura, Satoshi
+Munakata, Satoshi Nakashima, Yu Ishikawa, Kosuke Maeda, Nao Soma,
+Kenichi Kobayashi, Keisuke Miyazaki, Keizo Kato, Shigeki Fukuta, Tatsuo
+Kumano, Nobutaka Imamura, Kevin Takeshi Musgrave, Shahbaz Abdul Khader,
+Kwun Ho Ngan, Joseph Townsend, Fayas Asharindavida, Matthieu Parizy,
+Akira Sakai, Yuma Ichikawa, Yang Zhao, Michiaki Takizawa, Taku Fukui,
+Hiroki Ohtsuji, Wei-Peng Chen, and Hiro Kobashi}
 \AtBeginDocument{%
   \patchcmd{\@mkbibcitation}%
     {\authors}%
@@ -269,7 +306,7 @@ Hiro Kobashi\textsuperscript{2}%
 \ccsdesc[500]{Software and its engineering~Software defect analysis}
 \ccsdesc[300]{Computing methodologies~Natural language processing}
 
-\keywords{LLM agents, automated program repair, SWE-bench, agent harness,
+\keywords{AI agent, LLM, automated program repair, SWE-bench, agent harness,
 test-time scaling, multi-cluster pipeline, production planning,
 experience report}
 
@@ -365,7 +402,7 @@ Four operational blockers shaped the design as follows.
 
 \begin{figure*}[t]
   \centering
-  \includegraphics[width=1.0\textwidth]{\figpath{overall-architecture.pdf}}
+  \includegraphics[width=0.9\textwidth]{\figpath{overall-architecture.pdf}}
   \caption{Kozuchi Agent workflow from candidate generation to
   cross-agent selection.}
   \Description{Two-lane system diagram. The upper lane shows the broad
@@ -1820,7 +1857,7 @@ language-agnostic harness transfer, not equal language fluency.
 The Java leaderboard mixes open-weight, semi-open, undeclared, and
 closed-frontier peers; our open-weight claim uses the strict
 ``decision-LLM weights publicly released'' subset. As in RQ5, the Java
-run does not separately ablate scaffold, backbone, and selector
+run does not separately ablate scaffold, and selector
 contributions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Operational Planning and Lessons Learned
@@ -1889,7 +1926,7 @@ anecdotal consistency check.
 %   - "same agent/backbone/scaffold": comparison.md §1, analysis.java.md header.
 Kozuchi Agent targets conservative pre-production evaluation of
 issue-to-patch agents on large repositories, with evidence from
-SWE-bench Verified (Python) and Multi-SWE-bench Java. Using a
+SWE-bench (Python) and Multi-SWE-bench Java. Using a
 locally hosted open-weight model, no fine-tuning,
 eight candidate runs, and cross-agent testing, it resolves 374/500
 SWE-bench Verified instances (\SI{74.80}{\percent}, Wilson \SI{95}{\percent} CI [\SI{70.82}{\percent},
@@ -1897,7 +1934,7 @@ SWE-bench Verified instances (\SI{74.80}{\percent}, Wilson \SI{95}{\percent} CI 
 Multi-SWE-bench Java instances (\SI{32.03}{\percent}) under the same agent,
 backbone, and scaffold. It ranks 12th among 135 catalogued Python
 submissions, is the highest-ranked open-weight Python system, ranks first
-among strict open-weight Java submissions, and recovers \SI{80}{\percent} of resolved
+among strict open-weight Java, and recovers \SI{80}{\percent} of resolved
 Python instances within 653 LLM calls.
 
 \textbf{What we learned.}
@@ -1939,14 +1976,43 @@ field A/B telemetry, and broader multilingual benchmarks are explicit
 future work.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Contributions of Each Team
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Contributions of Each Team}
+\label{sec:contributions}
+
+\paragraph{Fujitsu Research, Japan.}
+\begin{itemize}
+  \item Led the overall design and implementation of Kozuchi Agent.
+  \item Conducted evaluations on SWE-bench.
+\end{itemize}
+
+\paragraph{Fujitsu Research of America, USA}
+\begin{itemize}
+  \item Led the writing of this paper.
+  \item Designed the Verifier.
+  \item Developed and prepared tools for Java.
+  \item Conducted evaluations on Multi-SWE-bench Java.
+\end{itemize}
+
+\paragraph{Fujitsu Research of Europe, UK}
+\begin{itemize}
+  \item Developed the Software Engineering Tool Suite.
+\end{itemize}
+
+\paragraph{Fujitsu Research \& Development, China.}
+\begin{itemize}
+  \item Conducted evaluations of test-time selection.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Data Availability Statement
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Data Availability Statement}
 \label{sec:artifact}
 \label{sec:data}
-The public review artifact, including the Kozuchi Agent source code
-and all analysis, is available at
-\url{https://github.com/marscod/kozuchi-agent-artifact}.
+The public review artifact, including all analysis, is available at
+\url{https://github.com/marscod/kozuchi-agent-artifact} and Kozuchi Agent source code at: \url{https://github.com/FujitsuResearch/kozuchi-mini-swe-agent}.
 
 The complete agent execution trajectories are available in the Zenodo
 archival record (DOI: 10.5281/zenodo.19941649), together with the agent
@@ -1961,6 +2027,9 @@ RQ1--RQ6.
 %% References
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \nocite{qwen35,devstral,nemotron}
+%% \balance splits the reference list evenly across both columns of the
+%% last page, as required by the ACM camera-ready check.
+\balance
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}
 

@@ -32,9 +32,9 @@ usage() {
   cat <<'EOF'
 Usage: ./build.sh [--skip-figures] [--force-figures]
 
-Build the standalone final paper package from paper/final/main.tex.
+Build the standalone ASE 2026 final paper package from paper/final/main.tex.
 The build writes build/main.pdf, refreshes main.pdf, and creates
-build/paper-final.zip containing the standalone source package.
+build/ase2026-final.zip containing the standalone source package.
 EOF
 }
 
@@ -160,7 +160,7 @@ build_pdf() {
 }
 
 write_zip() {
-  local zip_path="$BUILD_DIR/paper-final.zip"
+  local zip_path="$BUILD_DIR/ase2026-final.zip"
   ZIP_PATH="$zip_path" python3 - <<'PY'
 from __future__ import annotations
 
@@ -181,7 +181,6 @@ include_roots = [
     "source-index.md",
     "ACM-Reference-Format.bst",
     "acmart.cls",
-    "acmart-tagged.cls",
     "acmauthoryear.bbx",
     "acmauthoryear.cbx",
     "acmnumeric.bbx",
@@ -192,8 +191,12 @@ include_roots = [
     "siunitx-binary.cfg",
     "figures",
     "stats",
-    "sources",
 ]
+
+# ACM's camera-ready checker rejects archives that contain more than one
+# acmart.cls or more than one document with \documentclass, so ship only the
+# files main.tex actually needs.
+exclude_suffixes = (".drawio", ".log", ".aux", ".synctex.gz")
 
 with ZipFile(zip_path, "w", ZIP_DEFLATED) as zf:
     for name in include_roots:
@@ -201,11 +204,11 @@ with ZipFile(zip_path, "w", ZIP_DEFLATED) as zf:
         if not path.exists():
             continue
         if path.is_file():
-            zf.write(path, Path("paper-final") / name)
+            zf.write(path, Path("ase2026-final") / name)
             continue
         for child in sorted(path.rglob("*")):
-            if child.is_file():
-                zf.write(child, Path("paper-final") / child.relative_to(root))
+            if child.is_file() and not child.name.endswith(exclude_suffixes):
+                zf.write(child, Path("ase2026-final") / child.relative_to(root))
 PY
   echo "Wrote zip: ${zip_path#$SCRIPT_DIR/}"
 }
