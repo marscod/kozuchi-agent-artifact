@@ -22,9 +22,48 @@ This directory is the **self-contained artifact** for the paper:
 > the 41st IEEE/ACM International Conference on Automated Software Engineering,
 > Munich, Germany, October 12–16, 2026)
 
+### What the paper is about
+
+Kozuchi Agent is a software-repair agent: give it a bug report and a
+repository, and it produces a patch that makes the project's tests pass.
+The paper is an industry experience report on making such an agent work
+under real engineering constraints — a *locally hosted, open-weight*
+model (Qwen3.5-27B, no fine-tuning) instead of a proprietary API, and
+heterogeneous internal clusters instead of a single research machine.
+
+The design rests on four ideas: an explicit **eight-phase workflow**
+(reproduce the issue, synthesize a test, localize code and tests, fix,
+verify, close, report) that keeps long repair trajectories auditable;
+**persistent state on the filesystem**
+so facts survive context compression; a **model-independent action
+interface** and small deterministic tool set, so switching model families
+does not mean rewriting the agent; and **cross-agent test-time selection**,
+which picks among 8 independent candidate patches using only tests the
+runs wrote themselves — never the benchmark's hidden tests.
+
+Measured results: **374/500 (74.8%) on SWE-bench Verified**, first among
+open-weight systems and 12th of 135 overall on the official evaluator.
+The same configuration, with no language-specific tuning, resolves
+**41/128 (32.03%) on Multi-SWE-bench Java** — first among strict
+open-weight submissions and fourth of 42 overall. Peers at comparable
+scores use models an order of magnitude larger.
+
+### What this repository is for
+
+This is the **reproducibility artifact**: the evidence behind those
+claims, packaged so a reviewer can check them without access to our
+infrastructure. It contains the evaluation outputs, agent trajectories,
+configurations, analysis scripts, and the paper source itself.
+
 Everything cited in the paper — every numeric value, every figure,
 every table, every trajectory-bundle counter — is regenerable from
-files **inside this folder only**.
+files **inside this folder only**. Run [`reproduce.sh`](reproduce.sh) to
+rebuild them all, or read
+[`notebooks/reproduce.html`](notebooks/reproduce.html) for a narrative
+pass that prints each number next to the script that derives it and the
+place in the paper that cites it. It does *not* ship model weights or
+our internal cluster configuration; see
+[Trust model and license boundary](#4-trust-model-and-license-boundary).
 
 | Quick links | What it gives you |
 |---|---|
