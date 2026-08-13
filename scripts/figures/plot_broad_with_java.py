@@ -621,7 +621,7 @@ def main() -> None:
         "Blue dashed = strict Pareto front (Python).    "
         "Red dashed = max % per Java size class "
         "(strict Java Pareto front = Kozuchi Agent alone).",
-        transform=ax_py.transAxes, fontsize=12.0, color="0.35",
+        transform=ax_py.transAxes, fontsize=14.5, color="0.35",
         ha="center", va="top",
     )
 
