@@ -405,10 +405,10 @@
   Babuschkin}, \bibinfo{person}{Xinyun Chen}, \bibinfo{person}{Po-Sen Huang},
   \bibinfo{person}{Johannes Welbl}, \bibinfo{person}{Sven Gowal},
   \bibinfo{person}{Alexey Cherepanov}, \bibinfo{person}{James Molloy},
-  \bibinfo{person}{Daniel~J. Mankowitz}, \bibinfo{person}{Esme Robson},
-  \bibinfo{person}{Pushmeet Kohli}, \bibinfo{person}{Nando de Freitas},
-  \bibinfo{person}{Koray Kavukcuoglu}, {and} \bibinfo{person}{Oriol Vinyals}.}
-  \bibinfo{year}{2022}\natexlab{}.
+  \bibinfo{person}{Daniel~J. Mankowitz}, \bibinfo{person}{Esme
+  Sutherland~Robson}, \bibinfo{person}{Pushmeet Kohli}, \bibinfo{person}{Nando
+  de Freitas}, \bibinfo{person}{Koray Kavukcuoglu}, {and}
+  \bibinfo{person}{Oriol Vinyals}.} \bibinfo{year}{2022}\natexlab{}.
 \newblock \showarticletitle{Competition-Level Code Generation with
   {AlphaCode}}.
 \newblock \bibinfo{journal}{\emph{Science}} \bibinfo{volume}{378},
@@ -780,9 +780,9 @@
 
 \bibitem[Zhang et~al\mbox{.}(2024)]%
         {zhang2024autocoderover}
-\bibfield{author}{\bibinfo{person}{Kechi Zhang}, \bibinfo{person}{Zhuo Li},
-  \bibinfo{person}{Jia Li}, \bibinfo{person}{Ge Li}, {and} \bibinfo{person}{Zhi
-  Jin}.} \bibinfo{year}{2024}\natexlab{}.
+\bibfield{author}{\bibinfo{person}{Yuntong Zhang}, \bibinfo{person}{Haifeng
+  Ruan}, \bibinfo{person}{Zhiyu Fan}, {and} \bibinfo{person}{Abhik
+  Roychoudhury}.} \bibinfo{year}{2024}\natexlab{}.
 \newblock \bibinfo{title}{{AutoCodeRover}: Autonomous Program Improvement}.
 \newblock \bibinfo{howpublished}{Proceedings of the 33rd ACM SIGSOFT
   International Symposium on Software Testing and Analysis (ISSTA)}.

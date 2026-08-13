@@ -641,12 +641,12 @@ def fig_per_repo_vs_peers(csv_dir: Path, fig_dir: Path) -> None:
     for n in model_full_names:
         labels.append(PEER_ABBREV.get(n, n))
 
-    fig, ax = plt.subplots(figsize=(7.0, 3.5))
+    fig, ax = plt.subplots(figsize=(8.4, 4.2))
     im = ax.imshow(matrix, aspect="auto", cmap="RdYlGn", vmin=0, vmax=1)
     ax.set_xticks(np.arange(len(labels)))
-    ax.set_xticklabels(labels, rotation=40, ha="right", fontsize=7)
+    ax.set_xticklabels(labels, rotation=40, ha="right", fontsize=9.5)
     ax.set_yticks(np.arange(len(repos)))
-    ax.set_yticklabels(repos, fontsize=7.5)
+    ax.set_yticklabels(repos, fontsize=10)
     for i in range(matrix.shape[0]):
         for j in range(matrix.shape[1]):
             v = matrix[i, j]
@@ -656,13 +656,14 @@ def fig_per_repo_vs_peers(csv_dir: Path, fig_dir: Path) -> None:
                 f"{v*100:.0f}",
                 ha="center",
                 va="center",
-                fontsize=6.2,
+                fontsize=8.5,
                 color="white" if v < 0.42 or v > 0.85 else "black",
             )
     cbar = fig.colorbar(im, ax=ax, fraction=0.022, pad=0.015)
-    cbar.set_label("Per-repo resolution rate", fontsize=7.5)
-    cbar.ax.tick_params(labelsize=7)
-    ax.set_title("Per-repository resolution rate -- Kozuchi vs open-weight peers")
+    cbar.set_label("Per-repo resolution rate", fontsize=10)
+    cbar.ax.tick_params(labelsize=9)
+    ax.set_title("Per-repository resolution rate -- Kozuchi vs open-weight peers",
+                 fontsize=13)
     # Highlight Kozuchi column.
     if "Kozuchi" in labels:
         kj = labels.index("Kozuchi")

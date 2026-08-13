@@ -63,10 +63,17 @@ def write_figure(headline: list[dict[str, str]], phase_rows: list[dict[str, str]
     java_color = "#d62728"
     color_by_track = {"Python": py_color, "Java": java_color}
 
+    plt.rcParams.update(
+        {
+            "axes.labelsize": 11,
+            "xtick.labelsize": 10,
+            "ytick.labelsize": 10,
+        }
+    )
     fig, axes = plt.subplots(
         1,
         2,
-        figsize=(7.2, 2.55),
+        figsize=(7.6, 2.8),
         gridspec_kw={"width_ratios": [0.85, 1.65]},
     )
 
@@ -88,12 +95,12 @@ def write_figure(headline: list[dict[str, str]], phase_rows: list[dict[str, str]
             f"{rates[idx]:.2f}%\n({row['resolved']}/{row['n']})",
             ha="center",
             va="bottom",
-            fontsize=7,
+            fontsize=9,
         )
     ax.set_xticks(xs, labels)
-    ax.set_ylim(0, 92)
+    ax.set_ylim(0, 100)
     ax.set_ylabel("Resolved (%)")
-    ax.set_title("(a) Headline rate", loc="left", fontweight="bold", fontsize=9)
+    ax.set_title("(a) Headline rate", loc="left", fontweight="bold", fontsize=11)
     ax.grid(axis="y", linestyle=":", alpha=0.4)
     ax.set_axisbelow(True)
 
@@ -117,12 +124,12 @@ def write_figure(headline: list[dict[str, str]], phase_rows: list[dict[str, str]
     ax.bar([x + width / 2 for x in xs], java_phase, width=width, color=java_color, alpha=0.86, label="Java")
     ax.set_xticks(xs, phases, rotation=25, ha="right", rotation_mode="anchor")
     ax.set_ylabel("Assistant messages (%)")
-    ax.set_title("(b) Per-phase message share", loc="left", fontweight="bold", fontsize=9)
+    ax.set_title("(b) Per-phase message share", loc="left", fontweight="bold", fontsize=11)
     ax.grid(axis="y", linestyle=":", alpha=0.4)
     ax.set_axisbelow(True)
-    ax.legend(frameon=False, loc="upper right", fontsize=7)
+    ax.legend(frameon=False, loc="upper right", fontsize=10)
 
-    fig.suptitle("Kozuchi Agent + Qwen3.5-27B: Python vs. Java", fontsize=10, fontweight="bold", y=1.02)
+    fig.suptitle("Kozuchi Agent + Qwen3.5-27B: Python vs. Java", fontsize=12.5, fontweight="bold", y=1.02)
     fig.tight_layout(pad=0.6, w_pad=1.2)
     fig.savefig(path, dpi=240, bbox_inches="tight")
     plt.close(fig)

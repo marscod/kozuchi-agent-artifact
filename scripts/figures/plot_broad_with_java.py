@@ -53,19 +53,11 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 
-import os
-
-ARTIFACT_ROOT = Path(
-    os.environ.get(
-        "KOZUCHI_ARTIFACT_ROOT",
-        Path(__file__).resolve().parents[2],
-    )
-).resolve()
-ROOT = ARTIFACT_ROOT / "data" / "paper_comparison"
+ROOT = Path(__file__).resolve().parents[1]
 WORKBOOK = ROOT / "SWE-bench comparison.xlsx"
-PLOTS_DIR = ARTIFACT_ROOT / "plots"
-FINAL_FIG_DIR = ARTIFACT_ROOT / "figures"
-JAVA_LEADERBOARD = ARTIFACT_ROOT / "data" / "paper_java_src" / "csv" / "leaderboard.csv"
+PLOTS_DIR = ROOT / "plots"
+FINAL_FIG_DIR = ROOT.parent / "final" / "figures"
+JAVA_LEADERBOARD = ROOT.parent / "java_src" / "csv" / "leaderboard.csv"
 
 PYTHON_SHEET = "20260325_Map"
 JAVA_SHEET = "20260407_java_Map"
@@ -256,22 +248,22 @@ PY_ANNOTATIONS = {
         # Push up into the middle-top white band so the box no longer
         # collides with the iSWE-OpenModels box at the same x-screen
         # range below.
-        xy=(330, 88.5),
-        ha="center", va="bottom",
+        xy=(600, 82.6),
+        ha="left", va="bottom",
         connectionstyle="arc3,rad=-0.10",
     ),
     "Kimi-K2.5-1T": dict(
         label="Kimi K2.5",
         # Centred above the marker rather than tucked in the corner.
-        xy=(1100, 89.0),
+        xy=(1100, 88.2),
         ha="center", va="bottom",
         connectionstyle="arc3,rad=0.05",
     ),
     "Code World Model": dict(
         label="Code World Model",
-        xy=(55, 60.5),
-        ha="left", va="top",
-        connectionstyle="arc3,rad=0.10",
+        xy=(35.0, 63.8),
+        ha="center", va="top",
+        connectionstyle="arc3,rad=0.00",
     ),
 }
 
@@ -289,13 +281,13 @@ JA_ANNOTATIONS = {
         label="iSWE-OpenModels",
         # Move to the right of its marker into the empty mid-band; this
         # frees the area below the Kozuchi (Python) box.
-        xy=(260, 32.0),
+        xy=(205, 30.2),
         ha="left", va="bottom",
         connectionstyle="arc3,rad=-0.10",
     ),
     "MagentLess + DeepSeek-R1": dict(
         label="MagentLess + DeepSeek-R1",
-        xy=(1500, 26.5),
+        xy=(1500, 25.8),
         ha="right", va="bottom",
         connectionstyle="arc3,rad=-0.05",
     ),
@@ -330,7 +322,7 @@ MINOR_PY_LABELS: dict[str, tuple[str, float, float, str, str]] = {
         ("OH + DevStral-2505",   25.0, 45.4, "left", "top"),
     # 27 B (Qwen3.5-27B base, sits just below the Kozuchi star)
     "Qwen3.5-27B":
-        ("Qwen3.5-27B (base)",   33.0, 72.4, "left", "center"),
+        ("Qwen3.5-27B (base)",   28.0, 72.4, "left", "center"),
     # 30.5 / 32.8 B cluster
     "OpenHands + Qwen3-Coder-30B-A3B-Instruct":
         ("OH + Qwen3-Coder-30B", 36.0, 51.6, "left", "center"),
@@ -347,11 +339,11 @@ MINOR_PY_LABELS: dict[str, tuple[str, float, float, str, str]] = {
         ("mSWE + Qwen3-Coder-480B", 525.0, 55.4, "left", "center"),
     # 1024 B cluster (right of markers, in the open band 1080-1500)
     "Lingxi v1.5 x Kimi K2":
-        ("Lingxi v1.5 x K2",     1080.0, 71.2, "left", "center"),
+        ("Lingxi v1.5 x K2",     1500.0, 70.2, "right", "center"),
     "OpenHands + Kimi K2":
-        ("OH + Kimi K2",         1080.0, 65.4, "left", "center"),
+        ("OH + Kimi K2",         1540.0, 66.4, "right", "center"),
     "mini-SWE-agent + Kimi K2 Instruct":
-        ("mSWE + Kimi K2",       1080.0, 43.8, "left", "center"),
+        ("mSWE + Kimi K2",       1540.0, 49.2, "right", "center"),
 }
 
 MINOR_JA_LABELS: dict[str, tuple[str, float, float, str, str]] = {
@@ -381,7 +373,7 @@ MINOR_JA_LABELS: dict[str, tuple[str, float, float, str, str]] = {
 
 def _annotate(ax, *, x, y, xytext, label, ha, va, connectionstyle,
               weight="normal", bbox_ec="0.65", arrow_color="0.4",
-              fontsize=12.5):
+              fontsize=15.0):
     ax.annotate(
         label,
         xy=(x, y),
@@ -413,7 +405,7 @@ def _annotate(ax, *, x, y, xytext, label, ha, va, connectionstyle,
 
 
 def _minor_label(ax, *, x_text, y_text, label, ha, va, color,
-                  fontsize=8.5):
+                  fontsize=12.0):
     """Draw a small inline caption next to a marker (no box, no
     arrow).  Used for the unlabelled dots."""
     ax.text(
@@ -513,23 +505,23 @@ def main() -> None:
     ax_py.set_ylim(48, 92)
     ax_ja.set_ylim(8, 40)
 
-    ax_py.set_xlabel("Total parameters (B, log scale)", fontsize=18)
+    ax_py.set_xlabel("Total parameters (B, log scale)", fontsize=21)
     ax_py.set_ylabel(
         "SWE-Bench Verified (Python) — % resolved",
-        fontsize=17, color=PY_COLOR,
+        fontsize=20, color=PY_COLOR,
     )
     ax_ja.set_ylabel(
         "Multi-SWE-Bench Verified (Java) — % resolved",
-        fontsize=17, color=JA_COLOR,
+        fontsize=20, color=JA_COLOR,
     )
-    ax_py.tick_params(axis="y", labelcolor=PY_COLOR, labelsize=17)
-    ax_ja.tick_params(axis="y", labelcolor=JA_COLOR, labelsize=17)
-    ax_py.tick_params(axis="x", labelsize=17)
+    ax_py.tick_params(axis="y", labelcolor=PY_COLOR, labelsize=19)
+    ax_ja.tick_params(axis="y", labelcolor=JA_COLOR, labelsize=19)
+    ax_py.tick_params(axis="x", labelsize=19)
 
     ax_py.set_title(
         "Parameter Efficiency of Kozuchi Agent vs. Open-Weight Peers — "
         "Python Pareto front and Java size-class envelope",
-        fontsize=16, pad=14,
+        fontsize=18, pad=14,
     )
     # Major gridlines (at the decade ticks 10^2, 10^3) and a denser
     # set of x-axis reference lines at frequently cited parameter
@@ -619,21 +611,21 @@ def main() -> None:
         labels=labels_py + labels_ja + ["Pareto front (Python)",
                                           "Java best per size class"],
         loc="upper center", bbox_to_anchor=(0.5, -0.10),
-        ncol=3, fontsize=10.5, framealpha=0.95,
+        ncol=3, fontsize=13.5, framealpha=0.95,
     ).set_zorder(20)
 
     ax_py.text(
-        0.5, -0.235,
+        0.5, -0.26,
         "Python: SWE-Bench Verified, n=500.    "
         "Java: Multi-SWE-Bench Verified, n=128 (open-weight rows only).\n"
         "Blue dashed = strict Pareto front (Python).    "
         "Red dashed = max % per Java size class "
         "(strict Java Pareto front = Kozuchi Agent alone).",
-        transform=ax_py.transAxes, fontsize=9.5, color="0.35",
+        transform=ax_py.transAxes, fontsize=12.0, color="0.35",
         ha="center", va="top",
     )
 
-    fig.subplots_adjust(left=0.07, right=0.93, bottom=0.22, top=0.92)
+    fig.subplots_adjust(left=0.075, right=0.925, bottom=0.26, top=0.92)
 
     out1 = PLOTS_DIR / "broad_success_vs_params_with_java.png"
     fig.savefig(out1, dpi=240)
