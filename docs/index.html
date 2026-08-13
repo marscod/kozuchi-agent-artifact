@@ -232,6 +232,21 @@
     padding: 22px 24px; font-family: var(--mono); font-size: 13.5px; white-space: pre;
     overflow-x: auto; color: #aab6c8; margin-top: 20px; position: relative;
   }
+  /* citation blocks */
+  .cite-h {
+    margin: 26px 0 0; font-size: 13px; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .acmref {
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 22px 24px; padding-right: 92px;
+    font-size: 15px; line-height: 1.65; color: var(--ink);
+    margin-top: 12px; position: relative;
+  }
+  .acmref .copy-btn { color: var(--ink); background: rgba(20,26,38,.06); border-color: var(--line); }
+  .acmref .copy-btn:hover { background: rgba(20,26,38,.12); }
+  .bibtex { margin-top: 12px; }
+
   .copy-btn {
     position: absolute; top: 12px; right: 12px; font-family: "Inter", sans-serif; font-size: 12.5px;
     font-weight: 600; color: #fff; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
@@ -507,23 +522,35 @@
       <h2>Citation</h2>
       <a class="browse" href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/paper/references.bib">open references.bib ↗</a>
     </div>
-    <p class="lead">If you build on this artifact, please cite the paper (DOI and page numbers will be added once the proceedings are published):</p>
+    <p class="lead">If you build on this artifact, please cite the paper. The DOI is <a href="https://doi.org/10.1145/3832783.3834531">10.1145/3832783.3834531</a>.</p>
+
+    <h3 class="cite-h">ACM Reference Format</h3>
+    <div class="acmref" id="acmref">Mehdi Bahrami, Kosaku Kimura, Satoshi Munakata, Satoshi Nakashima, Yu Ishikawa, Kosuke Maeda, Nao Soma, Kenichi Kobayashi, Keisuke Miyazaki, Keizo Kato, Shigeki Fukuta, Tatsuo Kumano, Nobutaka Imamura, Kevin Musgrave, Shahbaz Abdul Khader, Kwun Ho Ngan, Joe Townsend, Fayas Asharindavida, Matthieu Parizy, Akira Sakai, Yuma Ichikawa, Yang Zhao, Michiaki Takizawa, Taku Fukui, Hiroki Ohtsuji, Wei-Peng Chen, and Hiromichi Kobashi. 2026. Kozuchi Agent: A Language-Agnostic Open-Weight Agent for Software Repair. In <em>Proceedings of the 41st IEEE/ACM International Conference on Automated Software Engineering (ASE '26), October 12–16, 2026, Munich, Germany</em>. ACM, New York, NY, USA, 13 pages. https://doi.org/10.1145/3832783.3834531<button class="copy-btn" onclick="copyBib(this)">Copy</button></div>
+
+    <h3 class="cite-h">BibTeX</h3>
     <div class="bibtex" id="bib">@inproceedings{kozuchi2026,
-  title  = {Kozuchi Agent: A Language-Agnostic Open-Weight Agent for Software Repair},
-  author = {Mehdi Bahrami and Kosaku Kimura and Satoshi Munakata and
-            Satoshi Nakashima and Yu Ishikawa and Kosuke Maeda and
-            Nao Soma and Kenichi Kobayashi and Keisuke Miyazaki and
-            Keizo Kato and Shigeki Fukuta and Tatsuo Kumano and
-            Nobutaka Imamura and Kevin Musgrave and Shahbaz {Abdul Khader} and
-            Kwun Ho Ngan and Joseph Townsend and Fayas Asharindavida and
-            Matthieu Parizy and Akira Sakai and Yuma Ichikawa and
-            Yang Zhao and Michiaki Takizawa and Taku Fukui and
-            Hiroki Ohtsuji and Wei-Peng Chen and Hiromichi Kobashi},
+  author    = {Bahrami, Mehdi and Kimura, Kosaku and Munakata, Satoshi and
+               Nakashima, Satoshi and Ishikawa, Yu and Maeda, Kosuke and
+               Soma, Nao and Kobayashi, Kenichi and Miyazaki, Keisuke and
+               Kato, Keizo and Fukuta, Shigeki and Kumano, Tatsuo and
+               Imamura, Nobutaka and Musgrave, Kevin and Abdul Khader, Shahbaz and
+               Ngan, Kwun Ho and Townsend, Joe and Asharindavida, Fayas and
+               Parizy, Matthieu and Sakai, Akira and Ichikawa, Yuma and
+               Zhao, Yang and Takizawa, Michiaki and Fukui, Taku and
+               Ohtsuji, Hiroki and Chen, Wei-Peng and Kobashi, Hiromichi},
+  title     = {Kozuchi Agent: A Language-Agnostic Open-Weight Agent for Software Repair},
+  year      = {2026},
+  isbn      = {979-8-4007-2882-2},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  url       = {https://doi.org/10.1145/3832783.3834531},
+  doi       = {10.1145/3832783.3834531},
   booktitle = {Proceedings of the 41st IEEE/ACM International Conference on
-               Automated Software Engineering (ASE 2026)},
-  address = {Munich, Germany},
-  year   = {2026},
-  note   = {To appear. Artifact: \url{https://github.com/marscod/kozuchi-agent-artifact}}
+               Automated Software Engineering},
+  numpages  = {13},
+  keywords  = {AI agent, automated program repair, SWE-bench, experience report},
+  location  = {Munich, Germany},
+  series    = {ASE '26}
 }<button class="copy-btn" onclick="copyBib(this)">Copy</button></div>
   </div>
 </section>
@@ -575,7 +602,7 @@
   document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
 
   function copyBib(btn) {
-    const text = document.getElementById('bib').innerText.replace(/Copy$/, '').trim();
+    const text = btn.parentElement.innerText.replace(/Copy(\s*✓)?$/, '').trim();
     navigator.clipboard.writeText(text).then(() => {
       btn.textContent = 'Copied ✓';
       setTimeout(() => btn.textContent = 'Copy', 1600);

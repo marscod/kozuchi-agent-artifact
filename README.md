@@ -292,25 +292,48 @@ is required.
 
 ## 7. Citation
 
-If you build on this artifact, please cite the paper (DOI and page
-numbers will be added once the ASE 2026 proceedings are published):
+If you build on this artifact, please cite the paper
+([doi:10.1145/3832783.3834531](https://doi.org/10.1145/3832783.3834531)).
+
+**ACM Reference Format**
+
+> Mehdi Bahrami, Kosaku Kimura, Satoshi Munakata, Satoshi Nakashima, Yu
+> Ishikawa, Kosuke Maeda, Nao Soma, Kenichi Kobayashi, Keisuke Miyazaki,
+> Keizo Kato, Shigeki Fukuta, Tatsuo Kumano, Nobutaka Imamura, Kevin
+> Musgrave, Shahbaz Abdul Khader, Kwun Ho Ngan, Joe Townsend, Fayas
+> Asharindavida, Matthieu Parizy, Akira Sakai, Yuma Ichikawa, Yang Zhao,
+> Michiaki Takizawa, Taku Fukui, Hiroki Ohtsuji, Wei-Peng Chen, and
+> Hiromichi Kobashi. 2026. Kozuchi Agent: A Language-Agnostic Open-Weight
+> Agent for Software Repair. In *Proceedings of the 41st IEEE/ACM
+> International Conference on Automated Software Engineering (ASE '26),
+> October 12–16, 2026, Munich, Germany*. ACM, New York, NY, USA, 13 pages.
+> https://doi.org/10.1145/3832783.3834531
+
+**BibTeX**
 
 ```bibtex
 @inproceedings{kozuchi2026,
-  title  = {Kozuchi Agent: A Language-Agnostic Open-Weight Agent for Software Repair},
-  author = {Mehdi Bahrami and Kosaku Kimura and Satoshi Munakata and
-            Satoshi Nakashima and Yu Ishikawa and Kosuke Maeda and
-            Nao Soma and Kenichi Kobayashi and Keisuke Miyazaki and
-            Keizo Kato and Shigeki Fukuta and Tatsuo Kumano and
-            Nobutaka Imamura and Kevin Musgrave and Shahbaz {Abdul Khader} and
-            Kwun Ho Ngan and Joseph Townsend and Fayas Asharindavida and
-            Matthieu Parizy and Akira Sakai and Yuma Ichikawa and
-            Yang Zhao and Michiaki Takizawa and Taku Fukui and
-            Hiroki Ohtsuji and Wei-Peng Chen and Hiromichi Kobashi},
+  author    = {Bahrami, Mehdi and Kimura, Kosaku and Munakata, Satoshi and
+               Nakashima, Satoshi and Ishikawa, Yu and Maeda, Kosuke and
+               Soma, Nao and Kobayashi, Kenichi and Miyazaki, Keisuke and
+               Kato, Keizo and Fukuta, Shigeki and Kumano, Tatsuo and
+               Imamura, Nobutaka and Musgrave, Kevin and Abdul Khader, Shahbaz and
+               Ngan, Kwun Ho and Townsend, Joe and Asharindavida, Fayas and
+               Parizy, Matthieu and Sakai, Akira and Ichikawa, Yuma and
+               Zhao, Yang and Takizawa, Michiaki and Fukui, Taku and
+               Ohtsuji, Hiroki and Chen, Wei-Peng and Kobashi, Hiromichi},
+  title     = {Kozuchi Agent: A Language-Agnostic Open-Weight Agent for Software Repair},
+  year      = {2026},
+  isbn      = {979-8-4007-2882-2},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  url       = {https://doi.org/10.1145/3832783.3834531},
+  doi       = {10.1145/3832783.3834531},
   booktitle = {Proceedings of the 41st IEEE/ACM International Conference on
-               Automated Software Engineering (ASE 2026)},
-  address = {Munich, Germany},
-  year   = {2026},
-  note   = {To appear. Artifact: \url{https://github.com/marscod/kozuchi-agent-artifact}}
+               Automated Software Engineering},
+  numpages  = {13},
+  keywords  = {AI agent, automated program repair, SWE-bench, experience report},
+  location  = {Munich, Germany},
+  series    = {ASE '26}
 }
 ```
