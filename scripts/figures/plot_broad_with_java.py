@@ -437,7 +437,7 @@ def main() -> None:
     py_open = filter_below_frontier(py_open_full, py_pareto, min_rate=50.0)
     ja_open = filter_below_frontier(ja_open_full, ja_envelope, min_rate=11.0)
 
-    fig, ax_py = plt.subplots(figsize=(15.5, 8.8))
+    fig, ax_py = plt.subplots(figsize=(15.5, 9.4))
     ax_ja = ax_py.twinx()
 
     # ---------------- Python scatter & pareto ----------------
@@ -618,14 +618,14 @@ def main() -> None:
         0.5, -0.26,
         "Python: SWE-Bench Verified, n=500.    "
         "Java: Multi-SWE-Bench Verified, n=128 (open-weight rows only).\n"
-        "Blue dashed = strict Pareto front (Python).    "
+        "Blue dashed = strict Pareto front (Python).\n"
         "Red dashed = max % per Java size class "
         "(strict Java Pareto front = Kozuchi Agent alone).",
-        transform=ax_py.transAxes, fontsize=14.5, color="0.35",
+        transform=ax_py.transAxes, fontsize=17.0, color="0.35",
         ha="center", va="top",
     )
 
-    fig.subplots_adjust(left=0.075, right=0.925, bottom=0.26, top=0.92)
+    fig.subplots_adjust(left=0.075, right=0.925, bottom=0.31, top=0.925)
 
     out1 = PLOTS_DIR / "broad_success_vs_params_with_java.png"
     fig.savefig(out1, dpi=240)
