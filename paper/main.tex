@@ -11,7 +11,7 @@
 
 %%% The following is specific to ASE '26-IND and the paper
 %%% 'Kozuchi Agent: A Language-Agnostic Open-Weight Agent for Software Repair'
-%%% by Mehdi Bahrami, Kosaku Kimura, Satoshi Munakata, Satoshi Nakashima, Yu Ishikawa, Kosuke Maeda, Nao Soma, Kenichi Kobayashi, Keisuke Miyazaki, Keizo Kato, Shigeki Fukuta, Tatsuo Kumano, Nobutaka Imamura, Kevin Musgrave, Shahbaz Abdul Khader, Kwun Ho Ngan, Joseph Townsend, Fayas Asharindavida, Matthieu Parizy, Akira Sakai, Yuma Ichikawa, Yang Zhao, Michiaki Takizawa, Taku Fukui, Hiroki Ohtsuji, Wei-Peng Chen, and Hiromichi Kobashi.
+%%% by Mehdi Bahrami, Kosaku Kimura, Satoshi Munakata, Satoshi Nakashima, Yu Ishikawa, Kosuke Maeda, Nao Soma, Kenichi Kobayashi, Keisuke Miyazaki, Keizo Kato, Shigeki Fukuta, Tatsuo Kumano, Nobutaka Imamura, Kevin Musgrave, Shahbaz Abdul Khader, Kwun Ho Ngan, Joe Townsend, Fayas Asharindavida, Matthieu Parizy, Akira Sakai, Yuma Ichikawa, Yang Zhao, Michiaki Takizawa, Taku Fukui, Hiroki Ohtsuji, Wei-Peng Chen, and Hiromichi Kobashi.
 %%%
 \copyrightyear{2026}
 \acmYear{2026}
@@ -110,14 +110,13 @@
 %% because acmart+hyperref's expansion of \_ via \textunderscore is
 %% not safely re-entrant in moving arguments.
 \newcommand{\code}[1]{\texttt{#1}}
-\urlstyle{tt}
+\urlstyle{rm}
 \definecolor{KeyIdeaBlue}{HTML}{006BFF}
 \definecolor{AlgPanelBg}{HTML}{F8FAFC}
 \definecolor{AlgPanelBorder}{HTML}{2563EB}
 \definecolor{AlgDecisionBg}{HTML}{FFF7ED}
 \definecolor{AlgDecisionBorder}{HTML}{EA580C}
 \makeatletter
-%% The local TeX image used for this artifact does not ship
 %% algorithm2e.sty. These macros keep the same ruled, line-numbered
 %% presentation style without adding an unavailable dependency.
 \floatstyle{ruled}
@@ -179,109 +178,216 @@
 \providecommand{\algorithmautorefname}{Algorithm}
 \makeatother
 
-\title[Kozuchi Agent: A Language-Agnostic Open-Weight Agent\ldots]{Kozuchi Agent: A Language-Agnostic Open-Weight Agent for Software Repair}
+\title{Kozuchi Agent: A Language-Agnostic Open-Weight Agent for Software Repair}
 
-%% Author roster: single \author block with superscript-keyed unique
-%% affiliations. Order matches the prior submission's metadata-derived list.
+%% Author roster (acmart): strict per-author affiliation grid. Every author
+%% gets their own \author and \affiliation with the mandatory
+%% \institution/\city/\country fields; no title-page \email. The four-column
+%% grid keeps the 27-author front matter compact.
+%% Order matches the prior submission's metadata-derived list.
 %% Source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/metadata.yaml
-%% Affiliation keys:
-%%   1 = Fujitsu Research of America, USA
-%%   2 = Fujitsu Research, Japan
-%%   3 = Fujitsu Research of Europe, UK
-%%   4 = Fujitsu Research \& Development, China
-%% Each author is declared with its own \author command so that the ACM
-%% camera-ready validator counts all 27 authors, but a single shared
-%% \affiliation keeps them in one title box. acmart stacks the names of a
-%% box one per line; with 27 authors that fills a page, so we make the
-%% separator inline and let the roster wrap across the full text width.
-%% This reproduces the original single-block roster with superscript-keyed
-%% affiliations.
-\settopmatter{authorsperrow=1}
-\makeatletter
-\newcount\kz@authorcount
-\def\@typeset@author@bx{\bgroup\hsize=\author@bx@wd
-  \normalbaselines
-  \global\setbox\author@bx=\vtop{\centering
-    \@authorfont
-    %% acmart separates the names of an author box with \par. Turn that
-    %% separator into a comma so the 27-name roster wraps as running text
-    %% instead of occupying 27 lines.
-    \begingroup
-      \kz@authorcount=0\relax
-      \def\par{\ifnum\kz@authorcount>0\relax,\space\fi
-        \global\advance\kz@authorcount by 1\relax}%
-      \@currentauthors
-    \endgroup
-    \endgraf\@affiliationfont\@currentaffiliation}\egroup
-  \box\author@bx\hspace{\author@bx@sep}%
-  \gdef\@currentauthors{}%
-  \gdef\@currentaffiliation{}}
-\makeatother
+%% Affiliation keys: 1 = Fujitsu Research of America (Santa Clara, CA, USA);
+%%   2 = Fujitsu Research (Kawasaki, Japan); 3 = Fujitsu Research of Europe
+%%   (Slough, UK); 4 = Fujitsu Research \& Development (Beijing, China).
+\settopmatter{authorsperrow=4}
 
-\author{Mehdi Bahrami\textsuperscript{1}}
-\author{Kosaku Kimura\textsuperscript{2}}
-\author{Satoshi Munakata\textsuperscript{2}}
-\author{Satoshi Nakashima\textsuperscript{2}}
-\author{Yu Ishikawa\textsuperscript{2}}
-\author{Kosuke Maeda\textsuperscript{2}}
-\author{Nao Soma\textsuperscript{2}}
-\author{Kenichi Kobayashi\textsuperscript{2}}
-\author{Keisuke Miyazaki\textsuperscript{2}}
-\author{Keizo Kato\textsuperscript{2}}
-\author{Shigeki Fukuta\textsuperscript{2}}
-\author{Tatsuo Kumano\textsuperscript{2}}
-\author{Nobutaka Imamura\textsuperscript{2}}
-\author{Kevin Musgrave\textsuperscript{1}}
-\author{Shahbaz Abdul Khader\textsuperscript{3}}
-\author{Kwun Ho Ngan\textsuperscript{3}}
-\author{Joe Townsend\textsuperscript{3}}
-\author{Fayas Asharindavida\textsuperscript{3}}
-\author{Matthieu Parizy\textsuperscript{3}}
-\author{Akira Sakai\textsuperscript{3}}
-\author{Yuma Ichikawa\textsuperscript{2}}
-\author{Yang Zhao\textsuperscript{4}}
-\author{Michiaki Takizawa\textsuperscript{2}}
-\author{Taku Fukui\textsuperscript{2}}
-\author{Hiroki Ohtsuji\textsuperscript{2}}
-\author{Wei-Peng Chen\textsuperscript{1}}
-\author{Hiromichi Kobashi\textsuperscript{2}}
-%% acmart requires a non-empty \country{}; we keep the location info inside
-%% the multi-line \institution{} block and use a single-space \country{}
-%% as a placeholder so the parent Fujitsu Research entity is not duplicated.
+\author{Mehdi Bahrami}
 \affiliation{%
-  \institution{%
-    \textsuperscript{1}Fujitsu Research of America, USA \\
-    \textsuperscript{2}Fujitsu Research, Japan \\
-    \textsuperscript{3}Fujitsu Research of Europe, UK \\
-    \textsuperscript{4}Fujitsu Research \& Development, China%
-  }
-  \country{~}
+  \institution{Fujitsu Research of America}
+  \city{Santa Clara}
+  \state{CA}
+  \country{USA}
 }
 
-%% \shortauthors drives the running page header only.
-%% The ACM Reference Format must carry the full roster exactly as the
-%% camera-ready validator expects it, so \@acmRefAuthors spells out all
-%% 27 co-authors; the single \author{} block above carries affiliation
-%% superscripts that must not leak into the reference string. acmart
-%% appends a literal ". " after this name, so the trailing period is
-%% deliberately omitted here.
-\renewcommand{\shortauthors}{Bahrami et al.}
-\makeatletter
-\newcommand{\@acmRefShortAuthors}{Mehdi Bahrami, Kosaku Kimura, Satoshi
-Munakata, Satoshi Nakashima, Yu Ishikawa, Kosuke Maeda, Nao Soma,
-Kenichi Kobayashi, Keisuke Miyazaki, Keizo Kato, Shigeki Fukuta, Tatsuo
-Kumano, Nobutaka Imamura, Kevin Takeshi Musgrave, Shahbaz Abdul Khader,
-Kwun Ho Ngan, Joseph Townsend, Fayas Asharindavida, Matthieu Parizy,
-Akira Sakai, Yuma Ichikawa, Yang Zhao, Michiaki Takizawa, Taku Fukui,
-Hiroki Ohtsuji, Wei-Peng Chen, and Hiromichi Kobashi}
-\AtBeginDocument{%
-  \patchcmd{\@mkbibcitation}%
-    {\authors}%
-    {\@acmRefShortAuthors}%
-    {}%
-    {\ClassWarning{test-prompt}{Could not patch ACM Reference Format author list}}%
+\author{Kosaku Kimura}
+\affiliation{%
+  \institution{Fujitsu Research}
+  \city{Kawasaki}
+  \country{Japan}
 }
-\makeatother
+
+\author{Satoshi Munakata}
+\affiliation{%
+  \institution{Fujitsu Research}
+  \city{Kawasaki}
+  \country{Japan}
+}
+
+\author{Satoshi Nakashima}
+\affiliation{%
+  \institution{Fujitsu Research}
+  \city{Kawasaki}
+  \country{Japan}
+}
+
+\author{Yu Ishikawa}
+\affiliation{%
+  \institution{Fujitsu Research}
+  \city{Kawasaki}
+  \country{Japan}
+}
+
+\author{Kosuke Maeda}
+\affiliation{%
+  \institution{Fujitsu Research}
+  \city{Kawasaki}
+  \country{Japan}
+}
+
+\author{Nao Soma}
+\affiliation{%
+  \institution{Fujitsu Research}
+  \city{Kawasaki}
+  \country{Japan}
+}
+
+\author{Kenichi Kobayashi}
+\affiliation{%
+  \institution{Fujitsu Research}
+  \city{Kawasaki}
+  \country{Japan}
+}
+
+\author{Keisuke Miyazaki}
+\affiliation{%
+  \institution{Fujitsu Research}
+  \city{Kawasaki}
+  \country{Japan}
+}
+
+\author{Keizo Kato}
+\affiliation{%
+  \institution{Fujitsu Research}
+  \city{Kawasaki}
+  \country{Japan}
+}
+
+\author{Shigeki Fukuta}
+\affiliation{%
+  \institution{Fujitsu Research}
+  \city{Kawasaki}
+  \country{Japan}
+}
+
+\author{Tatsuo Kumano}
+\affiliation{%
+  \institution{Fujitsu Research}
+  \city{Kawasaki}
+  \country{Japan}
+}
+
+\author{Nobutaka Imamura}
+\affiliation{%
+  \institution{Fujitsu Research}
+  \city{Kawasaki}
+  \country{Japan}
+}
+
+\author{Kevin Musgrave}
+\affiliation{%
+  \institution{Fujitsu Research of America}
+  \city{Santa Clara}
+  \state{CA}
+  \country{USA}
+}
+
+\author{Shahbaz Abdul Khader}
+\affiliation{%
+  \institution{Fujitsu Research of Europe}
+  \city{Slough}
+  \country{UK}
+}
+
+\author{Kwun Ho Ngan}
+\affiliation{%
+  \institution{Fujitsu Research of Europe}
+  \city{Slough}
+  \country{UK}
+}
+
+\author{Joe Townsend}
+\affiliation{%
+  \institution{Fujitsu Research of Europe}
+  \city{Slough}
+  \country{UK}
+}
+
+\author{Fayas Asharindavida}
+\affiliation{%
+  \institution{Fujitsu Research of Europe}
+  \city{Slough}
+  \country{UK}
+}
+
+\author{Matthieu Parizy}
+\affiliation{%
+  \institution{Fujitsu Research of Europe}
+  \city{Slough}
+  \country{UK}
+}
+
+\author{Akira Sakai}
+\affiliation{%
+  \institution{Fujitsu Research}
+  \city{Kawasaki}
+  \country{Japan}
+}
+
+\author{Yuma Ichikawa}
+\affiliation{%
+  \institution{Fujitsu Research}
+  \city{Kawasaki}
+  \country{Japan}
+}
+
+\author{Yang Zhao}
+\affiliation{%
+  \institution{Fujitsu Research \& Development}
+  \city{Beijing}
+  \country{China}
+}
+
+\author{Michiaki Takizawa}
+\affiliation{%
+  \institution{Fujitsu Research}
+  \city{Kawasaki}
+  \country{Japan}
+}
+
+\author{Taku Fukui}
+\affiliation{%
+  \institution{Fujitsu Research}
+  \city{Kawasaki}
+  \country{Japan}
+}
+
+\author{Hiroki Ohtsuji}
+\affiliation{%
+  \institution{Fujitsu Research}
+  \city{Kawasaki}
+  \country{Japan}
+}
+
+\author{Wei-Peng Chen}
+\affiliation{%
+  \institution{Fujitsu Research of America}
+  \city{Santa Clara}
+  \state{CA}
+  \country{USA}
+}
+
+\author{Hiromichi Kobashi}
+\affiliation{%
+  \institution{Fujitsu Research}
+  \city{Kawasaki}
+  \country{Japan}
+}
+
+%% Short form for running page headers (full 27-author list overflows).
+\renewcommand{\shortauthors}{Bahrami et al.}
+%% Let acmart typeset the full abstract before CCS Concepts, Keywords, and
+%% ACM Reference Format. Those three blocks may spill to page~2; the
+%% first-page publishing-rights footer is emitted by \maketitle itself.
 
 %% CCS Concepts commented out for the review build.
 %% Mandatory CCS Concepts (ACM 2012 classification).
@@ -306,9 +412,7 @@ Hiroki Ohtsuji, Wei-Peng Chen, and Hiromichi Kobashi}
 \ccsdesc[500]{Software and its engineering~Software defect analysis}
 \ccsdesc[300]{Computing methodologies~Natural language processing}
 
-\keywords{AI agent, LLM, automated program repair, SWE-bench, agent harness,
-test-time scaling, multi-cluster pipeline, production planning,
-experience report}
+\keywords{AI agent, automated program repair, SWE-bench, experience report}
 
 \begin{document}
 
@@ -344,27 +448,23 @@ peers by parameter count. Analysis of candidate diversity, selector
 regret, and patch reliability shows that the remaining gap is primarily
 semantic correctness and selection rather than edit formatting or
 proprietary-model access.
-% Causal evidence in this submission isolates candidate count
-% and the cross-agent selector ($K{=}8$, +14 over the order baseline); the
-% phase graph, persistent state, action formatter, tool sandbox, and
-% CI-reuse mechanisms are reported as design-level evidence supported by
-% operational signatures and trajectory audits. 
 Operationally, reusable CI stages reduce operator touch-points from five
 to one across heterogeneous internal clusters.
-% We do not claim production
-% deployment of the agent itself; the evidence is benchmark-scale
-% evaluation.
-%The public artifact contains trajectories, selector choices, and evaluation outputs.
 \end{abstract}
 
-%% Fig.~1 centered on page~1 in the ACM teaser slot (acmart sets
-%% \@topnum=0, so ordinary [t] floats cannot reach page~1). Abstract
-%% prints normally below the teaser in the left column.
-\begin{teaserfigure}
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Introduction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+\label{sec:intro}
+%% Ordinary [t] floats cannot reach page~1 under acmart (\@topnum=0).
+\begin{figure}[t]
   \centering
   % source: figures/broad_success_vs_params_with_java.png
   %         (regenerated by paper/comparison/src/plot_broad_with_java.py).
-  \includegraphics[width=0.64\textwidth]{figures/broad_success_vs_params_with_java.png}
+  \includegraphics[width=\columnwidth]{figures/broad_success_vs_params_with_java.png}
   \caption{Kozuchi Agent is parameter efficient on both Python
   SWE-bench Verified and Multi-SWE-bench Java.}
   \Description{Dual-axis scatter plot of agent success rate against
@@ -377,15 +477,8 @@ to one across heterogeneous internal clusters.
   markers on both axes (74.8 percent Python, 32.03 percent Java) at
   27 billion parameters.}
   \label{fig:pareto}
-\end{teaserfigure}
+\end{figure}
 
-\maketitle
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Introduction
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Introduction}
-\label{sec:intro}
 Across our engineering organization, we observe a recurring
 industrial demand: developers prefer an LLM-based agent that takes an
 issue description plus a repository state and emits a correct,
@@ -399,20 +492,6 @@ auditable repair harness and selected through cross-agent testing?}
 Figure~\ref{fig:pareto} summarizes the resulting Python and Java
 position against open/local peers by parameter count.
 Four operational blockers shaped the design as follows.
-
-\begin{figure*}[t]
-  \centering
-  \includegraphics[width=0.9\textwidth]{\figpath{overall-architecture.pdf}}
-  \caption{Kozuchi Agent workflow from candidate generation to
-  cross-agent selection.}
-  \Description{Two-lane system diagram. The upper lane shows the broad
-  issue-to-patch workflow through candidate generation, archived
-  artifacts, selection, and submitted patch. The lower lane expands one
-  candidate trajectory with durable shared memory, turn-level action
-  normalization, tools, and the cross-run test application that produces
-  the selector signals B_ij and R_ij.}
-  \label{fig:arch}
-\end{figure*}
 
 \paragraph{Pain~1: Long-Horizon Execution.}
 % source: configs/agent_sota.yaml (step_limit: 500; instance_timeout: "3:00:00";
@@ -505,7 +584,7 @@ and guarded editing. These design mechanisms make a free-form repair
 loop inspectable: state can be resumed, audited, and compared across
 open-weight and API-served backends. C1 is supported by operational
 signatures (\S\ref{sec:observations}, \S\ref{sec:design}) and
-artifact-level audit (\S\ref{sec:artifact}), not by mechanism-removal
+artifact-level audit (Data Availability Statement), not by mechanism-removal
 ablations; controlled removals of the phase graph, formatter,
 persistent state, and tool sandbox are scoped as future work
 (\S\ref{sec:conclusion}). Table~\ref{tab:evidence-map} summarizes this
@@ -524,7 +603,7 @@ stages can be short-circuited using previously validated outputs, while
 the published analysis scripts in \code{src/} regenerate every
 empirical value cited in RQ1--RQ6 directly from the SWE-bench and
 Multi-SWE-bench Java harness reports, trajectories, and cross-agent
-selection bundles in the public artifact (\S\ref{sec:artifact}).
+selection bundles in the public artifact (Data Availability Statement).
 
 \noindent\textbf{C3. A cross-agent test-time selector with trajectory-level audit.}
 % source: pipeline/tts/; trajectories/q35_.../xcheck/results/*_75p2.json;
@@ -614,7 +693,7 @@ describe the observations, harness design, and cross-agent selector.
 \S\ref{sec:eval} reports six scripted analyses over the published
 Python TTS@8 and Java xcheck@8 artifacts. \S\ref{sec:lessons} states
 operational lessons, \S\ref{sec:conclusion} concludes, and
-\S\ref{sec:artifact} defines the public artifact boundary.
+the Data Availability Statement defines the public artifact boundary.
 
 \section{Related Work}
 \label{sec:related}
@@ -635,7 +714,7 @@ program-improvement systems~\cite{wang2024openhands,zhang2024autocoderover}.
 % reviewer requests to separate causal from observational claims.
 % Numbers cross-referenced from paper/final/stats/{per_run_pass1.json,
 % selector_ablation.json,run_overlap.json,workflow_replacement.json}.
-\caption{Evidence map: mechanisms and claims by evidence type.}
+\caption{Evidence map: mechanisms and claims by type.}
 \label{tab:evidence-map}
 \begin{tabular}{@{}p{0.4\columnwidth}p{0.36\columnwidth}l@{}}
 \toprule
@@ -893,6 +972,20 @@ artifact reuse.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{System Design}
 \label{sec:design}
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.72\textwidth]{\figpath{overall-architecture.pdf}}
+  \caption{Kozuchi Agent workflow from candidate generation to
+  cross-agent selection.}
+  \Description{Two-lane system diagram. The upper lane shows the broad
+  issue-to-patch workflow through candidate generation, archived
+  artifacts, selection, and submitted patch. The lower lane expands one
+  candidate trajectory with durable shared memory, turn-level action
+  normalization, tools, and the cross-run test application that produces
+  the selector signals B_ij and R_ij.}
+  \label{fig:arch}
+\end{figure*}
 
 Figure~\ref{fig:arch} summarizes the architecture at two connected
 resolutions. The broad path shows how the pipeline
@@ -1285,7 +1378,7 @@ serving/run parameters including two-GPU tensor parallelism, 50 shards,
 \code{step\_limit=1000}, \code{instance\_timeout=06:00:00}, and the
 best-known repository commit before submission; the analysis scripts use
 fixed seed \code{SEED=20260427}. Model weights remain external licensed
-dependencies (\S\ref{sec:artifact}), so the artifact pins the model identifier and run
+dependencies (Data Availability Statement), so the artifact pins the model identifier and run
 provenance rather than redistributing the checkpoint.
 
 The Python analysis uses the published TTS@8 artifacts: 495 SWE-bench harness
@@ -1522,7 +1615,7 @@ both 0.  The taxonomy is summarised in Table~\ref{tab:failuremodes}.
 
 \begin{table}[t]
 \centering
-\normalsize
+\scriptsize
 % source: experiments/evaluation/verified/20260326_kozuchi-mini-swe-agent_qwen3.5-27b/src/csv/failure_modes.csv
 \caption{Failure taxonomy for unresolved instances.}
 \label{tab:failuremodes}
@@ -1978,7 +2071,7 @@ future work.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Contributions of Each Team
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Contributions of Each Team}
+\section*{Contributions of Each Team}
 \label{sec:contributions}
 
 \paragraph{Fujitsu Research, Japan.}
@@ -2008,7 +2101,7 @@ future work.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Data Availability Statement
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Data Availability Statement}
+\section*{Data Availability Statement}
 \label{sec:artifact}
 \label{sec:data}
 The public review artifact, including all analysis, is available at
@@ -2287,7 +2380,7 @@ multiplicity correction, the patch-size and trajectory-effort
 diagnostics, the failure taxonomy, the operational-reliability
 profile, and the cross-experiment consensus auxiliary all come
 from the scripted analysis under \code{src/} of the submission
-directory (full workspace path in~\S\ref{sec:data}), and the
+directory (full workspace path in the Data Availability Statement), and the
 per-run pass@1 / cross-agent-selection summaries come
 from the published analysis artifacts.
 \item \textbf{Artifact availability.} The repository, trajectory
