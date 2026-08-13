@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.4.3)  13 AUG 2026 11:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.4.3)  13 AUG 2026 12:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2137,11 +2137,11 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: C68C3C1447568815F4C2EEF8DDA9B8B3;6175.
  ) 
 Here is how much of TeX's memory you used:
- 26220 strings out of 476182
- 459070 string characters out of 5795596
+ 26212 strings out of 476182
+ 458878 string characters out of 5795596
  1985975 words of memory out of 5000000
  46607 multiletter control sequences out of 15000+600000
- 893166 words of font info for 740 fonts, out of 8000000 for 9000
+ 892412 words of font info for 735 fonts, out of 8000000 for 9000
  175 hyphenation exceptions out of 8191
  90i,13n,131p,1233b,1160s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4
@@ -2160,7 +2160,7 @@ t/fonts/type1/public/newtx/txexs.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /public/newtx/txmiaX.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newt
 x/txsys.pfb>
 Output written on /home/mbahrami/repo/kozuchi-agent-artifact/paper/build/main.p
-df (13 pages, 1612307 bytes).
+df (13 pages, 1612282 bytes).
 PDF statistics:
  689 PDF objects out of 1000 (max. 8388607)
  597 compressed objects within 6 object streams

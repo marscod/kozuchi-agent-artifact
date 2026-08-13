@@ -306,7 +306,7 @@ numbers will be added once the ASE 2026 proceedings are published):
             Kwun Ho Ngan and Joseph Townsend and Fayas Asharindavida and
             Matthieu Parizy and Akira Sakai and Yuma Ichikawa and
             Yang Zhao and Michiaki Takizawa and Taku Fukui and
-            Hiroki Ohtsuji and Wei-Peng Chen and Hiro Kobashi},
+            Hiroki Ohtsuji and Wei-Peng Chen and Hiromichi Kobashi},
   booktitle = {Proceedings of the 41st IEEE/ACM International Conference on
                Automated Software Engineering (ASE 2026)},
   address = {Munich, Germany},

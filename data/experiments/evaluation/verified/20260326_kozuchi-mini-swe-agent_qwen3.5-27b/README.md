@@ -75,4 +75,4 @@ Resolved by Time
 - [Michiaki Takizawa](mailto:m_takizawa@fujitsu.com)
 - [Taku Fukui](mailto:fukui.taku@fujitsu.com)
 - [Hiroki Ohtsuji](mailto:ohtsuji.hiroki@fujitsu.com)
-- [Hiro Kobashi](https://www.linkedin.com/in/hiromichikobashi/)
+- [Hiromichi Kobashi](https://www.linkedin.com/in/hiromichikobashi/)
