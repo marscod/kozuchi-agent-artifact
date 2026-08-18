@@ -33,6 +33,7 @@
     --violet: #6c5ce7;
     --blue: #2f6bff;
     --teal: #00b894;
+    --arxiv: #b31b1b;
     --grad: linear-gradient(90deg, var(--coral), var(--orange));
     --mono: "JetBrains Mono", ui-monospace, monospace;
     --radius: 18px;
@@ -102,6 +103,11 @@
   .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: #d4dbeb; }
   .btn.hot { background: var(--grad); border: none; color: #fff; box-shadow: 0 10px 28px rgba(255,61,94,.32); }
   .btn.hot:hover { box-shadow: 0 14px 36px rgba(255,61,94,.4); }
+  .btn.arxiv {
+    background: var(--arxiv); border-color: var(--arxiv); color: #fff;
+    box-shadow: 0 10px 24px rgba(179,27,27,.28);
+  }
+  .btn.arxiv:hover { border-color: #8f1515; box-shadow: 0 14px 32px rgba(179,27,27,.38); }
   .btn small { font-weight: 500; opacity: .75; font-size: 12px; }
 
   /* stat strip */
@@ -169,6 +175,8 @@
   .paper-points li { padding: 10px 0 10px 34px; position: relative; color: var(--muted); }
   .paper-points li::before { content: "→"; position: absolute; left: 0; color: var(--violet); font-weight: 800; }
   .paper-points strong { color: var(--ink); }
+  .paper-ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+  .paper-ctas .btn { padding: 10px 18px; font-size: 14px; }
 
   /* design pillars */
   .pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px; margin-top: 26px; }
@@ -286,6 +294,7 @@
       <a href="#results">Results</a>
       <a href="#reproduce">Reproduce</a>
       <a href="#artifact">Artifact</a>
+      <a class="keep" href="https://arxiv.org/abs/2608.15579">arXiv ↗</a>
       <a class="keep" href="https://github.com/marscod/kozuchi-agent-artifact">GitHub ↗</a>
     </div>
   </div>
@@ -300,6 +309,7 @@
     <p class="authors">Bahrami et&nbsp;al. — to appear at <a href="https://conf.researchr.org/home/ase-2026">ASE 2026</a>, the 41st IEEE/ACM International Conference on Automated Software Engineering, Munich, Germany</p>
     <div class="links">
       <a class="btn hot" href="paper/main.pdf">📄&nbsp; Paper (PDF)</a>
+      <a class="btn arxiv" href="https://arxiv.org/abs/2608.15579" title="Open the arXiv preprint">📚&nbsp; arXiv <small>· 2608.15579</small></a>
       <a class="btn" href="https://github.com/marscod/kozuchi-agent-artifact">⭐&nbsp; Artifact Repository</a>
       <a class="btn" href="https://github.com/FujitsuResearch/kozuchi-mini-swe-agent">💻&nbsp; Agent Source Code</a>
       <a class="btn" href="https://zenodo.org/records/19941649?preview=1&token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjIxMTZmNzIwLTIyYTYtNDcwMi1iYTEwLTRhYmQyZTE3YzY1OSIsImRhdGEiOnt9LCJyYW5kb20iOiIwNzg0MDQ0OWI1MzBmNDUwODE2YjQxYjVmMjIzYmU3MiJ9.zVk_UhMOeTJR0iFIuIwI2MRlek-JRnRLDOt1rfZrWS9x8poQFvlU6QTJTfhCr0By8gpDt5eHC6F3honpOdVbGw">🗃&nbsp; Dataset (Zenodo) <small>· under review</small></a>
@@ -349,7 +359,7 @@
     <div class="kicker">02 · The Paper</div>
     <div class="sec-head">
       <h2>Read the paper</h2>
-      <a class="browse" href="https://github.com/marscod/kozuchi-agent-artifact/tree/main/paper">browse paper/ ↗</a>
+      <a class="browse" href="https://arxiv.org/abs/2608.15579">arXiv:2608.15579 ↗</a>
     </div>
     <div class="paper-flex">
       <div class="paper-snap reveal">
@@ -360,11 +370,17 @@
       </div>
       <div>
         <ul class="paper-points">
+          <li><strong>Preprint on arXiv:</strong> <a href="https://arxiv.org/abs/2608.15579">arXiv:2608.15579</a> — accepted at ASE 2026 Industry Showcase (13 pages, 4 figures).</li>
           <li><strong>Six research questions</strong> covering headline performance, peer comparison, variance analysis, failure taxonomy, test-time-scaling selection lift, and cross-language transfer.</li>
           <li><strong>Statistically grounded:</strong> Wilson CIs, repo-level cluster bootstrap, McNemar paired tests with BH-FDR correction across 17 open-weight peers.</li>
           <li><strong>Fully rebuildable:</strong> <a href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/paper/build.sh"><code>paper/build.sh</code></a> compiles the PDF offline with bundled ACM class files.</li>
           <li><strong>Every cited number</strong> maps to a script via <a href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/INDEX.md"><code>INDEX.md</code></a>; every reference is annotated in <a href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/REFERENCES_INDEX.md"><code>REFERENCES_INDEX.md</code></a>.</li>
         </ul>
+        <div class="paper-ctas">
+          <a class="btn hot" href="paper/main.pdf">📄&nbsp; Camera-ready PDF</a>
+          <a class="btn arxiv" href="https://arxiv.org/pdf/2608.15579">📚&nbsp; arXiv PDF</a>
+          <a class="btn" href="https://arxiv.org/abs/2608.15579">Abstract &amp; BibTeX ↗</a>
+        </div>
       </div>
     </div>
   </div>
@@ -523,7 +539,7 @@
       <h2>Citation</h2>
       <a class="browse" href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/paper/references.bib">open references.bib ↗</a>
     </div>
-    <p class="lead">If you build on this artifact, please cite the paper. The DOI is <a href="https://doi.org/10.1145/3832783.3834531">10.1145/3832783.3834531</a>.</p>
+    <p class="lead">If you build on this artifact, please cite the paper. The DOI is <a href="https://doi.org/10.1145/3832783.3834531">10.1145/3832783.3834531</a>. A freely available preprint is on <a href="https://arxiv.org/abs/2608.15579">arXiv:2608.15579</a>.</p>
 
     <h3 class="cite-h">ACM Reference Format</h3>
     <div class="acmref" id="acmref">Mehdi Bahrami, Kosaku Kimura, Satoshi Munakata, Satoshi Nakashima, Yu Ishikawa, Kosuke Maeda, Nao Soma, Kenichi Kobayashi, Keisuke Miyazaki, Keizo Kato, Shigeki Fukuta, Tatsuo Kumano, Nobutaka Imamura, Kevin Musgrave, Shahbaz Abdul Khader, Kwun Ho Ngan, Joe Townsend, Fayas Asharindavida, Matthieu Parizy, Akira Sakai, Yuma Ichikawa, Yang Zhao, Michiaki Takizawa, Taku Fukui, Hiroki Ohtsuji, Wei-Peng Chen, and Hiromichi Kobashi. 2026. Kozuchi Agent: A Language-Agnostic Open-Weight Agent for Software Repair. In <em>Proceedings of the 41st IEEE/ACM International Conference on Automated Software Engineering (ASE '26), October 12–16, 2026, Munich, Germany</em>. ACM, New York, NY, USA, 13 pages. https://doi.org/10.1145/3832783.3834531<button class="copy-btn" onclick="copyBib(this)">Copy</button></div>
