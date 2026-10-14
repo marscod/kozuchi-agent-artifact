@@ -1,4 +1,5 @@
-[![ASE 2026](https://img.shields.io/badge/ASE_2026-Accepted-success)](https://conf.researchr.org/home/ase-2026)
+[![ASE 2026](https://img.shields.io/badge/ASE_2026-Presentation-success)](https://conf.researchr.org/details/ase-2026/ase-2026-industry-showcase/69/Kozuchi-Agent-A-Language-Agnostic-Open-Weight-Agent-for-Software-Repair)
+[![DOI](https://img.shields.io/badge/DOI-10.1145%2F3832783.3834531-blue)](https://dl.acm.org/doi/10.1145/3832783.3834531)
 [![arXiv](https://img.shields.io/badge/arXiv-2608.15579-b31b1b.svg)](https://arxiv.org/abs/2608.15579)
 [![Zenodo](https://img.shields.io/badge/Zenodo-Draft-blue)](https://zenodo.org/records/19941649?preview=1)
 ![Python](https://img.shields.io/badge/python-3.11+-blue.svg)
@@ -13,13 +14,13 @@
 >
 > ### 🌐 **[marscod.github.io/kozuchi-agent-artifact](https://marscod.github.io/kozuchi-agent-artifact/)**
 >
-> 📄 [Paper PDF](https://marscod.github.io/kozuchi-agent-artifact/paper/main.pdf) · 🖼 [ASE 2026 poster (A0)](https://marscod.github.io/kozuchi-agent-artifact/poster/Kozuchi_Agent_ASE_2026_A0.pdf) · 📚 [arXiv:2608.15579](https://arxiv.org/abs/2608.15579) · 📓 [Rendered walkthrough notebook](https://marscod.github.io/kozuchi-agent-artifact/notebooks/reproduce.html) · 🗃 [Dataset on Zenodo (under review — preview access)](https://zenodo.org/records/19941649?preview=1&token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjIxMTZmNzIwLTIyYTYtNDcwMi1iYTEwLTRhYmQyZTE3YzY1OSIsImRhdGEiOnt9LCJyYW5kb20iOiIwNzg0MDQ0OWI1MzBmNDUwODE2YjQxYjVmMjIzYmU3MiJ9.zVk_UhMOeTJR0iFIuIwI2MRlek-JRnRLDOt1rfZrWS9x8poQFvlU6QTJTfhCr0By8gpDt5eHC6F3honpOdVbGw)
+> 📄 [Paper PDF](https://marscod.github.io/kozuchi-agent-artifact/paper/main.pdf) · 🖼 [ASE 2026 poster (A0)](https://marscod.github.io/kozuchi-agent-artifact/poster/Kozuchi_Agent_ASE_2026_A0.pdf) · 🎤 [ASE 2026 presentation](https://conf.researchr.org/details/ase-2026/ase-2026-industry-showcase/69/Kozuchi-Agent-A-Language-Agnostic-Open-Weight-Agent-for-Software-Repair) · [DOI 10.1145/3832783.3834531](https://dl.acm.org/doi/10.1145/3832783.3834531) · 📚 [arXiv:2608.15579](https://arxiv.org/abs/2608.15579) · 📓 [Rendered walkthrough notebook](https://marscod.github.io/kozuchi-agent-artifact/notebooks/reproduce.html) · 🗃 [Dataset on Zenodo (under review — preview access)](https://zenodo.org/records/19941649?preview=1&token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjIxMTZmNzIwLTIyYTYtNDcwMi1iYTEwLTRhYmQyZTE3YzY1OSIsImRhdGEiOnt9LCJyYW5kb20iOiIwNzg0MDQ0OWI1MzBmNDUwODE2YjQxYjVmMjIzYmU3MiJ9.zVk_UhMOeTJR0iFIuIwI2MRlek-JRnRLDOt1rfZrWS9x8poQFvlU6QTJTfhCr0By8gpDt5eHC6F3honpOdVbGw)
 
 
 This directory is the **self-contained artifact** for the paper:
 
 > *Kozuchi Agent: A Language-Agnostic Open-Weight Agent for Software Repair*
-> (Bahrami et al. — **accepted for presentation at [ASE 2026](https://conf.researchr.org/home/ase-2026)**,
+> (Bahrami et al. — **accepted for presentation at [ASE 2026](https://conf.researchr.org/details/ase-2026/ase-2026-industry-showcase/69/Kozuchi-Agent-A-Language-Agnostic-Open-Weight-Agent-for-Software-Repair)**,
 > the 41st IEEE/ACM International Conference on Automated Software Engineering,
 > Munich, Germany, October 12–16, 2026)
 >
@@ -296,7 +297,8 @@ is required.
 ## 7. Citation
 
 If you build on this artifact, please cite the paper
-([doi:10.1145/3832783.3834531](https://doi.org/10.1145/3832783.3834531)).
+([doi:10.1145/3832783.3834531](https://dl.acm.org/doi/10.1145/3832783.3834531)).
+Session page: [ASE 2026 Industry Showcase](https://conf.researchr.org/details/ase-2026/ase-2026-industry-showcase/69/Kozuchi-Agent-A-Language-Agnostic-Open-Weight-Agent-for-Software-Repair).
 A freely available preprint is on [arXiv:2608.15579](https://arxiv.org/abs/2608.15579).
 
 **ACM Reference Format**

@@ -122,6 +122,11 @@
     box-shadow: 0 10px 24px rgba(179,27,27,.28);
   }
   .btn.arxiv:hover { border-color: #8f1515; box-shadow: 0 14px 32px rgba(179,27,27,.38); }
+  .btn.acm {
+    background: #1a6dba; border-color: #1a6dba; color: #fff;
+    box-shadow: 0 10px 24px rgba(26,109,186,.28);
+  }
+  .btn.acm:hover { border-color: #155a9a; box-shadow: 0 14px 32px rgba(26,109,186,.38); }
   .btn small { font-weight: 500; opacity: .75; font-size: 12px; }
 
   /* stat strip */
@@ -312,6 +317,8 @@
       <a href="#results">Results</a>
       <a href="#reproduce">Reproduce</a>
       <a href="#artifact">Artifact</a>
+      <a class="keep" href="https://conf.researchr.org/details/ase-2026/ase-2026-industry-showcase/69/Kozuchi-Agent-A-Language-Agnostic-Open-Weight-Agent-for-Software-Repair">ASE ↗</a>
+      <a class="keep" href="https://dl.acm.org/doi/10.1145/3832783.3834531">DOI ↗</a>
       <a class="keep" href="https://arxiv.org/abs/2608.15579">arXiv ↗</a>
       <a class="keep" href="https://github.com/marscod/kozuchi-agent-artifact">GitHub ↗</a>
     </div>
@@ -320,14 +327,16 @@
 
 <header>
   <div class="wrap">
-    <div class="pill"><span class="dot"></span>Accepted at <a href="https://conf.researchr.org/home/ase-2026" style="color:inherit;">ASE 2026</a> · Munich · Oct 12–16</div>
+    <div class="pill"><span class="dot"></span>Accepted at <a href="https://conf.researchr.org/details/ase-2026/ase-2026-industry-showcase/69/Kozuchi-Agent-A-Language-Agnostic-Open-Weight-Agent-for-Software-Repair" style="color:inherit;">ASE 2026</a> · Munich · Oct 12–16</div>
     <h1>Kozuchi <span class="grad">Agent</span></h1>
     <p class="subtitle">A language-agnostic, <strong>open-weight</strong> agent for software repair —
       state-of-the-art parameter efficiency on SWE-bench Verified with a 27B model.</p>
-    <p class="authors"><time datetime="2026-07-01T00:00:00+00:00">Bahrami et&nbsp;al.</time> — to appear at <a href="https://conf.researchr.org/home/ase-2026">ASE 2026</a>, the 41st IEEE/ACM International Conference on Automated Software Engineering, Munich, Germany</p>
+    <p class="authors"><time datetime="2026-07-01T00:00:00+00:00">Bahrami et&nbsp;al.</time> — published in <a href="https://conf.researchr.org/details/ase-2026/ase-2026-industry-showcase/69/Kozuchi-Agent-A-Language-Agnostic-Open-Weight-Agent-for-Software-Repair">ASE 2026</a>, the 41st IEEE/ACM International Conference on Automated Software Engineering, Munich, Germany</p>
     <div class="links">
       <a class="btn hot" href="paper/main.pdf">📄&nbsp; Paper (PDF)</a>
       <a class="btn" href="poster/Kozuchi_Agent_ASE_2026_A0.pdf">🖼&nbsp; Poster (A0)</a>
+      <a class="btn" href="https://conf.researchr.org/details/ase-2026/ase-2026-industry-showcase/69/Kozuchi-Agent-A-Language-Agnostic-Open-Weight-Agent-for-Software-Repair">🎤&nbsp; Presentation</a>
+      <a class="btn acm" href="https://dl.acm.org/doi/10.1145/3832783.3834531" title="ACM Digital Library">DOI <small>· 10.1145/3832783.3834531</small></a>
       <a class="btn arxiv" href="https://arxiv.org/abs/2608.15579" title="Open the arXiv preprint">📚&nbsp; arXiv <small>· 2608.15579</small></a>
       <a class="btn" href="https://github.com/marscod/kozuchi-agent-artifact">⭐&nbsp; Artifact Repository</a>
       <a class="btn" href="https://github.com/FujitsuResearch/kozuchi-mini-swe-agent">💻&nbsp; Agent Source Code</a>
@@ -390,6 +399,8 @@
       <div>
         <ul class="paper-points">
           <li><strong>Preprint on arXiv:</strong> <a href="https://arxiv.org/abs/2608.15579">arXiv:2608.15579</a> — accepted at ASE 2026 Industry Showcase (13 pages, 4 figures).</li>
+          <li><strong>ASE 2026 presentation:</strong> <a href="https://conf.researchr.org/details/ase-2026/ase-2026-industry-showcase/69/Kozuchi-Agent-A-Language-Agnostic-Open-Weight-Agent-for-Software-Repair">Wed 14 Oct 2026, 10:30–10:45 at Forum 2</a> (Industry Showcase).</li>
+          <li><strong>ACM Digital Library:</strong> <a href="https://dl.acm.org/doi/10.1145/3832783.3834531">doi:10.1145/3832783.3834531</a>.</li>
           <li><strong>Six research questions</strong> covering headline performance, peer comparison, variance analysis, failure taxonomy, test-time-scaling selection lift, and cross-language transfer.</li>
           <li><strong>Statistically grounded:</strong> Wilson CIs, repo-level cluster bootstrap, McNemar paired tests with BH-FDR correction across 17 open-weight peers.</li>
           <li><strong>Fully rebuildable:</strong> <a href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/paper/build.sh"><code>paper/build.sh</code></a> compiles the PDF offline with bundled ACM class files.</li>
@@ -398,6 +409,8 @@
         <div class="paper-ctas">
           <a class="btn hot" href="paper/main.pdf">📄&nbsp; Camera-ready PDF</a>
           <a class="btn arxiv" href="https://arxiv.org/pdf/2608.15579">📚&nbsp; arXiv PDF</a>
+          <a class="btn acm" href="https://dl.acm.org/doi/10.1145/3832783.3834531">DOI ↗</a>
+          <a class="btn" href="https://conf.researchr.org/details/ase-2026/ase-2026-industry-showcase/69/Kozuchi-Agent-A-Language-Agnostic-Open-Weight-Agent-for-Software-Repair">🎤&nbsp; Presentation</a>
           <a class="btn" href="https://arxiv.org/abs/2608.15579">Abstract &amp; BibTeX ↗</a>
           <a class="btn" href="poster/Kozuchi_Agent_ASE_2026_A0.pdf">🖼&nbsp; Conference poster</a>
         </div>
@@ -589,7 +602,7 @@
       <h2>Citation</h2>
       <a class="browse" href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/paper/references.bib">open references.bib ↗</a>
     </div>
-    <p class="lead">If you build on this artifact, please cite the paper. The DOI is <a href="https://doi.org/10.1145/3832783.3834531">10.1145/3832783.3834531</a>. A freely available preprint is on <a href="https://arxiv.org/abs/2608.15579">arXiv:2608.15579</a>.</p>
+    <p class="lead">If you build on this artifact, please cite the paper. The DOI is <a href="https://dl.acm.org/doi/10.1145/3832783.3834531">10.1145/3832783.3834531</a> (ACM Digital Library). Session page: <a href="https://conf.researchr.org/details/ase-2026/ase-2026-industry-showcase/69/Kozuchi-Agent-A-Language-Agnostic-Open-Weight-Agent-for-Software-Repair">ASE 2026 Industry Showcase</a>. A freely available preprint is on <a href="https://arxiv.org/abs/2608.15579">arXiv:2608.15579</a>.</p>
 
     <h3 class="cite-h">ACM Reference Format</h3>
     <div class="acmref" id="acmref">Mehdi Bahrami, Kosaku Kimura, Satoshi Munakata, Satoshi Nakashima, Yu Ishikawa, Kosuke Maeda, Nao Soma, Kenichi Kobayashi, Keisuke Miyazaki, Keizo Kato, Shigeki Fukuta, Tatsuo Kumano, Nobutaka Imamura, Kevin Musgrave, Shahbaz Abdul Khader, Kwun Ho Ngan, Joe Townsend, Fayas Asharindavida, Matthieu Parizy, Akira Sakai, Yuma Ichikawa, Yang Zhao, Michiaki Takizawa, Taku Fukui, Hiroki Ohtsuji, Wei-Peng Chen, and Hiromichi Kobashi. 2026. Kozuchi Agent: A Language-Agnostic Open-Weight Agent for Software Repair. In <em>Proceedings of the 41st IEEE/ACM International Conference on Automated Software Engineering (ASE '26), October 12–16, 2026, Munich, Germany</em>. ACM, New York, NY, USA, 13 pages. https://doi.org/10.1145/3832783.3834531<button class="copy-btn" onclick="copyBib(this)">Copy</button></div>
