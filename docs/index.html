@@ -191,6 +191,9 @@
   .paper-points strong { color: var(--ink); }
   .paper-ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
   .paper-ctas .btn { padding: 10px 18px; font-size: 14px; }
+  .paper-flex.poster-flex { grid-template-columns: 260px 1fr; }
+  @media (max-width: 820px) { .paper-flex.poster-flex { grid-template-columns: 1fr; } }
+  .paper-snap.poster img { max-width: 260px; }
 
   /* design pillars */
   .pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px; margin-top: 26px; }
@@ -304,6 +307,7 @@
     <div class="nav-links">
       <a href="#overview">Overview</a>
       <a href="#paper">Paper</a>
+      <a href="#poster">Poster</a>
       <a href="#architecture">Architecture</a>
       <a href="#results">Results</a>
       <a href="#reproduce">Reproduce</a>
@@ -323,6 +327,7 @@
     <p class="authors"><time datetime="2026-07-01T00:00:00+00:00">Bahrami et&nbsp;al.</time> — to appear at <a href="https://conf.researchr.org/home/ase-2026">ASE 2026</a>, the 41st IEEE/ACM International Conference on Automated Software Engineering, Munich, Germany</p>
     <div class="links">
       <a class="btn hot" href="paper/main.pdf">📄&nbsp; Paper (PDF)</a>
+      <a class="btn" href="poster/Kozuchi_Agent_ASE_2026_A0.pdf">🖼&nbsp; Poster (A0)</a>
       <a class="btn arxiv" href="https://arxiv.org/abs/2608.15579" title="Open the arXiv preprint">📚&nbsp; arXiv <small>· 2608.15579</small></a>
       <a class="btn" href="https://github.com/marscod/kozuchi-agent-artifact">⭐&nbsp; Artifact Repository</a>
       <a class="btn" href="https://github.com/FujitsuResearch/kozuchi-mini-swe-agent">💻&nbsp; Agent Source Code</a>
@@ -394,6 +399,37 @@
           <a class="btn hot" href="paper/main.pdf">📄&nbsp; Camera-ready PDF</a>
           <a class="btn arxiv" href="https://arxiv.org/pdf/2608.15579">📚&nbsp; arXiv PDF</a>
           <a class="btn" href="https://arxiv.org/abs/2608.15579">Abstract &amp; BibTeX ↗</a>
+          <a class="btn" href="poster/Kozuchi_Agent_ASE_2026_A0.pdf">🖼&nbsp; Conference poster</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="poster" style="--kc:#ff8a3d">
+  <div class="wrap">
+    <div class="kicker">03 · Poster</div>
+    <div class="sec-head">
+      <h2>ASE 2026 conference poster</h2>
+      <a class="browse" href="poster/Kozuchi_Agent_ASE_2026_A0.pdf">download A0 PDF ↗</a>
+    </div>
+    <div class="paper-flex poster-flex">
+      <div class="paper-snap poster reveal">
+        <a href="poster/Kozuchi_Agent_ASE_2026_A0.pdf" title="Open the A0 poster PDF">
+          <img src="static/poster-preview.png" alt="ASE 2026 A0 poster for Kozuchi Agent">
+        </a>
+        <div class="tag">Click the snapshot to open the full A0 PDF</div>
+      </div>
+      <div>
+        <ul class="paper-points">
+          <li><strong>A0 portrait</strong> (841 × 1189 mm) two-column poster for the ASE 2026 Industry Showcase in Munich.</li>
+          <li><strong>Same claims as the paper:</strong> 27B open-weight Qwen3.5, no fine-tuning, no hidden-test access at selection, 74.8% on SWE-bench Verified.</li>
+          <li><strong>QR on the poster</strong> points at this site — paper, artifact, code, and reproduction in one scan.</li>
+          <li><strong>Print-ready PDF</strong> (~2.1&nbsp;MB), generated from the editable PPTX in the paper repository.</li>
+        </ul>
+        <div class="paper-ctas">
+          <a class="btn hot" href="poster/Kozuchi_Agent_ASE_2026_A0.pdf">🖼&nbsp; Download A0 PDF</a>
+          <a class="btn" href="paper/main.pdf">📄&nbsp; Paper PDF</a>
         </div>
       </div>
     </div>
@@ -402,7 +438,7 @@
 
 <section id="architecture" class="tint" style="--kc:#2f6bff">
   <div class="wrap">
-    <div class="kicker">03 · Architecture</div>
+    <div class="kicker">04 · Architecture</div>
     <div class="sec-head">
       <h2>How it works</h2>
       <a class="browse" href="https://github.com/marscod/kozuchi-agent-artifact/tree/main/figures">browse figures/ ↗</a>
@@ -441,7 +477,7 @@
 
 <section id="results" style="--kc:#00b894">
   <div class="wrap">
-    <div class="kicker">04 · Results</div>
+    <div class="kicker">05 · Results</div>
     <div class="sec-head">
       <h2>Results at a glance</h2>
       <a class="browse" href="https://github.com/marscod/kozuchi-agent-artifact/tree/main/stats">browse stats/ ↗</a>
@@ -471,7 +507,7 @@
 
 <section id="reproduce" class="tint" style="--kc:#ff8a3d">
   <div class="wrap">
-    <div class="kicker">05 · Reproducibility</div>
+    <div class="kicker">06 · Reproducibility</div>
     <div class="sec-head">
       <h2>Reproduce every number</h2>
       <a class="browse" href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/reproduce.sh">open reproduce.sh ↗</a>
@@ -505,7 +541,7 @@
 
 <section id="artifact" style="--kc:#e84393">
   <div class="wrap">
-    <div class="kicker">06 · Artifact</div>
+    <div class="kicker">07 · Artifact</div>
     <div class="sec-head">
       <h2>Artifact map</h2>
       <a class="browse" href="https://github.com/marscod/kozuchi-agent-artifact">browse all files ↗</a>
@@ -548,7 +584,7 @@
 
 <section id="citation" class="tint" style="--kc:#6c5ce7">
   <div class="wrap">
-    <div class="kicker">07 · Citation</div>
+    <div class="kicker">08 · Citation</div>
     <div class="sec-head">
       <h2>Citation</h2>
       <a class="browse" href="https://github.com/marscod/kozuchi-agent-artifact/blob/main/paper/references.bib">open references.bib ↗</a>
@@ -588,9 +624,9 @@
 
 <section id="tour" style="--kc:#ff3d5e">
   <div class="wrap tour">
-    <div class="kicker">08 · One-Minute Tour</div>
+    <div class="kicker">09 · One-Minute Tour</div>
     <h2 style="margin-bottom:18px;">The artifact in motion</h2>
-    <p class="lead" style="margin: 0 auto 8px;">Headline Pareto frontier, construction map, cross-language transfer, peer heatmap, and the paper itself.</p>
+    <p class="lead" style="margin: 0 auto 8px;">Headline Pareto frontier, construction map, cross-language transfer, peer heatmap, the paper, and the conference poster.</p>
     <figure class="reveal">
       <a href="https://github.com/marscod/kozuchi-agent-artifact" title="Explore the repository">
         <img src="static/artifact-tour.gif" alt="Animated tour cycling through the key figures of the Kozuchi Agent artifact">

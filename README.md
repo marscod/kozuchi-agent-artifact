@@ -13,7 +13,7 @@
 >
 > ### 🌐 **[marscod.github.io/kozuchi-agent-artifact](https://marscod.github.io/kozuchi-agent-artifact/)**
 >
-> 📄 [Paper PDF](https://marscod.github.io/kozuchi-agent-artifact/paper/main.pdf) · 📚 [arXiv:2608.15579](https://arxiv.org/abs/2608.15579) · 📓 [Rendered walkthrough notebook](https://marscod.github.io/kozuchi-agent-artifact/notebooks/reproduce.html) · 🗃 [Dataset on Zenodo (under review — preview access)](https://zenodo.org/records/19941649?preview=1&token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjIxMTZmNzIwLTIyYTYtNDcwMi1iYTEwLTRhYmQyZTE3YzY1OSIsImRhdGEiOnt9LCJyYW5kb20iOiIwNzg0MDQ0OWI1MzBmNDUwODE2YjQxYjVmMjIzYmU3MiJ9.zVk_UhMOeTJR0iFIuIwI2MRlek-JRnRLDOt1rfZrWS9x8poQFvlU6QTJTfhCr0By8gpDt5eHC6F3honpOdVbGw)
+> 📄 [Paper PDF](https://marscod.github.io/kozuchi-agent-artifact/paper/main.pdf) · 🖼 [ASE 2026 poster (A0)](https://marscod.github.io/kozuchi-agent-artifact/poster/Kozuchi_Agent_ASE_2026_A0.pdf) · 📚 [arXiv:2608.15579](https://arxiv.org/abs/2608.15579) · 📓 [Rendered walkthrough notebook](https://marscod.github.io/kozuchi-agent-artifact/notebooks/reproduce.html) · 🗃 [Dataset on Zenodo (under review — preview access)](https://zenodo.org/records/19941649?preview=1&token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjIxMTZmNzIwLTIyYTYtNDcwMi1iYTEwLTRhYmQyZTE3YzY1OSIsImRhdGEiOnt9LCJyYW5kb20iOiIwNzg0MDQ0OWI1MzBmNDUwODE2YjQxYjVmMjIzYmU3MiJ9.zVk_UhMOeTJR0iFIuIwI2MRlek-JRnRLDOt1rfZrWS9x8poQFvlU6QTJTfhCr0By8gpDt5eHC6F3honpOdVbGw)
 
 
 This directory is the **self-contained artifact** for the paper:
